@@ -224,35 +224,37 @@
   .canvas{position:relative}
 
   /* ---------- Animations ---------- */
-  @keyframes rcp-hand{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
-  @keyframes rcp-chest{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.9);transform-origin:center bottom}}
-  @keyframes rcp-ring{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.6);opacity:0}}
-  @keyframes pls-body{0%,20%{transform:rotate(0)}50%,80%{transform:rotate(-45deg)}100%{transform:rotate(0)}}
-  @keyframes arrow-in{0%{transform:translateX(0);opacity:.3}50%{transform:translateX(20px);opacity:1}100%{transform:translateX(0);opacity:.3}}
-  @keyframes arrow-in-r{0%{transform:translateX(0);opacity:.3}50%{transform:translateX(-20px);opacity:1}100%{transform:translateX(0);opacity:.3}}
-  @keyframes water{0%{transform:translateY(-6px);opacity:0}30%{opacity:1}100%{transform:translateY(60px);opacity:0}}
-  @keyframes ripple{0%{r:20;opacity:.8}100%{r:80;opacity:0}}
-  @keyframes phone-shake{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
-  @keyframes pat{0%,100%{transform:translate(0,0) rotate(-10deg)}50%{transform:translate(6px,10px) rotate(-4deg)}}
+  @keyframes rcp-body{0%,100%{transform:translateY(0)}50%{transform:translateY(12px)}}
+  @keyframes rcp-chest{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.86)}}
+  @keyframes rcp-ring{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.7);opacity:0}}
+  @keyframes pls-rotate{0%,10%{transform:rotate(0)}45%,90%{transform:rotate(-38deg)}100%{transform:rotate(0)}}
+  @keyframes heimlich{0%,100%{transform:translate(0,0)}45%{transform:translate(-10px,-12px)}}
+  @keyframes back-blow{0%,20%{transform:translate(-12px,-10px) rotate(-25deg)}45%,60%{transform:translate(6px,6px) rotate(10deg)}100%{transform:translate(-12px,-10px) rotate(-25deg)}}
+  @keyframes water{0%{transform:translateY(-6px);opacity:0}25%{opacity:1}100%{transform:translateY(70px);opacity:0}}
+  @keyframes bleed{0%{transform:translateY(-4px);opacity:0}30%{opacity:1}100%{transform:translateY(50px);opacity:0}}
+  @keyframes ripple{0%{r:20;opacity:.8}100%{r:90;opacity:0}}
+  @keyframes phone-shake{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
   @keyframes pad-glow{0%,100%{opacity:.4}50%{opacity:1}}
-  @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.08);transform-origin:center bottom}}
+  @keyframes breathe{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.08)}}
   @keyframes dash{to{stroke-dashoffset:-40}}
-  @keyframes press{0%,100%{transform:scale(1)}50%{transform:scale(.92)}}
+  @keyframes press{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(6px) scale(.96)}}
+  @keyframes nod{0%,100%{transform:rotate(0)}50%{transform:rotate(-4deg)}}
 
-  .a-rcp-hand{animation:rcp-hand 1s cubic-bezier(.5,0,.5,1) infinite;transform-origin:center}
-  .a-rcp-chest{animation:rcp-chest 1s cubic-bezier(.5,0,.5,1) infinite;transform-origin:center bottom}
-  .a-rcp-ring{animation:rcp-ring 1s ease-out infinite;transform-origin:center}
-  .a-pls{animation:pls-body 4s ease-in-out infinite;transform-origin:50% 70%}
-  .a-arr-l{animation:arrow-in 1.6s ease-in-out infinite}
-  .a-arr-r{animation:arrow-in-r 1.6s ease-in-out infinite}
-  .a-water{animation:water 1.4s linear infinite;transform-origin:top center}
-  .a-ripple{animation:ripple 2s ease-out infinite}
-  .a-phone{animation:phone-shake .5s ease-in-out infinite;transform-origin:center bottom}
-  .a-pat{animation:pat .8s ease-in-out infinite;transform-origin:center}
+  .a-rcp-body{animation:rcp-body 1s cubic-bezier(.5,0,.5,1) infinite}
+  .a-rcp-chest{animation:rcp-chest 1s cubic-bezier(.5,0,.5,1) infinite;transform-box:fill-box;transform-origin:center}
+  .a-rcp-ring{animation:rcp-ring 1s ease-out infinite;transform-box:fill-box;transform-origin:center}
+  .a-pls-rotate{animation:pls-rotate 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+  .a-heimlich{animation:heimlich 1.2s ease-in-out infinite}
+  .a-back-blow{animation:back-blow 1s ease-in-out infinite;transform-origin:center}
+  .a-water{animation:water 1.4s linear infinite}
+  .a-bleed{animation:bleed 1.4s linear infinite}
+  .a-ripple{animation:ripple 2.2s ease-out infinite;transform-box:fill-box;transform-origin:center}
+  .a-phone{animation:phone-shake .5s ease-in-out infinite;transform-box:fill-box;transform-origin:center bottom}
   .a-glow{animation:pad-glow 1.4s ease-in-out infinite}
-  .a-breathe{animation:breathe 3s ease-in-out infinite}
+  .a-breathe{animation:breathe 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
   .a-dash{stroke-dasharray:8 6;animation:dash 1.5s linear infinite}
-  .a-press{animation:press 1s ease-in-out infinite;transform-origin:center}
+  .a-press{animation:press 1.1s ease-in-out infinite}
+  .a-nod{animation:nod 3s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom center}
 
   @media(prefers-reduced-motion:reduce){
     *{animation:none !important}
@@ -391,37 +393,72 @@
       <!-- RCP -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 01 — RCP · 30 compressions / 2 insufflations</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <!-- ground -->
-            <line x1="20" y1="215" x2="380" y2="215" stroke="rgba(255,255,255,.12)" stroke-width="1" stroke-dasharray="4 6"/>
-            <!-- body silhouette -->
-            <g transform="translate(60,120)">
-              <ellipse cx="30" cy="80" rx="30" ry="12" fill="rgba(255,255,255,.06)"/>
-              <!-- head -->
-              <circle cx="30" cy="40" r="22" fill="#e7e2d5"/>
-              <!-- torso (breathing/press) -->
-              <g class="a-rcp-chest">
-                <rect x="55" y="30" width="180" height="60" rx="26" fill="#f7f5f0"/>
-              </g>
-              <!-- legs -->
-              <rect x="235" y="42" width="90" height="30" rx="14" fill="#e7e2d5"/>
-              <rect x="235" y="72" width="90" height="18" rx="9" fill="#d8d3c5"/>
+          <span class="fig-title">Fig. 01 — RCP · Sauveteur qui masse le cœur</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <!-- sol -->
+            <line x1="20" y1="255" x2="480" y2="255" stroke="rgba(255,255,255,.15)" stroke-dasharray="4 6"/>
+
+            <!-- ============ VICTIME (allongée sur le dos) ============ -->
+            <!-- pantalon -->
+            <rect x="260" y="212" width="150" height="26" rx="13" fill="#3a2a1a"/>
+            <rect x="405" y="216" width="55" height="20" rx="10" fill="#3a2a1a"/>
+            <!-- chaussures -->
+            <ellipse cx="462" cy="234" rx="14" ry="8" fill="#1a1a1a"/>
+            <!-- hanches -->
+            <rect x="240" y="206" width="60" height="32" rx="16" fill="#4a3a2a"/>
+            <!-- torse (se comprime) -->
+            <g class="a-rcp-chest">
+              <rect x="115" y="196" width="140" height="46" rx="22" fill="#f7f5f0"/>
+              <path d="M 120 208 Q 150 216 180 208" stroke="rgba(0,0,0,.08)" stroke-width="1.5" fill="none"/>
             </g>
-            <!-- arms + hands pressing -->
-            <g class="a-rcp-hand" transform="translate(190,60)">
-              <!-- arms -->
-              <path d="M -14 -34 L -10 30 M 14 -34 L 10 30" stroke="#c6c3bb" stroke-width="14" stroke-linecap="round"/>
-              <!-- hands stacked -->
-              <ellipse cx="0" cy="42" rx="22" ry="14" fill="#ffb648"/>
-              <ellipse cx="0" cy="52" rx="26" ry="16" fill="#ff8a3d"/>
-              <!-- press ring -->
-              <circle cx="0" cy="60" r="20" fill="none" stroke="#ff3b30" stroke-width="2" class="a-rcp-ring"/>
+            <!-- bras sur le sol -->
+            <rect x="120" y="242" width="90" height="12" rx="6" fill="#e7e2d5"/>
+            <circle cx="214" cy="248" r="7" fill="#e7e2d5"/>
+            <!-- cou -->
+            <rect x="97" y="216" width="20" height="14" rx="4" fill="#e7e2d5"/>
+            <!-- tête -->
+            <circle cx="78" cy="218" r="22" fill="#e7e2d5"/>
+            <path d="M 62 210 Q 78 200 94 210" stroke="#4a3a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <circle cx="88" cy="218" r="3" fill="#c6c3bb"/>
+
+            <!-- ============ SAUVETEUR (à genoux, profil, comprime) ============ -->
+            <!-- jambes (statiques) -->
+            <rect x="245" y="240" width="70" height="22" rx="11" fill="#c8501e"/>
+            <rect x="240" y="252" width="90" height="14" rx="7" fill="#8a3a1a"/>
+            <circle cx="250" cy="248" r="12" fill="#ff5a4d"/>
+
+            <!-- Haut du corps qui monte/descend -->
+            <g class="a-rcp-body">
+              <!-- torse penché en avant -->
+              <path d="M 205 160 L 240 160 L 275 235 L 250 240 Z" fill="#ff8a3d"/>
+              <!-- col -->
+              <path d="M 212 168 Q 222 172 232 168" stroke="rgba(0,0,0,.15)" stroke-width="1.5" fill="none"/>
+              <!-- bras tendu vertical -->
+              <rect x="217" y="160" width="15" height="55" rx="7" fill="#f5a970"/>
+              <!-- mains empilées sur le sternum -->
+              <ellipse cx="228" cy="210" rx="16" ry="9" fill="#f5a970"/>
+              <ellipse cx="228" cy="218" rx="20" ry="11" fill="#ffb648"/>
+              <!-- cou -->
+              <rect x="207" y="140" width="16" height="20" fill="#f5a970"/>
+              <!-- tête -->
+              <circle cx="212" cy="120" r="22" fill="#f5a970"/>
+              <path d="M 196 108 Q 212 96 228 108" stroke="#3a1a10" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle cx="224" cy="122" r="3" fill="#c8501e"/>
+              <!-- œil (concentré) -->
+              <circle cx="204" cy="122" r="1.5" fill="#3a1a10"/>
+              <!-- anneau de pression -->
+              <circle cx="228" cy="222" r="18" fill="none" stroke="#ff3b30" stroke-width="2" class="a-rcp-ring"/>
             </g>
-            <!-- BPM label -->
-            <g transform="translate(310,40)">
-              <rect x="-40" y="-18" width="80" height="30" rx="15" fill="rgba(255,59,48,.15)" stroke="rgba(255,59,48,.5)"/>
-              <text x="0" y="2" text-anchor="middle" fill="#ff5a4d" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">100/min</text>
+
+            <!-- Étiquette 100/min -->
+            <g transform="translate(420,40)">
+              <rect x="-50" y="-16" width="100" height="30" rx="15" fill="rgba(255,59,48,.15)" stroke="rgba(255,59,48,.5)"/>
+              <text x="0" y="4" text-anchor="middle" fill="#ff5a4d" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">100 / min</text>
+            </g>
+            <!-- Étiquette 5-6 cm -->
+            <g transform="translate(80,50)">
+              <rect x="-40" y="-16" width="80" height="30" rx="15" fill="rgba(255,182,72,.15)" stroke="rgba(255,182,72,.5)"/>
+              <text x="0" y="4" text-anchor="middle" fill="#ffb648" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">5–6 cm</text>
             </g>
           </svg>
         </div>
@@ -440,36 +477,58 @@
       <!-- DAE -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 02 — DAE · Placement des électrodes</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <!-- torso -->
-            <g transform="translate(120,40)">
-              <!-- head -->
-              <circle cx="80" cy="15" r="18" fill="#e7e2d5"/>
-              <!-- torso -->
-              <path d="M 40 30 Q 80 20 120 30 L 130 170 Q 80 185 30 170 Z" fill="#f7f5f0"/>
-              <!-- collar bone hint -->
-              <path d="M 45 42 Q 80 34 115 42" stroke="rgba(0,0,0,.06)" fill="none" stroke-width="2"/>
+          <span class="fig-title">Fig. 02 — DAE · Placement des électrodes torse nu</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <line x1="20" y1="258" x2="480" y2="258" stroke="rgba(255,255,255,.15)" stroke-dasharray="4 6"/>
+
+            <!-- ============ VICTIME (torse nu, vue de face, allongée) ============ -->
+            <g transform="translate(210,50)">
+              <!-- tête -->
+              <circle cx="90" cy="0" r="26" fill="#e7e2d5"/>
+              <path d="M 68 -8 Q 90 -22 112 -8" stroke="#4a3a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+              <circle cx="82" cy="2" r="1.8" fill="#3a3a3a"/>
+              <circle cx="98" cy="2" r="1.8" fill="#3a3a3a"/>
+              <!-- cou -->
+              <rect x="80" y="22" width="20" height="14" fill="#e7e2d5"/>
+              <!-- torse (poitrine découverte) -->
+              <path d="M 40 36 Q 90 26 140 36 L 148 200 Q 90 210 32 200 Z" fill="#f5d5b8"/>
+              <!-- sternum ligne -->
+              <line x1="90" y1="50" x2="90" y2="180" stroke="rgba(0,0,0,.1)" stroke-width="1"/>
+              <!-- clavicules -->
+              <path d="M 50 50 Q 90 44 130 50" stroke="rgba(0,0,0,.15)" stroke-width="2" fill="none"/>
+              <!-- pectoraux -->
+              <path d="M 50 60 Q 70 85 88 62 Q 90 60 92 62 Q 110 85 130 60" stroke="rgba(0,0,0,.08)" stroke-width="1" fill="none"/>
+              <!-- pantalon en bas -->
+              <rect x="30" y="200" width="120" height="30" fill="#3a2a1a"/>
+              <!-- bras -->
+              <rect x="10" y="40" width="24" height="150" rx="12" fill="#f5d5b8"/>
+              <rect x="146" y="40" width="24" height="150" rx="12" fill="#f5d5b8"/>
             </g>
-            <!-- Pad 1 : right upper chest -->
-            <g transform="translate(178,90)" class="a-glow">
-              <rect x="-20" y="-14" width="40" height="28" rx="6" fill="#ff8a3d" stroke="#fff" stroke-width="2"/>
-              <text x="0" y="4" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#fff" font-weight="700">1</text>
+
+            <!-- Électrode 1 (haut droite du patient = gauche à l'écran) -->
+            <g transform="translate(275,110)" class="a-glow">
+              <rect x="-24" y="-16" width="48" height="32" rx="6" fill="#ff8a3d" stroke="#fff" stroke-width="2.5"/>
+              <text x="0" y="4" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#fff" font-weight="700">1</text>
+              <!-- fil -->
+              <path d="M -24 0 Q -50 -30 -80 -20" stroke="#ff8a3d" stroke-width="2.5" fill="none"/>
             </g>
-            <!-- Pad 2 : left lower side -->
-            <g transform="translate(240,170)" class="a-glow" style="animation-delay:.7s">
-              <rect x="-20" y="-14" width="40" height="28" rx="6" fill="#ff3b30" stroke="#fff" stroke-width="2"/>
-              <text x="0" y="4" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#fff" font-weight="700">2</text>
+            <!-- Électrode 2 (bas gauche du patient = droite à l'écran) -->
+            <g transform="translate(348,200)" class="a-glow" style="animation-delay:.7s">
+              <rect x="-24" y="-16" width="48" height="32" rx="6" fill="#ff3b30" stroke="#fff" stroke-width="2.5"/>
+              <text x="0" y="4" text-anchor="middle" font-family="JetBrains Mono" font-size="12" fill="#fff" font-weight="700">2</text>
+              <path d="M 24 0 Q 50 -20 90 -20" stroke="#ff3b30" stroke-width="2.5" fill="none"/>
             </g>
-            <!-- lightning between -->
-            <path d="M 190 100 L 210 130 L 200 135 L 225 165" stroke="#ffb648" stroke-width="2.5" fill="none" class="a-dash"/>
-            <!-- DAE device -->
-            <g transform="translate(40,150)">
-              <rect x="0" y="0" width="60" height="70" rx="10" fill="#1e1e2b" stroke="rgba(255,255,255,.2)"/>
-              <circle cx="30" cy="20" r="8" fill="#37d67a" class="a-glow"/>
-              <rect x="10" y="36" width="40" height="4" rx="2" fill="rgba(255,255,255,.25)"/>
-              <rect x="10" y="46" width="30" height="4" rx="2" fill="rgba(255,255,255,.15)"/>
-              <text x="30" y="65" text-anchor="middle" font-family="Inter" font-size="8" fill="#fff" font-weight="700">DAE</text>
+            <!-- Éclair entre les deux -->
+            <path d="M 290 130 L 310 160 L 300 165 L 335 185" stroke="#ffb648" stroke-width="3" fill="none" class="a-dash"/>
+
+            <!-- Appareil DAE -->
+            <g transform="translate(50,150)">
+              <rect x="0" y="0" width="80" height="90" rx="12" fill="#1e1e2b" stroke="rgba(255,255,255,.25)" stroke-width="2"/>
+              <circle cx="40" cy="22" r="10" fill="#37d67a" class="a-glow"/>
+              <rect x="14" y="42" width="52" height="5" rx="2" fill="rgba(255,255,255,.3)"/>
+              <rect x="14" y="52" width="40" height="5" rx="2" fill="rgba(255,255,255,.18)"/>
+              <rect x="14" y="62" width="46" height="5" rx="2" fill="rgba(255,255,255,.18)"/>
+              <text x="40" y="82" text-anchor="middle" font-family="Inter" font-size="10" fill="#ffb648" font-weight="700" letter-spacing="1">DAE</text>
             </g>
           </svg>
         </div>
@@ -488,25 +547,54 @@
       <!-- PLS -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 03 — Position Latérale de Sécurité (PLS)</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(255,255,255,.12)" stroke-width="1" stroke-dasharray="4 6"/>
-            <g class="a-pls" transform="translate(200,140)">
-              <!-- body -->
-              <ellipse cx="0" cy="35" rx="130" ry="28" fill="#f7f5f0"/>
-              <!-- head -->
-              <circle cx="-115" cy="10" r="24" fill="#e7e2d5"/>
-              <!-- arm bent up -->
-              <path d="M -100 20 Q -90 -15 -60 -20" stroke="#c6c3bb" stroke-width="14" fill="none" stroke-linecap="round"/>
-              <!-- leg bent -->
-              <path d="M 100 40 Q 130 20 150 -20" stroke="#c6c3bb" stroke-width="16" fill="none" stroke-linecap="round"/>
-              <!-- mouth toward ground -->
-              <circle cx="-125" cy="18" r="3" fill="#ff3b30"/>
+          <span class="fig-title">Fig. 03 — PLS · Bascule sur le côté</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <line x1="20" y1="258" x2="480" y2="258" stroke="rgba(255,255,255,.15)" stroke-dasharray="4 6"/>
+
+            <!-- Flèche de rotation -->
+            <g transform="translate(250,60)">
+              <path d="M -70 30 A 70 70 0 0 1 70 30" stroke="#ffb648" stroke-width="2.5" fill="none" class="a-dash"/>
+              <polygon points="70,30 60,22 60,38" fill="#ffb648"/>
+              <text x="0" y="10" text-anchor="middle" fill="#ffb648" font-family="JetBrains Mono" font-size="10" letter-spacing="2">BASCULE</text>
             </g>
-            <!-- rotation arrow -->
-            <g transform="translate(200,80)">
-              <path d="M -50 0 A 50 50 0 0 1 50 0" stroke="#ffb648" stroke-width="2" fill="none" class="a-dash"/>
-              <polygon points="50,0 42,-6 42,6" fill="#ffb648"/>
+
+            <!-- ============ VICTIME (bascule de dos à côté) ============ -->
+            <g class="a-pls-rotate">
+              <!-- jambe droite (au sol, allongée) -->
+              <rect x="290" y="215" width="130" height="26" rx="13" fill="#3a2a1a"/>
+              <ellipse cx="425" cy="228" rx="14" ry="8" fill="#1a1a1a"/>
+              <!-- jambe gauche (pliée en avant pour la PLS) -->
+              <path d="M 295 210 Q 340 180 380 175" stroke="#4a3a2a" stroke-width="28" fill="none" stroke-linecap="round"/>
+              <ellipse cx="388" cy="172" rx="15" ry="9" fill="#1a1a1a"/>
+              <!-- hanches -->
+              <rect x="255" y="200" width="60" height="36" rx="18" fill="#4a3a2a"/>
+              <!-- torse -->
+              <rect x="130" y="192" width="140" height="48" rx="24" fill="#f7f5f0"/>
+              <!-- bras au sol -->
+              <rect x="140" y="234" width="80" height="14" rx="7" fill="#e7e2d5"/>
+              <!-- bras plié sous la tête (main sous joue) -->
+              <path d="M 145 200 Q 105 175 90 190" stroke="#e7e2d5" stroke-width="16" fill="none" stroke-linecap="round"/>
+              <ellipse cx="88" cy="192" rx="10" ry="7" fill="#e7e2d5"/>
+              <!-- cou -->
+              <rect x="112" y="216" width="18" height="12" fill="#e7e2d5"/>
+              <!-- tête (inclinée en arrière pour libérer voies aériennes) -->
+              <g transform="translate(93,215) rotate(-8)">
+                <circle cx="0" cy="0" r="22" fill="#e7e2d5"/>
+                <path d="M -16 -8 Q 0 -20 16 -8" stroke="#4a3a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <circle cx="10" cy="0" r="3" fill="#c6c3bb"/>
+                <!-- bouche ouverte vers le bas -->
+                <ellipse cx="-8" cy="8" rx="4" ry="2.5" fill="#a5231d"/>
+              </g>
+            </g>
+
+            <!-- Étiquettes explicatives -->
+            <g transform="translate(120,240)">
+              <circle cx="0" cy="0" r="5" fill="#5aa9ff"/>
+              <text x="10" y="4" fill="#5aa9ff" font-family="JetBrains Mono" font-size="9" letter-spacing="1">TÊTE EN ARRIÈRE</text>
+            </g>
+            <g transform="translate(320,260)">
+              <circle cx="0" cy="0" r="5" fill="#ff8a3d"/>
+              <text x="10" y="4" fill="#ff8a3d" font-family="JetBrains Mono" font-size="9" letter-spacing="1">JAMBE PLIÉE</text>
             </g>
           </svg>
         </div>
@@ -525,32 +613,65 @@
       <!-- HEIMLICH -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 04 — Étouffement · Heimlich</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <!-- Victim standing -->
-            <g transform="translate(180,50)">
+          <span class="fig-title">Fig. 04 — Heimlich · Sauveteur derrière la victime</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <line x1="20" y1="268" x2="480" y2="268" stroke="rgba(255,255,255,.15)" stroke-dasharray="4 6"/>
+
+            <!-- ============ SAUVETEUR (derrière, plus grand) ============ -->
+            <g transform="translate(200,20)">
+              <!-- tête -->
+              <circle cx="0" cy="20" r="26" fill="#f5a970"/>
+              <path d="M -22 8 Q 0 -8 22 8" stroke="#3a1a10" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle cx="20" cy="24" r="3" fill="#c8501e"/>
+              <circle cx="-8" cy="22" r="1.8" fill="#3a1a10"/>
+              <circle cx="8" cy="22" r="1.8" fill="#3a1a10"/>
+              <!-- cou -->
+              <rect x="-10" y="42" width="20" height="12" fill="#f5a970"/>
+              <!-- torse (plus large, en fond) -->
+              <path d="M -46 54 Q 0 46 46 54 L 60 240 L -60 240 Z" fill="#ff8a3d"/>
+            </g>
+
+            <!-- ============ VICTIME (devant, plus petite car proche) ============ -->
+            <g transform="translate(200,55)">
+              <!-- tête (bras levés, panique) -->
               <circle cx="0" cy="20" r="22" fill="#e7e2d5"/>
-              <path d="M -30 40 L -30 130 Q 0 145 30 130 L 30 40 Z" fill="#f7f5f0"/>
-              <!-- arms up -->
-              <path d="M -28 50 L -70 30 M 28 50 L 70 30" stroke="#c6c3bb" stroke-width="12" fill="none" stroke-linecap="round"/>
-              <!-- distress marks -->
-              <path d="M -12 12 L -6 18 M -6 12 L -12 18" stroke="#ff3b30" stroke-width="2"/>
-              <path d="M 6 12 L 12 18 M 12 12 L 6 18" stroke="#ff3b30" stroke-width="2"/>
+              <path d="M -18 10 Q 0 -2 18 10" stroke="#4a3a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <!-- yeux paniqués -->
+              <circle cx="-8" cy="22" r="2.5" fill="#3a3a3a"/>
+              <circle cx="8" cy="22" r="2.5" fill="#3a3a3a"/>
+              <!-- bouche ouverte -->
+              <circle cx="0" cy="32" r="4" fill="#a5231d"/>
+              <!-- signes de détresse -->
+              <path d="M -30 -2 L -22 6 M -22 -2 L -30 6" stroke="#ff3b30" stroke-width="2.5"/>
+              <path d="M 22 -2 L 30 6 M 30 -2 L 22 6" stroke="#ff3b30" stroke-width="2.5"/>
+              <!-- cou -->
+              <rect x="-9" y="40" width="18" height="10" fill="#e7e2d5"/>
+              <!-- torse (chemise) -->
+              <path d="M -30 50 Q 0 44 30 50 L 34 180 L -34 180 Z" fill="#f7f5f0"/>
+              <!-- ceinture / niveau sternum -->
+              <line x1="-30" y1="120" x2="30" y2="120" stroke="rgba(255,59,48,.3)" stroke-width="1" stroke-dasharray="3 3"/>
+              <!-- bras levés / mains vers le cou (étouffement) -->
+              <path d="M -30 60 Q -60 30 -50 0" stroke="#e7e2d5" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <path d="M 30 60 Q 60 30 50 0" stroke="#e7e2d5" stroke-width="12" fill="none" stroke-linecap="round"/>
             </g>
-            <!-- rescuer arms hugging from behind -->
-            <g transform="translate(180,150)">
-              <!-- fist -->
-              <g class="a-arr-l">
-                <circle cx="-8" cy="0" r="18" fill="#ff8a3d"/>
-                <circle cx="-8" cy="0" r="10" fill="#ff3b30"/>
-              </g>
-              <!-- direction arrow inward-up -->
-              <g transform="translate(-40,0)">
-                <path d="M 0 0 L 26 -10" stroke="#ffb648" stroke-width="3" fill="none" class="a-dash"/>
-                <polygon points="26,-10 18,-14 20,-4" fill="#ffb648"/>
+
+            <!-- Bras du sauveteur qui entoure + poing (animé) -->
+            <g class="a-heimlich">
+              <!-- bras droit du sauveteur qui vient de derrière -->
+              <path d="M 260 130 Q 280 150 240 175" stroke="#ff8a3d" stroke-width="18" fill="none" stroke-linecap="round"/>
+              <!-- bras gauche -->
+              <path d="M 140 130 Q 120 150 160 175" stroke="#ff8a3d" stroke-width="18" fill="none" stroke-linecap="round"/>
+              <!-- mains jointes / poing sous le sternum -->
+              <ellipse cx="200" cy="180" rx="24" ry="16" fill="#f5a970"/>
+              <ellipse cx="200" cy="180" rx="12" ry="8" fill="#ff3b30"/>
+              <!-- flèche interne-haut -->
+              <g transform="translate(230,205)">
+                <path d="M 0 0 L -30 -22" stroke="#ffb648" stroke-width="3" fill="none" class="a-dash"/>
+                <polygon points="-30,-22 -20,-20 -24,-30" fill="#ffb648"/>
               </g>
             </g>
-            <text x="200" y="235" text-anchor="middle" fill="rgba(255,255,255,.4)" font-family="JetBrains Mono" font-size="10" letter-spacing="1">1–5 compressions abdominales</text>
+
+            <text x="250" y="262" text-anchor="middle" fill="rgba(255,255,255,.5)" font-family="JetBrains Mono" font-size="10" letter-spacing="2">POUSSER VERS SOI + VERS LE HAUT</text>
           </svg>
         </div>
         <div class="body">
@@ -568,38 +689,64 @@
       <!-- SAIGNEMENT -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 05 — Saignement abondant · Compression</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <!-- arm -->
-            <g transform="translate(50,110)">
-              <rect x="0" y="0" width="280" height="60" rx="30" fill="#e7e2d5"/>
-              <!-- wound -->
-              <ellipse cx="180" cy="30" rx="18" ry="8" fill="#a5231d"/>
-              <!-- blood drops -->
-              <g class="a-water" style="animation-delay:0s">
-                <circle cx="180" cy="40" r="4" fill="#ff3b30"/>
-              </g>
-              <g class="a-water" style="animation-delay:.4s">
-                <circle cx="185" cy="40" r="3" fill="#ff3b30"/>
-              </g>
-              <g class="a-water" style="animation-delay:.8s">
-                <circle cx="175" cy="40" r="3" fill="#ff3b30"/>
-              </g>
+          <span class="fig-title">Fig. 05 — Saignement · Compression manuelle</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <line x1="20" y1="260" x2="480" y2="260" stroke="rgba(255,255,255,.15)" stroke-dasharray="4 6"/>
+
+            <!-- ============ VICTIME (allongée, on voit son bras qui saigne) ============ -->
+            <!-- tête -->
+            <circle cx="60" cy="80" r="24" fill="#e7e2d5"/>
+            <path d="M 42 68 Q 60 56 78 68" stroke="#4a3a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <!-- torse -->
+            <path d="M 80 60 L 260 55 L 265 130 L 82 135 Z" fill="#f7f5f0"/>
+            <!-- épaule / manche -->
+            <ellipse cx="90" cy="140" rx="30" ry="18" fill="#f7f5f0"/>
+            <!-- bras qui saigne (tendu vers la droite) -->
+            <rect x="115" y="140" width="230" height="42" rx="21" fill="#e7e2d5"/>
+            <!-- main -->
+            <circle cx="352" cy="161" r="16" fill="#e7e2d5"/>
+            <!-- Plaie visible -->
+            <ellipse cx="240" cy="160" rx="22" ry="10" fill="#a5231d"/>
+            <ellipse cx="240" cy="160" rx="14" ry="6" fill="#5a0f0a"/>
+            <!-- Gouttes de sang qui coulent -->
+            <g class="a-bleed" style="animation-delay:0s">
+              <ellipse cx="235" cy="175" rx="4" ry="7" fill="#ff3b30"/>
             </g>
-            <!-- pressing hand -->
-            <g transform="translate(230,140)" class="a-press">
-              <ellipse cx="0" cy="0" rx="46" ry="30" fill="#ff8a3d"/>
-              <!-- fingers -->
-              <rect x="-30" y="-40" width="14" height="30" rx="7" fill="#ff8a3d"/>
-              <rect x="-12" y="-46" width="14" height="36" rx="7" fill="#ff8a3d"/>
-              <rect x="6" y="-46" width="14" height="36" rx="7" fill="#ff8a3d"/>
-              <rect x="24" y="-40" width="14" height="30" rx="7" fill="#ff8a3d"/>
+            <g class="a-bleed" style="animation-delay:.4s">
+              <ellipse cx="245" cy="175" rx="3" ry="6" fill="#ff3b30"/>
             </g>
-            <!-- arrow down (pressure) -->
-            <g transform="translate(230,80)" opacity=".7">
-              <line x1="0" y1="0" x2="0" y2="30" stroke="#ffb648" stroke-width="3" class="a-dash"/>
-              <polygon points="0,30 -6,22 6,22" fill="#ffb648"/>
+            <g class="a-bleed" style="animation-delay:.8s">
+              <ellipse cx="240" cy="175" rx="3.5" ry="6" fill="#ff3b30"/>
             </g>
+            <!-- jambes -->
+            <rect x="260" y="90" width="150" height="30" rx="15" fill="#3a2a1a"/>
+            <ellipse cx="418" cy="105" rx="14" ry="8" fill="#1a1a1a"/>
+
+            <!-- ============ SAUVETEUR (mains + bras qui compriment) ============ -->
+            <g class="a-press">
+              <!-- avant-bras qui descend -->
+              <rect x="220" y="30" width="40" height="90" rx="20" fill="#ff8a3d"/>
+              <!-- poignet -->
+              <ellipse cx="240" cy="118" rx="24" ry="10" fill="#ff8a3d"/>
+              <!-- paume (au-dessus de la plaie) -->
+              <ellipse cx="240" cy="140" rx="42" ry="24" fill="#f5a970"/>
+              <!-- doigts -->
+              <rect x="205" y="145" width="14" height="26" rx="7" fill="#f5a970"/>
+              <rect x="220" y="148" width="14" height="30" rx="7" fill="#f5a970"/>
+              <rect x="236" y="148" width="14" height="30" rx="7" fill="#f5a970"/>
+              <rect x="252" y="145" width="14" height="26" rx="7" fill="#f5a970"/>
+              <!-- pouce -->
+              <ellipse cx="200" cy="135" rx="9" ry="14" transform="rotate(-30 200 135)" fill="#f5a970"/>
+              <!-- Tissu blanc entre main et plaie -->
+              <rect x="200" y="152" width="80" height="16" rx="4" fill="#fdfdfd" opacity=".85"/>
+            </g>
+
+            <!-- Flèche indiquant la pression -->
+            <g transform="translate(240,10)" opacity=".8">
+              <line x1="0" y1="0" x2="0" y2="20" stroke="#ffb648" stroke-width="3" class="a-dash"/>
+              <polygon points="0,20 -7,12 7,12" fill="#ffb648"/>
+            </g>
+            <text x="290" y="14" fill="#ffb648" font-family="JetBrains Mono" font-size="10" letter-spacing="1">APPUYER FORT</text>
           </svg>
         </div>
         <div class="body">
@@ -617,33 +764,69 @@
       <!-- BRÛLURE -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 06 — Brûlure · Refroidir 15 min</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <!-- tap -->
-            <g transform="translate(180,30)">
-              <rect x="-20" y="0" width="40" height="20" rx="4" fill="#8a8780"/>
-              <rect x="-6" y="20" width="12" height="18" fill="#8a8780"/>
-              <rect x="-15" y="38" width="30" height="6" rx="2" fill="#c6c3bb"/>
+          <span class="fig-title">Fig. 06 — Brûlure · Refroidir sous l'eau 15 min</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <!-- Lavabo -->
+            <path d="M 60 220 Q 60 260 100 260 L 400 260 Q 440 260 440 220 Z" fill="#2a2a35" stroke="rgba(255,255,255,.1)"/>
+            <ellipse cx="250" cy="220" rx="190" ry="12" fill="#0b0b10"/>
+
+            <!-- Robinet -->
+            <g transform="translate(250,20)">
+              <rect x="-24" y="0" width="48" height="24" rx="4" fill="#8a8780"/>
+              <rect x="-8" y="24" width="16" height="24" fill="#8a8780"/>
+              <rect x="-20" y="48" width="40" height="8" rx="3" fill="#c6c3bb"/>
+              <!-- poignée -->
+              <rect x="18" y="4" width="14" height="12" rx="3" fill="#c6c3bb"/>
             </g>
-            <!-- water droplets stream -->
-            <g transform="translate(200,74)">
-              <g class="a-water" style="animation-delay:0s"><ellipse cx="0" cy="0" rx="4" ry="8" fill="#5aa9ff"/></g>
-              <g class="a-water" style="animation-delay:.15s"><ellipse cx="-4" cy="0" rx="3" ry="6" fill="#5aa9ff"/></g>
-              <g class="a-water" style="animation-delay:.35s"><ellipse cx="4" cy="0" rx="3" ry="6" fill="#5aa9ff"/></g>
-              <g class="a-water" style="animation-delay:.55s"><ellipse cx="0" cy="0" rx="3" ry="7" fill="#5aa9ff"/></g>
-              <g class="a-water" style="animation-delay:.75s"><ellipse cx="-2" cy="0" rx="3" ry="6" fill="#5aa9ff"/></g>
+
+            <!-- Eau qui coule -->
+            <g transform="translate(250,60)">
+              <g class="a-water" style="animation-delay:0s"><ellipse cx="0" cy="0" rx="5" ry="10" fill="#5aa9ff"/></g>
+              <g class="a-water" style="animation-delay:.15s"><ellipse cx="-5" cy="0" rx="4" ry="8" fill="#5aa9ff"/></g>
+              <g class="a-water" style="animation-delay:.3s"><ellipse cx="5" cy="0" rx="4" ry="8" fill="#5aa9ff"/></g>
+              <g class="a-water" style="animation-delay:.45s"><ellipse cx="-2" cy="0" rx="3.5" ry="8" fill="#5aa9ff"/></g>
+              <g class="a-water" style="animation-delay:.6s"><ellipse cx="2" cy="0" rx="3.5" ry="7" fill="#5aa9ff"/></g>
+              <g class="a-water" style="animation-delay:.75s"><ellipse cx="0" cy="0" rx="4" ry="8" fill="#5aa9ff"/></g>
+              <g class="a-water" style="animation-delay:.9s"><ellipse cx="-3" cy="0" rx="3" ry="7" fill="#5aa9ff"/></g>
             </g>
-            <!-- forearm under water -->
-            <g transform="translate(120,150)">
-              <rect x="0" y="0" width="220" height="46" rx="23" fill="#e7e2d5"/>
-              <!-- burn -->
-              <ellipse cx="90" cy="20" rx="30" ry="10" fill="#ff5a4d" opacity=".85"/>
-              <ellipse cx="90" cy="20" rx="18" ry="6" fill="#a5231d"/>
+
+            <!-- Éclaboussures sur le bras -->
+            <g transform="translate(250,175)">
+              <circle cx="-20" cy="0" r="3" fill="#5aa9ff" opacity=".6"/>
+              <circle cx="20" cy="4" r="2.5" fill="#5aa9ff" opacity=".6"/>
+              <circle cx="-30" cy="8" r="2" fill="#5aa9ff" opacity=".5"/>
+              <circle cx="30" cy="-4" r="2" fill="#5aa9ff" opacity=".5"/>
             </g>
-            <!-- timer chip -->
-            <g transform="translate(60,60)">
-              <rect x="-30" y="-16" width="80" height="30" rx="15" fill="rgba(90,169,255,.15)" stroke="rgba(90,169,255,.5)"/>
-              <text x="10" y="4" text-anchor="middle" fill="#5aa9ff" font-family="JetBrains Mono" font-size="11" letter-spacing="1">15–20 min</text>
+
+            <!-- ============ PERSONNE (bras tendu sous l'eau) ============ -->
+            <!-- épaule + haut du bras venant de gauche -->
+            <path d="M 20 130 Q 60 120 100 130 L 100 200 L 20 200 Z" fill="#ff8a3d"/>
+            <!-- coude -->
+            <circle cx="100" cy="165" r="26" fill="#f5a970"/>
+            <!-- avant-bras horizontal sous l'eau -->
+            <rect x="100" y="150" width="220" height="42" rx="21" fill="#f5a970"/>
+            <!-- main -->
+            <circle cx="332" cy="171" r="18" fill="#f5a970"/>
+            <!-- Doigts -->
+            <rect x="340" y="145" width="10" height="20" rx="5" fill="#f5a970"/>
+            <rect x="340" y="158" width="12" height="22" rx="5" fill="#f5a970"/>
+            <rect x="340" y="171" width="12" height="22" rx="5" fill="#f5a970"/>
+            <!-- Brûlure visible -->
+            <ellipse cx="220" cy="168" rx="34" ry="12" fill="#ff5a4d" opacity=".95"/>
+            <ellipse cx="220" cy="168" rx="20" ry="7" fill="#a5231d"/>
+            <!-- petites cloques -->
+            <circle cx="205" cy="168" r="3" fill="#ffb648" opacity=".9"/>
+            <circle cx="235" cy="168" r="2.5" fill="#ffb648" opacity=".9"/>
+
+            <!-- Étiquette timer -->
+            <g transform="translate(400,50)">
+              <rect x="-40" y="-16" width="80" height="32" rx="16" fill="rgba(90,169,255,.18)" stroke="rgba(90,169,255,.6)" stroke-width="1.5"/>
+              <text x="0" y="4" text-anchor="middle" fill="#5aa9ff" font-family="JetBrains Mono, monospace" font-size="12" font-weight="700">15–20 min</text>
+            </g>
+            <!-- Étiquette température -->
+            <g transform="translate(90,50)">
+              <rect x="-38" y="-16" width="76" height="32" rx="16" fill="rgba(55,214,122,.15)" stroke="rgba(55,214,122,.5)"/>
+              <text x="0" y="4" text-anchor="middle" fill="#37d67a" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1">EAU TIÈDE</text>
             </g>
           </svg>
         </div>
@@ -662,38 +845,76 @@
       <!-- MALAISE -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 07 — Malaise · Position choisie</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <line x1="20" y1="215" x2="380" y2="215" stroke="rgba(255,255,255,.12)" stroke-width="1" stroke-dasharray="4 6"/>
-            <!-- chair -->
-            <g transform="translate(180,120)">
-              <rect x="-6" y="80" width="80" height="8" fill="#8a8780"/>
-              <rect x="-6" y="88" width="6" height="20" fill="#8a8780"/>
-              <rect x="68" y="88" width="6" height="20" fill="#8a8780"/>
-              <rect x="-6" y="10" width="8" height="80" fill="#8a8780"/>
+          <span class="fig-title">Fig. 07 — Malaise · Sauveteur qui rassure & questionne</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <line x1="20" y1="260" x2="480" y2="260" stroke="rgba(255,255,255,.15)" stroke-dasharray="4 6"/>
+
+            <!-- Chaise -->
+            <g transform="translate(280,90)">
+              <rect x="-4" y="130" width="100" height="10" fill="#5a5a60"/>
+              <rect x="0" y="140" width="8" height="90" fill="#5a5a60"/>
+              <rect x="88" y="140" width="8" height="90" fill="#5a5a60"/>
+              <rect x="-4" y="20" width="12" height="120" fill="#5a5a60"/>
+              <rect x="-14" y="10" width="30" height="14" rx="4" fill="#5a5a60"/>
             </g>
-            <!-- person seated -->
-            <g transform="translate(220,110)">
-              <!-- torso breathing -->
+
+            <!-- ============ VICTIME (assise, pâle) ============ -->
+            <g transform="translate(310,90)">
+              <!-- jambes -->
+              <rect x="8" y="140" width="80" height="26" rx="13" fill="#3a2a1a"/>
+              <rect x="80" y="160" width="26" height="60" rx="10" fill="#3a2a1a"/>
+              <ellipse cx="98" cy="220" rx="12" ry="7" fill="#1a1a1a"/>
+              <!-- bassin -->
+              <rect x="0" y="126" width="90" height="30" rx="14" fill="#4a3a2a"/>
+              <!-- torse qui respire -->
               <g class="a-breathe">
-                <rect x="-30" y="30" width="60" height="60" rx="20" fill="#f7f5f0"/>
+                <rect x="6" y="60" width="80" height="72" rx="20" fill="#f7f5f0"/>
               </g>
-              <!-- head -->
-              <circle cx="0" cy="10" r="22" fill="#e7e2d5"/>
-              <!-- legs -->
-              <rect x="-24" y="90" width="80" height="18" rx="9" fill="#e7e2d5"/>
-              <!-- arm rest -->
-              <path d="M -20 60 L -50 80" stroke="#c6c3bb" stroke-width="10" fill="none" stroke-linecap="round"/>
+              <!-- bras qui pend -->
+              <path d="M 8 68 Q 0 100 -10 130" stroke="#e7e2d5" stroke-width="14" fill="none" stroke-linecap="round"/>
+              <!-- cou -->
+              <rect x="36" y="50" width="20" height="14" fill="#e7e2d5"/>
+              <!-- tête (légère nod, pâle) -->
+              <g class="a-nod">
+                <circle cx="46" cy="30" r="24" fill="#efe6d5"/>
+                <path d="M 26 20 Q 46 8 66 20" stroke="#4a3a2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <!-- yeux mi-clos -->
+                <path d="M 34 30 L 42 30" stroke="#3a3a3a" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 50 30 L 58 30" stroke="#3a3a3a" stroke-width="2" stroke-linecap="round"/>
+                <!-- sueur -->
+                <ellipse cx="66" cy="26" rx="2" ry="4" fill="#5aa9ff" opacity=".7"/>
+                <ellipse cx="26" cy="30" rx="2" ry="3" fill="#5aa9ff" opacity=".7"/>
+              </g>
             </g>
-            <!-- SST reassuring -->
-            <g transform="translate(80,110)">
-              <circle cx="0" cy="0" r="20" fill="#ff8a3d"/>
-              <rect x="-24" y="20" width="48" height="60" rx="14" fill="#ff8a3d"/>
-              <!-- speech bubble -->
-              <g transform="translate(0,-40)">
-                <rect x="-32" y="-16" width="64" height="24" rx="12" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.3)"/>
-                <text x="0" y="0" text-anchor="middle" fill="#f7f5f0" font-family="Inter" font-size="10" font-weight="600">Ça va aller</text>
-              </g>
+
+            <!-- ============ SAUVETEUR (accroupi devant, main sur épaule) ============ -->
+            <g transform="translate(140,120)">
+              <!-- jambe pliée -->
+              <rect x="10" y="80" width="70" height="30" rx="15" fill="#c8501e"/>
+              <rect x="10" y="105" width="90" height="16" rx="8" fill="#8a3a1a"/>
+              <!-- torse penché en avant -->
+              <path d="M 20 30 L 60 30 L 80 90 L 10 90 Z" fill="#ff8a3d"/>
+              <!-- bras tendu vers la victime -->
+              <path d="M 65 50 Q 130 40 165 55" stroke="#f5a970" stroke-width="16" fill="none" stroke-linecap="round"/>
+              <!-- main sur épaule -->
+              <ellipse cx="170" cy="56" rx="14" ry="10" fill="#f5a970"/>
+              <!-- cou -->
+              <rect x="30" y="10" width="18" height="20" fill="#f5a970"/>
+              <!-- tête (regarde la victime) -->
+              <circle cx="39" cy="-8" r="22" fill="#f5a970"/>
+              <path d="M 23 -20 Q 39 -32 55 -20" stroke="#3a1a10" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <circle cx="52" cy="-6" r="3" fill="#c8501e"/>
+              <!-- œil regardant droite -->
+              <circle cx="46" cy="-8" r="1.8" fill="#3a1a10"/>
+              <!-- sourire rassurant -->
+              <path d="M 40 2 Q 48 6 54 2" stroke="#3a1a10" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </g>
+
+            <!-- Bulle de dialogue -->
+            <g transform="translate(140,50)">
+              <path d="M 0 0 Q 0 -18 20 -18 L 180 -18 Q 200 -18 200 0 L 200 18 Q 200 34 180 34 L 30 34 L 10 42 L 20 34 Q 0 34 0 18 Z"
+                    fill="rgba(255,182,72,.15)" stroke="rgba(255,182,72,.6)" stroke-width="1.5"/>
+              <text x="100" y="12" text-anchor="middle" fill="#ffb648" font-family="Inter" font-size="12" font-weight="600">« Depuis quand ? Traitement ? »</text>
             </g>
           </svg>
         </div>
@@ -712,26 +933,68 @@
       <!-- ALERTE -->
       <div class="card geste">
         <div class="canvas">
-          <span class="fig-title">Fig. 08 — Alerter · 15 · 18 · 112</span>
-          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid meet">
-            <!-- ripples -->
-            <g transform="translate(200,125)">
-              <circle cx="0" cy="0" r="20" fill="none" stroke="#ff3b30" stroke-width="2" class="a-ripple"/>
-              <circle cx="0" cy="0" r="20" fill="none" stroke="#ff8a3d" stroke-width="2" class="a-ripple" style="animation-delay:.5s"/>
-              <circle cx="0" cy="0" r="20" fill="none" stroke="#ffb648" stroke-width="2" class="a-ripple" style="animation-delay:1s"/>
+          <span class="fig-title">Fig. 08 — Alerter · Sauveteur au téléphone</span>
+          <svg viewBox="0 0 500 280" preserveAspectRatio="xMidYMid meet">
+            <line x1="20" y1="260" x2="480" y2="260" stroke="rgba(255,255,255,.15)" stroke-dasharray="4 6"/>
+
+            <!-- Ondes de propagation depuis le téléphone -->
+            <g transform="translate(360,100)">
+              <circle cx="0" cy="0" r="20" fill="none" stroke="#ff3b30" stroke-width="2.5" class="a-ripple"/>
+              <circle cx="0" cy="0" r="20" fill="none" stroke="#ff8a3d" stroke-width="2.5" class="a-ripple" style="animation-delay:.7s"/>
+              <circle cx="0" cy="0" r="20" fill="none" stroke="#ffb648" stroke-width="2.5" class="a-ripple" style="animation-delay:1.4s"/>
             </g>
-            <!-- phone -->
-            <g transform="translate(200,125)" class="a-phone">
-              <rect x="-28" y="-46" width="56" height="92" rx="10" fill="#1e1e2b" stroke="rgba(255,255,255,.2)"/>
-              <rect x="-22" y="-38" width="44" height="60" rx="4" fill="#0b0b10"/>
-              <text x="0" y="-10" text-anchor="middle" fill="#ff3b30" font-family="Instrument Serif" font-size="26" font-style="italic">15</text>
-              <text x="0" y="10" text-anchor="middle" fill="#c6c3bb" font-family="JetBrains Mono" font-size="7" letter-spacing="1">SAMU</text>
-              <circle cx="0" cy="34" r="4" fill="rgba(255,255,255,.25)"/>
+
+            <!-- ============ SAUVETEUR (téléphone à l'oreille) ============ -->
+            <g transform="translate(150,90)">
+              <!-- jambes -->
+              <rect x="20" y="150" width="30" height="90" rx="12" fill="#c8501e"/>
+              <rect x="60" y="150" width="30" height="90" rx="12" fill="#c8501e"/>
+              <ellipse cx="35" cy="242" rx="14" ry="7" fill="#1a1a1a"/>
+              <ellipse cx="75" cy="242" rx="14" ry="7" fill="#1a1a1a"/>
+              <!-- torse -->
+              <path d="M 5 60 L 105 60 L 115 155 L -5 155 Z" fill="#ff8a3d"/>
+              <!-- bras gauche (le long du corps) -->
+              <path d="M 5 70 Q -10 110 -5 145" stroke="#f5a970" stroke-width="18" fill="none" stroke-linecap="round"/>
+              <!-- bras droit (téléphone à l'oreille) -->
+              <path d="M 100 70 Q 145 60 155 25" stroke="#f5a970" stroke-width="18" fill="none" stroke-linecap="round"/>
+              <!-- main tenant le téléphone -->
+              <ellipse cx="157" cy="18" rx="12" ry="14" fill="#f5a970"/>
+              <!-- cou -->
+              <rect x="45" y="40" width="20" height="20" fill="#f5a970"/>
+              <!-- tête -->
+              <circle cx="55" cy="20" r="26" fill="#f5a970"/>
+              <path d="M 32 6 Q 55 -8 78 6" stroke="#3a1a10" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <!-- yeux -->
+              <circle cx="46" cy="20" r="2" fill="#3a1a10"/>
+              <circle cx="60" cy="20" r="2" fill="#3a1a10"/>
+              <!-- oreille -->
+              <circle cx="76" cy="22" r="4" fill="#c8501e"/>
+              <!-- bouche parlant -->
+              <ellipse cx="52" cy="34" rx="4" ry="2" fill="#3a1a10"/>
             </g>
-            <!-- little contact -->
-            <g transform="translate(320,80)">
-              <circle cx="0" cy="0" r="16" fill="#37d67a"/>
-              <text x="0" y="4" text-anchor="middle" fill="#0b0b10" font-family="Inter" font-size="14" font-weight="700">✓</text>
+
+            <!-- Téléphone -->
+            <g class="a-phone" transform="translate(310,90)">
+              <rect x="-22" y="-40" width="44" height="80" rx="8" fill="#1e1e2b" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+              <rect x="-18" y="-34" width="36" height="52" rx="3" fill="#0b0b10"/>
+              <text x="0" y="-10" text-anchor="middle" fill="#ff3b30" font-family="Instrument Serif" font-size="22" font-style="italic">15</text>
+              <text x="0" y="6" text-anchor="middle" fill="#c6c3bb" font-family="JetBrains Mono" font-size="6" letter-spacing="1">SAMU</text>
+              <circle cx="0" cy="30" r="4" fill="rgba(255,255,255,.3)"/>
+            </g>
+
+            <!-- Bulle de dialogue -->
+            <g transform="translate(220,20)">
+              <path d="M 0 0 L 200 0 L 210 20 L 200 40 L 0 40 L -10 20 Z" fill="rgba(255,59,48,.12)" stroke="rgba(255,59,48,.5)" stroke-width="1.5"/>
+              <text x="100" y="24" text-anchor="middle" fill="#ff5a4d" font-family="Inter" font-size="12" font-weight="700">« Ici SST, homme 45 ans... »</text>
+            </g>
+
+            <!-- Numéros disponibles -->
+            <g transform="translate(60,230)">
+              <text x="0" y="0" fill="#ff5a4d" font-family="Instrument Serif" font-size="20" font-style="italic">15</text>
+              <text x="30" y="0" fill="#8a8780" font-family="JetBrains Mono" font-size="10">·</text>
+              <text x="45" y="0" fill="#ff8a3d" font-family="Instrument Serif" font-size="20" font-style="italic">18</text>
+              <text x="75" y="0" fill="#8a8780" font-family="JetBrains Mono" font-size="10">·</text>
+              <text x="90" y="0" fill="#ffb648" font-family="Instrument Serif" font-size="20" font-style="italic">112</text>
             </g>
           </svg>
         </div>
