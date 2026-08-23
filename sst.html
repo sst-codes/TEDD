@@ -155,6 +155,12 @@
   .geste .body p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.55}
   .geste .body .step-list{margin:12px 0 0;padding-left:18px;color:var(--ink-2);font-size:14px}
   .geste .body .step-list li{margin:5px 0}
+  .video-link{display:inline-flex;align-items:center;gap:10px;margin-top:16px;padding:10px 16px;
+    border-radius:999px;background:linear-gradient(135deg,rgba(255,59,48,.18),rgba(255,182,72,.14));
+    border:1px solid rgba(255,59,48,.45);color:var(--red-soft);font-weight:600;font-size:13.5px;
+    transition:transform .2s,background .2s}
+  .video-link:hover{transform:translateY(-2px);color:#fff;background:linear-gradient(135deg,#ff3b30,#ff8a3d)}
+  .video-link .play{width:22px;height:22px;border-radius:50%;background:var(--red);display:grid;place-items:center;color:#fff;font-size:9px}
 
   /* ---------- Emergency numbers ---------- */
   .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -384,8 +390,8 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">03 · Gestes de premiers secours</span>
-      <h2>Les gestes, <em>illustrés & animés</em>.</h2>
-      <p class="sub">Chaque schéma bouge pour mieux montrer le mouvement. Simple, précis, à appliquer sans hésiter.</p>
+      <h2>Les gestes, <em>en vidéo & schéma</em>.</h2>
+      <p class="sub">Chaque geste a un <b>schéma animé</b> pour saisir le mouvement, et un <b>lien vers une démo vidéo réelle</b> (INRS / Croix-Rouge) pour voir le geste exécuté par un professionnel.</p>
     </div>
 
     <div class="grid g-2">
@@ -471,6 +477,7 @@
             <li>Comprimer <b>5–6 cm de profondeur</b>, cadence <b>100/min</b></li>
             <li>Enchaîner <b>30 compressions / 2 insufflations</b> jusqu’à la relève ou l’arrivée du DAE</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=RCP+adulte+massage+cardiaque+INRS" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
@@ -541,6 +548,7 @@
             <li>Ne pas toucher la victime pendant l’analyse ni le choc</li>
             <li>Reprendre la RCP immédiatement après</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=d%C3%A9fibrillateur+DAE+utilisation+premiers+secours" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
@@ -607,6 +615,7 @@
             <li>Stabiliser jambe et bras pour éviter la bascule</li>
             <li>Alerter, surveiller la respiration jusqu’aux secours</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=PLS+position+lat%C3%A9rale+s%C3%A9curit%C3%A9+croix+rouge" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
@@ -683,6 +692,7 @@
             <li>Alterner claques / compressions jusqu’à expulsion</li>
             <li>Si perte de conscience → allonger + RCP</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=heimlich+adulte+%C3%A9touffement+premiers+secours" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
@@ -758,6 +768,7 @@
             <li>Faire alerter le 15 / 18 / 112</li>
             <li>Surveiller conscience et respiration</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=saignement+abondant+compression+premiers+secours" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
@@ -839,6 +850,7 @@
             <li>Ne <b>rien appliquer</b> (crème, glace, coton…)</li>
             <li>Alerter si brûlure grave / étendue / du visage</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=br%C3%BBlure+refroidir+eau+premiers+secours" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
@@ -927,6 +939,7 @@
             <li>Alerter le <b>15</b>, transmettre les réponses</li>
             <li>Surveiller, rassurer, ne rien donner à boire</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=malaise+premiers+secours+SST+position" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
@@ -1007,6 +1020,7 @@
             <li>Risques persistants, gestes déjà effectués</li>
             <li>Attendre les <b>consignes</b> du régulateur</li>
           </ol>
+          <a class="video-link" href="https://www.youtube.com/results?search_query=message+alerte+SAMU+15+premiers+secours" target="_blank" rel="noopener"><span class="play">▶</span> Voir en vidéo · démo réelle</a>
         </div>
       </div>
 
