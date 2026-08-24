@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VitaCanin — Compléments alimentaires pour chiens</title>
+<meta name="description" content="Compléments alimentaires naturels formulés par des vétérinaires pour la santé de votre chien : articulations, digestion, pelage, immunité." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf7f2;
+    --surface:#ffffff;
+    --ink:#1c1a17;
+    --ink-2:#4a463f;
+    --muted:#7a746a;
+    --line:#e8e2d6;
+    --brand:#2f6a3a;
+    --brand-2:#3f8a4c;
+    --brand-ink:#0f2913;
+    --accent:#e8a03b;
+    --danger:#c2410c;
+    --shadow: 0 1px 2px rgba(20,15,5,.04), 0 8px 24px rgba(20,15,5,.06);
+    --radius: 14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em;margin:0}
+  h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.08}
+  h2{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.15}
+  h3{font-size:1.15rem;font-weight:700;font-family:'Inter',sans-serif;letter-spacing:-.005em}
+  p{margin:.5em 0}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+  .container{max-width:1160px;margin:0 auto;padding:0 20px}
+
+  /* Header */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,247,242,.85);
+    backdrop-filter:saturate(1.2) blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:20px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.35rem;text-decoration:none;color:var(--ink)}
+  .logo-mark{width:34px;height:34px;border-radius:10px;background:var(--brand);display:grid;place-items:center;color:#fff;font-size:18px}
+  nav ul{display:flex;gap:26px;list-style:none;padding:0;margin:0}
+  nav a{text-decoration:none;color:var(--ink-2);font-weight:500;font-size:.95rem}
+  nav a:hover{color:var(--brand)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .cart-btn{
+    position:relative;
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--ink);color:#fff;border:0;
+    padding:10px 16px;border-radius:999px;font-weight:600;cursor:pointer;font-size:.9rem;
+  }
+  .cart-btn:hover{background:var(--brand)}
+  .cart-count{background:var(--accent);color:#1c1a17;font-size:.75rem;padding:1px 8px;border-radius:999px;font-weight:700}
+  @media (max-width:760px){ nav ul{display:none} }
+
+  /* Hero */
+  .hero{padding:60px 0 40px}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;gap:32px} }
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#eaf2ec;color:var(--brand);font-weight:600;font-size:.85rem;padding:6px 12px;border-radius:999px;margin-bottom:18px}
+  .eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand)}
+  .hero p.lead{font-size:1.15rem;color:var(--ink-2);max-width:52ch;margin-top:16px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem;border:0;cursor:pointer;transition:transform .05s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-2)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .trust{display:flex;gap:24px;margin-top:32px;color:var(--muted);font-size:.9rem;flex-wrap:wrap}
+  .trust span{display:inline-flex;align-items:center;gap:6px}
+  .trust svg{color:var(--brand)}
+
+  .hero-visual{
+    position:relative;aspect-ratio:1/1;
+    background:linear-gradient(140deg,#eaf2ec 0%,#f5efe1 100%);
+    border-radius:24px;overflow:hidden;box-shadow:var(--shadow);
+    display:grid;place-items:center;
+  }
+  .hero-visual .dog{font-size:180px;line-height:1;filter:drop-shadow(0 12px 20px rgba(0,0,0,.15))}
+  .badge-float{
+    position:absolute;background:#fff;padding:12px 16px;border-radius:14px;box-shadow:var(--shadow);
+    font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:8px;
+  }
+  .badge-float.b1{top:24px;left:24px}
+  .badge-float.b2{bottom:24px;right:24px}
+  .badge-float .dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+
+  /* Section */
+  section{padding:72px 0}
+  .section-head{text-align:center;max-width:640px;margin:0 auto 44px}
+  .section-head p{color:var(--muted);margin-top:12px}
+
+  /* Benefits */
+  .benefits{background:#fff}
+  .benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media (max-width:900px){ .benefit-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:520px){ .benefit-grid{grid-template-columns:1fr} }
+  .benefit{padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg)}
+  .benefit .icon{width:44px;height:44px;border-radius:12px;background:#eaf2ec;color:var(--brand);display:grid;place-items:center;margin-bottom:14px;font-size:22px}
+  .benefit p{color:var(--muted);font-size:.92rem;margin:6px 0 0}
+
+  /* Products */
+  .products-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:28px;gap:20px;flex-wrap:wrap}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:#fff;border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:.85rem;font-weight:500;color:var(--ink-2);cursor:pointer}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  @media (max-width:900px){ .product-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:520px){ .product-grid{grid-template-columns:1fr} }
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+  .card .thumb{aspect-ratio:1/1;display:grid;place-items:center;font-size:82px;background:linear-gradient(140deg,#f5efe1,#eaf2ec);position:relative}
+  .card .tag{position:absolute;top:12px;left:12px;background:#fff;padding:4px 10px;border-radius:999px;font-size:.72rem;font-weight:600;color:var(--brand);border:1px solid #d5e5d8}
+  .card .body{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card h3{margin:0}
+  .card .desc{color:var(--muted);font-size:.88rem;flex:1}
+  .card .row{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+  .price{font-family:'Fraunces',serif;font-weight:700;font-size:1.3rem}
+  .add{background:var(--brand);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer;font-size:.85rem}
+  .add:hover{background:var(--brand-2)}
+  .rating{display:flex;align-items:center;gap:6px;color:var(--accent);font-size:.85rem;font-weight:600}
+  .rating .n{color:var(--muted);font-weight:500}
+
+  /* Testimonials */
+  .testis{background:#fff}
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media (max-width:900px){ .testi-grid{grid-template-columns:1fr} }
+  .testi{padding:26px;border:1px solid var(--line);border-radius:var(--radius);background:var(--bg)}
+  .testi .stars{color:var(--accent);margin-bottom:8px}
+  .testi .quote{font-size:1rem;color:var(--ink-2)}
+  .testi .author{display:flex;align-items:center;gap:12px;margin-top:18px}
+  .avatar{width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700}
+  .author-info small{color:var(--muted)}
+
+  /* FAQ */
+  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+  details{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;cursor:pointer}
+  details summary{list-style:none;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:16px}
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{content:"+";font-size:1.4rem;color:var(--brand);font-weight:400;transition:transform .2s ease}
+  details[open] summary::after{content:"−"}
+  details p{color:var(--ink-2);margin-top:10px}
+
+  /* CTA */
+  .cta-band{
+    background:var(--brand-ink);color:#fff;border-radius:24px;padding:56px 40px;
+    text-align:center;margin:20px 0;
+    background-image:radial-gradient(circle at 20% 30%, rgba(232,160,59,.15), transparent 40%),radial-gradient(circle at 80% 70%, rgba(63,138,76,.25), transparent 40%);
+  }
+  .cta-band h2{color:#fff}
+  .cta-band p{color:#cfd8ce;max-width:52ch;margin:12px auto 24px}
+
+  /* Footer */
+  footer{background:#141311;color:#c9c4bb;padding:56px 0 28px;margin-top:40px}
+  .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px}
+  @media (max-width:800px){ .foot{grid-template-columns:1fr 1fr} }
+  footer h4{color:#fff;font-size:.95rem;margin:0 0 12px}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  footer a{color:#c9c4bb;text-decoration:none;font-size:.9rem}
+  footer a:hover{color:#fff}
+  .foot-bottom{border-top:1px solid #2a2825;margin-top:32px;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.85rem;color:#807a71}
+  .foot-brand{max-width:36ch;color:#a8a298;font-size:.9rem;margin-top:10px}
+
+  /* Cart drawer */
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .2s ease;z-index:80}
+  .drawer{
+    position:fixed;top:0;right:0;height:100dvh;width:min(420px,100%);
+    background:#fff;box-shadow:-10px 0 30px rgba(0,0,0,.15);
+    transform:translateX(100%);transition:transform .25s ease;z-index:90;
+    display:flex;flex-direction:column;
+  }
+  body.drawer-open .drawer{transform:translateX(0)}
+  body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto}
+  .drawer-head{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+  .drawer-head h3{font-family:'Fraunces',serif;font-size:1.3rem}
+  .close-btn{background:none;border:0;font-size:1.5rem;cursor:pointer;color:var(--muted);padding:4px 10px}
+  .drawer-body{flex:1;overflow-y:auto;padding:16px 20px}
+  .drawer-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .drawer-item .ti{width:56px;height:56px;border-radius:10px;background:linear-gradient(140deg,#f5efe1,#eaf2ec);display:grid;place-items:center;font-size:28px;flex:0 0 auto}
+  .drawer-item .info{flex:1;min-width:0}
+  .drawer-item .info h4{margin:0;font-size:.95rem;font-weight:600}
+  .drawer-item .info small{color:var(--muted)}
+  .qty{display:inline-flex;align-items:center;gap:8px;margin-top:6px}
+  .qty button{width:26px;height:26px;border-radius:8px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:600}
+  .remove{background:none;border:0;color:var(--danger);cursor:pointer;font-size:.85rem;margin-top:4px;padding:0}
+  .drawer-foot{padding:20px;border-top:1px solid var(--line);background:var(--bg)}
+  .totals{display:flex;justify-content:space-between;margin-bottom:14px;font-weight:600}
+  .totals .big{font-size:1.3rem;font-family:'Fraunces',serif}
+  .checkout{width:100%;padding:14px;border-radius:12px;background:var(--brand);color:#fff;border:0;font-weight:600;cursor:pointer;font-size:1rem}
+  .checkout:hover{background:var(--brand-2)}
+  .empty{padding:40px 20px;text-align:center;color:var(--muted)}
+
+  /* Toast */
+  .toast{
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:12px 20px;border-radius:999px;
+    font-weight:500;font-size:.9rem;opacity:0;pointer-events:none;transition:all .25s ease;z-index:100;
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="container nav">
+    <a class="logo" href="#top">
+      <span class="logo-mark">🐾</span>
+      <span>VitaCanin</span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#produits">Produits</a></li>
+        <li><a href="#bienfaits">Bienfaits</a></li>
+        <li><a href="#avis">Avis</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <button class="cart-btn" id="openCart">
+        Panier <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Formulé avec des vétérinaires</span>
+        <h1>La santé de votre chien, en une gamelle.</h1>
+        <p class="lead">Des compléments alimentaires naturels, dosés au poids et à l'âge de votre chien. Fabriqués en France, sans additifs inutiles.</p>
+        <div class="hero-cta">
+          <a href="#produits" class="btn btn-primary">Découvrir la gamme →</a>
+          <a href="#bienfaits" class="btn btn-ghost">Comment ça marche</a>
+        </div>
+        <div class="trust">
+          <span>✓ Fabriqué en France</span>
+          <span>✓ Livraison offerte dès 39 €</span>
+          <span>✓ Satisfait ou remboursé 30 j</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dog">🐕</div>
+        <div class="badge-float b1"><span class="dot"></span> +14 000 chiens heureux</div>
+        <div class="badge-float b2">★ 4,9 / 5 sur 2 300 avis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="benefits" id="bienfaits">
+    <div class="container">
+      <div class="section-head">
+        <h2>Pourquoi VitaCanin ?</h2>
+        <p>Des formules ciblées, des ingrédients tracés, une approche respectueuse de l'animal.</p>
+      </div>
+      <div class="benefit-grid">
+        <div class="benefit">
+          <div class="icon">🌿</div>
+          <h3>100 % naturel</h3>
+          <p>Sans colorants, sans arômes artificiels, sans OGM. Uniquement l'essentiel.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon">🔬</div>
+          <h3>Validé par des vétos</h3>
+          <p>Chaque formule est développée avec notre comité vétérinaire.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon">🇫🇷</div>
+          <h3>Fabriqué en France</h3>
+          <p>Production dans notre laboratoire partenaire en Bretagne.</p>
+        </div>
+        <div class="benefit">
+          <div class="icon">📦</div>
+          <h3>Livraison en 48h</h3>
+          <p>Expédié depuis la France, livraison offerte dès 39 € d'achat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="produits">
+    <div class="container">
+      <div class="section-head">
+        <h2>Notre gamme</h2>
+        <p>Choisissez la formule adaptée au besoin de votre chien.</p>
+      </div>
+      <div class="products-head">
+        <div class="filters" id="filters">
+          <button class="chip active" data-cat="all">Tous</button>
+          <button class="chip" data-cat="articulations">Articulations</button>
+          <button class="chip" data-cat="digestion">Digestion</button>
+          <button class="chip" data-cat="pelage">Peau &amp; Poil</button>
+          <button class="chip" data-cat="immunite">Immunité</button>
+        </div>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testis" id="avis">
+    <div class="container">
+      <div class="section-head">
+        <h2>Ils ont retrouvé leur énergie</h2>
+        <p>Des milliers de maîtres nous font confiance pour la santé de leur compagnon.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi">
+          <div class="stars">★★★★★</div>
+          <p class="quote">« Après 3 semaines de cure Articulations+, mon labrador de 9 ans a retrouvé ses balades du matin. Un vrai bonheur. »</p>
+          <div class="author"><div class="avatar">S</div><div class="author-info"><strong>Sophie L.</strong><br><small>Nantes · Labrador, 9 ans</small></div></div>
+        </div>
+        <div class="testi">
+          <div class="stars">★★★★★</div>
+          <p class="quote">« Mon berger australien a le poil beaucoup plus brillant depuis Peau &amp; Poil. La différence se voit en un mois. »</p>
+          <div class="author"><div class="avatar">M</div><div class="author-info"><strong>Marc D.</strong><br><small>Lyon · Berger australien, 4 ans</small></div></div>
+        </div>
+        <div class="testi">
+          <div class="stars">★★★★★</div>
+          <p class="quote">« Fini les épisodes de digestion difficile. Le produit est appétant, elle le mange sans souci mélangé aux croquettes. »</p>
+          <div class="author"><div class="avatar">C</div><div class="author-info"><strong>Camille R.</strong><br><small>Bordeaux · Cavalier King Charles, 6 ans</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-head">
+        <h2>Questions fréquentes</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Comment donner les compléments à mon chien ?</summary>
+          <p>Il suffit de saupoudrer la dose recommandée (indiquée sur le pot selon le poids) sur la ration quotidienne. La plupart des chiens l'acceptent sans difficulté grâce au goût neutre ou légèrement carné selon la formule.</p>
+        </details>
+        <details>
+          <summary>Combien de temps avant de voir des résultats ?</summary>
+          <p>Les premiers effets se ressentent généralement en 3 à 4 semaines. Pour les cures Articulations+ et Peau &amp; Poil, nous recommandons une cure minimale de 2 mois.</p>
+        </details>
+        <details>
+          <summary>Puis-je combiner plusieurs compléments ?</summary>
+          <p>Oui, nos formules sont conçues pour être combinables. Nous proposons des packs à tarif préférentiel. En cas de doute, notre équipe vétérinaire est disponible par chat.</p>
+        </details>
+        <details>
+          <summary>Y a-t-il des effets secondaires ?</summary>
+          <p>Nos produits sont formulés à base d'ingrédients naturels et testés. Nous recommandons toutefois de demander l'avis de votre vétérinaire en cas de traitement médicamenteux ou de pathologie chronique.</p>
+        </details>
+        <details>
+          <summary>Quels sont les délais et frais de livraison ?</summary>
+          <p>Livraison en 48h en France métropolitaine. Frais offerts dès 39 € d'achat, sinon 4,90 €. Emballage recyclable.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <div class="container">
+      <div class="cta-band">
+        <h2>Prêt à améliorer le quotidien de votre chien ?</h2>
+        <p>Recevez -10 % sur votre première commande en vous inscrivant à notre newsletter.</p>
+        <a href="#produits" class="btn btn-primary" style="background:var(--accent);color:#1c1a17">Voir les produits →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot">
+      <div>
+        <div class="logo" style="color:#fff"><span class="logo-mark">🐾</span> VitaCanin</div>
+        <p class="foot-brand">Compléments alimentaires naturels pour chiens, formulés en France avec des vétérinaires.</p>
+      </div>
+      <div>
+        <h4>Boutique</h4>
+        <ul>
+          <li><a href="#produits">Tous les produits</a></li>
+          <li><a href="#produits">Packs</a></li>
+          <li><a href="#produits">Nouveautés</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Aide</h4>
+        <ul>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Livraison</a></li>
+          <li><a href="#">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Suivez-nous</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div>© 2026 VitaCanin — Tous droits réservés</div>
+      <div><a href="#">Mentions légales</a> · <a href="#">CGV</a> · <a href="#">Confidentialité</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Cart drawer -->
+<div class="drawer-backdrop" id="backdrop"></div>
+<aside class="drawer" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>Votre panier</h3>
+    <button class="close-btn" id="closeCart" aria-label="Fermer">×</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot">
+    <div class="totals"><span>Total</span><span class="big" id="total">0,00 €</span></div>
+    <button class="checkout" id="checkout">Passer commande</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast">Ajouté au panier</div>
+
+<script>
+  const PRODUCTS = [
+    { id:'art', cat:'articulations', name:'Articulations +', emoji:'🦴', tag:'Best-seller',
+      desc:'Glucosamine, chondroïtine et harpagophytum pour soulager les articulations.',
+      price:29.90, rating:4.9, reviews:842 },
+    { id:'dig', cat:'digestion', name:'Digestion +', emoji:'🌾', tag:'Nouveau',
+      desc:'Probiotiques et prébiotiques pour une flore intestinale équilibrée.',
+      price:24.90, rating:4.8, reviews:412 },
+    { id:'poil', cat:'pelage', name:'Peau & Poil', emoji:'✨', tag:'',
+      desc:'Oméga 3, biotine et zinc pour un pelage brillant et une peau apaisée.',
+      price:26.90, rating:4.9, reviews:657 },
+    { id:'imm', cat:'immunite', name:'Immunité +', emoji:'🛡️', tag:'',
+      desc:'Vitamines C, E et échinacée pour renforcer les défenses naturelles.',
+      price:22.90, rating:4.7, reviews:298 },
+    { id:'calm', cat:'immunite', name:'Sérénité', emoji:'🌙', tag:'',
+      desc:'Tryptophane et camomille pour apaiser le stress et favoriser le sommeil.',
+      price:23.90, rating:4.8, reviews:189 },
+    { id:'dent', cat:'digestion', name:'Haleine Fraîche', emoji:'🦷', tag:'',
+      desc:'Algues et persil pour une haleine agréable et une hygiène bucco-dentaire.',
+      price:19.90, rating:4.6, reviews:143 },
+    { id:'puppy', cat:'articulations', name:'Junior Croissance', emoji:'🐶', tag:'',
+      desc:'Calcium, phosphore et vitamine D pour les chiots en pleine croissance.',
+      price:27.90, rating:4.9, reviews:221 },
+    { id:'sen', cat:'articulations', name:'Senior Vitalité', emoji:'💪', tag:'',
+      desc:'Formule complète pour accompagner les chiens de plus de 8 ans.',
+      price:31.90, rating:4.9, reviews:376 },
+  ];
+
+  const fmt = n => n.toFixed(2).replace('.', ',') + ' €';
+  const grid = document.getElementById('productGrid');
+  const filters = document.getElementById('filters');
+  let activeCat = 'all';
+
+  function renderProducts(){
+    const list = PRODUCTS.filter(p => activeCat==='all' || p.cat===activeCat);
+    grid.innerHTML = list.map(p => `
+      <article class="card" data-id="${p.id}">
+        <div class="thumb">
+          ${p.tag ? `<span class="tag">${p.tag}</span>` : ''}
+          <span>${p.emoji}</span>
+        </div>
+        <div class="body">
+          <div class="rating">★ ${p.rating.toString().replace('.',',')} <span class="n">(${p.reviews})</span></div>
+          <h3>${p.name}</h3>
+          <p class="desc">${p.desc}</p>
+          <div class="row">
+            <span class="price">${fmt(p.price)}</span>
+            <button class="add" data-id="${p.id}">Ajouter</button>
+          </div>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  filters.addEventListener('click', e => {
+    const btn = e.target.closest('.chip');
+    if(!btn) return;
+    [...filters.children].forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    renderProducts();
+  });
+
+  // CART
+  const CART_KEY = 'vitacanin_cart_v1';
+  let cart = {};
+  try { cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}'); } catch(_) { cart = {}; }
+
+  function saveCart(){ try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(_){} }
+  function cartCount(){ return Object.values(cart).reduce((a,b)=>a+b,0); }
+  function cartTotal(){
+    return Object.entries(cart).reduce((s,[id,q]) => {
+      const p = PRODUCTS.find(x=>x.id===id); return s + (p ? p.price*q : 0);
+    },0);
+  }
+  function updateBadge(){ document.getElementById('cartCount').textContent = cartCount(); }
+  function renderDrawer(){
+    const body = document.getElementById('drawerBody');
+    const items = Object.entries(cart);
+    if(!items.length){
+      body.innerHTML = '<div class="empty">Votre panier est vide.<br><br>Ajoutez un produit pour commencer.</div>';
+    } else {
+      body.innerHTML = items.map(([id,q]) => {
+        const p = PRODUCTS.find(x=>x.id===id); if(!p) return '';
+        return `
+          <div class="drawer-item">
+            <div class="ti">${p.emoji}</div>
+            <div class="info">
+              <h4>${p.name}</h4>
+              <small>${fmt(p.price)}</small>
+              <div class="qty">
+                <button data-dec="${id}">−</button>
+                <span>${q}</span>
+                <button data-inc="${id}">+</button>
+              </div>
+              <button class="remove" data-rm="${id}">Supprimer</button>
+            </div>
+            <div><strong>${fmt(p.price*q)}</strong></div>
+          </div>`;
+      }).join('');
+    }
+    document.getElementById('total').textContent = fmt(cartTotal());
+    updateBadge();
+  }
+
+  document.addEventListener('click', e => {
+    const add = e.target.closest('.add');
+    if(add){
+      const id = add.dataset.id;
+      cart[id] = (cart[id]||0) + 1;
+      saveCart(); renderDrawer(); toast('Ajouté au panier ✓');
+      return;
+    }
+    if(e.target.dataset.inc){ const id=e.target.dataset.inc; cart[id]=(cart[id]||0)+1; saveCart(); renderDrawer(); }
+    if(e.target.dataset.dec){ const id=e.target.dataset.dec; cart[id]=Math.max(0,(cart[id]||0)-1); if(cart[id]===0) delete cart[id]; saveCart(); renderDrawer(); }
+    if(e.target.dataset.rm){ const id=e.target.dataset.rm; delete cart[id]; saveCart(); renderDrawer(); }
+  });
+
+  const openCart = () => document.body.classList.add('drawer-open');
+  const closeCart = () => document.body.classList.remove('drawer-open');
+  document.getElementById('openCart').addEventListener('click', openCart);
+  document.getElementById('closeCart').addEventListener('click', closeCart);
+  document.getElementById('backdrop').addEventListener('click', closeCart);
+  document.getElementById('checkout').addEventListener('click', () => {
+    if(!cartCount()){ toast('Votre panier est vide'); return; }
+    toast('Commande simulée — merci ! 🐾');
+    cart = {}; saveCart(); renderDrawer(); setTimeout(closeCart, 800);
+  });
+
+  let toastT;
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), 1800);
+  }
+
+  renderProducts();
+  renderDrawer();
+</script>
+</body>
+</html>
