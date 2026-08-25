@@ -3,28 +3,30 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Marcel Digestion — Bonbons digestion pour chien</title>
-<meta name="description" content="Bonbons à mâcher formulés par des vétérinaires pour la digestion de votre chien. Prébiotiques, probiotiques, citrouille et gingembre. Fabriqués en France." />
+<title>Marcel — Complément pour chien</title>
+<meta name="description" content="Description du produit à compléter." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,50;1,9..144,400..700,100&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ground:#efeadb;
-    --cream:#faf7ec;
-    --ink:#141a12;
-    --ink-2:#3a3d33;
-    --muted:#6f6b5f;
-    --line:#dcd6c4;
-    --forest:#2b3f2b;
-    --forest-2:#3d6b3f;
-    --sage:#c8d4b8;
+    --bg:#ffffff;
+    --peach:#f2d5b6;
+    --peach-soft:#f7e6d0;
+    --cream:#faf6ee;
+    --ink:#12241c;
+    --ink-2:#3a473f;
+    --muted:#7a7a6f;
+    --line:#e8e2d6;
+    --line-2:#eeeadf;
+    --forest:#1e4a3a;
+    --forest-2:#296b4d;
+    --sage:#a8c6a8;
+    --mint:#c9dcc4;
     --amber:#c9843a;
-    --amber-soft:#e8b872;
     --shadow-sm: 0 1px 2px rgba(20,15,5,.04);
-    --shadow: 0 1px 2px rgba(20,15,5,.04), 0 12px 32px rgba(20,15,5,.08);
+    --shadow: 0 1px 2px rgba(20,15,5,.04), 0 12px 32px rgba(20,15,5,.06);
     --radius: 20px;
-    --radius-sm: 12px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -32,661 +34,589 @@
   body{
     font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
     color:var(--ink);
-    background:var(--ground);
+    background:var(--bg);
     line-height:1.55;
     -webkit-font-smoothing:antialiased;
-    text-rendering:optimizeLegibility;
   }
   ::selection{background:var(--forest);color:var(--cream)}
 
   h1,h2,h3,h4{
-    font-family:'Fraunces',Georgia,serif;
-    font-weight:500;
-    font-variation-settings:"opsz" 96, "SOFT" 50;
-    letter-spacing:-.015em;
+    font-family:'DM Serif Display', Georgia, serif;
+    font-weight:400;
+    letter-spacing:-.005em;
     margin:0;
     text-wrap:balance;
     color:var(--ink);
   }
-  h1{font-size:clamp(2.4rem,5.2vw,3.8rem);line-height:1.02;font-weight:400}
-  h2{font-size:clamp(1.9rem,3.6vw,2.8rem);line-height:1.1}
-  h3{font-size:1.2rem;font-weight:600;font-variation-settings:"opsz" 24, "SOFT" 30}
-  h4{font-size:1rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:.01em}
-  em{font-style:italic;font-weight:400}
+  h1{font-size:clamp(1.9rem,3.6vw,2.6rem);line-height:1.1}
+  h2{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.15;text-transform:uppercase;letter-spacing:.02em;font-family:'Inter',sans-serif;font-weight:800;font-size:1.2rem}
+  h3{font-size:1.1rem;font-weight:600;font-family:'Inter',sans-serif;letter-spacing:-.005em}
   p{margin:.5em 0;text-wrap:pretty}
   a{color:inherit}
   img,svg{max-width:100%;display:block}
 
-  .container{max-width:1200px;margin:0 auto;padding:0 24px}
-  .eyebrow{
-    font-family:'Inter',sans-serif;
-    font-size:.72rem;font-weight:600;
-    text-transform:uppercase;letter-spacing:.14em;
-    color:var(--forest-2);
-  }
-  .eyebrow.dark{color:var(--sage)}
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
 
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease, transform .7s ease}
-  .reveal.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion: reduce){
-    .reveal{opacity:1;transform:none;transition:none}
-    html{scroll-behavior:auto}
-    .float, .sun{animation:none !important}
+  /* Announcement bar */
+  .announce{
+    background:var(--sage);
+    color:var(--ink);
+    padding:10px 16px;
+    text-align:center;
+    font-size:.86rem;
+    font-weight:500;
+  }
+  .announce strong{font-weight:700}
+  .announce .code{
+    background:var(--forest);color:var(--cream);
+    padding:2px 10px;border-radius:4px;
+    font-weight:700;letter-spacing:.06em;font-size:.78rem;
+    margin-left:6px;
+    display:inline-block;
   }
 
   /* Header */
   header.site{
+    background:var(--bg);
+    border-bottom:1px solid var(--line-2);
     position:sticky;top:0;z-index:60;
-    background:rgba(239,234,219,.85);
-    backdrop-filter:saturate(1.2) blur(10px);
-    border-bottom:1px solid transparent;
-    transition:border-color .2s ease;
   }
-  header.site.scrolled{border-color:var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:20px}
+  .nav{
+    display:grid;grid-template-columns:1fr auto 1fr;
+    align-items:center;padding:18px 0;gap:20px;
+  }
+  .nav-left, .nav-right{display:flex;align-items:center;gap:22px}
+  .nav-right{justify-content:flex-end}
+  .nav a{
+    text-decoration:none;color:var(--ink);font-weight:600;font-size:.82rem;
+    text-transform:uppercase;letter-spacing:.06em;
+    display:flex;align-items:center;gap:4px;
+  }
+  .nav a:hover{color:var(--forest)}
+  .nav a .caret{font-size:.6rem;opacity:.6}
+  .sub-cta{
+    background:var(--sage) !important;color:var(--ink) !important;
+    padding:10px 18px;border-radius:8px;
+    text-transform:uppercase;letter-spacing:.06em;font-size:.82rem;font-weight:700 !important;
+  }
+  .sub-cta:hover{background:var(--mint) !important}
   .logo{
-    display:flex;align-items:center;gap:10px;
-    font-family:'Fraunces',serif;font-weight:500;font-size:1.5rem;
-    text-decoration:none;color:var(--ink);
-    font-variation-settings:"opsz" 40, "SOFT" 50;
+    font-family:'DM Serif Display', serif;
+    font-weight:400;font-size:2.2rem;
+    color:var(--forest);
+    text-decoration:none;
+    letter-spacing:-.01em;
   }
-  .logo .paw{
-    width:32px;height:32px;border-radius:50%;
-    background:var(--forest);color:var(--cream);
-    display:grid;place-items:center;font-size:15px;
-  }
-  nav ul{display:flex;gap:26px;list-style:none;padding:0;margin:0}
-  nav a{text-decoration:none;color:var(--ink-2);font-weight:500;font-size:.94rem;transition:color .15s ease}
-  nav a:hover{color:var(--forest)}
-  @media (max-width:820px){ nav ul{display:none} }
-
-  .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:10px;
-    padding:14px 22px;border-radius:999px;
-    text-decoration:none;font-weight:600;font-size:.94rem;
-    border:0;cursor:pointer;transition:transform .06s ease, background .15s ease;
-    font-family:inherit;
-  }
-  .btn:active{transform:translateY(1px)}
-  .btn-primary{background:var(--forest);color:var(--cream)}
-  .btn-primary:hover{background:var(--forest-2)}
-  .btn-ink{background:var(--ink);color:var(--cream)}
-  .btn-ink:hover{background:var(--forest)}
-  .btn-amber{background:var(--amber);color:#1c1207}
-  .btn-amber:hover{background:var(--amber-soft)}
-  .btn-block{width:100%;padding:16px 22px;font-size:1rem}
-  .btn .arr{transition:transform .2s ease}
-  .btn:hover .arr{transform:translateX(3px)}
-
-  /* HERO */
-  .hero{padding:48px 0 72px;position:relative;overflow:hidden}
-  @media (max-width:940px){ .hero{padding:24px 0 48px} }
-  .hero-grid{
-    display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;
-  }
-  @media (max-width:940px){ .hero-grid{grid-template-columns:1fr;gap:36px} }
-  .hero .rating-row{display:flex;align-items:center;gap:10px;margin-top:20px;font-size:.9rem}
-  .hero .rating-row .stars{color:var(--amber);letter-spacing:2px}
-  .hero .rating-row a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
-  .hero h1 .accent{color:var(--forest);font-style:italic;font-weight:400}
-  .hero h1 small{
-    display:block;font-family:'Fraunces',serif;font-style:italic;font-weight:400;
-    color:var(--forest-2);font-size:.42em;line-height:1;margin-bottom:14px;
-    font-variation-settings:"opsz" 24, "SOFT" 100;
-  }
-  .hero .lead{font-size:1.08rem;color:var(--ink-2);max-width:52ch;margin-top:18px;line-height:1.6}
-  .hero .bullets{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-direction:column;gap:10px}
-  .hero .bullets li{display:flex;align-items:center;gap:12px;font-weight:500;font-size:.98rem}
-  .hero .bullets svg{width:22px;height:22px;color:var(--forest-2);flex:0 0 auto;background:var(--sage);padding:4px;border-radius:50%}
-
-  /* Buy box */
-  .buy-box{
-    background:var(--cream);border:1px solid var(--line);border-radius:22px;
-    padding:24px;margin-top:32px;box-shadow:var(--shadow-sm);max-width:520px;
-  }
-  .plans{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .plan{
-    background:var(--ground);border:2px solid var(--line);border-radius:14px;padding:14px 16px;
-    cursor:pointer;position:relative;transition:all .15s ease;
-    display:flex;flex-direction:column;gap:2px;
-  }
-  .plan:hover{border-color:var(--forest-2)}
-  .plan.selected{border-color:var(--forest);background:#e8ecd8;box-shadow:0 0 0 1px var(--forest) inset}
-  .plan .label{font-weight:600;font-size:.95rem;display:flex;align-items:center;gap:8px}
-  .plan .save{background:var(--amber);color:#1c1207;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.05em}
-  .plan .price{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:500;font-variation-settings:"opsz" 32}
-  .plan .price small{color:var(--muted);font-size:.72rem;font-weight:500;font-family:'Inter',sans-serif}
-  .plan .old{color:var(--muted);text-decoration:line-through;font-size:.85rem}
-  .plan .desc{color:var(--muted);font-size:.78rem}
-  .buy-actions{display:flex;flex-direction:column;gap:8px;margin-top:16px}
-  .guarantee{margin-top:12px;text-align:center;font-size:.82rem;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:6px}
-
-  /* Hero visual - jar of gummies */
-  .hero-visual{
-    position:relative;aspect-ratio:1/1;
+  .icon-btn{
+    background:none;border:0;padding:6px;cursor:pointer;color:var(--ink);
     display:grid;place-items:center;
-    max-width:520px;margin:0 auto;width:100%;
   }
-  .sun{
-    position:absolute;inset:6%;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #f4d4a0 0%, var(--amber-soft) 50%, var(--amber) 100%);
-    animation:spin 80s linear infinite;
+  .icon-btn svg{width:22px;height:22px}
+  @media (max-width:960px){
+    .nav-left a:not(.sub-cta), .nav-right a:not(.icon-btn){display:none}
   }
-  @keyframes spin{ to{transform:rotate(360deg)} }
-  .jar{position:relative;z-index:2;width:70%;aspect-ratio:1/1.05;display:grid;place-items:center}
-  .jar svg{width:100%;height:100%;filter:drop-shadow(0 22px 32px rgba(20,15,5,.22))}
 
-  .badge-float{
-    position:absolute;background:var(--cream);padding:12px 16px;border-radius:14px;box-shadow:var(--shadow);
-    font-size:.85rem;font-weight:500;display:flex;align-items:center;gap:10px;z-index:3;
-    animation:float 4s ease-in-out infinite;
+  /* PRODUCT HERO */
+  .product{padding:32px 0 64px}
+  .product-grid{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:44px;
+    align-items:flex-start;
   }
-  .badge-float.b1{top:6%;left:-4%;animation-delay:0s}
-  .badge-float.b2{bottom:12%;right:-6%;animation-delay:2s}
-  @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
-  .badge-float strong{font-weight:700}
-  .badge-float .dotg{width:8px;height:8px;border-radius:50%;background:var(--forest-2)}
-  .badge-float .stars{color:var(--amber);letter-spacing:1px}
-  @media (max-width:940px){ .badge-float.b1{left:2%} .badge-float.b2{right:2%} }
+  @media (max-width:960px){ .product-grid{grid-template-columns:1fr} }
 
-  /* Benefits band */
-  .benefits{background:var(--forest);color:var(--cream);padding:22px 0;overflow:hidden}
-  .benefit-row{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
-  .benefit-row ul{display:flex;gap:36px;list-style:none;padding:0;margin:0;flex-wrap:wrap}
-  .benefit-row li{
-    list-style:none;display:inline-flex;align-items:center;gap:10px;
-    color:#e2decd;font-size:.94rem;
+  /* Gallery */
+  .gallery{
+    display:grid;grid-template-columns:1fr 80px;gap:14px;
+    align-items:flex-start;
   }
-  .benefit-row li svg{width:18px;height:18px;color:var(--sage);flex:0 0 auto}
+  @media (max-width:520px){ .gallery{grid-template-columns:1fr} .thumbs{flex-direction:row !important;overflow-x:auto} }
+  .main-img{
+    aspect-ratio:1/1;background:var(--peach);border-radius:8px;
+    display:grid;place-items:center;position:relative;overflow:hidden;
+  }
+  .main-img .sun-bg{
+    position:absolute;inset:-10%;
+    background:radial-gradient(circle at 50% 60%, rgba(255,255,255,.35), transparent 60%);
+  }
+  .main-img svg{width:70%;height:70%;filter:drop-shadow(0 30px 30px rgba(20,10,0,.15));position:relative;z-index:2}
+  .food-props{
+    position:absolute;bottom:6%;left:0;right:0;height:22%;
+    display:flex;justify-content:space-around;align-items:flex-end;z-index:1;
+  }
+  .food-props span{font-size:2.8rem;filter:drop-shadow(0 10px 12px rgba(0,0,0,.15))}
+  .thumbs{
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .thumb{
+    aspect-ratio:1/1;background:var(--peach-soft);border-radius:6px;
+    border:1px solid var(--line);cursor:pointer;
+    display:grid;place-items:center;font-size:1.4rem;
+    transition:border-color .15s ease, transform .15s ease;
+  }
+  .thumb:hover{border-color:var(--forest)}
+  .thumb.active{border-color:var(--forest);border-width:2px}
 
-  /* Sections */
-  section{padding:88px 0}
-  @media (max-width:720px){ section{padding:56px 0} }
-  .section-head{max-width:640px;margin:0 auto 48px;text-align:center}
-  .section-head p{color:var(--muted);margin-top:12px;font-size:1.02rem}
+  /* Buy column */
+  .buy h1 small{
+    display:block;font-family:'Inter',sans-serif;font-weight:600;
+    color:var(--forest);font-size:.78rem;
+    text-transform:uppercase;letter-spacing:.14em;
+    margin-bottom:10px;
+  }
+  .rating-row{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:.88rem}
+  .rating-row .stars{color:var(--forest);letter-spacing:2px}
+  .rating-row a{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
+  .short-desc{color:var(--ink-2);font-size:1rem;margin-top:14px;line-height:1.5}
+  .price-line{margin-top:20px;font-size:1.4rem;font-weight:600;color:var(--ink);display:flex;align-items:baseline;gap:10px}
+  .price-line .old{color:var(--muted);text-decoration:line-through;font-size:1rem;font-weight:500}
+  .price-line .savings{background:var(--sage);color:var(--forest);font-size:.72rem;padding:3px 8px;border-radius:4px;font-weight:700;letter-spacing:.05em}
 
-  /* Signs */
-  .signs{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .signs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media (max-width:800px){ .signs-grid{grid-template-columns:1fr 1fr} }
-  @media (max-width:520px){ .signs-grid{grid-template-columns:1fr} }
-  .sign{
-    background:var(--ground);border:1px solid var(--line);border-radius:16px;padding:22px;
-    display:flex;gap:14px;align-items:flex-start;
+  /* Subscription offer box */
+  .offer{
+    background:var(--peach-soft);
+    border:1px solid var(--peach);
+    border-radius:10px;
+    padding:18px 20px;margin-top:20px;
+    display:flex;flex-direction:column;gap:8px;
   }
-  .sign .icon{
-    width:44px;height:44px;border-radius:12px;background:var(--sage);color:var(--forest);
-    display:grid;place-items:center;font-size:22px;flex:0 0 auto;
+  .offer .row{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink-2)}
+  .offer .row svg{width:16px;height:16px;color:var(--forest);flex:0 0 auto;margin-top:4px}
+  .offer .row strong{color:var(--ink);font-weight:600}
+  .offer .code{
+    background:var(--sage);color:var(--forest);font-weight:700;letter-spacing:.05em;
+    padding:1px 8px;border-radius:4px;font-size:.78rem;margin-left:4px;
   }
-  .sign h4{font-family:'Fraunces';font-size:1.05rem;font-weight:500;font-variation-settings:"opsz" 24;margin-bottom:4px}
-  .sign p{color:var(--muted);font-size:.9rem;margin:0}
 
-  /* How it works */
-  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative}
-  @media (max-width:800px){ .how-grid{grid-template-columns:1fr} }
-  .step{
-    background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:32px 26px;
-    position:relative;
+  /* Qty + add to cart */
+  .buy-actions{display:flex;gap:12px;margin-top:20px}
+  .qty{
+    display:flex;align-items:center;background:var(--peach-soft);border-radius:8px;
+    border:1px solid var(--peach);overflow:hidden;
   }
-  .step .num{
-    font-family:'Fraunces';font-style:italic;font-weight:400;color:var(--forest);
-    font-size:2.6rem;line-height:1;margin-bottom:14px;
-    font-variation-settings:"opsz" 96, "SOFT" 100;
+  .qty button{
+    background:transparent;border:0;width:44px;height:56px;
+    font-size:1.4rem;font-weight:400;color:var(--ink);cursor:pointer;
   }
-  .step h3{margin-bottom:8px}
-  .step p{color:var(--ink-2);font-size:.94rem}
+  .qty button:hover{background:var(--peach)}
+  .qty span{
+    display:grid;place-items:center;background:var(--bg);
+    width:52px;height:56px;font-weight:600;font-size:1rem;
+    border-left:1px solid var(--peach);border-right:1px solid var(--peach);
+  }
+  .add-btn{
+    flex:1;background:var(--forest);color:var(--cream);
+    border:0;border-radius:8px;padding:0 24px;
+    font-family:inherit;font-weight:700;font-size:.94rem;
+    text-transform:uppercase;letter-spacing:.06em;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    transition:background .15s ease;
+  }
+  .add-btn:hover{background:var(--forest-2)}
+
+  /* SECTION TITLE style */
+  .sec-title{
+    font-family:'Inter',sans-serif;font-weight:800;
+    font-size:1.15rem;text-transform:uppercase;letter-spacing:.02em;
+    color:var(--ink);
+    margin:36px 0 18px;
+  }
+
+  /* Benefit cards (un geste quotidien) */
+  .benefit-cards{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  }
+  @media (max-width:520px){ .benefit-cards{grid-template-columns:1fr 1fr} }
+  .bcard{
+    background:var(--peach-soft);
+    border:1px solid var(--peach);
+    border-radius:10px;
+    padding:16px 12px 14px;text-align:center;position:relative;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    cursor:pointer;transition:transform .15s ease;
+  }
+  .bcard:hover{transform:translateY(-2px)}
+  .bcard .plus{
+    position:absolute;top:8px;right:8px;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--sage);color:var(--forest);
+    display:grid;place-items:center;font-weight:700;font-size:.9rem;
+  }
+  .bcard .illu{width:64px;height:64px;display:grid;place-items:center}
+  .bcard .illu svg{width:100%;height:100%}
+  .bcard .label{font-weight:600;font-size:.82rem;color:var(--ink);line-height:1.25}
+
+  /* Full-width sections */
+  section.wide{padding:80px 0;border-top:1px solid var(--line-2)}
+  @media (max-width:720px){ section.wide{padding:56px 0} }
+  .wide h2.big{
+    font-family:'DM Serif Display',serif;font-weight:400;
+    font-size:clamp(1.8rem,3.2vw,2.6rem);text-transform:none;letter-spacing:-.01em;line-height:1.15;
+    text-align:center;max-width:640px;margin:0 auto 40px;
+  }
+  .wide h2.big em{font-style:italic;color:var(--forest)}
+  .wide .kicker{
+    text-align:center;color:var(--forest);
+    font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;font-weight:700;
+    margin-bottom:12px;
+  }
 
   /* Ingredients */
-  .ingredients{background:var(--forest);color:var(--cream)}
-  .ingredients h2, .ingredients .eyebrow{color:var(--cream)}
-  .ingredients .section-head p{color:#c0c6b3}
-  .ing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .ing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   @media (max-width:720px){ .ing-grid{grid-template-columns:1fr} }
-  .ing-card{
-    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
-    border-radius:18px;padding:24px;display:flex;gap:18px;align-items:flex-start;
+  .ing{
+    background:var(--cream);border:1px solid var(--line-2);border-radius:14px;
+    padding:22px;display:flex;gap:16px;
   }
-  .ing-emoji{
-    width:56px;height:56px;border-radius:14px;background:rgba(232,184,114,.15);
-    display:grid;place-items:center;font-size:28px;flex:0 0 auto;
+  .ing .emj{
+    width:56px;height:56px;border-radius:12px;background:var(--peach-soft);
+    display:grid;place-items:center;font-size:26px;flex:0 0 auto;
   }
-  .ing-card h3{color:var(--cream);font-family:'Fraunces';font-size:1.2rem;font-weight:500;font-variation-settings:"opsz" 32}
-  .ing-card .dose{color:var(--sage);font-size:.82rem;font-weight:600;font-variant-numeric:tabular-nums;margin-top:2px}
-  .ing-card p{color:#c9ccbc;font-size:.9rem;margin-top:8px}
-
-  /* Compare */
-  .compare{background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .compare-table{
-    background:var(--ground);border:1px solid var(--line);border-radius:22px;overflow:hidden;
-    max-width:820px;margin:0 auto;
-  }
-  .compare-row{
-    display:grid;grid-template-columns:1.4fr 1fr 1fr;
-    align-items:center;padding:16px 24px;border-bottom:1px solid var(--line);
-    font-size:.94rem;
-  }
-  .compare-row:last-child{border-bottom:0}
-  .compare-row.head{background:var(--cream);font-weight:600;font-size:.92rem}
-  .compare-row.head .us{color:var(--forest)}
-  .compare-row .cell{text-align:center;display:flex;align-items:center;justify-content:center;gap:6px}
-  .compare-row .cell.left{justify-content:flex-start;text-align:left;font-weight:500}
-  .compare-row .cell.us{color:var(--forest);font-weight:600}
-  .compare-row .yes{color:var(--forest-2);font-weight:700}
-  .compare-row .no{color:#c25e3a}
+  .ing h3{font-family:'DM Serif Display',serif;font-weight:400;font-size:1.25rem;letter-spacing:0}
+  .ing .dose{color:var(--forest);font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:2px;font-variant-numeric:tabular-nums}
+  .ing p{color:var(--ink-2);font-size:.9rem;margin-top:8px}
 
   /* Reviews */
-  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  @media (max-width:900px){ .reviews-grid{grid-template-columns:1fr} }
+  .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media (max-width:900px){ .r-grid{grid-template-columns:1fr} }
   .review{
-    background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:24px;
-    display:flex;flex-direction:column;gap:14px;
+    background:var(--cream);border:1px solid var(--line-2);border-radius:14px;
+    padding:22px;display:flex;flex-direction:column;gap:12px;
   }
-  .review .stars{color:var(--amber);letter-spacing:2px}
-  .review .q{font-family:'Fraunces';font-size:1.05rem;line-height:1.45;font-weight:400;font-variation-settings:"opsz" 24, "SOFT" 60}
-  .review .who{display:flex;align-items:center;gap:12px;margin-top:auto}
-  .av{width:40px;height:40px;border-radius:50%;background:var(--forest);color:var(--cream);display:grid;place-items:center;font-weight:700}
+  .review .stars{color:var(--forest);letter-spacing:2px}
+  .review .q{font-family:'DM Serif Display',serif;font-weight:400;font-size:1.1rem;line-height:1.35}
+  .review .who{display:flex;align-items:center;gap:10px;margin-top:auto}
+  .av{width:38px;height:38px;border-radius:50%;background:var(--forest);color:var(--cream);display:grid;place-items:center;font-weight:700}
   .who small{color:var(--muted)}
-  .verified{display:inline-flex;align-items:center;gap:4px;color:var(--forest-2);font-size:.75rem;font-weight:600;margin-left:auto}
+  .verified{margin-left:auto;color:var(--forest);font-size:.72rem;font-weight:700}
 
   /* FAQ */
-  .faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-  details{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:20px 24px;transition:border-color .15s ease}
-  details[open]{border-color:var(--forest-2)}
-  details summary{list-style:none;font-weight:600;font-size:1.02rem;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;position:relative}
+  .faq-list{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+  details{background:var(--cream);border:1px solid var(--line-2);border-radius:12px;padding:18px 22px}
+  details[open]{border-color:var(--forest)}
+  details summary{list-style:none;font-weight:600;font-size:1rem;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer}
   details summary::-webkit-details-marker{display:none}
-  details summary::after{content:"+";color:var(--forest);font-size:1.4rem;font-weight:400;transition:transform .2s ease;line-height:1}
+  details summary::after{content:"+";color:var(--forest);font-size:1.4rem;font-weight:400}
   details[open] summary::after{content:"−"}
-  details p{color:var(--ink-2);margin-top:12px;max-width:65ch}
+  details p{color:var(--ink-2);margin-top:10px;max-width:65ch}
 
-  /* Guarantee band */
-  .gua{
-    background:var(--sage);border-radius:24px;padding:48px;text-align:center;
-    display:flex;flex-direction:column;align-items:center;gap:12px;
-    position:relative;overflow:hidden;
+  /* Guarantee */
+  .gua-band{
+    background:var(--forest);color:var(--cream);
+    padding:56px 40px;border-radius:20px;text-align:center;
+    display:flex;flex-direction:column;align-items:center;gap:14px;
   }
-  .gua h2{max-width:24ch}
-  .gua p{color:var(--ink-2);max-width:52ch}
-
-  /* Sticky cart */
-  .sticky-buy{
-    position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(120%);
-    background:var(--ink);color:var(--cream);border-radius:999px;padding:10px 14px;
-    display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);z-index:70;
-    transition:transform .3s ease;max-width:calc(100% - 32px);
+  .gua-band .kicker{color:var(--sage)}
+  .gua-band h2{color:var(--cream);font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(1.8rem,3vw,2.4rem);letter-spacing:-.005em;text-transform:none;max-width:22ch}
+  .gua-band p{color:#c9d4c9;max-width:52ch}
+  .gua-band .btn-w{
+    background:var(--sage);color:var(--forest);
+    padding:14px 28px;border-radius:8px;
+    text-transform:uppercase;letter-spacing:.06em;
+    font-weight:700;font-size:.86rem;
+    text-decoration:none;margin-top:6px;
   }
-  .sticky-buy.show{transform:translateX(-50%) translateY(0)}
-  .sticky-buy .info{display:flex;align-items:center;gap:10px;font-size:.9rem}
-  .sticky-buy .thumb{width:34px;height:34px;border-radius:10px;background:var(--amber-soft);display:grid;place-items:center;font-size:18px}
-  .sticky-buy .btn{padding:10px 18px;font-size:.88rem}
+  .gua-band .btn-w:hover{background:var(--mint)}
 
   /* Footer */
-  footer{background:var(--ink);color:#a8ab9d;padding:64px 0 28px}
+  footer{background:var(--forest);color:#c9d4c9;padding:64px 0 28px;margin-top:0}
   .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:44px}
   @media (max-width:800px){ .foot-grid{grid-template-columns:1fr 1fr;gap:32px} }
-  footer h4{color:#e8e4d8;font-size:.85rem;margin:0 0 16px;text-transform:uppercase;letter-spacing:.12em}
-  footer .logo{color:var(--cream)}
-  footer .logo .paw{background:var(--sage);color:var(--forest)}
-  footer .brand-desc{color:#8a8d7f;font-size:.9rem;max-width:34ch;margin-top:14px;line-height:1.6}
+  footer h4{color:var(--cream);font-size:.82rem;margin:0 0 14px;text-transform:uppercase;letter-spacing:.1em;font-family:'Inter',sans-serif;font-weight:700}
+  footer .logo{font-size:2.2rem;color:var(--cream)}
+  footer .brand-desc{color:#a5b5a5;font-size:.9rem;max-width:34ch;margin-top:14px;line-height:1.6}
   footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
-  footer a{color:#a8ab9d;text-decoration:none;font-size:.9rem;transition:color .15s ease}
-  footer a:hover{color:var(--cream)}
+  footer a{color:#c9d4c9;text-decoration:none;font-size:.9rem}
+  footer a:hover{color:var(--cream);text-decoration:underline}
   .payments{display:flex;gap:8px;margin-top:14px}
-  .pay{padding:6px 10px;background:rgba(255,255,255,.06);border-radius:6px;font-size:.7rem;font-weight:700;letter-spacing:.06em;color:#c0c3b6}
-  .foot-bottom{border-top:1px solid rgba(255,255,255,.08);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.85rem;color:#70736a}
-  .foot-bottom a{color:#70736a}
+  .pay{padding:6px 10px;background:rgba(255,255,255,.08);border-radius:6px;font-size:.7rem;font-weight:700;letter-spacing:.05em;color:#c9d4c9}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:44px;padding-top:22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.85rem;color:#8ca08c}
 
   /* Toast */
   .toast{
-    position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--ink);color:var(--cream);padding:14px 22px;border-radius:999px;
+    position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:var(--cream);padding:14px 22px;border-radius:8px;
     font-weight:500;font-size:.92rem;opacity:0;pointer-events:none;transition:all .28s ease;z-index:100;
   }
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
-  /* Dark theme */
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ground:#161a13;
-      --cream:#1e231a;
-      --ink:#f0ecdd;
-      --ink-2:#c8c4b3;
-      --muted:#8a8672;
-      --line:#2d3227;
-      --forest:#3d6b3f;
-      --forest-2:#5b8f5d;
-      --sage:#a8c19a;
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#161a13;--cream:#1e231a;--ink:#f0ecdd;--ink-2:#c8c4b3;
-    --muted:#8a8672;--line:#2d3227;--forest:#3d6b3f;--forest-2:#5b8f5d;--sage:#a8c19a;
-  }
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
-<header class="site" id="siteHeader">
+<!-- Announcement -->
+<div class="announce">
+  <strong>Bandeau promo :</strong> votre offre d'accueil ici avec le code
+  <span class="code">CODE</span>
+</div>
+
+<!-- Header -->
+<header class="site">
   <div class="container nav">
-    <a class="logo" href="#top"><span class="paw">✦</span> Marcel</a>
-    <nav>
-      <ul>
-        <li><a href="#produit">Le produit</a></li>
-        <li><a href="#ingredients">Ingrédients</a></li>
-        <li><a href="#avis">Avis</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
-    </nav>
-    <a href="#buy" class="btn btn-ink">Commander <span class="arr">→</span></a>
+    <div class="nav-left">
+      <a href="#">Chien <span class="caret">▾</span></a>
+      <a href="#">Bilan nutritionnel</a>
+      <a href="#" class="sub-cta">S'abonner (−20 %)</a>
+    </div>
+    <a href="#" class="logo">marcel</a>
+    <div class="nav-right">
+      <a href="#">À propos <span class="caret">▾</span></a>
+      <a href="#">Fidélité</a>
+      <a href="#">Conseils <span class="caret">▾</span></a>
+      <button class="icon-btn" aria-label="Recherche"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+      <button class="icon-btn" aria-label="Compte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></button>
+      <button class="icon-btn" aria-label="Panier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 12H7z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg></button>
+    </div>
   </div>
 </header>
 
 <main id="top">
 
-  <!-- HERO / PRODUCT -->
-  <section class="hero" id="produit">
-    <div class="container hero-grid">
-      <div class="reveal">
-        <span class="eyebrow">Digestion · Formulé par des vétérinaires</span>
-        <h1 style="margin-top:18px">
-          <small>Marcel Digestion,</small>
-          Le bonbon qui rend sa <span class="accent">digestion</span> légère.
+  <!-- PRODUCT -->
+  <section class="product">
+    <div class="container product-grid">
+
+      <!-- GALLERY -->
+      <div class="gallery">
+        <div class="main-img" id="mainImg">
+          <div class="sun-bg"></div>
+          <svg viewBox="0 0 400 420" aria-hidden="true">
+            <!-- shadow -->
+            <ellipse cx="200" cy="410" rx="140" ry="10" fill="#12241c" opacity=".15"/>
+            <!-- lid -->
+            <rect x="88" y="34" width="224" height="54" rx="12" fill="#12241c"/>
+            <rect x="88" y="72" width="224" height="12" fill="#0a1610"/>
+            <rect x="142" y="16" width="116" height="26" rx="6" fill="#12241c"/>
+            <!-- jar body -->
+            <path d="M78 96 Q78 86 96 86 L304 86 Q322 86 322 96 L322 372 Q322 388 306 388 L94 388 Q78 388 78 372 Z" fill="#a8c6a8"/>
+            <!-- label area -->
+            <rect x="98" y="140" width="204" height="210" rx="4" fill="#a8c6a8"/>
+            <!-- brand -->
+            <text x="200" y="170" text-anchor="middle" font-family="DM Serif Display, serif" font-size="22" fill="#12241c">marcel</text>
+            <line x1="150" y1="180" x2="250" y2="180" stroke="#12241c" stroke-width="1" opacity=".25"/>
+            <text x="200" y="205" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#12241c" letter-spacing="2">SOUS-TITRE</text>
+            <!-- Big word -->
+            <text x="200" y="248" text-anchor="middle" font-family="Inter, sans-serif" font-size="30" font-weight="800" fill="#12241c" letter-spacing="2">PRODUIT</text>
+            <text x="200" y="278" text-anchor="middle" font-family="DM Serif Display, serif" font-style="italic" font-size="22" fill="#12241c">catégorie</text>
+            <!-- underline curve -->
+            <path d="M120 288 Q200 302 280 288" fill="none" stroke="#12241c" stroke-width="1.5" opacity=".4"/>
+            <text x="200" y="308" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#12241c" letter-spacing="1.5">ACCROCHE PRODUIT</text>
+            <text x="200" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#12241c" letter-spacing="1.5">SUR DEUX LIGNES</text>
+            <!-- dog illustration -->
+            <g transform="translate(140,330)">
+              <ellipse cx="60" cy="18" rx="52" ry="10" fill="#12241c" opacity=".15"/>
+              <path d="M20 14 Q30 -2 60 -2 Q90 -2 100 14 Q110 20 100 24 L20 24 Q10 20 20 14 Z" fill="#12241c"/>
+              <circle cx="34" cy="8" r="6" fill="#12241c"/>
+              <circle cx="86" cy="8" r="6" fill="#12241c"/>
+            </g>
+            <!-- bottom small text -->
+            <text x="200" y="368" text-anchor="middle" font-family="Inter, sans-serif" font-size="7" fill="#12241c" letter-spacing="1">SOUS-ACCROCHE PRODUIT</text>
+          </svg>
+          <div class="food-props">
+            <span>🍖</span>
+            <span>🌱</span>
+            <span>🫐</span>
+            <span>🥕</span>
+          </div>
+        </div>
+        <div class="thumbs">
+          <div class="thumb active">🫙</div>
+          <div class="thumb">📋</div>
+          <div class="thumb">🌿</div>
+          <div class="thumb">🌾</div>
+          <div class="thumb">🐕</div>
+          <div class="thumb">📊</div>
+          <div class="thumb">👩‍⚕️</div>
+          <div class="thumb">💬</div>
+        </div>
+      </div>
+
+      <!-- BUY -->
+      <div class="buy">
+        <h1>
+          <small>Catégorie · Sous-titre</small>
+          Nom du produit
         </h1>
         <div class="rating-row">
           <span class="stars">★★★★★</span>
-          <strong>4,9/5</strong>
-          <a href="#avis">2 340 avis vérifiés</a>
+          <strong>—/5</strong>
+          <a href="#avis">— avis</a>
         </div>
-        <p class="lead">Bonbons à mâcher au poulet, riches en probiotiques, prébiotiques, citrouille et gingembre. Un rituel quotidien qui apaise l'estomac, régule le transit et renforce la flore intestinale de votre chien.</p>
+        <p class="short-desc">Description courte du produit à ajouter ici — présentez en 2 phrases ce qu'il fait et à qui il s'adresse.</p>
 
-        <ul class="bullets">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4 10-10"/></svg> Apaise les ballonnements et les gaz</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4 10-10"/></svg> Régule le transit — selles plus régulières</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4 10-10"/></svg> Renforce la flore intestinale</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4 10-10"/></svg> Goût poulet — 96 % des chiens l'adorent</li>
-        </ul>
+        <div class="price-line">
+          <span>—,— €</span>
+          <span class="old">—,— €</span>
+          <span class="savings">— %</span>
+        </div>
 
-        <div class="buy-box" id="buy">
-          <div class="plans">
-            <div class="plan selected" data-plan="sub" id="planSub">
-              <div class="label">Abonnement mensuel <span class="save">-30 %</span></div>
-              <div class="price">20,90 € <small>/ mois</small></div>
-              <div class="desc"><span class="old">29,90 €</span> · Livraison offerte · Annulable</div>
-            </div>
-            <div class="plan" data-plan="one" id="planOne">
-              <div class="label">Achat ponctuel</div>
-              <div class="price">29,90 € <small>/ pot</small></div>
-              <div class="desc">60 bonbons · 4,90 € livraison</div>
-            </div>
+        <div class="offer">
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4 10-10"/></svg>
+            <div>Premier argument commercial à ajouter</div>
           </div>
-          <div class="buy-actions">
-            <button class="btn btn-primary btn-block" id="addBtn">Commander — <span id="priceTxt">20,90 €</span> <span class="arr">→</span></button>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4 10-10"/></svg>
+            <div>Deuxième argument commercial</div>
           </div>
-          <div class="guarantee">🛡 Satisfait ou remboursé pendant 30 jours</div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l4 4 10-10"/></svg>
+            <div>Troisième argument commercial</div>
+          </div>
         </div>
-      </div>
 
-      <div class="hero-visual reveal">
-        <div class="sun"></div>
-        <!-- Jar SVG -->
-        <div class="jar">
-          <svg viewBox="0 0 400 420" aria-hidden="true">
-            <!-- shadow -->
-            <ellipse cx="200" cy="400" rx="120" ry="10" fill="#141a12" opacity=".18"/>
-            <!-- lid -->
-            <rect x="90" y="40" width="220" height="52" rx="14" fill="#2b3f2b"/>
-            <rect x="90" y="76" width="220" height="10" fill="#1a2612"/>
-            <rect x="140" y="20" width="120" height="28" rx="8" fill="#3d6b3f"/>
-            <!-- jar body -->
-            <path d="M80 100 Q80 90 100 90 L300 90 Q320 90 320 100 L320 360 Q320 380 300 380 L100 380 Q80 380 80 360 Z" fill="#faf7ec" stroke="#dcd6c4" stroke-width="1.5"/>
-            <!-- label -->
-            <rect x="100" y="150" width="200" height="180" rx="14" fill="#c8d4b8"/>
-            <!-- label content -->
-            <text x="200" y="185" text-anchor="middle" font-family="Fraunces, serif" font-size="14" font-style="italic" fill="#2b3f2b">Marcel</text>
-            <text x="200" y="220" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="500" fill="#141a12">Digestion</text>
-            <line x1="140" y1="235" x2="260" y2="235" stroke="#2b3f2b" stroke-width="1" opacity=".3"/>
-            <text x="200" y="256" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#3a3d33" letter-spacing="1.5">PROBIOTIQUES · CITROUILLE</text>
-            <text x="200" y="272" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#3a3d33" letter-spacing="1.5">GINGEMBRE · POULET</text>
-            <!-- paw icon on label -->
-            <circle cx="200" cy="300" r="16" fill="#2b3f2b"/>
-            <text x="200" y="306" text-anchor="middle" font-size="16" fill="#faf7ec">✦</text>
-            <!-- bottom text -->
-            <text x="200" y="365" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#6f6b5f" letter-spacing="1">60 BONBONS · 240 g</text>
-            <!-- highlight on jar -->
-            <path d="M100 110 Q110 100 130 100 L130 350 Q110 350 100 340 Z" fill="#ffffff" opacity=".4"/>
-          </svg>
+        <div class="buy-actions">
+          <div class="qty">
+            <button id="qMinus" aria-label="Diminuer">−</button>
+            <span id="qVal">1</span>
+            <button id="qPlus" aria-label="Augmenter">+</button>
+          </div>
+          <button class="add-btn" id="addBtn">Ajouter au panier</button>
         </div>
-        <div class="badge-float b1">
-          <span class="dotg"></span>
-          <span><strong>Made in France</strong><br><span style="color:var(--muted);font-size:.78rem">Laboratoire de Bretagne</span></span>
-        </div>
-        <div class="badge-float b2">
-          <span class="stars">★★★★★</span>
-          <span><strong>96 %</strong><br><span style="color:var(--muted);font-size:.78rem">l'adorent au premier essai</span></span>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- BENEFITS BAND -->
-  <section class="benefits" style="padding-top:0;padding-bottom:0">
-    <div class="container">
-      <ul class="benefit-row">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l3 6 6 1-4.5 4 1 6.5L12 16l-5.5 3.5 1-6.5L3 9l6-1z"/></svg> Ingrédients naturels</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l4 4 10-10"/></svg> Approuvé par des vétérinaires</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2v20M4 8h16M4 16h16"/></svg> Fabriqué en France</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V4h8v3"/></svg> Livraison offerte en abonnement</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- SIGNS -->
-  <section class="signs">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Les signes à surveiller</span>
-        <h2 style="margin-top:12px">Votre chien montre <em>l'un</em> de ces signes ?</h2>
-        <p>Ce sont autant d'indices d'un microbiote fragile ou d'une digestion perturbée.</p>
-      </div>
-      <div class="signs-grid">
-        <div class="sign reveal"><div class="icon">💨</div><div><h4>Ballonnements et gaz</h4><p>Un ventre gonflé après le repas, des flatulences fréquentes.</p></div></div>
-        <div class="sign reveal"><div class="icon">💩</div><div><h4>Selles irrégulières</h4><p>Diarrhée, constipation ou selles molles à répétition.</p></div></div>
-        <div class="sign reveal"><div class="icon">🍽️</div><div><h4>Appétit en baisse</h4><p>Il boude sa gamelle ou mange par à-coups.</p></div></div>
-        <div class="sign reveal"><div class="icon">💤</div><div><h4>Fatigue inhabituelle</h4><p>Moins de tonus, moins d'entrain qu'à l'ordinaire.</p></div></div>
-        <div class="sign reveal"><div class="icon">🌾</div><div><h4>Changement d'alimentation</h4><p>Transition récente ou sensibilité à certaines protéines.</p></div></div>
-        <div class="sign reveal"><div class="icon">🐾</div><div><h4>Léchage excessif</h4><p>Il se lèche les pattes ou le pelage plus que d'habitude.</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section>
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Comment ça marche</span>
-        <h2 style="margin-top:12px">Un bonbon par jour, <em>trois</em> semaines pour ressentir la différence.</h2>
-      </div>
-      <div class="how-grid">
-        <div class="step reveal">
-          <div class="num">i.</div>
-          <h3>Donnez un bonbon</h3>
-          <p>À la main ou dans la gamelle, un bonbon par 10 kg de poids, une fois par jour. Goût poulet irrésistible.</p>
-        </div>
-        <div class="step reveal">
-          <div class="num">ii.</div>
-          <h3>Les probiotiques agissent</h3>
-          <p>Nos 5 souches vivantes colonisent l'intestin, rééquilibrent la flore et apaisent l'inflammation.</p>
-        </div>
-        <div class="step reveal">
-          <div class="num">iii.</div>
-          <h3>Digestion transformée</h3>
-          <p>En 3 semaines, les selles se régulent, les ballonnements disparaissent, la vitalité revient.</p>
+        <!-- Benefit cards -->
+        <h2 class="sec-title">Un geste quotidien = des effets durables</h2>
+        <div class="benefit-cards">
+          <div class="bcard">
+            <span class="plus">+</span>
+            <div class="illu">
+              <svg viewBox="0 0 64 64">
+                <ellipse cx="32" cy="58" rx="20" ry="3" fill="#12241c" opacity=".2"/>
+                <path d="M18 46 Q18 34 32 32 Q46 30 46 44 Q46 54 32 54 Q18 54 18 46 Z" fill="#296b4d"/>
+                <path d="M22 40 Q26 26 34 26 Q42 26 42 36" fill="none" stroke="#296b4d" stroke-width="4" stroke-linecap="round"/>
+                <path d="M26 34 Q30 22 36 22" fill="none" stroke="#296b4d" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="label">Bienfait n° 1</div>
+          </div>
+          <div class="bcard">
+            <span class="plus">+</span>
+            <div class="illu">
+              <svg viewBox="0 0 64 64">
+                <circle cx="32" cy="32" r="18" fill="none" stroke="#296b4d" stroke-width="3"/>
+                <circle cx="32" cy="32" r="6" fill="#296b4d"/>
+              </svg>
+            </div>
+            <div class="label">Bienfait n° 2</div>
+          </div>
+          <div class="bcard">
+            <span class="plus">+</span>
+            <div class="illu">
+              <svg viewBox="0 0 64 64">
+                <rect x="18" y="18" width="28" height="28" rx="4" fill="none" stroke="#296b4d" stroke-width="3"/>
+                <path d="M24 32 L30 38 L40 26" fill="none" stroke="#296b4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="label">Bienfait n° 3</div>
+          </div>
+          <div class="bcard">
+            <span class="plus">+</span>
+            <div class="illu">
+              <svg viewBox="0 0 64 64">
+                <path d="M32 14 L36 26 L48 26 L38 34 L42 46 L32 38 L22 46 L26 34 L16 26 L28 26 Z" fill="none" stroke="#296b4d" stroke-width="2.5" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="label">Bienfait n° 4</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- INGREDIENTS -->
-  <section class="ingredients" id="ingredients">
+  <section class="wide" id="ingredients">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow dark">Nos ingrédients actifs</span>
-        <h2 style="margin-top:12px">Quatre ingrédients, <em>zéro</em> compromis.</h2>
-        <p>Chaque dose est vérifiée en laboratoire. Rien de superflu, rien de caché.</p>
-      </div>
+      <div class="kicker reveal">Ingrédients actifs</div>
+      <h2 class="big reveal">Le titre de votre section <em>ingrédients</em>.</h2>
       <div class="ing-grid">
-        <div class="ing-card reveal">
-          <div class="ing-emoji">🦠</div>
+        <div class="ing reveal">
+          <div class="emj">◦</div>
           <div>
-            <h3>Probiotiques (5 souches)</h3>
-            <div class="dose">2 milliards UFC par bonbon</div>
-            <p>Lactobacillus, Bifidobacterium & co — les bonnes bactéries qui rééquilibrent la flore et renforcent la barrière intestinale.</p>
+            <h3>Ingrédient n° 1</h3>
+            <div class="dose">Dosage / unité</div>
+            <p>Décrivez ici en 2 phrases le bienfait de cet ingrédient et pourquoi vous l'avez choisi.</p>
           </div>
         </div>
-        <div class="ing-card reveal">
-          <div class="ing-emoji">🎃</div>
+        <div class="ing reveal">
+          <div class="emj">◦</div>
           <div>
-            <h3>Citrouille bio</h3>
-            <div class="dose">120 mg par bonbon</div>
-            <p>Riche en fibres solubles, elle régule le transit dans les deux sens : elle absorbe l'excès d'eau en cas de diarrhée et facilite la constipation.</p>
+            <h3>Ingrédient n° 2</h3>
+            <div class="dose">Dosage / unité</div>
+            <p>Décrivez ici en 2 phrases le bienfait de cet ingrédient et pourquoi vous l'avez choisi.</p>
           </div>
         </div>
-        <div class="ing-card reveal">
-          <div class="ing-emoji">🌿</div>
+        <div class="ing reveal">
+          <div class="emj">◦</div>
           <div>
-            <h3>Gingembre frais</h3>
-            <div class="dose">50 mg par bonbon</div>
-            <p>Anti-inflammatoire naturel, il apaise les nausées, réduit les ballonnements et soutient la digestion des graisses.</p>
+            <h3>Ingrédient n° 3</h3>
+            <div class="dose">Dosage / unité</div>
+            <p>Décrivez ici en 2 phrases le bienfait de cet ingrédient et pourquoi vous l'avez choisi.</p>
           </div>
         </div>
-        <div class="ing-card reveal">
-          <div class="ing-emoji">🌾</div>
+        <div class="ing reveal">
+          <div class="emj">◦</div>
           <div>
-            <h3>Prébiotiques (Inuline)</h3>
-            <div class="dose">200 mg par bonbon</div>
-            <p>La nourriture préférée des bonnes bactéries. L'inuline nourrit les probiotiques pour un effet durable.</p>
+            <h3>Ingrédient n° 4</h3>
+            <div class="dose">Dosage / unité</div>
+            <p>Décrivez ici en 2 phrases le bienfait de cet ingrédient et pourquoi vous l'avez choisi.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPARE -->
-  <section class="compare">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Pourquoi Marcel Digestion</span>
-        <h2 style="margin-top:12px">Ce qui nous distingue.</h2>
-      </div>
-      <div class="compare-table reveal">
-        <div class="compare-row head">
-          <div class="cell left"></div>
-          <div class="cell us">✦ Marcel</div>
-          <div class="cell">Autres bonbons</div>
-        </div>
-        <div class="compare-row">
-          <div class="cell left">Souches probiotiques vivantes</div>
-          <div class="cell us">5 souches, 2 Mds UFC</div>
-          <div class="cell">1 à 2 souches</div>
-        </div>
-        <div class="compare-row">
-          <div class="cell left">Fabrication en France</div>
-          <div class="cell us"><span class="yes">Oui</span></div>
-          <div class="cell"><span class="no">Rare</span></div>
-        </div>
-        <div class="compare-row">
-          <div class="cell left">Sans sucres ajoutés</div>
-          <div class="cell us"><span class="yes">Oui</span></div>
-          <div class="cell"><span class="no">Souvent non</span></div>
-        </div>
-        <div class="compare-row">
-          <div class="cell left">Doses testées en laboratoire</div>
-          <div class="cell us"><span class="yes">Oui</span></div>
-          <div class="cell"><span class="no">Non vérifiable</span></div>
-        </div>
-        <div class="compare-row">
-          <div class="cell left">Satisfait ou remboursé</div>
-          <div class="cell us">30 jours</div>
-          <div class="cell">Rarement</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- REVIEWS -->
-  <section id="avis">
+  <section class="wide" id="avis">
     <div class="container">
-      <div class="section-head reveal">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
-          <span style="color:var(--amber);font-size:1.4rem;letter-spacing:3px">★★★★★</span>
-          <div style="font-family:'Fraunces';font-size:1.3rem;font-variation-settings:'opsz' 40">4,9 sur 5 · 2 340 avis vérifiés</div>
-        </div>
-      </div>
-
-      <div class="reviews-grid">
+      <div class="kicker reveal">Avis clients</div>
+      <h2 class="big reveal">Vos <em>meilleurs avis</em> à afficher ici.</h2>
+      <div class="r-grid">
         <div class="review reveal">
-          <div style="display:flex;align-items:center"><div class="stars">★★★★★</div><div class="verified">✓ Achat vérifié</div></div>
-          <p class="q">« En 3 semaines, plus une seule crise. Nala digère enfin normalement, et elle attend son bonbon avec impatience. »</p>
-          <div class="who"><div class="av">S</div><div><strong>Sophie L.</strong><br><small>Labrador · 4 ans</small></div></div>
+          <div style="display:flex;align-items:center"><div class="stars">★★★★★</div><span class="verified">✓ Vérifié</span></div>
+          <p class="q">« Témoignage client n° 1 — remplacez ce texte par un vrai avis quand vous en aurez. »</p>
+          <div class="who"><div class="av">—</div><div><strong>Prénom N.</strong><br><small>Race · âge</small></div></div>
         </div>
         <div class="review reveal">
-          <div style="display:flex;align-items:center"><div class="stars">★★★★★</div><div class="verified">✓ Achat vérifié</div></div>
-          <p class="q">« J'ai essayé 3 marques avant. Marcel est le seul dont les selles de mon chien sont enfin stables. Un vrai soulagement. »</p>
-          <div class="who"><div class="av">M</div><div><strong>Marc D.</strong><br><small>Berger australien · 7 ans</small></div></div>
+          <div style="display:flex;align-items:center"><div class="stars">★★★★★</div><span class="verified">✓ Vérifié</span></div>
+          <p class="q">« Témoignage client n° 2 — remplacez ce texte par un vrai avis quand vous en aurez. »</p>
+          <div class="who"><div class="av">—</div><div><strong>Prénom N.</strong><br><small>Race · âge</small></div></div>
         </div>
         <div class="review reveal">
-          <div style="display:flex;align-items:center"><div class="stars">★★★★★</div><div class="verified">✓ Achat vérifié</div></div>
-          <p class="q">« Mon vétérinaire m'a recommandé Marcel après une gastrite. Résultat en une semaine, je continue en abonnement. »</p>
-          <div class="who"><div class="av">C</div><div><strong>Camille R.</strong><br><small>Beagle · 11 ans</small></div></div>
+          <div style="display:flex;align-items:center"><div class="stars">★★★★★</div><span class="verified">✓ Vérifié</span></div>
+          <p class="q">« Témoignage client n° 3 — remplacez ce texte par un vrai avis quand vous en aurez. »</p>
+          <div class="who"><div class="av">—</div><div><strong>Prénom N.</strong><br><small>Race · âge</small></div></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq">
+  <section class="wide" id="faq">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="eyebrow">Questions fréquentes</span>
-        <h2 style="margin-top:12px">Vous vous demandez peut-être…</h2>
-      </div>
+      <div class="kicker reveal">Questions fréquentes</div>
+      <h2 class="big reveal">Questions <em>fréquentes</em> — à compléter.</h2>
       <div class="faq-list">
-        <details class="reveal">
-          <summary>Combien de bonbons donner par jour ?</summary>
-          <p>Un bonbon par tranche de 10 kg de poids, une fois par jour. Un petit chien de 5 kg reçoit 1/2 bonbon, un grand chien de 30 kg en reçoit 3. Un pot de 60 bonbons dure un mois pour un chien de 20 kg.</p>
-        </details>
-        <details class="reveal">
-          <summary>Combien de temps avant de voir des résultats ?</summary>
-          <p>Les premiers effets apparaissent en général en 7 à 10 jours (selles plus régulières, moins de gaz). Pour un effet complet sur la flore intestinale, comptez 3 à 4 semaines de cure.</p>
-        </details>
-        <details class="reveal">
-          <summary>Puis-je donner Marcel Digestion à mon chiot ?</summary>
-          <p>Oui, dès 3 mois. Adaptez la dose au poids : 1/4 de bonbon pour les chiots de moins de 5 kg. Les probiotiques sont particulièrement bénéfiques pour la mise en place d'une flore intestinale saine.</p>
-        </details>
-        <details class="reveal">
-          <summary>Comment fonctionne l'abonnement ?</summary>
-          <p>Vous recevez un pot chaque mois, à la date de votre choix. Livraison offerte, annulable ou modifiable en un clic depuis votre espace client. Aucun engagement de durée.</p>
-        </details>
-        <details class="reveal">
-          <summary>Est-ce compatible avec un traitement vétérinaire ?</summary>
-          <p>Les probiotiques sont généralement compatibles avec les traitements. Nous recommandons toutefois de demander l'avis de votre vétérinaire en cas de pathologie chronique ou de traitement antibiotique en cours.</p>
-        </details>
-        <details class="reveal">
-          <summary>Que se passe-t-il si mon chien n'aime pas ?</summary>
-          <p>Vous êtes remboursé intégralement pendant 30 jours, sans avoir à retourner le pot. Notre équipe vous répond en moins de 24 h.</p>
-        </details>
+        <details class="reveal"><summary>Question fréquente n° 1</summary><p>Réponse à ajouter ici.</p></details>
+        <details class="reveal"><summary>Question fréquente n° 2</summary><p>Réponse à ajouter ici.</p></details>
+        <details class="reveal"><summary>Question fréquente n° 3</summary><p>Réponse à ajouter ici.</p></details>
+        <details class="reveal"><summary>Question fréquente n° 4</summary><p>Réponse à ajouter ici.</p></details>
+        <details class="reveal"><summary>Question fréquente n° 5</summary><p>Réponse à ajouter ici.</p></details>
+        <details class="reveal"><summary>Question fréquente n° 6</summary><p>Réponse à ajouter ici.</p></details>
       </div>
     </div>
   </section>
 
   <!-- GUARANTEE -->
-  <section style="padding-top:0">
+  <section class="wide" style="border-top:0;padding-top:0">
     <div class="container">
-      <div class="gua reveal">
-        <span class="eyebrow">Notre garantie</span>
-        <h2>Si votre chien n'y accroche pas, <em>on vous rembourse</em>.</h2>
-        <p>30 jours pour tester. Aucun pot à retourner. Un simple message et nous vous remboursons intégralement — sans condition.</p>
-        <a href="#buy" class="btn btn-primary" style="margin-top:8px">Commander le pot <span class="arr">→</span></a>
+      <div class="gua-band reveal">
+        <div class="kicker">Votre garantie</div>
+        <h2>Votre <em>promesse</em> à afficher ici.</h2>
+        <p>Décrivez en 1 ou 2 phrases votre garantie (satisfait ou remboursé, durée, conditions).</p>
+        <a href="#top" class="btn-w">Commander maintenant</a>
       </div>
     </div>
   </section>
@@ -696,8 +626,8 @@
   <div class="container">
     <div class="foot-grid">
       <div>
-        <div class="logo"><span class="paw">✦</span> Marcel</div>
-        <p class="brand-desc">Bonbons formulés par des vétérinaires pour la santé digestive de votre chien. Fabriqués en Bretagne.</p>
+        <div class="logo">marcel</div>
+        <p class="brand-desc">Baseline de votre marque à ajouter ici — quelques mots sur ce que vous faites et pour qui.</p>
         <div class="payments" aria-label="Moyens de paiement">
           <span class="pay">VISA</span><span class="pay">MC</span><span class="pay">PAYPAL</span><span class="pay">APPLE</span>
         </div>
@@ -705,10 +635,10 @@
       <div>
         <h4>Le produit</h4>
         <ul>
-          <li><a href="#produit">Marcel Digestion</a></li>
+          <li><a href="#top">Nom du produit</a></li>
           <li><a href="#ingredients">Ingrédients</a></li>
-          <li><a href="#buy">Abonnement</a></li>
-          <li><a href="#buy">Cartes cadeaux</a></li>
+          <li><a href="#">S'abonner</a></li>
+          <li><a href="#">Cartes cadeaux</a></li>
         </ul>
       </div>
       <div>
@@ -737,66 +667,36 @@
   </div>
 </footer>
 
-<!-- Sticky buy bar -->
-<div class="sticky-buy" id="sticky">
-  <div class="info">
-    <div class="thumb">🫙</div>
-    <div><strong>Marcel Digestion</strong> · <span id="stickyPrice">20,90 € / mois</span></div>
-  </div>
-  <a href="#buy" class="btn btn-amber">Ajouter</a>
-</div>
-
 <div class="toast" id="toast">Ajouté au panier ✓</div>
 
 <script>
-  // Plan selection
-  const plans = { sub:'20,90 €', one:'29,90 €' };
-  const stickyLabel = { sub:'20,90 € / mois', one:'29,90 € / pot' };
-  let selected = 'sub';
-  const planSub = document.getElementById('planSub');
-  const planOne = document.getElementById('planOne');
-  const priceTxt = document.getElementById('priceTxt');
-  const stickyPrice = document.getElementById('stickyPrice');
+  // Quantity
+  let qty = 1;
+  const qVal = document.getElementById('qVal');
+  document.getElementById('qMinus').addEventListener('click', () => { qty = Math.max(1, qty-1); qVal.textContent = qty; });
+  document.getElementById('qPlus').addEventListener('click', () => { qty++; qVal.textContent = qty; });
 
-  function selectPlan(p){
-    selected = p;
-    planSub.classList.toggle('selected', p==='sub');
-    planOne.classList.toggle('selected', p==='one');
-    priceTxt.textContent = plans[p];
-    stickyPrice.textContent = stickyLabel[p];
-  }
-  planSub.addEventListener('click', () => selectPlan('sub'));
-  planOne.addEventListener('click', () => selectPlan('one'));
-
-  // Add to cart toast
+  // Add to cart
   document.getElementById('addBtn').addEventListener('click', () => {
     const t = document.getElementById('toast');
-    t.textContent = selected==='sub' ? 'Abonnement ajouté — bienvenue ! 🐾' : 'Pot ajouté au panier ✓';
+    t.textContent = `${qty} pot${qty>1?'s':''} ajouté${qty>1?'s':''} au panier ✓`;
     t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'), 2000);
+    setTimeout(()=>t.classList.remove('show'), 1800);
   });
 
-  // Sticky buy bar (shows after scrolling past hero)
-  const sticky = document.getElementById('sticky');
-  const heroSection = document.querySelector('.hero');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(en => {
-      if(en.target === heroSection){
-        sticky.classList.toggle('show', !en.isIntersecting);
-      } else if(en.isIntersecting){
-        en.target.classList.add('in');
-        io.unobserve(en.target);
-      }
+  // Thumb selection
+  document.querySelectorAll('.thumb').forEach(th => {
+    th.addEventListener('click', () => {
+      document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      th.classList.add('active');
     });
-  }, { threshold: 0.12 });
-  io.observe(heroSection);
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  });
 
-  // Header scroll shadow
-  const hdr = document.getElementById('siteHeader');
-  window.addEventListener('scroll', () => {
-    hdr.classList.toggle('scrolled', window.scrollY > 20);
-  }, { passive: true });
+  // Reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>
