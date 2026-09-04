@@ -1,0 +1,621 @@
+<title>Nexus 60 RGB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --ground:      #06070f;
+    --panel:       #0c0e1a;
+    --panel-2:     #12152a;
+    --border:      #232848;
+    --text:        #e8ecff;
+    --muted:       #8890b8;
+    --cyan:        #00e5ff;
+    --magenta:     #ff3fa6;
+    --violet:      #b657ff;
+    --lime:        #a3ff3d;
+    --red:         #ff2b4d;
+    --amber:       #ffb020;
+    --display:     'Chakra Petch','Segoe UI',system-ui,sans-serif;
+    --body:        'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+    --mono:        'JetBrains Mono',ui-monospace,'SF Mono',monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; background: var(--ground); }
+
+  body {
+    color: var(--text);
+    font-family: var(--body);
+    min-height: 100vh;
+    padding: 28px 20px;
+    background:
+      radial-gradient(65% 45% at 18% 25%, rgba(0,229,255,.18), transparent 60%),
+      radial-gradient(55% 40% at 82% 30%, rgba(182,87,255,.22), transparent 60%),
+      radial-gradient(60% 55% at 50% 95%, rgba(255,63,166,.18), transparent 60%),
+      var(--ground);
+    display: grid;
+    place-items: center;
+    overflow-x: hidden;
+  }
+
+  /* faint grid, evokes a mousepad texture */
+  body::before {
+    content:'';
+    position: fixed;
+    inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent 0 44px, rgba(255,255,255,.018) 44px 45px),
+      repeating-linear-gradient(0deg,  transparent 0 44px, rgba(255,255,255,.018) 44px 45px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .poster {
+    position: relative;
+    z-index: 1;
+    width: min(1220px, 100%);
+    background:
+      linear-gradient(180deg, rgba(18,21,42,.55), rgba(6,7,15,.75));
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 26px 32px 28px;
+    box-shadow:
+      0 40px 110px -30px rgba(0,0,0,.85),
+      inset 0 1px 0 rgba(255,255,255,.05);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 18px;
+  }
+
+  /* corner ambient bleeds */
+  .poster::before, .poster::after {
+    content:'';
+    position: absolute;
+    width: 340px; height: 340px;
+    filter: blur(90px);
+    opacity: .55;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .poster::before { top: -140px; left: -110px;  background: radial-gradient(circle, var(--cyan), transparent 60%); }
+  .poster::after  { bottom: -160px; right: -120px; background: radial-gradient(circle, var(--magenta), transparent 60%); }
+
+  /* --- top bar --- */
+  .top {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: .28em;
+    font-size: 18px;
+  }
+  .brand-mark {
+    width: 26px; height: 26px;
+    display: grid; place-items: center;
+    position: relative;
+  }
+  .brand-mark svg { display: block; }
+  .top .meta {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: .22em;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 22px;
+  }
+  .top .meta .live {
+    color: var(--lime);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .top .meta .live::before {
+    content:''; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 0 0 12px var(--lime);
+  }
+
+  /* --- scene --- */
+  .scene {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    padding: 6px 0 4px;
+  }
+  .scene svg {
+    width: 100%;
+    max-width: 1120px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,.55));
+  }
+
+  /* --- info bar --- */
+  .info {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1.6fr 1.6fr auto;
+    gap: 34px;
+    align-items: end;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,.06);
+  }
+  .title h1 {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(30px, 3.4vw, 44px);
+    line-height: 1.02;
+    margin: 0 0 8px;
+    letter-spacing: -.005em;
+    text-wrap: balance;
+  }
+  .title h1 .accent {
+    color: var(--cyan);
+    text-shadow: 0 0 24px rgba(0,229,255,.5);
+  }
+  .title p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13.5px;
+    max-width: 460px;
+    line-height: 1.5;
+  }
+
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 22px;
+    font-family: var(--mono);
+  }
+  .spec {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 12px;
+    border-left: 1px solid rgba(255,255,255,.08);
+  }
+  .spec .lbl {
+    font-size: 9.5px;
+    letter-spacing: .22em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .spec .val {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .spec .val em { color: var(--cyan); font-style: normal; }
+
+  .price-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    min-width: 180px;
+  }
+  .price {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--lime);
+    line-height: .9;
+    letter-spacing: -.02em;
+    text-shadow: 0 0 20px rgba(163,255,61,.35);
+    font-variant-numeric: tabular-nums;
+  }
+  .price small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .22em;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 6px;
+    text-align: right;
+  }
+  .cta {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--cyan) 0%, var(--violet) 100%);
+    color: #050710;
+    border: 0;
+    border-radius: 5px;
+    font-family: var(--display);
+    font-weight: 700;
+    letter-spacing: .2em;
+    font-size: 12.5px;
+    cursor: pointer;
+    box-shadow:
+      0 10px 30px -6px rgba(0,229,255,.55),
+      inset 0 0 0 1px rgba(255,255,255,.15);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cta::after { content: '→'; font-size: 15px; }
+
+  @media (max-width: 780px) {
+    .info { grid-template-columns: 1fr; gap: 20px; }
+    .price-cta { align-items: flex-start; }
+    .top .meta { display: none; }
+  }
+</style>
+
+<div class="poster">
+  <!-- Top bar -->
+  <div class="top">
+    <div class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 26 26" width="26" height="26" aria-hidden="true">
+          <path d="M13 1 L25 13 L13 25 L1 13 Z" fill="none" stroke="#00e5ff" stroke-width="2"/>
+          <path d="M13 6 L20 13 L13 20 L6 13 Z" fill="#00e5ff" opacity=".25"/>
+          <circle cx="13" cy="13" r="2" fill="#00e5ff"/>
+        </svg>
+      </span>
+      <span>TEDD&nbsp;·&nbsp;NEXUS</span>
+    </div>
+    <div class="meta">
+      <span>SKU&nbsp;NX-60-K01</span>
+      <span>DROP&nbsp;03</span>
+      <span class="live">EN STOCK</span>
+    </div>
+  </div>
+
+  <!-- Scene -->
+  <div class="scene">
+    <svg id="scene" viewBox="0 0 1200 620" role="img" aria-label="Clavier gaming Nexus 60 RGB avec repose-poignet magnétique et souris G502">
+      <defs>
+        <!-- RGB backlight wave (visible through the gaps between keys) -->
+        <linearGradient id="rgbwave" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0"    stop-color="#ff2b4d"/>
+          <stop offset="0.18" stop-color="#ffb020"/>
+          <stop offset="0.35" stop-color="#a3ff3d"/>
+          <stop offset="0.55" stop-color="#00e5ff"/>
+          <stop offset="0.75" stop-color="#b657ff"/>
+          <stop offset="1"    stop-color="#ff3fa6"/>
+        </linearGradient>
+        <linearGradient id="caseGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#191d33"/>
+          <stop offset="1" stop-color="#0a0c18"/>
+        </linearGradient>
+        <linearGradient id="keyGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"  stop-color="#1a1f36"/>
+          <stop offset=".55" stop-color="#0b0e1c"/>
+          <stop offset="1"  stop-color="#050710"/>
+        </linearGradient>
+        <linearGradient id="restGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#16192c"/>
+          <stop offset="1" stop-color="#0a0c1a"/>
+        </linearGradient>
+        <linearGradient id="mouseBody" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0"   stop-color="#1a1f36"/>
+          <stop offset=".4"  stop-color="#0e1122"/>
+          <stop offset="1"   stop-color="#050710"/>
+        </linearGradient>
+        <radialGradient id="glowCyan" cx=".5" cy=".5" r=".5">
+          <stop offset="0"  stop-color="#00e5ff" stop-opacity=".95"/>
+          <stop offset=".6" stop-color="#00e5ff" stop-opacity=".18"/>
+          <stop offset="1"  stop-color="#00e5ff" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glowPink" cx=".5" cy=".5" r=".5">
+          <stop offset="0"  stop-color="#ff3fa6" stop-opacity=".85"/>
+          <stop offset="1"  stop-color="#ff3fa6" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="glowViolet" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#b657ff" stop-opacity=".85"/>
+          <stop offset="1" stop-color="#b657ff" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="deskPool" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#101326" stop-opacity=".9"/>
+          <stop offset="1" stop-color="#101326" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="10"/>
+        </filter>
+        <filter id="glowStrong" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Ambient desk pool -->
+      <ellipse cx="600" cy="500" rx="580" ry="90" fill="url(#deskPool)"/>
+
+      <!-- Big soft RGB back glows (rim light behind setup) -->
+      <ellipse cx="220" cy="220" rx="260" ry="200" fill="url(#glowCyan)"    opacity=".55"/>
+      <ellipse cx="980" cy="240" rx="280" ry="220" fill="url(#glowViolet)"  opacity=".55"/>
+      <ellipse cx="600" cy="560" rx="420" ry="90"  fill="url(#glowPink)"    opacity=".45"/>
+
+      <!-- ==================== KEYBOARD ==================== -->
+      <g transform="translate(140 130)">
+        <!-- Under-halo (RGB bleed onto desk) -->
+        <rect x="-14" y="-14" width="744" height="312" rx="26"
+              fill="url(#rgbwave)" opacity=".55" filter="url(#softBlur)"/>
+
+        <!-- Case -->
+        <rect x="0" y="0" width="716" height="284" rx="14" fill="url(#caseGrad)"
+              stroke="#2a3054" stroke-width="1"/>
+        <!-- Top bevel -->
+        <rect x="0" y="0" width="716" height="1.5" fill="rgba(255,255,255,.08)"/>
+        <!-- Deck inset where keys sit; the RGB wave shows through the gaps -->
+        <rect x="18" y="18" width="680" height="248" rx="8" fill="url(#rgbwave)" opacity=".95"/>
+        <!-- Slight vignette on backlight -->
+        <rect x="18" y="18" width="680" height="248" rx="8"
+              fill="url(#deskPool)" opacity=".5"/>
+
+        <!-- Keys are generated by JS into #kbkeys -->
+        <g id="kbkeys"></g>
+
+        <!-- Volume / macro pod (top-left accessory attachment) -->
+        <g transform="translate(-30 -30)">
+          <!-- attachment arm -->
+          <rect x="18" y="46" width="24" height="12" rx="3" fill="#1a1f36" stroke="#2a3054"/>
+          <!-- pod body -->
+          <circle cx="24" cy="24" r="22" fill="#0a0d1a" stroke="#2a3054"/>
+          <circle cx="24" cy="24" r="18" fill="none" stroke="#00e5ff" stroke-width="1.5" opacity=".9"/>
+          <circle cx="24" cy="24" r="14" fill="#0d1226"/>
+          <!-- knob notch -->
+          <rect x="23" y="8"  width="2" height="6" rx="1" fill="#00e5ff"/>
+          <!-- glow -->
+          <circle cx="24" cy="24" r="26" fill="url(#glowCyan)" opacity=".7"/>
+        </g>
+
+        <!-- brand badge on case, bottom-right -->
+        <g transform="translate(660 268)" font-family="Chakra Petch, sans-serif">
+          <text x="0" y="0" font-size="9" fill="#8890b8" letter-spacing="3">NEXUS · 60</text>
+        </g>
+      </g>
+
+      <!-- ==================== WRIST REST ==================== -->
+      <g transform="translate(140 434)">
+        <!-- soft shadow -->
+        <rect x="-6" y="6" width="728" height="58" rx="14" fill="#000" opacity=".55" filter="url(#softBlur)"/>
+        <!-- rest body -->
+        <rect x="0" y="0" width="716" height="52" rx="10" fill="url(#restGrad)" stroke="#242a48"/>
+        <!-- stitching -->
+        <rect x="6" y="6" width="704" height="40" rx="8" fill="none" stroke="rgba(255,255,255,.06)" stroke-dasharray="3 3"/>
+        <!-- magnetic connectors on top edge -->
+        <rect x="60"  y="-3" width="26" height="6" rx="2" fill="#2a3054"/>
+        <rect x="345" y="-3" width="26" height="6" rx="2" fill="#2a3054"/>
+        <rect x="630" y="-3" width="26" height="6" rx="2" fill="#2a3054"/>
+
+        <!-- underglow (matches keyboard RGB spill) -->
+        <rect x="20" y="46" width="676" height="10" rx="5" fill="url(#rgbwave)" opacity=".55" filter="url(#softBlur)"/>
+
+        <!-- Anime chibi decal on the right side -->
+        <g transform="translate(600 26)">
+          <!-- head -->
+          <circle cx="0" cy="0" r="20" fill="#fbe6d3" stroke="#1d1229" stroke-width="1.2"/>
+          <!-- hair -->
+          <path d="M -22 -4
+                   C -22 -22, -12 -26, 0 -26
+                   C 12 -26, 22 -22, 22 -4
+                   C 18 -14, 12 -16, 8 -12
+                   C 4 -18, -4 -18, -8 -12
+                   C -12 -16, -18 -14, -22 -4 Z"
+                fill="#1d1229"/>
+          <!-- side bang -->
+          <path d="M -22 -4 Q -18 6 -14 8 L -18 -2 Z" fill="#1d1229"/>
+          <path d="M  22 -4 Q  18 6  14 8 L  18 -2 Z" fill="#1d1229"/>
+          <!-- eyes -->
+          <ellipse cx="-7" cy="3"  rx="3.4" ry="4.6" fill="#0e0723"/>
+          <ellipse cx="7"  cy="3"  rx="3.4" ry="4.6" fill="#0e0723"/>
+          <!-- eye highlights -->
+          <circle  cx="-8" cy="1.5" r="1.1" fill="#fff"/>
+          <circle  cx="6"  cy="1.5" r="1.1" fill="#fff"/>
+          <circle  cx="-6.2" cy="4.5" r=".7" fill="#00e5ff"/>
+          <circle  cx="7.8"  cy="4.5" r=".7" fill="#00e5ff"/>
+          <!-- blush -->
+          <ellipse cx="-11" cy="8" rx="2.5" ry="1.2" fill="#ff8fbf" opacity=".55"/>
+          <ellipse cx="11"  cy="8" rx="2.5" ry="1.2" fill="#ff8fbf" opacity=".55"/>
+          <!-- mouth -->
+          <path d="M -3 11 Q 0 14 3 11" stroke="#1d1229" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- decal frame -->
+        <rect x="570" y="-4" width="60" height="60" rx="10" fill="none" stroke="#00e5ff" stroke-width="1" opacity=".55"/>
+        <text x="600" y="70" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="7" letter-spacing="2" fill="#8890b8">EDITION · MANGA</text>
+      </g>
+
+      <!-- ==================== MOUSE (G502 style, top-down) ==================== -->
+      <g transform="translate(915 128)">
+        <!-- underglow -->
+        <ellipse cx="118" cy="310" rx="115" ry="18" fill="#000" opacity=".55" filter="url(#softBlur)"/>
+        <ellipse cx="118" cy="180" rx="140" ry="180" fill="url(#glowCyan)" opacity=".4"/>
+
+        <!-- Mouse silhouette (sculpted asymmetric, thumb rest bulge on left) -->
+        <path d="M 110 8
+                 C 78 10, 50 30, 40 68
+                 C 34 88, 30 108, 26 124
+                 C 20 148, 18 168, 34 176
+                 C 48 182, 60 180, 68 178
+                 C 62 210, 60 238, 74 268
+                 C 90 300, 130 306, 168 296
+                 C 200 286, 214 258, 216 220
+                 C 220 168, 224 118, 210 78
+                 C 194 34, 154 6, 110 8 Z"
+              fill="url(#mouseBody)" stroke="#2a3054" stroke-width="1"/>
+
+        <!-- top highlight to hint sculpted crest -->
+        <path d="M 118 22 C 96 26, 78 40, 68 60
+                 C 58 82, 54 108, 56 132
+                 C 88 116, 130 108, 170 116
+                 C 178 96, 184 74, 184 54
+                 C 176 32, 152 20, 118 22 Z"
+              fill="rgba(255,255,255,.03)"/>
+
+        <!-- Scroll wheel -->
+        <rect x="102" y="70" width="24" height="34" rx="6" fill="#050710" stroke="#2a3054"/>
+        <line x1="105" y1="76" x2="123" y2="76" stroke="#1d233d"/>
+        <line x1="105" y1="82" x2="123" y2="82" stroke="#1d233d"/>
+        <line x1="105" y1="88" x2="123" y2="88" stroke="#1d233d"/>
+        <line x1="105" y1="94" x2="123" y2="94" stroke="#1d233d"/>
+        <!-- wheel RGB stripe -->
+        <rect x="102" y="98" width="24" height="3" fill="#00e5ff" opacity=".9"/>
+
+        <!-- DPI shift toggle (behind wheel) -->
+        <rect x="106" y="110" width="16" height="6" rx="2" fill="#0b0e1c" stroke="#2a3054"/>
+        <!-- DPI up/down pair -->
+        <rect x="88"  y="52" width="14" height="10" rx="3" fill="#0b0e1c" stroke="#2a3054"/>
+        <rect x="88"  y="66" width="14" height="10" rx="3" fill="#0b0e1c" stroke="#2a3054"/>
+
+        <!-- Left click / right click seam -->
+        <path d="M 114 20 Q 108 90 100 132" stroke="#1d233d" stroke-width="1" fill="none"/>
+        <path d="M 114 20 Q 128 90 138 132" stroke="#1d233d" stroke-width="1" fill="none"/>
+
+        <!-- Thumb buttons on left flank -->
+        <rect x="30" y="110" width="16" height="8" rx="2" fill="#0b0e1c" stroke="#2a3054"/>
+        <rect x="28" y="124" width="18" height="8" rx="2" fill="#0b0e1c" stroke="#2a3054"/>
+        <!-- Sniper button (protrudes on thumb rest) -->
+        <path d="M 22 148 L 46 152 L 44 162 L 22 158 Z" fill="#0b0e1c" stroke="#2a3054"/>
+
+        <!-- G-shift button on thumb rest -->
+        <rect x="34" y="176" width="14" height="10" rx="2" fill="#0b0e1c" stroke="#2a3054"/>
+
+        <!-- Palm rest RGB "G" logo -->
+        <g transform="translate(138 210)">
+          <circle cx="0" cy="0" r="28" fill="url(#glowCyan)" opacity=".85"/>
+          <circle cx="0" cy="0" r="14" fill="none" stroke="#00e5ff" stroke-width="2"/>
+          <text x="0" y="6" text-anchor="middle" font-family="Chakra Petch, sans-serif"
+                font-size="20" font-weight="700" fill="#00e5ff" filter="url(#glowStrong)">G</text>
+        </g>
+
+        <!-- Rear RGB strip (Logitech G lightsync band) -->
+        <path d="M 88 286 Q 128 300 172 284" stroke="url(#rgbwave)" stroke-width="4" fill="none"
+              stroke-linecap="round" opacity=".95"/>
+
+        <!-- Cable at the front-top -->
+        <path d="M 118 8 C 122 -20, 160 -32, 190 -60"
+              stroke="#1a1f36" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M 118 8 C 122 -20, 160 -32, 190 -60"
+              stroke="#2a3054" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+        <!-- model label -->
+        <text x="118" y="256" text-anchor="middle" font-family="JetBrains Mono, monospace"
+              font-size="7" letter-spacing="3" fill="#3b4370">G502&nbsp;·&nbsp;RGB</text>
+      </g>
+
+      <!-- LED strip glare across the top of the desk (very subtle) -->
+      <rect x="0" y="120" width="1200" height="1" fill="rgba(255,255,255,.05)"/>
+    </svg>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="info">
+    <div class="title">
+      <h1>Nexus <span class="accent">60</span> · Édition Manga</h1>
+      <p>Clavier mécanique 60 % à switchs Hall-Effect, rétroéclairage RGB par touche et repose-poignet magnétique amovible. Édition limitée avec décalque anime.</p>
+    </div>
+
+    <div class="specs">
+      <div class="spec">
+        <span class="lbl">Switchs</span>
+        <span class="val"><em>HALL</em>-EFFECT</span>
+      </div>
+      <div class="spec">
+        <span class="lbl">Polling</span>
+        <span class="val">8000 Hz</span>
+      </div>
+      <div class="spec">
+        <span class="lbl">Rétroéclairage</span>
+        <span class="val">16,8&nbsp;M couleurs</span>
+      </div>
+      <div class="spec">
+        <span class="lbl">Layout</span>
+        <span class="val">60 % ANSI</span>
+      </div>
+    </div>
+
+    <div class="price-cta">
+      <div class="price">
+        <small>DÈS</small>149 €
+      </div>
+      <button class="cta" type="button">Commander</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Build the 60% keyboard key grid programmatically.
+  // Key top caps sit *above* an RGB wave already painted inside the case;
+  // the gaps between caps let the color bleed through.
+  (() => {
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const g = document.getElementById('kbkeys');
+    const rows = [
+      // width unit, label
+      [['`',1],['1',1],['2',1],['3',1],['4',1],['5',1],['6',1],['7',1],['8',1],['9',1],['0',1],['-',1],['=',1],['⌫',2]],
+      [['⇥',1.5],['Q',1],['W',1],['E',1],['R',1],['T',1],['Y',1],['U',1],['I',1],['O',1],['P',1],['[',1],[']',1],['\\',1.5]],
+      [['⇪',1.75],['A',1],['S',1],['D',1],['F',1],['G',1],['H',1],['J',1],['K',1],['L',1],[';',1],['\'',1],['↵',2.25]],
+      [['⇧',2.25],['Z',1],['X',1],['C',1],['V',1],['B',1],['N',1],['M',1],[',',1],['.',1],['/',1],['⇧',2.75]],
+      [['ctrl',1.25],['◆',1.25],['alt',1.25],['',6.25],['alt',1.25],['fn',1.25],['≡',1.25],['ctrl',1.25]]
+    ];
+    const u = 44, gap = 4, pad = 18;
+    rows.forEach((row, ri) => {
+      let x = pad;
+      const y = pad + ri * (u + gap);
+      row.forEach(([label, w]) => {
+        const kw = w * u + (w - 1) * gap;
+        // subtle cap shadow underneath (gives the illusion the cap sits above the RGB deck)
+        const shadow = document.createElementNS(svgNS, 'rect');
+        shadow.setAttribute('x', x + 1);
+        shadow.setAttribute('y', y + 2);
+        shadow.setAttribute('width', kw);
+        shadow.setAttribute('height', u);
+        shadow.setAttribute('rx', 5);
+        shadow.setAttribute('fill', '#000');
+        shadow.setAttribute('opacity', '.35');
+        g.appendChild(shadow);
+
+        // key cap
+        const cap = document.createElementNS(svgNS, 'rect');
+        cap.setAttribute('x', x);
+        cap.setAttribute('y', y);
+        cap.setAttribute('width', kw);
+        cap.setAttribute('height', u - 2);
+        cap.setAttribute('rx', 5);
+        cap.setAttribute('fill', 'url(#keyGrad)');
+        cap.setAttribute('stroke', 'rgba(255,255,255,.06)');
+        g.appendChild(cap);
+
+        // top highlight sliver
+        const hi = document.createElementNS(svgNS, 'rect');
+        hi.setAttribute('x', x + 2);
+        hi.setAttribute('y', y + 2);
+        hi.setAttribute('width', kw - 4);
+        hi.setAttribute('height', 1);
+        hi.setAttribute('rx', 1);
+        hi.setAttribute('fill', 'rgba(255,255,255,.08)');
+        g.appendChild(hi);
+
+        // legend
+        if (label) {
+          const t = document.createElementNS(svgNS, 'text');
+          t.setAttribute('x', x + kw / 2);
+          t.setAttribute('y', y + u / 2 + 3);
+          t.setAttribute('text-anchor', 'middle');
+          t.setAttribute('font-family', 'Chakra Petch, sans-serif');
+          t.setAttribute('font-size', label.length > 2 ? 8 : 11);
+          t.setAttribute('fill', 'rgba(232,236,255,.85)');
+          t.setAttribute('font-weight', '600');
+          t.textContent = label;
+          g.appendChild(t);
+        }
+        x += kw + gap;
+      });
+    });
+  })();
+</script>
