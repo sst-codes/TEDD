@@ -1,0 +1,1271 @@
+<title>Guide SST</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Outfit:wght@300;400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #F5F0EB;
+  --bg-alt: #EDE7DF;
+  --bg-card: #FFFFFF;
+  --text: #1E293B;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --accent: #B33A2B;
+  --accent-light: #F9EEEC;
+  --accent-hover: #942F22;
+  --safe: #1B7A5A;
+  --safe-light: #ECF5F0;
+  --deep: #0D2B45;
+  --deep-text: #E8EEF4;
+  --warning: #D97706;
+  --warning-light: #FEF7ED;
+  --warning-border: #E09025;
+  --border: #D4CFC8;
+  --shadow-sm: 0 1px 3px rgba(13,43,69,0.06);
+  --shadow-md: 0 4px 12px rgba(13,43,69,0.08);
+  --shadow-lg: 0 8px 24px rgba(13,43,69,0.12);
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0F1A2E;
+    --bg-alt: #162240;
+    --bg-card: #1C2D4A;
+    --text: #E2E8F0;
+    --text-secondary: #B0BEC5;
+    --text-muted: #94A3B8;
+    --accent: #E8654F;
+    --accent-light: #2A1E1B;
+    --accent-hover: #F07D6A;
+    --safe: #3CDBA7;
+    --safe-light: #0F2A28;
+    --deep: #0A1628;
+    --deep-text: #E2E8F0;
+    --warning: #F59E0B;
+    --warning-light: #2D2414;
+    --warning-border: #D4A028;
+    --border: #2D3A54;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.3);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0F1A2E;
+  --bg-alt: #162240;
+  --bg-card: #1C2D4A;
+  --text: #E2E8F0;
+  --text-secondary: #B0BEC5;
+  --text-muted: #94A3B8;
+  --accent: #E8654F;
+  --accent-light: #2A1E1B;
+  --accent-hover: #F07D6A;
+  --safe: #3CDBA7;
+  --safe-light: #0F2A28;
+  --deep: #0A1628;
+  --deep-text: #E2E8F0;
+  --warning: #F59E0B;
+  --warning-light: #2D2414;
+  --warning-border: #D4A028;
+  --border: #2D3A54;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.25);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+html { scroll-behavior: smooth }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', system-ui, sans-serif;
+  line-height: 1.65;
+  padding-inline: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* ── Hero ── */
+.hero {
+  background: var(--deep);
+  color: var(--deep-text);
+  margin: -16px -16px 0;
+  padding: clamp(3rem, 8vw, 5rem) 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(179,58,43,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(27,122,90,0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.hero h1 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-optical-sizing: auto;
+  font-size: clamp(2.2rem, 5.5vw, 3.4rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 span {
+  color: var(--accent);
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  color: rgba(255,255,255,0.75);
+  max-width: 540px;
+  margin: 0 auto 2rem;
+  font-weight: 300;
+}
+
+.hero-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.price-tag {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.price-tag small {
+  font-size: 0.45em;
+  font-weight: 400;
+  opacity: 0.7;
+  vertical-align: super;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 14px 32px;
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-decoration: none;
+}
+
+.cta-btn:hover, .cta-btn:focus-visible {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(179,58,43,0.3);
+}
+
+.cta-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.cta-btn svg { flex-shrink: 0 }
+
+/* ── Table of Contents ── */
+.toc {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin: 3rem auto;
+  max-width: 860px;
+  box-shadow: var(--shadow-sm);
+}
+
+.toc h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  color: var(--deep);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .toc h2 { color: var(--text) }
+}
+:root[data-theme="dark"] .toc h2 { color: var(--text) }
+
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px;
+}
+
+.toc-list a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 0.15s;
+}
+
+.toc-list a:hover { background: var(--bg-alt) }
+
+.toc-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--accent-light);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.toc-prefas .toc-num {
+  background: var(--safe-light);
+  color: var(--safe);
+}
+
+/* ── PREFAS Section ── */
+.section-block {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-block: 3rem;
+}
+
+.section-title {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.6rem, 3.5vw, 2rem);
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.section-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0 0 2rem;
+  font-weight: 400;
+}
+
+.prefas-flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  position: relative;
+}
+
+@media (max-width: 700px) {
+  .prefas-flow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.prefas-step {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.25rem;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.prefas-step::before {
+  content: attr(data-letter);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--safe);
+  color: #fff;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 auto 1rem;
+}
+
+.prefas-step h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  color: var(--safe);
+}
+
+.prefas-step p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.prefas-arrow {
+  display: none;
+}
+
+@media (min-width: 701px) {
+  .prefas-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    right: -18px;
+    transform: translateY(-50%);
+    z-index: 2;
+    color: var(--safe);
+    font-size: 1.2rem;
+  }
+  .prefas-step:last-child .prefas-arrow { display: none }
+  .prefas-step { position: relative }
+}
+
+@media (max-width: 700px) {
+  .prefas-arrow-v {
+    display: flex;
+    justify-content: center;
+    color: var(--safe);
+    font-size: 1.2rem;
+    margin: -8px 0;
+  }
+}
+
+@media (min-width: 701px) {
+  .prefas-arrow-v { display: none }
+}
+
+/* ── Gesture Sections ── */
+.gesture {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: calc(16px + env(safe-area-inset-top, 0px));
+}
+
+.gesture-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.gesture-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gesture-icon svg {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+}
+
+.gesture-header h2 {
+  font-size: clamp(1.15rem, 2.8vw, 1.4rem);
+  font-weight: 700;
+  margin: 0;
+  color: var(--text);
+}
+
+.gesture-header .gesture-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.gesture-sub {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 1.5rem 0 0.75rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gesture-sub svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.gesture-sub.safe svg { color: var(--safe) }
+
+.signs-list, .steps-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.signs-list li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+.signs-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.steps-list {
+  counter-reset: step;
+}
+
+.steps-list li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 10px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  min-height: 28px;
+  display: flex;
+  align-items: baseline;
+}
+
+.steps-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--safe-light);
+  color: var(--safe);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.callout {
+  margin-top: 1.5rem;
+  background: var(--warning-light);
+  border-left: 3px solid var(--warning-border);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+}
+
+.callout-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--warning);
+  margin: 0 0 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.callout-title svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.callout dl {
+  margin: 0;
+}
+
+.callout dt {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--text);
+  margin-top: 0.65rem;
+}
+
+.callout dt:first-of-type { margin-top: 0 }
+
+.callout dd {
+  margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* ── Bottom CTA ── */
+.bottom-cta {
+  background: var(--deep);
+  color: var(--deep-text);
+  margin: 3rem -16px 0;
+  padding: clamp(3rem, 8vw, 4.5rem) 16px;
+  text-align: center;
+}
+
+.bottom-cta h2 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  margin: 0 0 0.75rem;
+}
+
+.bottom-cta p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+  margin: 0 0 2rem;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.bottom-cta .price-tag {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.bottom-contact {
+  margin-top: 2rem;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.5);
+}
+
+.bottom-contact strong {
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+}
+
+/* ── Footer ── */
+.site-footer {
+  background: var(--bg-alt);
+  margin: 0 -16px;
+  padding: 1.5rem 16px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── Floating Mobile CTA ── */
+.float-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 16px;
+  padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 640px) {
+  .float-cta { display: flex }
+  body { padding-bottom: 72px }
+}
+
+.float-price {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.float-cta .cta-btn {
+  padding: 10px 24px;
+  font-size: 0.9rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  .gesture-header { flex-direction: column; gap: 0.75rem }
+  .toc-list { grid-template-columns: 1fr }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+  .cta-btn { transition: none }
+}
+</style>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L15 8.5H22L16.5 13L18.5 20L12 16L5.5 20L7.5 13L2 8.5H9Z"/></svg>
+      Formation Sauveteur Secouriste du Travail
+    </div>
+    <h1>Les gestes<br>qui <span>sauvent</span></h1>
+    <p>Le guide complet du SST : protocole PREFAS, les 8 situations d'urgence et tous les gestes de premiers secours, expliqués pas à pas.</p>
+    <div class="hero-price">
+      <span class="price-tag">12,90&nbsp;€<small> TTC</small></span>
+      <a href="#commander" class="cta-btn">
+        Commander le guide
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TABLE OF CONTENTS ═══════════ -->
+<div class="wrap">
+  <nav class="toc">
+    <h2>Sommaire</h2>
+    <ul class="toc-list">
+      <li class="toc-prefas"><a href="#prefas"><span class="toc-num">P</span>Le protocole PREFAS</a></li>
+      <li><a href="#g1"><span class="toc-num">1</span>Saignement abondant</a></li>
+      <li><a href="#g2"><span class="toc-num">2</span>Étouffement</a></li>
+      <li><a href="#g3"><span class="toc-num">3</span>Malaise</a></li>
+      <li><a href="#g4"><span class="toc-num">4</span>Brûlures</a></li>
+      <li><a href="#g5"><span class="toc-num">5</span>Traumatismes</a></li>
+      <li><a href="#g6"><span class="toc-num">6</span>Plaies</a></li>
+      <li><a href="#g7"><span class="toc-num">7</span>Inconscience avec respiration</a></li>
+      <li><a href="#g8"><span class="toc-num">8</span>Arrêt cardio-respiratoire</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══════════ PREFAS ═══════════ -->
+  <section class="section-block" id="prefas">
+    <h2 class="section-title">Le protocole PREFAS</h2>
+    <p class="section-subtitle">Avant tout geste de secours, appliquez systématiquement cette séquence.</p>
+
+    <div class="prefas-flow">
+      <div class="prefas-step" data-letter="P">
+        <h3>Protéger</h3>
+        <p>Supprimer ou écarter le danger pour vous, la victime et les témoins. Baliser la zone si nécessaire. Si le danger ne peut pas être maîtrisé, ne pas intervenir et alerter les secours.</p>
+      </div>
+
+      <div class="prefas-arrow-v" aria-hidden="true">▼</div>
+
+      <div class="prefas-step" data-letter="E">
+        <h3>Examiner</h3>
+        <p>Rechercher les signes vitaux : la victime répond-elle ? Respire-t-elle ? Saigne-t-elle abondamment ? S'étouffe-t-elle ? L'examen détermine le geste de secours à réaliser.</p>
+      </div>
+
+      <div class="prefas-arrow-v" aria-hidden="true">▼</div>
+
+      <div class="prefas-step" data-letter="FA">
+        <h3>Faire alerter</h3>
+        <p>Appeler ou faire appeler les secours : le 15 (SAMU), le 18 (Pompiers), le 112 (numéro européen) ou le numéro d'urgence interne de l'entreprise. Donner un message clair et précis.</p>
+      </div>
+
+      <div class="prefas-arrow-v" aria-hidden="true">▼</div>
+
+      <div class="prefas-step" data-letter="S">
+        <h3>Secourir</h3>
+        <p>Effectuer le geste de premiers secours adapté à la situation identifiée lors de l'examen, en attendant l'arrivée des secours spécialisés. Surveiller en permanence l'état de la victime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ GESTURE 1 — HÉMORRAGIE ═══════════ -->
+  <article class="gesture" id="g1">
+    <div class="gesture-header">
+      <div class="gesture-icon">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 3C14 3 22 13 22 18C22 22.4 18.4 25 14 25C9.6 25 6 22.4 6 18C6 13 14 3 14 3Z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 1</span>
+        <h2>La victime saigne abondamment</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li>Du sang coule abondamment d'une plaie, de façon continue</li>
+      <li>Le sang imbibe rapidement les vêtements ou forme une flaque</li>
+      <li>La victime peut être pâle, avoir froid, se sentir faible</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir
+    </h4>
+    <ol class="steps-list">
+      <li>Appuyer fortement sur la plaie avec la main (protégée par un gant ou un linge propre)</li>
+      <li>Allonger la victime</li>
+      <li>Faire alerter ou alerter les secours (15, 18 ou 112)</li>
+      <li>Maintenir la compression directe jusqu'à l'arrivée des secours</li>
+      <li>Si la compression directe est impossible ou inefficace, poser un garrot en dernier recours, en notant l'heure de pose</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Saignement de nez</dt>
+        <dd>Asseoir la victime tête penchée en avant. Comprimer la narine qui saigne avec le doigt pendant 10 minutes sans relâcher. Si le saignement persiste, alerter le 15.</dd>
+
+        <dt>Corps étranger visible dans la plaie</dt>
+        <dd>Ne jamais retirer le corps étranger. Comprimer de part et d'autre de l'objet. Alerter les secours.</dd>
+
+        <dt>Amputation</dt>
+        <dd>Comprimer le moignon. Emballer le segment amputé dans un linge propre, le placer dans un sac plastique fermé, poser ce sac sur de la glace si possible. Le confier aux secours.</dd>
+
+        <dt>Victime sous anticoagulants</dt>
+        <dd>Le saignement sera plus long à stopper. Maintenir la compression plus longtemps et le signaler aux secours.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ═══════════ GESTURE 2 — ÉTOUFFEMENT ═══════════ -->
+  <article class="gesture" id="g2">
+    <div class="gesture-header">
+      <div class="gesture-icon">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 7C9 7 14 3 14 3L19 7"/>
+          <path d="M14 3V16"/>
+          <path d="M8 12C5 14 4 18 7 22C9 25 14 25 14 25C14 25 19 25 21 22C24 18 23 14 20 12"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 2</span>
+        <h2>La victime s'étouffe</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li><strong>Obstruction totale :</strong> la victime ne peut plus parler, tousser ni respirer. Elle porte les mains à sa gorge, devient rouge puis bleue</li>
+      <li><strong>Obstruction partielle :</strong> la victime peut encore tousser, respirer difficilement, émettre des sifflements</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir — Obstruction totale
+    </h4>
+    <ol class="steps-list">
+      <li>Pencher la victime en avant et donner 5 claques vigoureuses dans le dos, entre les omoplates, avec le talon de la main</li>
+      <li>Vérifier après chaque claque si le corps étranger a été expulsé</li>
+      <li>Si les claques sont inefficaces : réaliser 5 compressions abdominales (méthode de Heimlich) — se placer derrière la victime, poing fermé au creux de l'estomac, tirer vers soi et vers le haut</li>
+      <li>Alterner 5 claques dans le dos et 5 compressions abdominales jusqu'à la désobstruction</li>
+      <li>Si la victime perd connaissance : l'allonger au sol, alerter les secours et débuter la RCP (compressions thoraciques)</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Nourrisson (moins de 1 an)</dt>
+        <dd>Poser le nourrisson à califourchon sur l'avant-bras, tête plus basse que le corps. 5 claques dans le dos, puis retourner et effectuer 5 compressions thoraciques avec 2 doigts au milieu du sternum. Alterner jusqu'à désobstruction.</dd>
+
+        <dt>Femme enceinte ou personne obèse</dt>
+        <dd>Remplacer les compressions abdominales par des compressions thoraciques : poing au milieu du sternum, comprimer vers l'arrière.</dd>
+
+        <dt>Obstruction partielle</dt>
+        <dd>Ne pas intervenir physiquement. Encourager la victime à tousser. Ne pas donner de claques dans le dos (risque d'aggraver l'obstruction). Alerter le 15 si l'état s'aggrave ou ne s'améliore pas.</dd>
+
+        <dt>Victime seule (auto-désobstruction)</dt>
+        <dd>Se pencher sur le dossier d'une chaise et comprimer le ventre contre le bord pour tenter d'expulser le corps étranger.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ═══════════ GESTURE 3 — MALAISE ═══════════ -->
+  <article class="gesture" id="g3">
+    <div class="gesture-header">
+      <div class="gesture-icon">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 14h4l3-8 4 16 4-12 3 4h4"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 3</span>
+        <h2>La victime se plaint d'un malaise</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li>La victime se sent mal, se plaint de sensations anormales</li>
+      <li>Signes possibles : pâleur, sueurs, vertiges, nausées, douleur, faiblesse</li>
+      <li>Troubles de la parole, de la vue, engourdissements</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir
+    </h4>
+    <ol class="steps-list">
+      <li>Mettre la victime au repos dans la position où elle se sent le mieux (assise, allongée, demi-assise)</li>
+      <li>Questionner avec la méthode PQRST : Provoqué par quoi ? Qualité de la douleur ? Région concernée ? Sévérité (de 1 à 10) ? Temps (depuis quand ?)</li>
+      <li>Demander les antécédents médicaux et les traitements en cours</li>
+      <li>Alerter le 15 (SAMU) en transmettant toutes les informations recueillies</li>
+      <li>Aider la victime à prendre son traitement si elle en a un prescrit</li>
+      <li>Surveiller en permanence jusqu'à l'arrivée des secours</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Douleur thoracique (suspicion d'infarctus)</dt>
+        <dd>Douleur oppressante dans la poitrine pouvant irradier dans le bras gauche, la mâchoire ou le dos. Alerter le 15 immédiatement. Installer en position demi-assise. Ne pas faire marcher la victime.</dd>
+
+        <dt>AVC — Accident Vasculaire Cérébral (méthode FAST)</dt>
+        <dd><strong>F</strong>ace : asymétrie du visage, sourire déformé. <strong>A</strong>rm : faiblesse ou engourdissement d'un bras. <strong>S</strong>peech : troubles de la parole. <strong>T</strong>ime : noter l'heure d'apparition et alerter le 15 sans délai.</dd>
+
+        <dt>Crise d'asthme</dt>
+        <dd>Installer en position assise. Aider à prendre le bronchodilatateur si prescrit (Ventoline®). Alerter le 15 si pas d'amélioration rapide.</dd>
+
+        <dt>Réaction allergique grave (choc anaphylactique)</dt>
+        <dd>Gonflement du visage, difficultés à respirer, urticaire généralisée. Alerter le 15 immédiatement. Aider à l'injection d'adrénaline auto-injectable si prescrite. Allonger la victime jambes surélevées.</dd>
+
+        <dt>Crise d'épilepsie</dt>
+        <dd>Ne jamais mettre d'objet dans la bouche. Écarter les objets dangereux autour de la victime. Protéger la tête. Laisser la crise se dérouler. Après la crise, mettre en PLS et alerter les secours.</dd>
+
+        <dt>Hypoglycémie (diabétique connu)</dt>
+        <dd>Si la victime est consciente et peut avaler : donner du sucre (morceau de sucre, jus de fruit sucré). Si elle est inconsciente : ne rien donner par la bouche, alerter le 15, PLS.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ═══════════ GESTURE 4 — BRÛLURES ═══════════ -->
+  <article class="gesture" id="g4">
+    <div class="gesture-header">
+      <div class="gesture-icon">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 3C14 3 8 10 8 16C8 20 10 22 14 22C18 22 20 20 20 16C20 13 17 10 17 10C17 10 18 14 16 16C14 18 12 16 13 13C13 13 14 3 14 3Z"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 4</span>
+        <h2>La victime se plaint de brûlures</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li><strong>1er degré :</strong> rougeur douloureuse (type coup de soleil)</li>
+      <li><strong>2e degré :</strong> cloques remplies de liquide clair, douleur vive</li>
+      <li><strong>3e degré :</strong> peau blanche, cartonnée ou noire, peu ou pas de douleur (nerfs détruits)</li>
+      <li>Brûlure grave si : étendue, profonde, au visage/mains/articulations, ou chez un enfant/personne âgée</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir
+    </h4>
+    <ol class="steps-list">
+      <li>Refroidir la brûlure sous l'eau tempérée (15 à 25°C) pendant au moins 15 minutes, en laissant l'eau couler sans pression directe sur la brûlure</li>
+      <li>Retirer les vêtements non collés à la peau pendant ou après le refroidissement</li>
+      <li>Retirer bagues, montres et bracelets avant l'apparition du gonflement</li>
+      <li>Ne jamais percer les cloques</li>
+      <li>Protéger la zone brûlée avec un pansement stérile ou un linge propre</li>
+      <li>Allonger la victime et alerter les secours si la brûlure est grave</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Brûlure chimique</dt>
+        <dd>Retirer immédiatement les vêtements imbibés (avec des gants). Rincer abondamment à grande eau pendant au moins 20 minutes. Alerter le 15. Si projection dans les yeux : rincer à l'eau du coin interne vers l'extérieur, œil ouvert.</dd>
+
+        <dt>Brûlure électrique</dt>
+        <dd>Couper le courant ou écarter la victime de la source avec un objet isolant avant tout contact. Rechercher un point d'entrée et un point de sortie du courant. Alerter le 15 systématiquement (risque de trouble cardiaque même sans brûlure visible).</dd>
+
+        <dt>Brûlure par inhalation</dt>
+        <dd>Suspectée si : toux, voix rauque, suie autour du nez et de la bouche, difficulté à respirer. Installer en position demi-assise, alerter le 15 immédiatement.</dd>
+
+        <dt>Brûlure étendue</dt>
+        <dd>Plus de 10 % de la surface corporelle chez l'adulte ou 5 % chez l'enfant. Refroidir prudemment (risque d'hypothermie). Couvrir avec une couverture de survie. Alerter le 15 immédiatement.</dd>
+
+        <dt>Brûlure interne par ingestion</dt>
+        <dd>Ne pas faire vomir, ne pas donner à boire. Alerter le 15. Garder l'emballage du produit pour les secours.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ═══════════ GESTURE 5 — TRAUMATISMES ═══════════ -->
+  <article class="gesture" id="g5">
+    <div class="gesture-header">
+      <div class="gesture-icon">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 4L12 14L10 14L15 24"/>
+          <path d="M20 4L16 14L18 14L13 24"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 5</span>
+        <h2>La victime se plaint d'une douleur empêchant certains mouvements</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li>Douleur vive au niveau d'un membre, du dos ou du cou</li>
+      <li>Gonflement, déformation visible, hématome</li>
+      <li>Impossibilité de bouger le membre ou douleur à la mobilisation</li>
+      <li>Craquement perçu au moment de l'accident</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir
+    </h4>
+    <ol class="steps-list">
+      <li>Conseiller fermement à la victime de ne pas bouger</li>
+      <li>Ne jamais mobiliser la zone douloureuse</li>
+      <li>Ne jamais tenter de remettre un membre en place</li>
+      <li>Stabiliser le membre atteint dans la position trouvée (caler avec des vêtements, coussins)</li>
+      <li>Alerter les secours (15, 18 ou 112)</li>
+      <li>Surveiller l'état de la victime (conscience, coloration, sensibilité du membre)</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Traumatisme du rachis (dos / cou)</dt>
+        <dd>Ne jamais déplacer la victime sauf danger immédiat. Maintenir la tête dans l'axe du corps (maintien tête à deux mains). Demander à la victime de ne pas bouger du tout. Alerter le 15 immédiatement.</dd>
+
+        <dt>Traumatisme crânien</dt>
+        <dd>Même si la victime semble aller bien : surveiller la conscience pendant plusieurs heures. Alerter le 15. Signes d'alerte : vomissements, somnolence, pupilles inégales, perte de mémoire.</dd>
+
+        <dt>Membre déformé avec plaie (fracture ouverte)</dt>
+        <dd>Ne pas remettre en place. Couvrir la plaie d'un pansement stérile. Ne pas laver. Alerter le 15. Immobiliser sans serrer.</dd>
+
+        <dt>Chute de hauteur</dt>
+        <dd>Toujours suspecter un traumatisme du rachis. Ne pas déplacer la victime. Maintenir la tête et alerter les secours.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ═══════════ GESTURE 6 — PLAIES ═══════════ -->
+  <article class="gesture" id="g6">
+    <div class="gesture-header">
+      <div class="gesture-icon">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="6" y="10" width="16" height="8" rx="2"/>
+          <path d="M10 10V8C10 6 12 4 14 4C16 4 18 6 18 8V10"/>
+          <path d="M14 13V15"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 6</span>
+        <h2>La victime se plaint d'une plaie qui ne saigne pas abondamment</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li><strong>Plaie simple :</strong> petite, superficielle, peu étendue, ne saignant pas abondamment</li>
+      <li><strong>Plaie grave :</strong> plaie étendue, profonde (par couteau, outil…), contenant un corps étranger, située au thorax, à l'abdomen, à l'œil ou près d'un orifice naturel</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir — Plaie simple
+    </h4>
+    <ol class="steps-list">
+      <li>Se laver les mains ou mettre des gants</li>
+      <li>Nettoyer la plaie à l'eau claire et au savon, du centre vers l'extérieur</li>
+      <li>Appliquer un antiseptique</li>
+      <li>Protéger la plaie avec un pansement adhésif stérile</li>
+      <li>Vérifier que la vaccination antitétanique est à jour</li>
+    </ol>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir — Plaie grave
+    </h4>
+    <ol class="steps-list">
+      <li>Ne pas nettoyer, ne pas désinfecter</li>
+      <li>Ne jamais retirer un corps étranger</li>
+      <li>Allonger la victime en position adaptée</li>
+      <li>Protéger la plaie avec un pansement stérile ou un linge propre</li>
+      <li>Alerter les secours (15, 18 ou 112)</li>
+      <li>Surveiller l'état de la victime en attendant</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Plaie à l'œil</dt>
+        <dd>Ne pas toucher l'œil, ne rien retirer. Allonger la victime et couvrir les deux yeux avec un pansement occlusif (bander les deux yeux évite les mouvements oculaires). Alerter le 15.</dd>
+
+        <dt>Plaie au thorax</dt>
+        <dd>Laisser la plaie à l'air libre (ne pas obturer). Installer en position demi-assise pour faciliter la respiration. Alerter le 15 immédiatement.</dd>
+
+        <dt>Plaie à l'abdomen</dt>
+        <dd>Ne rien remettre en place en cas d'éviscération. Allonger la victime sur le dos, jambes fléchies. Couvrir la plaie avec un linge humide propre. Ne rien donner à boire ni à manger. Alerter le 15.</dd>
+
+        <dt>Plaie avec corps étranger</dt>
+        <dd>Ne jamais retirer le corps étranger (risque d'aggraver l'hémorragie). Immobiliser l'objet si possible. Alerter les secours.</dd>
+
+        <dt>Morsure animale</dt>
+        <dd>Laver abondamment à l'eau et au savon. Consulter un médecin systématiquement (risque de rage, d'infection). Identifier l'animal si possible.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ═══════════ GESTURE 7 — PLS ═══════════ -->
+  <article class="gesture" id="g7">
+    <div class="gesture-header">
+      <div class="gesture-icon">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="8" cy="10" r="3"/>
+          <path d="M11 14C11 14 14 13 18 15"/>
+          <path d="M11 17L14 22"/>
+          <path d="M15 15L20 20"/>
+          <path d="M18 15C18 15 22 13 24 14"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 7</span>
+        <h2>La victime ne répond pas mais elle respire</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li>La victime ne répond pas aux questions, ne réagit pas aux ordres simples</li>
+      <li>Elle ne réagit pas à un stimulus douloureux (pincement)</li>
+      <li>Sa poitrine se soulève régulièrement : elle respire</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir
+    </h4>
+    <ol class="steps-list">
+      <li>Vérifier la conscience : poser des questions simples (« Vous m'entendez ? Serrez-moi la main »), secouer doucement les épaules</li>
+      <li>Si elle ne répond pas : appeler à l'aide</li>
+      <li>Libérer les voies aériennes : basculer prudemment la tête en arrière en relevant le menton (LVA)</li>
+      <li>Vérifier la respiration pendant 10 secondes maximum : regarder le ventre et la poitrine se soulever, écouter et sentir l'air expiré</li>
+      <li>Si elle respire : la placer en Position Latérale de Sécurité (PLS)</li>
+      <li>Alerter ou faire alerter les secours (15, 18 ou 112)</li>
+      <li>Couvrir la victime et surveiller sa respiration en permanence jusqu'à l'arrivée des secours</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Femme enceinte</dt>
+        <dd>Toujours placer en PLS sur le côté gauche pour éviter la compression de la veine cave inférieure par l'utérus.</dd>
+
+        <dt>Suspicion de traumatisme du rachis</dt>
+        <dd>La PLS reste prioritaire pour protéger les voies aériennes. La réaliser à deux si possible, en maintenant l'axe tête-cou-tronc pendant le retournement.</dd>
+
+        <dt>Nourrisson</dt>
+        <dd>Placer le nourrisson dans les bras, sur le côté, tête légèrement plus basse que le corps pour faciliter l'écoulement des sécrétions.</dd>
+
+        <dt>Si la victime arrête de respirer</dt>
+        <dd>La remettre immédiatement sur le dos et débuter la réanimation cardio-pulmonaire (voir situation 8).</dd>
+
+        <dt>Victime trouvée sur le ventre</dt>
+        <dd>La retourner sur le dos en maintenant l'axe de la tête, puis évaluer la conscience et la respiration avant de mettre en PLS.</dd>
+      </dl>
+    </div>
+  </article>
+
+  <!-- ═══════════ GESTURE 8 — ARRÊT CARDIO-RESPIRATOIRE ═══════════ -->
+  <article class="gesture" id="g8">
+    <div class="gesture-header">
+      <div class="gesture-icon" style="background: #B33A2B22">
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 24L5 16C2.5 13 2.5 9 5.5 7C8.5 5 11.5 7 14 10C16.5 7 19.5 5 22.5 7C25.5 9 25.5 13 23 16Z"/>
+          <path d="M11 14L14 10L17 14" stroke-width="2.5"/>
+        </svg>
+      </div>
+      <div>
+        <span class="gesture-label">Situation 8 — Urgence vitale</span>
+        <h2>La victime ne répond pas et ne respire pas</h2>
+      </div>
+    </div>
+
+    <h4 class="gesture-sub">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Reconnaître
+    </h4>
+    <ul class="signs-list">
+      <li>La victime ne répond pas, ne réagit à aucun stimulus</li>
+      <li>Après avoir libéré les voies aériennes : aucun mouvement respiratoire, aucun souffle</li>
+      <li>Les gasps (mouvements respiratoires anarchiques, bruyants, inefficaces) ne sont pas une respiration normale : traiter comme un arrêt respiratoire</li>
+    </ul>
+
+    <h4 class="gesture-sub safe">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Agir
+    </h4>
+    <ol class="steps-list">
+      <li>Appeler à l'aide et faire alerter immédiatement les secours (15, 18 ou 112) — demander un DAE</li>
+      <li>Placer la victime sur le dos, sur un plan dur</li>
+      <li>Débuter les compressions thoraciques : mains superposées au centre de la poitrine, bras tendus, comprimer de 5 à 6 cm de profondeur, au rythme de 100 à 120 compressions par minute</li>
+      <li>Après 30 compressions, effectuer 2 insufflations : basculer la tête en arrière, pincer le nez, souffler régulièrement pendant 1 seconde en vérifiant que la poitrine se soulève</li>
+      <li>Alterner sans interruption 30 compressions et 2 insufflations</li>
+      <li>Dès que le DAE est disponible : le mettre en marche, coller les électrodes (une sous la clavicule droite, une sous l'aisselle gauche), suivre les instructions vocales</li>
+      <li>Ne pas toucher la victime pendant l'analyse et le choc éventuel</li>
+      <li>Reprendre immédiatement la RCP après le choc et continuer jusqu'à l'arrivée des secours ou la reprise de la respiration</li>
+    </ol>
+
+    <div class="callout">
+      <p class="callout-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 22h20L12 2zM12 9v5M12 17h.01"/></svg>
+        Cas particuliers
+      </p>
+      <dl>
+        <dt>Nourrisson (moins de 1 an)</dt>
+        <dd>Commencer par 5 insufflations (bouche-à-bouche-et-nez). Puis 15 compressions thoraciques avec 2 doigts au milieu du sternum (environ 4 cm de profondeur), suivies de 2 insufflations. Alterner 15/2.</dd>
+
+        <dt>Enfant (1 à 8 ans)</dt>
+        <dd>Commencer par 5 insufflations. Puis 15 compressions (avec une seule main, environ 5 cm de profondeur) et 2 insufflations. Utiliser les électrodes pédiatriques du DAE si disponibles, sinon les électrodes adultes.</dd>
+
+        <dt>Noyade</dt>
+        <dd>Commencer par 5 insufflations avant les compressions thoraciques. Le cœur s'est arrêté par manque d'oxygène : la ventilation est prioritaire.</dd>
+
+        <dt>Femme enceinte</dt>
+        <dd>RCP standard. Surélever légèrement la hanche droite (avec un vêtement roulé) pour décomprimer la veine cave.</dd>
+
+        <dt>Si seul et sans téléphone</dt>
+        <dd>Chez l'adulte : alerter d'abord, puis commencer la RCP. Chez l'enfant ou le nourrisson : effectuer 1 minute de RCP, puis aller alerter.</dd>
+
+        <dt>Insufflations impossibles ou refusées</dt>
+        <dd>Pratiquer uniquement les compressions thoraciques en continu, sans interruption, au rythme de 100 à 120 par minute.</dd>
+
+        <dt>Victime porteuse d'un stimulateur cardiaque</dt>
+        <dd>Ne pas coller l'électrode du DAE directement sur le boîtier (souvent visible sous la peau, sous la clavicule gauche). Décaler l'électrode de quelques centimètres.</dd>
+      </dl>
+    </div>
+  </article>
+
+</div>
+
+<!-- ═══════════ BOTTOM CTA ═══════════ -->
+<section class="bottom-cta" id="commander">
+  <div class="wrap">
+    <h2>Procurez-vous le guide complet</h2>
+    <p>Tous les gestes de premiers secours SST dans un format pratique à garder sur soi — à consulter à tout moment.</p>
+    <span class="price-tag">12,90&nbsp;€<small> TTC</small></span>
+    <div>
+      <a href="mailto:votre@email.com?subject=Commande%20Guide%20SST" class="cta-btn" style="font-size:1.1rem;padding:16px 40px;">
+        Commander maintenant
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <p class="bottom-contact">Pour toute question : <strong>votre@email.com</strong> · <strong>06 XX XX XX XX</strong></p>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="site-footer">
+  <p>© 2026 — Formation SST · Sauveteur Secouriste du Travail</p>
+</footer>
+
+<!-- ═══════════ FLOATING MOBILE CTA ═══════════ -->
+<div class="float-cta">
+  <span class="float-price">12,90 €</span>
+  <a href="#commander" class="cta-btn">Commander</a>
+</div>
