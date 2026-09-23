@@ -312,6 +312,38 @@ strong{font-weight:600;color:var(--text)}
 .tab:not(.active):hover{background:var(--border);color:var(--text)}
 .tab svg{width:16px;height:16px;flex-shrink:0}
 
+/* ── FICHES GRID ── */
+.fiches-head{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-top:none;border-radius:0 0 var(--rl) var(--rl);
+  padding:2rem 2rem 1.75rem;margin-bottom:2rem;box-shadow:var(--shadow);
+}
+.fiches-head h2{
+  font-family:var(--serif);font-size:clamp(1.5rem,4vw,2rem);
+  font-weight:700;margin:0 0 .4rem;
+}
+.fiches-head p{color:var(--text-m);margin:0;font-size:.95rem}
+.fiches-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.25rem;padding-bottom:3rem;
+}
+.fiche-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow);
+  transition:box-shadow .2s,transform .15s;
+}
+.fiche-card:hover{box-shadow:var(--shadow-m);transform:translateY(-2px)}
+.fiche-card img{width:100%;height:auto;display:block}
+.fiche-info{padding:1rem 1.25rem}
+.fiche-info h3{
+  font-family:var(--serif);font-size:1rem;font-weight:700;margin:0 0 .25rem;
+}
+.fiche-info p{font-size:.82rem;color:var(--text-m);margin:0}
+
+/* Tab panels */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
 /* ── BOTTOM CTA ── */
 .bcta{
   background:var(--deep);color:var(--deep-text);
@@ -358,8 +390,13 @@ strong{font-weight:600;color:var(--text)}
 .fcta-p{font-family:var(--serif);font-size:1.3rem;font-weight:700}
 .fcta .btn{padding:10px 22px;font-size:.88rem}
 
+button.tab{
+  cursor:pointer;font-family:var(--sans);
+  -webkit-appearance:none;appearance:none;
+}
+
 @media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}.btn{transition:none}
+  html{scroll-behavior:auto}.btn{transition:none}.fiche-card{transition:none}
 }
 </style>
 
@@ -383,15 +420,18 @@ strong{font-weight:600;color:var(--text)}
 
 <!-- ═══ TABS ═══ -->
 <nav class="tabs">
-  <a href="guide-sst.html" class="tab active">
+  <button class="tab active" data-tab="guide" onclick="switchTab('guide')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
     Guide SST
-  </a>
-  <a href="https://claude.ai/artifact/UKtZGdEqwe7ZUu7hatSfn4" class="tab">
+  </button>
+  <button class="tab" data-tab="fiches" onclick="switchTab('fiches')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
     Fiches à imprimer
-  </a>
+  </button>
 </nav>
+
+<!-- ═══ PANEL: GUIDE ═══ -->
+<div id="panel-guide" class="tab-panel active">
 
 <!-- ═══ TOC ═══ -->
 <div class="w">
@@ -841,6 +881,52 @@ strong{font-weight:600;color:var(--text)}
 
 </div>
 
+</div><!-- /panel-guide -->
+
+<!-- ═══ PANEL: FICHES ═══ -->
+<div id="panel-fiches" class="tab-panel">
+<div class="w">
+  <div class="fiches-head">
+    <h2>Fiches à imprimer</h2>
+    <p>Supports visuels des gestes de premiers secours — à afficher dans vos locaux ou à distribuer en formation.</p>
+  </div>
+  <div class="fiches-grid">
+    <div class="fiche-card">
+      <img src="images/1.webp" alt="Fiche saignement abondant — compression, alerte et surveillance" loading="lazy">
+      <div class="fiche-info"><h3>Saignement abondant</h3><p>Comprimer, allonger, alerter, maintenir la pression</p></div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/2.webp" alt="Fiche étouffement adulte — claques dans le dos et compressions abdominales" loading="lazy">
+      <div class="fiche-info"><h3>Étouffement adulte</h3><p>Claques dans le dos, compressions abdominales, cas particuliers</p></div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/3.webp" alt="Fiche PLS — position latérale de sécurité en 4 étapes" loading="lazy">
+      <div class="fiche-info"><h3>Position Latérale de Sécurité</h3><p>Vérifier la respiration, préparer, tourner, stabiliser</p></div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/4.webp" alt="Fiche RCP — réanimation cardio-pulmonaire et utilisation du DAE" loading="lazy">
+      <div class="fiche-info"><h3>Réanimation Cardio-Pulmonaire</h3><p>Alerter, 30 compressions, 2 insufflations, DAE</p></div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/5.webp" alt="Fiche brûlure thermique — refroidir, retirer les vêtements, alerter" loading="lazy">
+      <div class="fiche-info"><h3>Brûlure thermique</h3><p>Écarter la source, refroidir à l'eau tempérée, demander un avis médical</p></div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/6.webp" alt="Fiche plaie simple et plaie grave — nettoyage, protection et positions adaptées" loading="lazy">
+      <div class="fiche-info"><h3>Plaies simples et graves</h3><p>Nettoyer et protéger une plaie simple, positions adaptées pour les plaies graves</p></div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/7.webp" alt="Fiche traumatisme — ne pas bouger, respecter la position, alerter et surveiller" loading="lazy">
+      <div class="fiche-info"><h3>Traumatisme</h3><p>Ne pas bouger, respecter la position trouvée, alerter et surveiller</p></div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/8.webp" alt="Fiche malaise — mettre au repos, écouter, observer, appeler le 15" loading="lazy">
+      <div class="fiche-info"><h3>Malaise</h3><p>Mettre au repos, écouter et observer, appeler le 15 et surveiller</p></div>
+    </div>
+  </div>
+</div>
+</div><!-- /panel-fiches -->
+
 <!-- ═══ BOTTOM CTA ═══ -->
 <section class="bcta" id="commander">
   <div class="w">
@@ -867,3 +953,11 @@ strong{font-weight:600;color:var(--text)}
   <span class="fcta-p">12,90 €</span>
   <a href="#commander" class="btn">Commander</a>
 </div>
+
+<script>
+function switchTab(id){
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.dataset.tab===id)});
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.toggle('active',p.id==='panel-'+id)});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
