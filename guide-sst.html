@@ -285,6 +285,30 @@ strong{font-weight:600;color:var(--text)}
 .co dt:first-of-type{margin-top:0}
 .co dd{margin:2px 0 0;font-size:.84rem;color:var(--text-s);line-height:1.6}
 
+/* ── FICHES ── */
+.fiches{padding-block:3rem}
+.fiches-t{
+  font-family:var(--serif);font-size:clamp(1.5rem,3.5vw,1.9rem);
+  font-weight:700;margin:0 0 .4rem;
+}
+.fiches-sub{color:var(--text-m);margin:0 0 2rem;font-size:.95rem}
+.fiches-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.25rem;
+}
+.fiche-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow);
+  transition:box-shadow .2s,transform .15s;
+}
+.fiche-card:hover{box-shadow:var(--shadow-m);transform:translateY(-2px)}
+.fiche-card img{width:100%;height:auto;display:block}
+.fiche-info{padding:1rem 1.25rem}
+.fiche-info h3{
+  font-family:var(--serif);font-size:1rem;font-weight:700;margin:0 0 .25rem;
+}
+.fiche-info p{font-size:.82rem;color:var(--text-m);margin:0}
+
 /* ── BOTTOM CTA ── */
 .bcta{
   background:var(--deep);color:var(--deep-text);
@@ -368,6 +392,7 @@ strong{font-weight:600;color:var(--text)}
     <li><a href="#g6"><span class="toc-n red">6</span>Plaies</a></li>
     <li><a href="#g7"><span class="toc-n red">7</span>Inconscience + respiration</a></li>
     <li><a href="#g8"><span class="toc-n red">8</span>Arrêt cardio-respiratoire</a></li>
+    <li><a href="#fiches"><span class="toc-n grn">&#9998;</span>Fiches à imprimer</a></li>
   </ul>
 </nav>
 
@@ -799,6 +824,49 @@ strong{font-weight:600;color:var(--text)}
     </div>
   </div>
 </article>
+
+  <!-- ═══ FICHES À IMPRIMER ═══ -->
+  <section class="fiches" id="fiches">
+    <h2 class="fiches-t">Fiches à imprimer</h2>
+    <p class="fiches-sub">Supports visuels des gestes de premiers secours — à afficher dans vos locaux ou à distribuer en formation.</p>
+    <div class="fiches-grid">
+      <div class="fiche-card">
+        <img src="images/1.webp" alt="Fiche saignement abondant — compression, alerte et surveillance" loading="lazy">
+        <div class="fiche-info">
+          <h3>Saignement abondant</h3>
+          <p>Comprimer, allonger, alerter, maintenir la pression</p>
+        </div>
+      </div>
+      <div class="fiche-card">
+        <img src="images/2.webp" alt="Fiche étouffement adulte — claques dans le dos et compressions abdominales" loading="lazy">
+        <div class="fiche-info">
+          <h3>Étouffement adulte</h3>
+          <p>Claques dans le dos, compressions abdominales, cas particuliers</p>
+        </div>
+      </div>
+      <div class="fiche-card">
+        <img src="images/3.webp" alt="Fiche PLS — position latérale de sécurité en 4 étapes" loading="lazy">
+        <div class="fiche-info">
+          <h3>Position Latérale de Sécurité</h3>
+          <p>Vérifier la respiration, préparer, tourner, stabiliser</p>
+        </div>
+      </div>
+      <div class="fiche-card">
+        <img src="images/4.webp" alt="Fiche RCP — réanimation cardio-pulmonaire et utilisation du DAE" loading="lazy">
+        <div class="fiche-info">
+          <h3>Réanimation Cardio-Pulmonaire</h3>
+          <p>Alerter, 30 compressions, 2 insufflations, DAE</p>
+        </div>
+      </div>
+      <div class="fiche-card">
+        <img src="images/5.webp" alt="Fiche brûlure thermique — refroidir, retirer les vêtements, alerter" loading="lazy">
+        <div class="fiche-info">
+          <h3>Brûlure thermique</h3>
+          <p>Écarter la source, refroidir à l'eau tempérée, demander un avis médical</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </div>
 
