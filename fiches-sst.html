@@ -1,0 +1,203 @@
+<title>Fiches SST</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #FAF7F2;
+  --bg-alt: #F0EBE3;
+  --bg-card: #FFFFFF;
+  --text: #1C2A3A;
+  --text-s: #3D4F63;
+  --text-m: #6B7A8D;
+  --accent: #C0392B;
+  --accent-h: #A5301F;
+  --accent-soft: #FDF0EE;
+  --safe: #1A7B55;
+  --safe-soft: #EDF8F2;
+  --deep: #0F1D32;
+  --deep-text: #E8EDF3;
+  --border: #DDD6CB;
+  --shadow: 0 1px 4px rgba(28,42,58,0.06);
+  --shadow-m: 0 4px 16px rgba(28,42,58,0.07);
+  --r: 10px;
+  --rl: 16px;
+  --serif: 'Lora', Georgia, 'Times New Roman', serif;
+  --sans: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101B2E;--bg-alt:#162240;--bg-card:#1B2D4B;
+    --text:#E0E7EF;--text-s:#B8C5D3;--text-m:#8A9BB0;
+    --accent:#E8654F;--accent-h:#F07D6A;--accent-soft:#2C1D1A;
+    --safe:#3CDBA7;--safe-soft:#0F2A28;
+    --deep:#0A1425;--deep-text:#E0E7EF;
+    --border:#2A3B55;
+    --shadow:0 1px 4px rgba(0,0,0,0.2);--shadow-m:0 4px 16px rgba(0,0,0,0.25);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101B2E;--bg-alt:#162240;--bg-card:#1B2D4B;
+  --text:#E0E7EF;--text-s:#B8C5D3;--text-m:#8A9BB0;
+  --accent:#E8654F;--accent-h:#F07D6A;--accent-soft:#2C1D1A;
+  --safe:#3CDBA7;--safe-soft:#0F2A28;
+  --deep:#0A1425;--deep-text:#E0E7EF;
+  --border:#2A3B55;
+  --shadow:0 1px 4px rgba(0,0,0,0.2);--shadow-m:0 4px 16px rgba(0,0,0,0.25);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--sans);line-height:1.7;
+  padding-inline:16px;-webkit-font-smoothing:antialiased;
+}
+.w{max-width:880px;margin:0 auto}
+h1,h2,h3{line-height:1.25;text-wrap:balance}
+
+/* ── TABS ── */
+.tabs{
+  display:flex;gap:4px;max-width:880px;margin:0 auto;
+  padding:1.5rem 0 0;
+}
+.tab{
+  display:flex;align-items:center;gap:6px;
+  padding:10px 20px;border-radius:10px 10px 0 0;
+  font-size:.88rem;font-weight:600;text-decoration:none;
+  transition:background .15s,color .15s;
+  border:1px solid transparent;border-bottom:none;
+}
+.tab.active{
+  background:var(--bg-card);color:var(--text);
+  border-color:var(--border);position:relative;
+}
+.tab.active::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;
+  height:2px;background:var(--bg-card);
+}
+.tab:not(.active){background:var(--bg-alt);color:var(--text-m)}
+.tab:not(.active):hover{background:var(--border);color:var(--text)}
+.tab svg{width:16px;height:16px;flex-shrink:0}
+
+/* ── HEADER ── */
+.page-head{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-top:none;border-radius:0 0 var(--rl) var(--rl);
+  padding:2rem 2rem 1.75rem;margin-bottom:2rem;
+  box-shadow:var(--shadow);
+}
+.page-head h1{
+  font-family:var(--serif);font-size:clamp(1.5rem,4vw,2rem);
+  font-weight:700;margin:0 0 .4rem;
+}
+.page-head p{color:var(--text-m);margin:0;font-size:.95rem}
+
+/* ── GRID ── */
+.fiches-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.25rem;padding-bottom:3rem;
+}
+.fiche-card{
+  background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--rl);overflow:hidden;box-shadow:var(--shadow);
+  transition:box-shadow .2s,transform .15s;
+}
+.fiche-card:hover{box-shadow:var(--shadow-m);transform:translateY(-2px)}
+.fiche-card img{width:100%;height:auto;display:block}
+.fiche-info{padding:1rem 1.25rem}
+.fiche-info h3{
+  font-family:var(--serif);font-size:1rem;font-weight:700;margin:0 0 .25rem;
+}
+.fiche-info p{font-size:.82rem;color:var(--text-m);margin:0}
+
+/* ── FOOTER ── */
+.ft{
+  background:var(--bg-alt);margin:0 -16px;padding:1.5rem 16px;
+  text-align:center;font-size:.78rem;color:var(--text-m);
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}.fiche-card{transition:none}
+}
+</style>
+
+<!-- ═══ TABS ═══ -->
+<nav class="tabs">
+  <a href="https://claude.ai/artifact/AsurseZ8MMfniqkk2q1xyT" class="tab">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+    Guide SST
+  </a>
+  <a href="fiches-sst.html" class="tab active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    Fiches à imprimer
+  </a>
+</nav>
+
+<div class="w">
+  <div class="page-head">
+    <h1>Fiches à imprimer</h1>
+    <p>Supports visuels des gestes de premiers secours — à afficher dans vos locaux ou à distribuer en formation.</p>
+  </div>
+
+  <div class="fiches-grid">
+    <div class="fiche-card">
+      <img src="images/1.webp" alt="Fiche saignement abondant — compression, alerte et surveillance" loading="lazy">
+      <div class="fiche-info">
+        <h3>Saignement abondant</h3>
+        <p>Comprimer, allonger, alerter, maintenir la pression</p>
+      </div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/2.webp" alt="Fiche étouffement adulte — claques dans le dos et compressions abdominales" loading="lazy">
+      <div class="fiche-info">
+        <h3>Étouffement adulte</h3>
+        <p>Claques dans le dos, compressions abdominales, cas particuliers</p>
+      </div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/3.webp" alt="Fiche PLS — position latérale de sécurité en 4 étapes" loading="lazy">
+      <div class="fiche-info">
+        <h3>Position Latérale de Sécurité</h3>
+        <p>Vérifier la respiration, préparer, tourner, stabiliser</p>
+      </div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/4.webp" alt="Fiche RCP — réanimation cardio-pulmonaire et utilisation du DAE" loading="lazy">
+      <div class="fiche-info">
+        <h3>Réanimation Cardio-Pulmonaire</h3>
+        <p>Alerter, 30 compressions, 2 insufflations, DAE</p>
+      </div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/5.webp" alt="Fiche brûlure thermique — refroidir, retirer les vêtements, alerter" loading="lazy">
+      <div class="fiche-info">
+        <h3>Brûlure thermique</h3>
+        <p>Écarter la source, refroidir à l'eau tempérée, demander un avis médical</p>
+      </div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/6.webp" alt="Fiche plaie simple et plaie grave — nettoyage, protection et positions adaptées" loading="lazy">
+      <div class="fiche-info">
+        <h3>Plaies simples et graves</h3>
+        <p>Nettoyer et protéger une plaie simple, positions adaptées pour les plaies graves</p>
+      </div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/7.webp" alt="Fiche traumatisme — ne pas bouger, respecter la position, alerter et surveiller" loading="lazy">
+      <div class="fiche-info">
+        <h3>Traumatisme</h3>
+        <p>Ne pas bouger, respecter la position trouvée, alerter et surveiller</p>
+      </div>
+    </div>
+    <div class="fiche-card">
+      <img src="images/8.webp" alt="Fiche malaise — mettre au repos, écouter, observer, appeler le 15" loading="lazy">
+      <div class="fiche-info">
+        <h3>Malaise</h3>
+        <p>Mettre au repos, écouter et observer, appeler le 15 et surveiller</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="ft">
+  <p>© 2026 — Formation SST · Sauveteur Secouriste du Travail</p>
+</footer>
