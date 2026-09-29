@@ -322,6 +322,7 @@ strong{font-weight:600;color:var(--text)}
 }
 .tab:not(.active):hover{background:var(--border);color:var(--text)}
 .tab svg{width:16px;height:16px;flex-shrink:0}
+.tab .tab-lock{width:13px;height:13px;opacity:.55}
 
 /* ── FICHES GRID ── */
 .fiches-head{
@@ -350,14 +351,35 @@ strong{font-weight:600;color:var(--text)}
   font-family:var(--serif);font-size:1rem;font-weight:700;margin:0 0 .25rem;
 }
 .fiche-info p{font-size:.82rem;color:var(--text-m);margin:0}
-.fiche-dl{
-  display:inline-flex;align-items:center;gap:6px;
-  margin-top:.7rem;padding:7px 14px;border-radius:8px;
-  background:var(--accent);color:#fff;font-size:.78rem;font-weight:600;
-  text-decoration:none;transition:background .15s;
+
+
+/* ── LOCKED FICHES ── */
+.unlock{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  background:var(--deep);color:var(--deep-text);
+  border-radius:var(--rl);padding:1.25rem 1.5rem;margin-bottom:1.5rem;
+  box-shadow:var(--shadow-m);
 }
-.fiche-dl:hover{background:var(--accent-h)}
-.fiche-dl svg{width:14px;height:14px;flex-shrink:0}
+.unlock-ic{
+  width:44px;height:44px;border-radius:12px;flex-shrink:0;
+  background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;
+}
+.unlock-ic svg{width:22px;height:22px}
+.unlock-tx{flex:1;min-width:220px;display:flex;flex-direction:column;gap:2px}
+.unlock-tx strong{font-family:var(--serif);font-size:1.1rem;color:#fff}
+.unlock-tx span{font-size:.88rem;color:rgba(255,255,255,.7)}
+.unlock-tx b{color:#fff}
+.unlock-btn{padding:12px 26px;font-size:.92rem}
+.fiche-thumb{position:relative;overflow:hidden;background:var(--bg-alt)}
+.fiche-card.locked:hover{transform:none;box-shadow:var(--shadow)}
+.lock-badge{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(15,29,50,.28);color:#fff;
+}
+.lock-badge svg{
+  width:46px;height:46px;padding:12px;border-radius:50%;
+  background:rgba(15,29,50,.75);
+}
 
 /* Tab panels */
 .tab-panel{display:none}
@@ -436,7 +458,7 @@ button.tab{
     <p>Protocole PREFAS, 8 situations d'urgence et tous les gestes de premiers secours — expliqués pas à pas, avec les cas particuliers.</p>
     <div class="hero-cta">
       <span class="price">12,90 €<sub>TTC</sub></span>
-      <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn">Commander le guide <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn">Débloquer les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div class="urg-wrap">
     <p class="urg-title">Les numéros qui sauvent</p>
@@ -458,6 +480,7 @@ button.tab{
   <button class="tab" data-tab="fiches" onclick="switchTab('fiches')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
     Fiches à imprimer
+    <svg class="tab-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
   </button>
 </nav>
 
@@ -919,56 +942,45 @@ button.tab{
 <div class="w">
   <div class="fiches-head">
     <h2>Fiches à imprimer</h2>
-    <p>Supports visuels des gestes de premiers secours — à afficher dans vos locaux ou à distribuer en formation.</p>
+    <p>Les 8 supports visuels des gestes de premiers secours, en PDF A4 prêts à imprimer — à afficher dans vos locaux ou à distribuer en formation.</p>
+  </div>
+  <div class="unlock">
+    <div class="unlock-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></div>
+    <div class="unlock-tx"><strong>Accès réservé</strong><span>Débloquez les 8 fiches PDF pour <b>12,90 € TTC</b>. Paiement unique et sécurisé par Stripe.</span></div>
+    <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn unlock-btn">Débloquer les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
   <div class="fiches-grid">
-    <div class="fiche-card">
-      <img src="images/1.webp" alt="Fiche saignement abondant — compression, alerte et surveillance" loading="lazy">
-      <div class="fiche-info"><h3>Saignement abondant</h3><p>Comprimer, allonger, alerter, maintenir la pression</p>
-        <a href="pdf/Fiche-SST-Saignement-abondant.pdf" download data-pdf="pdf/Fiche-SST-Saignement-abondant.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-1.webp" alt="Aperçu flouté de la fiche Saignement abondant" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Saignement abondant</h3><p>Comprimer, allonger, alerter</p></div>
     </div>
-    <div class="fiche-card">
-      <img src="images/2.webp" alt="Fiche étouffement adulte — claques dans le dos et compressions abdominales" loading="lazy">
-      <div class="fiche-info"><h3>Étouffement adulte</h3><p>Claques dans le dos, compressions abdominales, cas particuliers</p>
-        <a href="pdf/Fiche-SST-Etouffement-adulte.pdf" download data-pdf="pdf/Fiche-SST-Etouffement-adulte.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-2.webp" alt="Aperçu flouté de la fiche Étouffement adulte" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Étouffement adulte</h3><p>Claques dans le dos, compressions abdominales</p></div>
     </div>
-    <div class="fiche-card">
-      <img src="images/3.webp" alt="Fiche PLS — position latérale de sécurité en 4 étapes" loading="lazy">
-      <div class="fiche-info"><h3>Position Latérale de Sécurité</h3><p>Vérifier la respiration, préparer, tourner, stabiliser</p>
-        <a href="pdf/Fiche-SST-PLS.pdf" download data-pdf="pdf/Fiche-SST-PLS.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-3.webp" alt="Aperçu flouté de la fiche Position Latérale de Sécurité" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Position Latérale de Sécurité</h3><p>Vérifier, préparer, tourner, stabiliser</p></div>
     </div>
-    <div class="fiche-card">
-      <img src="images/4.webp" alt="Fiche RCP — réanimation cardio-pulmonaire et utilisation du DAE" loading="lazy">
-      <div class="fiche-info"><h3>Réanimation Cardio-Pulmonaire</h3><p>Alerter, 30 compressions, 2 insufflations, DAE</p>
-        <a href="pdf/Fiche-SST-RCP.pdf" download data-pdf="pdf/Fiche-SST-RCP.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-4.webp" alt="Aperçu flouté de la fiche Réanimation Cardio-Pulmonaire" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Réanimation Cardio-Pulmonaire</h3><p>30 compressions, 2 insufflations, DAE</p></div>
     </div>
-    <div class="fiche-card">
-      <img src="images/5.webp" alt="Fiche brûlure thermique — refroidir, retirer les vêtements, alerter" loading="lazy">
-      <div class="fiche-info"><h3>Brûlure thermique</h3><p>Écarter la source, refroidir à l'eau tempérée, demander un avis médical</p>
-        <a href="pdf/Fiche-SST-Brulure-thermique.pdf" download data-pdf="pdf/Fiche-SST-Brulure-thermique.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-5.webp" alt="Aperçu flouté de la fiche Brûlure thermique" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Brûlure thermique</h3><p>Refroidir, retirer, alerter</p></div>
     </div>
-    <div class="fiche-card">
-      <img src="images/6.webp" alt="Fiche plaie simple et plaie grave — nettoyage, protection et positions adaptées" loading="lazy">
-      <div class="fiche-info"><h3>Plaies simples et graves</h3><p>Nettoyer et protéger une plaie simple, positions adaptées pour les plaies graves</p>
-        <a href="pdf/Fiche-SST-Plaies.pdf" download data-pdf="pdf/Fiche-SST-Plaies.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-6.webp" alt="Aperçu flouté de la fiche Plaies simples et graves" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Plaies simples et graves</h3><p>Nettoyer, protéger, positions adaptées</p></div>
     </div>
-    <div class="fiche-card">
-      <img src="images/7.webp" alt="Fiche traumatisme — ne pas bouger, respecter la position, alerter et surveiller" loading="lazy">
-      <div class="fiche-info"><h3>Traumatisme</h3><p>Ne pas bouger, respecter la position trouvée, alerter et surveiller</p>
-        <a href="pdf/Fiche-SST-Traumatisme.pdf" download data-pdf="pdf/Fiche-SST-Traumatisme.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-7.webp" alt="Aperçu flouté de la fiche Traumatisme" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Traumatisme</h3><p>Ne pas bouger, alerter, surveiller</p></div>
     </div>
-    <div class="fiche-card">
-      <img src="images/8.webp" alt="Fiche malaise — mettre au repos, écouter, observer, appeler le 15" loading="lazy">
-      <div class="fiche-info"><h3>Malaise</h3><p>Mettre au repos, écouter et observer, appeler le 15 et surveiller</p>
-        <a href="pdf/Fiche-SST-Malaise.pdf" download data-pdf="pdf/Fiche-SST-Malaise.pdf" class="fiche-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Télécharger PDF</a>
-      </div>
+    <div class="fiche-card locked">
+      <div class="fiche-thumb"><img src="images/apercu-8.webp" alt="Aperçu flouté de la fiche Malaise" loading="lazy"><span class="lock-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg></span></div>
+      <div class="fiche-info"><h3>Malaise</h3><p>Repos, écouter, observer, appeler le 15</p></div>
     </div>
   </div>
 </div>
@@ -977,16 +989,16 @@ button.tab{
 <!-- ═══ BOTTOM CTA ═══ -->
 <section class="bcta" id="commander">
   <div class="w">
-    <h2>Procurez-vous le guide complet</h2>
-    <p>Tous les gestes de premiers secours SST dans un format pratique — à consulter à tout moment sur votre smartphone.</p>
+    <h2>Débloquez les 8 fiches à imprimer</h2>
+    <p>Les 8 fiches des gestes de premiers secours SST en PDF A4, prêtes à imprimer et à afficher dans vos locaux.</p>
     <span class="price">12,90 €<sub>TTC</sub></span>
     <div>
-      <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn" style="font-size:1.05rem;padding:16px 40px">Commander maintenant <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn" style="font-size:1.05rem;padding:16px 40px">Obtenir les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div class="trust">
-      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Guide PDF téléchargeable</span>
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 8 fiches PDF au format A4</span>
       <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Compatible mobile</span>
-      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Conforme aux recommandations INRS</span>
+      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Paiement sécurisé par Stripe</span>
     </div>
   </div>
 </section>
@@ -998,7 +1010,7 @@ button.tab{
 
 <div class="fcta">
   <span class="fcta-p">12,90 €</span>
-  <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn">Commander</a>
+  <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn">Débloquer</a>
 </div>
 
 <script>
@@ -1008,24 +1020,4 @@ function switchTab(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-(async function(){
-  if(typeof claude==='undefined'||!claude.use) return;
-  var dl = await claude.use('downloads');
-  if(!dl){
-    document.querySelectorAll('.fiche-dl').forEach(function(a){a.style.display='none'});
-    return;
-  }
-  document.querySelectorAll('.fiche-dl').forEach(function(a){
-    a.addEventListener('click',async function(e){
-      e.preventDefault();
-      var href=a.getAttribute('data-pdf');
-      var name=href.split('/').pop();
-      try{
-        var res=await fetch(href);
-        var blob=await res.blob();
-        await dl.save({filename:name,data:blob});
-      }catch(err){}
-    });
-  });
-})();
 </script>
