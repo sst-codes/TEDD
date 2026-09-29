@@ -119,9 +119,13 @@ strong{font-weight:600;color:var(--text)}
 .btn svg{flex-shrink:0}
 
 /* Emergency strip */
+.urg-wrap{padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.08)}
+.urg-title{
+  margin:0 0 1rem;font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);
+}
 .urg{
   display:flex;justify-content:center;gap:clamp(1.5rem,5vw,3rem);
-  padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);
   flex-wrap:wrap;
 }
 .urg-item{text-align:center}
@@ -424,10 +428,13 @@ button.tab{
       <span class="price">12,90 €<sub>TTC</sub></span>
       <a href="#commander" class="btn">Commander le guide <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
+    <div class="urg-wrap">
+    <p class="urg-title">Les numéros qui sauvent</p>
     <div class="urg">
       <div class="urg-item"><span class="urg-num">15</span><span class="urg-label">SAMU</span></div>
       <div class="urg-item"><span class="urg-num">18</span><span class="urg-label">Pompiers</span></div>
       <div class="urg-item"><span class="urg-num">112</span><span class="urg-label">N° européen</span></div>
+    </div>
     </div>
   </div>
 </section>
