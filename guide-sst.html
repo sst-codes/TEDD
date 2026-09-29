@@ -2,27 +2,23 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
 <style>
 :root {
-  --bg: #F8F4EA;
-  --bg-alt: #EFE8D6;
+  --bg: #FAF7F2;
+  --bg-alt: #F0EBE3;
   --bg-card: #FFFFFF;
-  --text: #0F2418;
-  --text-s: #34483C;
-  --text-m: #6B7B70;
-  --accent: #8F6A16;
-  --accent-h: #7A5A12;
-  --accent-soft: #F5ECD3;
-  --gold: #D9AE4A;
-  --gold-h: #E7C271;
-  --safe: #1E6B47;
-  --safe-soft: #E4F0E8;
-  --danger: #8B1A1A;
-  --danger-soft: #FBECE8;
+  --text: #1C2A3A;
+  --text-s: #3D4F63;
+  --text-m: #6B7A8D;
+  --accent: #C0392B;
+  --accent-h: #A5301F;
+  --accent-soft: #FDF0EE;
+  --safe: #1A7B55;
+  --safe-soft: #EDF8F2;
   --deep: #04120A;
-  --deep-text: #ECE6D3;
-  --amber: #8F6A16;
-  --amber-soft: #FBF5E4;
-  --amber-border: #C9A040;
-  --border: #DDD3BB;
+  --deep-text: #E8EDF3;
+  --amber: #B8860B;
+  --amber-soft: #FDF6E3;
+  --amber-border: #D4A932;
+  --border: #DDD6CB;
   --shadow: 0 1px 4px rgba(28,42,58,0.06);
   --shadow-m: 0 4px 16px rgba(28,42,58,0.07);
   --r: 10px;
@@ -33,29 +29,25 @@
 @media(prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     color-scheme:dark;
-    --bg:#07180F;--bg-alt:#0B2217;--bg-card:#0F2A1D;
-    --text:#ECE6D3;--text-s:#C9C4B0;--text-m:#8FA396;
-    --accent:#E0B455;--accent-h:#EBC677;--accent-soft:#2A2410;
-    --gold:#E0B455;--gold-h:#EBC677;
-    --safe:#55D69F;--safe-soft:#0F2E22;
-    --danger:#E86B5A;--danger-soft:#2C1A17;
-    --deep:#04120A;--deep-text:#ECE6D3;
-    --amber:#E0B455;--amber-soft:#22200F;--amber-border:#B8942F;
-    --border:#21402F;
+    --bg:#101B2E;--bg-alt:#162240;--bg-card:#1B2D4B;
+    --text:#E0E7EF;--text-s:#B8C5D3;--text-m:#8A9BB0;
+    --accent:#E8654F;--accent-h:#F07D6A;--accent-soft:#2C1D1A;
+    --safe:#3CDBA7;--safe-soft:#0F2A28;
+    --deep:#04120A;--deep-text:#E0E7EF;
+    --amber:#F5C542;--amber-soft:#2A2210;--amber-border:#C9A020;
+    --border:#2A3B55;
     --shadow:0 1px 4px rgba(0,0,0,0.2);--shadow-m:0 4px 16px rgba(0,0,0,0.25);
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#07180F;--bg-alt:#0B2217;--bg-card:#0F2A1D;
-  --text:#ECE6D3;--text-s:#C9C4B0;--text-m:#8FA396;
-  --accent:#E0B455;--accent-h:#EBC677;--accent-soft:#2A2410;
-  --gold:#E0B455;--gold-h:#EBC677;
-  --safe:#55D69F;--safe-soft:#0F2E22;
-  --danger:#E86B5A;--danger-soft:#2C1A17;
-  --deep:#04120A;--deep-text:#ECE6D3;
-  --amber:#E0B455;--amber-soft:#22200F;--amber-border:#B8942F;
-  --border:#21402F;
+  --bg:#101B2E;--bg-alt:#162240;--bg-card:#1B2D4B;
+  --text:#E0E7EF;--text-s:#B8C5D3;--text-m:#8A9BB0;
+  --accent:#E8654F;--accent-h:#F07D6A;--accent-soft:#2C1D1A;
+  --safe:#3CDBA7;--safe-soft:#0F2A28;
+  --deep:#04120A;--deep-text:#E0E7EF;
+  --amber:#F5C542;--amber-soft:#2A2210;--amber-border:#C9A020;
+  --border:#2A3B55;
   --shadow:0 1px 4px rgba(0,0,0,0.2);--shadow-m:0 4px 16px rgba(0,0,0,0.25);
 }
 html{scroll-behavior:smooth}
@@ -70,7 +62,7 @@ strong{font-weight:600;color:var(--text)}
 
 /* ── HERO ── */
 .hero{
-  background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(217,174,74,.10),transparent 70%),var(--deep);color:var(--deep-text);
+  background:var(--deep);color:var(--deep-text);
   margin:-16px -16px 0;position:relative;overflow:hidden;
   padding:clamp(3.5rem,10vw,6rem) 16px clamp(2.5rem,6vw,4rem);
   text-align:center;
@@ -78,7 +70,7 @@ strong{font-weight:600;color:var(--text)}
 .hero::before{
   content:'+';position:absolute;
   font-family:var(--serif);font-size:clamp(20rem,55vw,50rem);font-weight:700;
-  color:rgba(217,174,74,0.06);
+  color:rgba(192,57,43,0.045);
   top:50%;left:50%;transform:translate(-50%,-50%);
   pointer-events:none;line-height:1;
 }
@@ -99,7 +91,7 @@ strong{font-weight:600;color:var(--text)}
   font-family:var(--serif);font-size:clamp(3rem,8vw,5rem);
   font-weight:700;margin:0 0 1rem;letter-spacing:-.02em;color:#fff;
 }
-.hero h1 em{font-style:normal;color:var(--gold)}
+.hero h1 em{font-style:normal;color:var(--accent)}
 .hero>div>p{
   font-size:clamp(.95rem,2vw,1.1rem);color:rgba(255,255,255,0.65);
   max-width:480px;margin:0 auto 2.5rem;font-weight:300;
@@ -114,16 +106,16 @@ strong{font-weight:600;color:var(--text)}
 .price sub{font-size:.4em;font-weight:400;opacity:.6;vertical-align:super}
 .btn{
   display:inline-flex;align-items:center;gap:8px;
-  background:var(--gold);color:var(--deep);border:none;border-radius:100px;
+  background:var(--accent);color:#fff;border:none;border-radius:100px;
   padding:14px 36px;font-family:var(--sans);font-size:1rem;font-weight:600;
   cursor:pointer;text-decoration:none;
   transition:background .2s,transform .15s,box-shadow .2s;
 }
 .btn:hover,.btn:focus-visible{
-  background:var(--gold-h);transform:translateY(-1px);
-  box-shadow:0 6px 20px rgba(217,174,74,.3);
+  background:var(--accent-h);transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(192,57,43,.25);
 }
-.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .btn svg{flex-shrink:0}
 
 /* Emergency strip */
@@ -135,7 +127,7 @@ strong{font-weight:600;color:var(--text)}
 .urg-item{text-align:center}
 .urg-num{
   display:block;font-family:var(--serif);font-size:1.6rem;font-weight:700;
-  color:var(--gold);line-height:1.2;
+  color:var(--accent);line-height:1.2;
 }
 .urg-label{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 
@@ -187,7 +179,7 @@ strong{font-weight:600;color:var(--text)}
   width:52px;height:52px;border-radius:50%;
   background:var(--safe);margin:0 auto .9rem;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--bg-card);
+  font-family:var(--serif);font-size:1.1rem;font-weight:700;color:#fff;
   box-shadow:0 4px 12px rgba(26,123,85,.2);
 }
 .pref-step h3{
@@ -229,11 +221,10 @@ strong{font-weight:600;color:var(--text)}
   width:48px;height:48px;border-radius:12px;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   font-family:var(--serif);font-size:1.3rem;font-weight:700;
-  background:var(--deep);color:var(--gold);
-  border:1px solid rgba(217,174,74,.45);
-  box-shadow:0 2px 8px rgba(4,18,10,.25);
+  background:var(--accent);color:#fff;
+  box-shadow:0 2px 8px rgba(192,57,43,.2);
 }
-.g-num.vital{background:var(--danger);color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(139,26,26,.25)}
+.g-num.vital{background:#8B1A1A;box-shadow:0 2px 8px rgba(139,26,26,.25)}
 .g-head-text{min-width:0}
 .g-label{
   display:block;font-size:.7rem;font-weight:600;
@@ -356,10 +347,10 @@ strong{font-weight:600;color:var(--text)}
 .fiche-dl{
   display:inline-flex;align-items:center;gap:6px;
   margin-top:.7rem;padding:7px 14px;border-radius:8px;
-  background:var(--gold);color:var(--deep);font-size:.78rem;font-weight:600;
+  background:var(--accent);color:#fff;font-size:.78rem;font-weight:600;
   text-decoration:none;transition:background .15s;
 }
-.fiche-dl:hover{background:var(--gold-h)}
+.fiche-dl:hover{background:var(--accent-h)}
 .fiche-dl svg{width:14px;height:14px;flex-shrink:0}
 
 /* Tab panels */
@@ -368,7 +359,7 @@ strong{font-weight:600;color:var(--text)}
 
 /* ── BOTTOM CTA ── */
 .bcta{
-  background:radial-gradient(ellipse 70% 70% at 50% 100%,rgba(217,174,74,.10),transparent 70%),var(--deep);color:var(--deep-text);
+  background:var(--deep);color:var(--deep-text);
   margin:3rem -16px 0;padding:clamp(3rem,8vw,4.5rem) 16px;text-align:center;
 }
 .bcta h2{
@@ -385,7 +376,7 @@ strong{font-weight:600;color:var(--text)}
   font-size:.78rem;color:rgba(255,255,255,.5);
   display:flex;align-items:center;gap:5px;
 }
-.trust-item svg{width:14px;height:14px;color:var(--gold);flex-shrink:0}
+.trust-item svg{width:14px;height:14px;color:var(--safe);flex-shrink:0}
 .contact{
   margin-top:2rem;font-size:.85rem;color:rgba(255,255,255,.4);
 }
@@ -849,10 +840,10 @@ button.tab{
 
 <!-- ═══ G8 — ARRÊT CARDIO-RESPIRATOIRE ═══ -->
 <article class="g" id="g8">
-  <div class="g-head" style="background:var(--danger-soft)">
+  <div class="g-head" style="background:var(--accent-soft)">
     <div class="g-num vital">8</div>
     <div class="g-head-text">
-      <span class="g-label" style="color:var(--danger)">Situation 8 — Urgence vitale</span>
+      <span class="g-label" style="color:#8B1A1A">Situation 8 — Urgence vitale</span>
       <h2>La victime ne répond pas et ne respire pas</h2>
     </div>
   </div>
