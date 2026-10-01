@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Merci pour votre achat — SST</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#FAF7F2;--bg-alt:#F0EBE3;--bg-card:#FFFFFF;
+  --text:#1C2A3A;--text-s:#3D4F63;--text-m:#6B7A8D;
+  --accent:#C0392B;--accent-h:#A5301F;
+  --safe:#1A7B55;--safe-soft:#EDF8F2;
+  --deep:#0F1D32;--deep-text:#E8EDF3;
+  --border:#DDD6CB;
+  --shadow:0 1px 4px rgba(28,42,58,0.06);--shadow-m:0 4px 16px rgba(28,42,58,0.07);
+  --rl:16px;
+  --serif:'Lora',Georgia,'Times New Roman',serif;
+  --sans:'Source Sans 3','Segoe UI',system-ui,sans-serif;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    color-scheme:dark;
+    --bg:#101B2E;--bg-alt:#162240;--bg-card:#1B2D4B;
+    --text:#E0E7EF;--text-s:#B8C5D3;--text-m:#8A9BB0;
+    --accent:#E8654F;--accent-h:#F07D6A;
+    --safe:#3CDBA7;--safe-soft:#0F2A28;
+    --deep:#0A1425;--deep-text:#E0E7EF;
+    --border:#2A3B55;
+    --shadow:0 1px 4px rgba(0,0,0,0.2);--shadow-m:0 4px 16px rgba(0,0,0,0.25);
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{line-height:1.25;text-wrap:balance}
+a{color:inherit}
+.hero{
+  background:var(--deep);color:var(--deep-text);position:relative;overflow:hidden;
+  padding:clamp(5.5rem,10vw,6rem) 16px clamp(2.5rem,6vw,4rem);text-align:center;
+}
+.hero::before{
+  content:'+';position:absolute;font-family:var(--serif);
+  font-size:clamp(32rem,90vw,80rem);font-weight:700;color:rgba(60,219,167,0.08);
+  top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1;
+}
+.logo{
+  position:absolute;top:16px;left:16px;width:clamp(48px,8vw,72px);height:auto;
+  border-radius:10px;z-index:1;
+}
+.hero-in{position:relative;max-width:720px;margin:0 auto}
+.check{
+  width:64px;height:64px;border-radius:50%;margin:0 auto 1.25rem;
+  background:var(--safe);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 20px rgba(26,123,85,.35);
+}
+.check svg{width:32px;height:32px;color:#fff}
+.hero h1{
+  font-family:var(--serif);font-size:clamp(2.2rem,7vw,3.6rem);font-weight:700;
+  margin:0 0 .75rem;letter-spacing:-.02em;color:#fff;
+}
+.hero p{
+  font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,2.4vw,1.25rem);
+  line-height:1.6;color:rgba(255,255,255,.8);margin:0 auto 2rem;max-width:560px;text-wrap:balance;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:#fff;border-radius:100px;
+  padding:16px 40px;font-family:var(--sans);font-size:1.05rem;font-weight:600;
+  text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;
+}
+.btn:hover,.btn:focus-visible{
+  background:var(--accent-h);transform:translateY(-1px);
+  box-shadow:0 6px 20px rgba(192,57,43,.3);
+}
+.btn svg{width:20px;height:20px;flex-shrink:0}
+.alt{margin:1rem 0 0;font-size:.85rem;color:rgba(255,255,255,.6)}
+.alt a{color:rgba(255,255,255,.85)}
+.w{max-width:820px;margin:0 auto;padding:2.5rem 16px 1rem}
+.card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rl);
+  padding:1.75rem 2rem;margin-bottom:1.25rem;box-shadow:var(--shadow);
+}
+.card h2{font-family:var(--serif);font-size:1.25rem;margin:0 0 1rem}
+.list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px 16px}
+.list li{
+  display:flex;align-items:center;gap:10px;font-size:.92rem;color:var(--text-s);
+  padding:6px 0;
+}
+.list .n{
+  width:26px;height:26px;border-radius:7px;flex-shrink:0;background:var(--safe-soft);color:var(--safe);
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;
+}
+.tips{margin:0;padding-left:1.1rem;color:var(--text-s);font-size:.92rem}
+.tips li{margin-bottom:.35rem}
+.back{text-align:center;padding:1rem 0 2.5rem}
+.back a{color:var(--text-m);font-size:.9rem}
+.ft{background:var(--bg-alt);padding:1.5rem 16px;text-align:center;font-size:.78rem;color:var(--text-m)}
+.ft p{margin:.2rem 0}
+.ft a{color:var(--text-s);font-weight:600;text-decoration:none;border-bottom:1px solid var(--border)}
+@media(prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img src="images/logo-sst.png" alt="Logo SST" class="logo">
+  <div class="hero-in">
+    <div class="check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <h1>Merci pour votre achat !</h1>
+    <p>Votre paiement est confirmé. Vos 8 fiches SST sont prêtes à être téléchargées et imprimées.</p>
+    <a class="btn" href="https://drive.google.com/uc?export=download&amp;id=1JSd2eOBaDgKcFu5Vm32x1v4EIOmJjpG_">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Télécharger mes fiches
+    </a>
+    <p class="alt" style="margin-top:1rem;font-family:var(--sans);font-style:normal;font-size:.85rem">Le téléchargement ne démarre pas ? <a href="https://drive.google.com/file/d/1JSd2eOBaDgKcFu5Vm32x1v4EIOmJjpG_/view?usp=sharing">Ouvrir dans Google Drive</a></p>
+  </div>
+</header>
+
+<main class="w">
+  <section class="card">
+    <h2>Ce que contient votre pack</h2>
+    <ul class="list">
+      <li><span class="n">1</span>Saignement abondant</li>
+      <li><span class="n">2</span>Étouffement adulte</li>
+      <li><span class="n">3</span>Position Latérale de Sécurité</li>
+      <li><span class="n">4</span>Réanimation Cardio-Pulmonaire</li>
+      <li><span class="n">5</span>Brûlure thermique</li>
+      <li><span class="n">6</span>Plaies simples et graves</li>
+      <li><span class="n">7</span>Traumatisme</li>
+      <li><span class="n">8</span>Malaise</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Bien utiliser vos fiches</h2>
+    <ul class="tips">
+      <li>Le téléchargement est un fichier <strong>ZIP</strong> : décompressez-le pour retrouver les 8 PDF.</li>
+      <li>Chaque fiche est une page <strong>A4</strong>, à imprimer en couleur pour un meilleur rendu.</li>
+      <li>Un <strong>QR code</strong> en haut de chaque fiche renvoie vers sst.codes.</li>
+      <li>Un reçu de paiement vous a été envoyé par e-mail par Stripe.</li>
+    </ul>
+  </section>
+
+  <div class="back"><a href="index.html">← Retour au site</a></div>
+</main>
+
+<footer class="ft">
+  <p>© 2026 — Formation SST · Sauveteur Secouriste du Travail</p>
+  <p>Une question ? <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></p>
+</footer>
+
+</body>
+</html>
