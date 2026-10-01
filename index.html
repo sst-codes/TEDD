@@ -458,7 +458,7 @@ button.tab{
     <p>Protocole PREFAS, 8 situations d'urgence et tous les gestes de premiers secours — expliqués pas à pas, avec les cas particuliers.</p>
     <div class="hero-cta">
       <span class="price">12,90 €<sub>TTC</sub></span>
-      <a href="https://buy.stripe.com/aFa6oGgVkeheeOLadPfbq00" class="btn">Débloquer les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#fiches" class="btn" onclick="switchTab('fiches',true);document.querySelector('.tabs').scrollIntoView({behavior:'smooth'});return false;">Débloquer les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div class="urg-wrap">
     <p class="urg-title">Les numéros qui sauvent</p>
@@ -1014,10 +1014,10 @@ button.tab{
 </div>
 
 <script>
-function switchTab(id){
+function switchTab(id,noScroll){
   document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.dataset.tab===id)});
   document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.toggle('active',p.id==='panel-'+id)});
-  window.scrollTo({top:0,behavior:'smooth'});
+  if(!noScroll) window.scrollTo({top:0,behavior:'smooth'});
 }
 
 </script>
