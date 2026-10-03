@@ -64,7 +64,7 @@ strong{font-weight:600;color:var(--text)}
 .hero{
   background:#0A1425;color:var(--deep-text);
   margin:-16px -16px 0;position:relative;overflow:hidden;
-  padding:clamp(6.5rem,11vw,7rem) 16px clamp(2.5rem,6vw,4rem);
+  padding:clamp(3rem,6vw,4rem) 16px clamp(2.5rem,6vw,4rem);
   text-align:center;
 }
 .hero::before{
@@ -75,8 +75,8 @@ strong{font-weight:600;color:var(--text)}
   pointer-events:none;line-height:1;
 }
 .hero-logo{
-  position:absolute;top:26px;left:50%;transform:translateX(-50%);
-  width:clamp(52px,7.5vw,74px);height:auto;z-index:1;
+  display:block;margin:0 auto 1.25rem;
+  width:clamp(150px,22vw,220px);height:auto;
   filter:drop-shadow(0 4px 10px rgba(0,0,0,.45));
 }
 .hero-in{position:relative;max-width:820px;margin:0 auto}
@@ -474,9 +474,8 @@ button.tab{
 <!-- ═══ HERO ═══ -->
 <section class="hero">
   <span class="gyro gyro-l" aria-hidden="true"></span><span class="gyro gyro-r" aria-hidden="true"></span>
-  <img src="images/logo-sst.png" alt="Logo SST" class="hero-logo">
   <div class="hero-in">
-    <div class="hero-badge">Sauveteur Secouriste du Travail</div>
+    <img src="images/logo-sst.png" alt="Logo SST — Sauveteur Secouriste du Travail" class="hero-logo">
     <h1>Les gestes<br>qui <em>sauvent</em></h1>
     <p>Protocole PREFAS, 8 situations d'urgence et tous les gestes de premiers secours — expliqués pas à pas, avec les cas particuliers.</p>
     <div class="hero-cta">
