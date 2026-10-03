@@ -469,6 +469,13 @@ button.tab{
 @keyframes gyroA{0%,100%{opacity:1}50%{opacity:.35}}
 @keyframes gyroB{0%,100%{opacity:.35}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.gyro{animation:none;opacity:.8}}
+
+.ft-in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;max-width:820px;margin:0 auto}
+.ft-logo{height:auto;display:block}
+.ft-inrs{justify-self:start;width:clamp(84px,14vw,130px);background:#fff;border-radius:8px;padding:4px 6px}
+.ft-sst{justify-self:end;width:clamp(52px,8vw,72px)}
+.ft a{white-space:nowrap}
+@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div{grid-column:1/-1;grid-row:1}}
 </style>
 
 <!-- ═══ HERO ═══ -->
@@ -1028,8 +1035,14 @@ button.tab{
 </section>
 
 <footer class="ft">
-  <p>© 2026 — Formation SST · Sauveteur Secouriste du Travail</p>
-  <p class="ft-mail">Contact : <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></p>
+  <div class="ft-in">
+    <img src="images/logo-inrs.png" alt="INRS — Institut National de Recherche et de Sécurité" class="ft-logo ft-inrs" loading="lazy">
+    <div>
+      <p>© 2026 — Formation SST · Sauveteur Secouriste du Travail</p>
+      <p class="ft-mail">Contact : <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></p>
+    </div>
+    <img src="images/logo-sst-officiel.png" alt="Sauveteur Secouriste du Travail" class="ft-logo ft-sst" loading="lazy">
+  </div>
 </footer>
 
 <div class="fcta">
