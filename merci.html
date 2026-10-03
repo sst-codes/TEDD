@@ -40,7 +40,7 @@ h1,h2,h3{line-height:1.25;text-wrap:balance}
 a{color:inherit}
 .hero{
   background:#0A1425;color:var(--deep-text);position:relative;overflow:hidden;
-  padding:clamp(5.5rem,10vw,6rem) 16px clamp(2.5rem,6vw,4rem);text-align:center;
+  padding:clamp(2.5rem,5vw,3.5rem) 16px clamp(2.5rem,6vw,4rem);text-align:center;
 }
 .hero::before{
   content:'+';position:absolute;font-family:var(--serif);
@@ -48,7 +48,7 @@ a{color:inherit}
   top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1;
 }
 .logo{
-  position:absolute;top:8px;left:50%;transform:translateX(-50%);width:clamp(52px,7.5vw,74px);height:auto;z-index:1;
+  display:block;margin:0 auto 1.25rem;width:clamp(130px,18vw,180px);height:auto;
   filter:drop-shadow(0 4px 10px rgba(0,0,0,.45));
 }
 .hero-in{position:relative;max-width:720px;margin:0 auto}
@@ -116,8 +116,8 @@ a{color:inherit}
 
 <header class="hero">
   <span class="gyro gyro-l" aria-hidden="true"></span><span class="gyro gyro-r" aria-hidden="true"></span>
-  <img src="images/logo-sst.png" alt="Logo SST" class="logo">
   <div class="hero-in">
+    <img src="images/logo-sst.png" alt="Logo SST — Sauveteur Secouriste du Travail" class="logo">
     <div class="check" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
     </div>
