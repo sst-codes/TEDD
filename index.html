@@ -121,7 +121,20 @@ strong{font-weight:600;color:var(--text)}
 .btn svg{flex-shrink:0}
 
 /* Emergency strip */
-.urg-wrap{padding-top:1.75rem;border-top:1px solid rgba(255,255,255,.08)}
+.urg-wrap{padding-top:0}
+.ecg-line{
+  position:relative;height:48px;margin:0 0 1.3rem;
+  background-image:linear-gradient(rgba(232,101,79,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(232,101,79,.13) 1px,transparent 1px);
+  background-size:12px 12px;background-position:center;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);
+}
+.ecg-line svg{display:block;width:100%;height:100%}
+.ecg-line path{fill:none;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.ecg-line .ecg-glow{stroke:rgba(232,101,79,.28);stroke-width:6}
+.ecg-line .ecg-trace{stroke:#E8654F;stroke-width:2;stroke-dasharray:1000;stroke-dashoffset:1000;animation:ecgTrace 3.6s linear infinite}
+@keyframes ecgTrace{0%{stroke-dashoffset:1000;opacity:1}75%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@media(prefers-reduced-motion:reduce){.ecg-line .ecg-trace{animation:none;stroke-dashoffset:0}}
 .urg-title{
   margin:0 0 1rem;font-size:.72rem;font-weight:600;
   letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.55);
@@ -471,7 +484,8 @@ button.tab{
       <a href="#fiches" class="btn" onclick="switchTab('fiches',true);document.querySelector('.tabs').scrollIntoView({behavior:'smooth'});return false;">Débloquer les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
     <div class="urg-wrap">
-    <p class="urg-title">Les numéros qui sauvent</p>
+    <div class="ecg-line" aria-hidden="true"><svg viewBox="0 0 800 48" preserveAspectRatio="none"><path class="ecg-glow" pathLength="1000" d="M0 28 H150 L160 28 L168 22 L176 28 H196 L204 28 L212 6 L222 44 L230 28 H250 L264 20 L278 28 H400 L410 28 L418 22 L426 28 H446 L454 28 L462 6 L472 44 L480 28 H500 L514 20 L528 28 H650 L660 28 L668 22 L676 28 H696 L704 28 L712 6 L722 44 L730 28 H750 L764 20 L778 28 H800"/><path class="ecg-trace" pathLength="1000" d="M0 28 H150 L160 28 L168 22 L176 28 H196 L204 28 L212 6 L222 44 L230 28 H250 L264 20 L278 28 H400 L410 28 L418 22 L426 28 H446 L454 28 L462 6 L472 44 L480 28 H500 L514 20 L528 28 H650 L660 28 L668 22 L676 28 H696 L704 28 L712 6 L722 44 L730 28 H750 L764 20 L778 28 H800"/></svg></div>
+      <p class="urg-title">Les numéros qui sauvent</p>
     <div class="urg">
       <div class="urg-item"><span class="urg-num">15</span><span class="urg-label">SAMU</span></div>
       <div class="urg-item"><span class="urg-num">18</span><span class="urg-label">Pompiers</span></div>
