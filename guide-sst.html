@@ -62,7 +62,7 @@ strong{font-weight:600;color:var(--text)}
 
 /* ── HERO ── */
 .hero{
-  background:var(--deep);color:var(--deep-text);
+  background:#0A1425;color:var(--deep-text);
   margin:-16px -16px 0;position:relative;overflow:hidden;
   padding:clamp(5.5rem,10vw,6rem) 16px clamp(2.5rem,6vw,4rem);
   text-align:center;
@@ -70,7 +70,7 @@ strong{font-weight:600;color:var(--text)}
 .hero::before{
   content:'+';position:absolute;
   font-family:var(--serif);font-size:clamp(32rem,90vw,80rem);font-weight:700;
-  color:rgba(192,57,43,0.10);
+  color:rgba(255,255,255,0.04);
   top:50%;left:50%;transform:translate(-50%,-50%);
   pointer-events:none;line-height:1;
 }
@@ -387,7 +387,7 @@ strong{font-weight:600;color:var(--text)}
 
 /* ── BOTTOM CTA ── */
 .bcta{
-  background:var(--deep);color:var(--deep-text);
+  background:#0A1425;color:var(--deep-text);position:relative;overflow:hidden;
   margin:3rem -16px 0;padding:clamp(3rem,8vw,4.5rem) 16px;text-align:center;
 }
 .bcta h2{
@@ -447,10 +447,20 @@ button.tab{
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}.btn{transition:none}.fiche-card{transition:none}
 }
+.bcta .w{position:relative}
+
+/* ── Fond gyrophare (haut de page, bandeau du bas) ── */
+.gyro{position:absolute;top:-30%;width:70%;height:120%;border-radius:50%;filter:blur(40px);pointer-events:none}
+.gyro-l{left:-25%;background:radial-gradient(circle,rgba(220,58,46,.55),transparent 65%);animation:gyroA 2.4s ease-in-out infinite}
+.gyro-r{right:-25%;background:radial-gradient(circle,rgba(47,111,235,.55),transparent 65%);animation:gyroB 2.4s ease-in-out infinite}
+@keyframes gyroA{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes gyroB{0%,100%{opacity:.35}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.gyro{animation:none;opacity:.8}}
 </style>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
+  <span class="gyro gyro-l" aria-hidden="true"></span><span class="gyro gyro-r" aria-hidden="true"></span>
   <img src="images/logo-sst.png" alt="Logo SST" class="hero-logo">
   <div class="hero-in">
     <div class="hero-badge">Sauveteur Secouriste du Travail</div>
@@ -988,6 +998,7 @@ button.tab{
 
 <!-- ═══ BOTTOM CTA ═══ -->
 <section class="bcta" id="commander">
+  <span class="gyro gyro-l" aria-hidden="true"></span><span class="gyro gyro-r" aria-hidden="true"></span>
   <div class="w">
     <h2>Débloquez les 8 fiches à imprimer</h2>
     <p>Les 8 fiches des gestes de premiers secours SST en PDF A4, prêtes à imprimer et à afficher dans vos locaux.</p>
