@@ -519,7 +519,7 @@ button.tab{
 .hero::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.62);pointer-events:none}
 .hero>*:not(.faq-btn):not(.hero-logo){position:relative;z-index:1}
 .hero::before,.gyro{display:none}
-.hero-logo{position:absolute!important;top:28px;left:16px;margin:0;width:clamp(70px,9vw,96px);z-index:3!important;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
+.hero-logo{position:absolute!important;top:28px;left:16px;margin:0;width:clamp(76px,9vw,100px);height:auto;aspect-ratio:1;z-index:3!important;border-radius:16%;filter:none;box-shadow:0 4px 14px rgba(15,29,50,.28)}
 .hero h1{color:#0F1D32}
 .hero h1 em{color:#D23A2D;text-shadow:0 0 14px rgba(255,255,255,.9)}
 .hero>div>p{color:#22324A}
@@ -530,6 +530,7 @@ button.tab{
 .faq-btn{z-index:3;color:#0F1D32;background:rgba(255,255,255,.7);border-color:rgba(15,29,50,.25)}
 .faq-btn:hover,.faq-btn:focus-visible{background:#fff;border-color:rgba(15,29,50,.45)}
 @media(min-width:900px){.hero-logo{left:28px}}
+@media(max-width:600px){.hero{padding-top:7.4rem}}
 
 /* ── Bandeau du bas en blanc ── */
 .bcta{background:#fff;color:#1C2A3A;border-top:1px solid var(--border)}
@@ -547,7 +548,7 @@ button.tab{
 <section class="hero">
   <span class="gyro gyro-l" aria-hidden="true"></span><span class="gyro gyro-r" aria-hidden="true"></span>
   <a href="faq.html" class="faq-btn">FAQ</a>
-  <img src="images/logo-sst.png" alt="Logo SST — Sauveteur Secouriste du Travail" class="hero-logo">
+  <img src="images/logo-sst-badge.jpg" alt="Logo SST — Sauveteur Secouriste du Travail" class="hero-logo">
   <div class="hero-in">
     <h1>Les gestes<br>qui <em>sauvent</em></h1>
     <p>Face à une victime, chaque seconde compte et le doute coûte cher. Ce guide réunit les 8 gestes essentiels, leurs cas particuliers et les bons réflexes, en une fiche claire et pratique.<br>Pour que le bon geste vienne tout seul, au bon moment.</p>
