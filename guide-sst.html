@@ -1267,7 +1267,8 @@ function switchTab(id,noScroll){
   document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.dataset.tab===id)});
   document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.toggle('active',p.id==='panel-'+id)});
   document.body.classList.toggle('on-trousse',id==='trousse');
-  if(!noScroll) window.scrollTo({top:0,behavior:'smooth'});
+  if(!noScroll){var t=document.querySelector('.tabs');if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}
+  try{history.replaceState(null,'',id==='guide'?location.pathname:'#'+id)}catch(e){}
 }
 
 
