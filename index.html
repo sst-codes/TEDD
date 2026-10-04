@@ -533,12 +533,14 @@ button.tab{
 @media(max-width:600px){.hero{padding-top:7.4rem}}
 
 /* ── Bandeau du bas en blanc ── */
-.bcta{background:#fff;color:#1C2A3A;border-top:1px solid var(--border)}
+.bcta{background:#fff url(images/fond-bas.jpg) center/cover no-repeat;color:#1C2A3A;border-top:1px solid var(--border)}
+.bcta::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.76);pointer-events:none}
+.bcta .w{z-index:1}
 .bcta .gyro{display:none}
 .bcta h2{color:#0F1D32}
-.bcta>div>p{color:#3D4F63}
+.bcta>div>p{color:#22324A}
 .bcta .price{color:#0F1D32}
-.trust-item{color:#6B7A8D}
+.trust-item{color:#3D4F63}
 .contact{color:#6B7A8D}
 .contact strong{color:#3D4F63}
 .ft{background:#fff;border-top:1px solid var(--border)}
