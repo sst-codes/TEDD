@@ -575,6 +575,15 @@ body.on-trousse{padding-bottom:0}
 .ki-t{color:var(--text);font-weight:600;min-width:0}
 .ki-t small{display:block;font-weight:400;color:var(--text-m);font-size:.78rem}
 .ki-q{color:var(--text-s);font-size:.85rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.kit-table-wrap{overflow-x:auto}
+.kit-table{width:100%;border-collapse:collapse;font-size:.95rem}
+.kit-table th{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text-m);text-align:left;padding:0 14px 10px;border-bottom:2px solid var(--border)}
+.kit-table td{padding:16px 14px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+.kit-table tbody tr:last-child td{border-bottom:none}
+.kit-table td:nth-child(2){color:var(--text-s);white-space:nowrap;font-variant-numeric:tabular-nums}
+.kit-table th:nth-child(3),.kit-table td:nth-child(3){text-align:center;white-space:nowrap;font-variant-numeric:tabular-nums}
+.kit-table th:nth-child(1){width:52%}
+@media(max-width:600px){.kit-list{padding:1.1rem .8rem}.kit-table{font-size:.8rem}.kit-table td{padding:11px 5px}.kit-table th{padding:0 5px 8px;font-size:.62rem;letter-spacing:.04em}.kit-table th:nth-child(1){width:auto}}
 @media(max-width:720px){.kit-card{grid-template-columns:1fr}}
 </style>
 
@@ -1143,33 +1152,38 @@ body.on-trousse{padding-bottom:0}
 
   <section class="kit-list" id="kit-contenu">
     <h3>Contenu de la trousse</h3>
-    <ol>
-        <li><span class="ki-n">1</span><span class="ki-t">Bande PBT<small>5 cm × 4,5 m</small></span><span class="ki-q">3</span></li>
-        <li><span class="ki-n">2</span><span class="ki-t">Bande PBT<small>7,5 cm × 4,5 m</small></span><span class="ki-q">3</span></li>
-        <li><span class="ki-n">3</span><span class="ki-t">Bande PBT<small>10 cm × 4,5 m</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">4</span><span class="ki-t">Masque de bouche-à-bouche<small>30 × 20 cm</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">5</span><span class="ki-t">Gants (taille L)</span><span class="ki-q">1 paire</span></li>
-        <li><span class="ki-n">6</span><span class="ki-t">Bandage triangulaire<small>96 × 96 × 136 cm</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">7</span><span class="ki-t">Couverture de survie<small>210 × 130 cm</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">8</span><span class="ki-t">Épingles de sûreté</span><span class="ki-q">20</span></li>
-        <li><span class="ki-n">9</span><span class="ki-t">Tampons alcoolisés<small>5 × 5 cm</small></span><span class="ki-q">10</span></li>
-        <li><span class="ki-n">10</span><span class="ki-t">Lingettes savonneuses<small>5 × 5 cm</small></span><span class="ki-q">10</span></li>
-        <li><span class="ki-n">11</span><span class="ki-t">Compresses de gaze<small>5 × 5 cm</small></span><span class="ki-q">2</span></li>
-        <li><span class="ki-n">12</span><span class="ki-t">Compresses de gaze<small>7,5 × 7,5 cm</small></span><span class="ki-q">2</span></li>
-        <li><span class="ki-n">13</span><span class="ki-t">Ruban adhésif<small>1,25 cm × 4 m</small></span><span class="ki-q">2 rouleaux</span></li>
-        <li><span class="ki-n">14</span><span class="ki-t">Bande auto-adhésive<small>2,5 cm × 4,5 m</small></span><span class="ki-q">1 rouleau</span></li>
-        <li><span class="ki-n">15</span><span class="ki-t">Cotons-tiges<small>8 cm</small></span><span class="ki-q">50</span></li>
-        <li><span class="ki-n">16</span><span class="ki-t">Lingettes apaisantes piqûres d’insectes<small>5 × 5 cm</small></span><span class="ki-q">10</span></li>
-        <li><span class="ki-n">17</span><span class="ki-t">Pansement pour brûlures<small>40 × 60 cm</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">18</span><span class="ki-t">Pince à épiler en plastique<small>10 cm</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">19</span><span class="ki-t">Ciseaux<small>14,5 cm</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">20</span><span class="ki-t">Garrot<small>2,5 × 45 cm</small></span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">21</span><span class="ki-t">Pansements adhésifs<small>7,2 × 1,9 cm</small></span><span class="ki-q">20</span></li>
-        <li><span class="ki-n">22</span><span class="ki-t">Pansements adhésifs<small>72 × 38 mm</small></span><span class="ki-q">4</span></li>
-        <li><span class="ki-n">23</span><span class="ki-t">Pansements adhésifs<small>51 × 45 mm</small></span><span class="ki-q">4</span></li>
-        <li><span class="ki-n">24</span><span class="ki-t">Sifflet en aluminium</span><span class="ki-q">1</span></li>
-        <li><span class="ki-n">25</span><span class="ki-t">Pochette en nylon<small>26 × 18 × 8 cm</small></span><span class="ki-q">1</span></li>
-    </ol>
+    <div class="kit-table-wrap">
+      <table class="kit-table">
+        <thead><tr><th scope="col">Article</th><th scope="col">Dimensions</th><th scope="col">Quantité</th></tr></thead>
+        <tbody>
+          <tr><td>Bande PBT</td><td>5 cm × 4,5 m</td><td>3</td></tr>
+          <tr><td>Bande PBT</td><td>7,5 cm × 4,5 m</td><td>3</td></tr>
+          <tr><td>Bande PBT</td><td>10 cm × 4,5 m</td><td>1</td></tr>
+          <tr><td>Masque de bouche-à-bouche</td><td>30 × 20 cm</td><td>1</td></tr>
+          <tr><td>Gants</td><td>Taille L</td><td>1 paire</td></tr>
+          <tr><td>Bandage triangulaire</td><td>96 × 96 × 136 cm</td><td>1</td></tr>
+          <tr><td>Couverture de survie</td><td>210 × 130 cm</td><td>1 sachet</td></tr>
+          <tr><td>Épingles de sûreté</td><td>—</td><td>20</td></tr>
+          <tr><td>Tampons alcoolisés</td><td>5 × 5 cm</td><td>10</td></tr>
+          <tr><td>Lingettes savonneuses</td><td>5 × 5 cm</td><td>10</td></tr>
+          <tr><td>Compresses de gaze</td><td>5 × 5 cm</td><td>2</td></tr>
+          <tr><td>Compresses de gaze</td><td>7,5 × 7,5 cm</td><td>2</td></tr>
+          <tr><td>Ruban adhésif</td><td>1,25 cm × 4 m</td><td>2 rouleaux</td></tr>
+          <tr><td>Bande auto-adhésive</td><td>2,5 cm × 4,5 m</td><td>1 rouleau</td></tr>
+          <tr><td>Cotons-tiges</td><td>8 cm</td><td>50</td></tr>
+          <tr><td>Patchs pour piqûres de moustiques</td><td>5 × 5 cm</td><td>10</td></tr>
+          <tr><td>Pansement pour brûlures</td><td>40 × 60 cm</td><td>1 sachet</td></tr>
+          <tr><td>Pince en plastique</td><td>10 cm</td><td>1</td></tr>
+          <tr><td>Ciseaux</td><td>14,5 cm</td><td>1</td></tr>
+          <tr><td>Garrot</td><td>2,5 × 45 cm</td><td>1</td></tr>
+          <tr><td>Pansements adhésifs</td><td>7,2 × 1,9 cm</td><td>20</td></tr>
+          <tr><td>Pansements adhésifs</td><td>72 × 38 mm</td><td>4</td></tr>
+          <tr><td>Pansements adhésifs</td><td>51 × 45 mm</td><td>4</td></tr>
+          <tr><td>Sifflet en aluminium</td><td>—</td><td>1</td></tr>
+          <tr><td>Pochette en nylon</td><td>26 × 18 × 8 cm</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </div>
 </div><!-- /panel-trousse -->
