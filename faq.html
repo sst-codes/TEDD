@@ -80,8 +80,10 @@ a{color:inherit}
 .ft-logo{height:auto;display:block}
 .ft-inrs{justify-self:start;width:clamp(84px,14vw,130px);background:#fff;border-radius:8px;padding:4px 6px}
 .ft-sst{justify-self:end;width:clamp(52px,8vw,72px)}
+.ft-right{justify-self:end;display:flex;align-items:center;gap:clamp(10px,2vw,16px)}
+.ft-stripe{width:clamp(56px,8vw,78px)}
 .ft a{white-space:nowrap}
-@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div{grid-column:1/-1;grid-row:1}}
+@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right){grid-column:1/-1;grid-row:1}}
 </style>
 </head>
 <body>
@@ -119,7 +121,10 @@ a{color:inherit}
       <p>© 2026 — Formation SST · Sauveteur Secouriste du Travail</p>
       <p>Une question ? <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></p>
     </div>
-    <img src="images/logo-sst-officiel.png" alt="Sauveteur Secouriste du Travail" class="ft-logo ft-sst" loading="lazy">
+    <div class="ft-right">
+      <img src="images/logo-stripe.png" alt="Paiement sécurisé par Stripe" class="ft-logo ft-stripe" loading="lazy">
+      <img src="images/logo-sst-officiel.png" alt="Sauveteur Secouriste du Travail" class="ft-logo ft-sst" loading="lazy">
+    </div>
   </div>
 </footer>
 
