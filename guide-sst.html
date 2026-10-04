@@ -585,6 +585,20 @@ body.on-trousse{padding-bottom:0}
 .kit-table th:nth-child(1){width:52%}
 @media(max-width:600px){.kit-list{padding:1.1rem .8rem}.kit-table{font-size:.8rem}.kit-table td{padding:11px 5px}.kit-table th{padding:0 5px 8px;font-size:.62rem;letter-spacing:.04em}.kit-table th:nth-child(1){width:auto}}
 @media(max-width:720px){.kit-card{grid-template-columns:1fr}}
+
+/* ── Bas de page : deux offres ── */
+.bcta .w{max-width:960px}
+.bcta h2{margin-bottom:1.5rem}
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(1rem,3vw,1.5rem);text-align:left}
+.offer{display:flex;flex-direction:column;background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:var(--rl);padding:1.25rem;box-shadow:0 8px 24px rgba(15,29,50,.12);color:#1C2A3A}
+.offer-img{width:100%;height:170px;object-fit:cover;border-radius:12px;margin-bottom:1rem;background:#F0EBE3}
+.offer-img-fiche{object-position:top}
+.offer h3{font-family:var(--serif);font-size:1.25rem;margin:0 0 .4rem;color:#0F1D32}
+.offer p{font-size:.92rem;color:#3D4F63;margin:0 0 1rem;line-height:1.6;flex:1}
+.bcta .offer .price{font-size:2rem;margin:0 0 1rem;color:#0F1D32}
+.offer .btn{align-self:flex-start}
+.offer .trust{list-style:none;padding:0;margin:1rem 0 0;justify-content:flex-start;gap:.4rem 1rem}
+@media(max-width:600px){.offer .btn{align-self:stretch;justify-content:center}}
 </style>
 
 <!-- ═══ HERO ═══ -->
@@ -1192,16 +1206,30 @@ body.on-trousse{padding-bottom:0}
 <section class="bcta" id="commander">
   <span class="gyro gyro-l" aria-hidden="true"></span><span class="gyro gyro-r" aria-hidden="true"></span>
   <div class="w">
-    <h2>Débloquez les 8 fiches à imprimer</h2>
-    <p>Les 8 fiches des gestes de premiers secours SST en PDF A4, prêtes à imprimer et à afficher dans vos locaux.</p>
-    <span class="price">14,90 €<sub>TTC</sub></span>
-    <div>
-      <a href="#fiches" onclick="switchTab('fiches',true);document.querySelector('.tabs').scrollIntoView({behavior:'smooth'});return false;" class="btn" style="font-size:1.05rem;padding:16px 40px">Obtenir les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-    <div class="trust">
-      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 8 fiches PDF au format A4</span>
-      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Compatible mobile</span>
-      <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Paiement sécurisé par Stripe</span>
+    <h2>Nos produits</h2>
+    <div class="offers">
+      <article class="offer">
+        <img src="images/apercu-1.webp" alt="" class="offer-img offer-img-fiche" loading="lazy">
+        <h3>Débloquez les 8 fiches à imprimer</h3>
+        <p>Les 8 fiches des gestes de premiers secours SST en PDF A4, prêtes à imprimer et à afficher dans vos locaux.</p>
+        <span class="price">14,90 €<sub>TTC</sub></span>
+        <a href="#fiches" onclick="switchTab('fiches',true);document.querySelector('.tabs').scrollIntoView({behavior:'smooth'});return false;" class="btn">Obtenir les fiches <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <ul class="trust">
+          <li class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 8 fiches PDF au format A4</li>
+          <li class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Paiement sécurisé par Stripe</li>
+        </ul>
+      </article>
+      <article class="offer">
+        <img src="images/trousse-secours.jpg" alt="" class="offer-img" loading="lazy">
+        <h3>Trousse de premiers secours</h3>
+        <p>Une pochette en nylon avec bandages, pansements et accessoires de premiers secours réunis au même endroit.</p>
+        <span class="price">34,90 €<sub>TTC</sub></span>
+        <a href="#trousse" onclick="switchTab('trousse',true);document.querySelector('.tabs').scrollIntoView({behavior:'smooth'});return false;" class="btn">Acheter la trousse <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <ul class="trust">
+          <li class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Pochette 26 × 18 × 8 cm</li>
+          <li class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Livraison à domicile</li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>
@@ -1233,6 +1261,7 @@ body.on-trousse{padding-bottom:0}
   <div class="k-f k-front"><span class="k-n">1</span></div>
 </div></div>
 <script>
+if(location.hash==='#trousse'){document.addEventListener('DOMContentLoaded',function(){switchTab('trousse',true);var t=document.querySelector('.tabs');if(t)t.scrollIntoView();});}
 if(location.hash==='#fiches'){document.addEventListener('DOMContentLoaded',function(){switchTab('fiches',true);var t=document.querySelector('.tabs');if(t)t.scrollIntoView();});}
 function switchTab(id,noScroll){
   document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active',t.dataset.tab===id)});
