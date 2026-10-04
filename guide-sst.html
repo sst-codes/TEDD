@@ -504,6 +504,18 @@ button.tab{
 .kit3d.gl{width:132px;height:120px;perspective:none}
 .kit3d.gl .k-rot{display:none}
 .kit3d canvas{display:block;width:132px;height:120px}
+
+/* ── FAQ ── */
+.faq{padding:3rem 0 3.5rem}
+.faq h2{font-family:var(--serif);font-size:clamp(1.5rem,4vw,2rem);margin:0 0 1.25rem;text-align:center}
+.faq-i{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;margin-bottom:.6rem;box-shadow:var(--shadow)}
+.faq-i summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 1.25rem;font-weight:600;font-size:.98rem}
+.faq-i summary::-webkit-details-marker{display:none}
+.faq-i summary::after{content:'+';flex-shrink:0;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--accent-soft,rgba(192,57,43,.1));color:var(--accent);font-size:1.15rem;font-weight:700;transition:transform .2s}
+.faq-i[open] summary::after{transform:rotate(45deg)}
+.faq-i summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:12px}
+.faq-i p{margin:0;padding:0 1.25rem 1.1rem;color:var(--text-s);font-size:.93rem;line-height:1.65}
+.faq-i a{color:var(--accent);font-weight:600}
 </style>
 
 <!-- ═══ HERO ═══ -->
@@ -1043,6 +1055,23 @@ button.tab{
   </div>
 </div>
 </div><!-- /panel-fiches -->
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq" id="faq">
+  <div class="w">
+    <h2>Questions fréquentes</h2>
+    <details class="faq-i"><summary>À qui s’adressent ces fiches&nbsp;?</summary><p>Ces fiches s’adressent à toute personne souhaitant réviser ou retrouver rapidement les principaux gestes de premiers secours, notamment les SST, les professionnels et les personnes ayant déjà suivi une formation.</p></details>
+    <details class="faq-i"><summary>Que contient le pack&nbsp;?</summary><p>Le pack regroupe 8 fiches consacrées aux principaux gestes de premiers secours, avec les situations concernées, les étapes à suivre et les cas particuliers à connaître.</p></details>
+    <details class="faq-i"><summary>Est-ce que ces fiches remplacent une formation SST&nbsp;?</summary><p>Non. Ces fiches sont uniquement un support de rappel. Elles ne remplacent pas une formation SST, une certification ou l’apprentissage pratique des gestes de secours.</p></details>
+    <details class="faq-i"><summary>Est-ce adapté aux SST&nbsp;?</summary><p>Oui. Elles peuvent servir de support de révision et de rappel pour retrouver rapidement les principales conduites à tenir.</p></details>
+    <details class="faq-i"><summary>Est-ce que je peux consulter les fiches sur mon téléphone&nbsp;?</summary><p>Oui. Les fiches sont conçues pour être consultées facilement sur smartphone, tablette et ordinateur.</p></details>
+    <details class="faq-i"><summary>Est-ce que je peux les utiliser pendant mes révisions&nbsp;?</summary><p>Oui. Elles sont particulièrement adaptées pour réviser les gestes et retrouver rapidement une conduite à tenir.</p></details>
+    <details class="faq-i"><summary>Les fiches sont-elles disponibles immédiatement après l’achat&nbsp;?</summary><p>Oui. Après votre achat, vous pourrez accéder au contenu selon les modalités indiquées sur la page de vente.</p></details>
+    <details class="faq-i"><summary>Puis-je partager les fiches avec d’autres personnes&nbsp;?</summary><p>L’achat est destiné à un usage personnel. La reproduction, la revente ou la diffusion des fiches sans autorisation n’est pas autorisée.</p></details>
+    <details class="faq-i"><summary>Est-ce un document officiel de l’INRS&nbsp;?</summary><p>Non. Ces fiches sont un support indépendant de rappel et ne constituent pas un document officiel de l’INRS.</p></details>
+    <details class="faq-i"><summary>Une question supplémentaire&nbsp;?</summary><p>Si vous avez une question avant votre achat, vous pouvez nous contacter. Nous vous répondrons avec plaisir.<br><a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></p></details>
+  </div>
+</section>
 
 <!-- ═══ BOTTOM CTA ═══ -->
 <section class="bcta" id="commander">
