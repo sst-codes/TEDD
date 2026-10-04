@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exquis — Fragrance de Pisa</title>
+<meta name="description" content="Experience the art of fragrance: fresh, luscious, and 100% eco-friendly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mint:#c9f1d9;
+    --mint-2:#bfeccf;
+    --ink:#0c2b1f;
+    --forest:#0b3d2c;
+    --forest-2:#145a40;
+    --text:#173a2c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--mint);
+    color:var(--text);
+    font-family:"Lato",system-ui,sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .serif{font-family:"Playfair Display",Georgia,serif}
+
+  /* ---------- Nav ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:30;
+    display:flex;align-items:center;gap:56px;
+    padding:22px 3.2vw;
+    transition:color .4s;
+  }
+  .logo{
+    display:grid;grid-template-columns:repeat(3,auto);
+    font:800 13px/1 "Lato",sans-serif;letter-spacing:.5px;
+    color:var(--forest);text-decoration:none;row-gap:1px;
+  }
+  .logo span:nth-child(4){grid-column:1/4;letter-spacing:1.5px}
+  nav a.link{
+    color:var(--text);text-decoration:none;font-size:14px;
+    position:relative;
+  }
+  nav a.link::after{
+    content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;
+    background:currentColor;transition:width .3s;
+  }
+  nav a.link:hover::after{width:100%}
+  nav.on-dark .logo, nav.on-dark a.link{color:#eafff3}
+
+  /* ---------- 3D canvas ---------- */
+  #bottle{
+    position:fixed;inset:0;width:100vw;height:100vh;
+    z-index:10;pointer-events:none;
+  }
+
+  section{position:relative;min-height:100vh;overflow:hidden}
+
+  /* ---------- Hero ---------- */
+  .hero{display:flex;align-items:center;justify-content:center}
+  .hero h1{
+    font-family:"Playfair Display",serif;font-weight:700;
+    font-size:min(26vw,48vh);line-height:.9;letter-spacing:-.02em;
+    background:linear-gradient(180deg,var(--forest) 0%,var(--forest) 38%,rgba(11,61,44,.55) 62%,rgba(201,241,217,0) 96%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    transform:translateY(-4vh);
+    opacity:0;animation:rise 1.4s .2s cubic-bezier(.2,.7,.2,1) forwards;
+  }
+  .hero .intro{
+    position:absolute;right:6.5vw;bottom:13vh;max-width:250px;
+    font-size:14px;line-height:1.45;z-index:12;
+    opacity:0;animation:fade 1s 1s forwards;
+  }
+  .learn{
+    display:inline-flex;align-items:center;gap:14px;margin-top:26px;
+    color:var(--ink);text-decoration:none;font-size:13px;font-weight:700;
+  }
+  .mouse{
+    width:16px;height:24px;border:1.6px solid var(--ink);border-radius:9px;
+    position:relative;
+  }
+  .mouse::after{
+    content:"";position:absolute;left:50%;top:5px;width:2px;height:6px;margin-left:-1px;
+    background:var(--ink);border-radius:2px;animation:wheel 1.6s infinite;
+  }
+  .plant{position:absolute;pointer-events:none}
+  .hero .plant{left:-2vw;bottom:-4vh;width:min(36vw,440px);z-index:2}
+
+  /* ---------- Feature sections ---------- */
+  .feature{display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 6vw}
+  .num{
+    font-family:"Playfair Display",serif;font-weight:500;line-height:1.05;
+    font-size:min(26vw,44vh);letter-spacing:-.04em;padding:0 .04em .18em;margin:-.12em 0 -.28em;
+  }
+  .grad-num{
+    background:linear-gradient(100deg,#2a6e57 0%,var(--forest) 30%,rgba(11,61,44,.35) 70%,rgba(11,61,44,.08) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .feature h2{
+    font-family:"Playfair Display",serif;font-weight:700;
+    font-size:clamp(28px,3.6vw,58px);line-height:1.04;letter-spacing:-.01em;color:var(--ink);
+  }
+  .feature p{font-size:clamp(13px,1vw,16px);line-height:1.55;max-width:470px;margin-top:3.5vh}
+
+  /* 01 */
+  .s1 .left{position:relative;height:100%;display:flex;align-items:center}
+  .s1 .num{transform:translateX(-1vw)}
+  .s1 .right{padding-left:1vw}
+
+  /* 02 */
+  .s2{background:#4c8a6a;color:#f2fff7;align-items:end;padding-bottom:7vh}
+  .s2 canvas.water{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+  .s2 .left{position:relative;z-index:2;align-self:stretch;display:flex;flex-direction:column;justify-content:flex-end;padding-top:12vh}
+  .s2 .num{color:#f4fff8}
+  .s2 h2{color:#f4fff8;font-size:clamp(28px,3.4vw,54px)}
+  .s2 p{color:#e4f7ea;max-width:300px}
+  .s2 .plant{right:-3vw;bottom:-6vh;width:min(52vw,640px);z-index:11}
+
+  /* 03 */
+  .s3 .right{display:flex;flex-direction:column;align-items:flex-start;padding-top:6vh}
+  .s3 .num{margin-bottom:2vh;transform:translateX(1vw)}
+  .s3 .plant{left:-3vw;bottom:-4vh;width:min(36vw,440px);z-index:2}
+
+  /* ---------- CTA + footer ---------- */
+  .final{display:flex;flex-direction:column;justify-content:space-between;padding:0 6vw}
+  .cta{flex:1;display:grid;grid-template-columns:1fr 1fr;align-items:center}
+  .cta .box{text-align:center;transform:translateY(-6vh)}
+  .cta h2{font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(30px,3.9vw,62px);color:var(--ink);letter-spacing:-.01em}
+  .btn{
+    display:inline-block;margin-top:3vh;padding:14px 26px;
+    background:var(--forest);color:#e9fff1;border-radius:7px;text-decoration:none;
+    font-size:15px;transition:transform .25s,background .25s;
+  }
+  .btn:hover{transform:translateY(-2px);background:#0f513a}
+  footer{display:flex;justify-content:space-between;align-items:flex-end;padding:0 0 6vh;gap:30px;flex-wrap:wrap}
+  footer .brand{font-family:"Playfair Display",serif;font-weight:700;font-size:clamp(34px,3.4vw,52px);color:var(--ink);line-height:1}
+  footer small{display:block;font-size:11px;margin-top:10px}
+  footer .links{display:grid;grid-template-columns:repeat(2,160px);row-gap:6px;font-size:15px;margin-right:8vw}
+  footer .links a{color:var(--text);text-decoration:none}
+  footer .links a:hover{text-decoration:underline}
+
+  /* ---------- Bits ---------- */
+  .badge{
+    position:fixed;right:22px;bottom:22px;z-index:40;
+    display:flex;align-items:center;gap:6px;
+    background:#fff;color:#111;border-radius:7px;padding:6px 10px;
+    font:700 11px "Lato",sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.08);text-decoration:none;
+  }
+  .badge i{width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,#1f4bff 50%,#6f8bff 50%)}
+  .progress{position:fixed;left:0;bottom:0;height:3px;width:0;background:var(--forest);z-index:40}
+
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.12s}.reveal.d2{transition-delay:.24s}
+
+  @keyframes rise{from{opacity:0;transform:translateY(6vh)}to{opacity:1;transform:translateY(-4vh)}}
+  @keyframes fade{to{opacity:1}}
+  @keyframes wheel{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(7px)}}
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:800px){
+    nav{gap:28px;padding:18px 16px}
+    .hero .intro{left:16px;right:16px;bottom:9vh;max-width:none}
+    .hero .plant{width:38vw;bottom:-2vh}
+    .hero .intro{left:auto;width:62vw}
+    .feature,.cta{grid-template-columns:1fr;padding:0 16px}
+    .feature{align-content:end;padding-bottom:9vh}
+    .s1 .left{position:absolute;top:13vh;left:16px;height:auto;z-index:1}
+    .s1 .num{font-size:38vw}
+    .s1 .right,.s3 .right{padding:0;margin-top:46vh}
+    .s2{padding:0 16px 8vh}
+    .s2 .left{padding-top:0}
+    .s2 .num{font-size:30vw}
+    .s2 .plant{width:90vw;bottom:-14vh}
+    .s3 .right{margin-top:0}
+    .s3 .num{position:absolute;top:12vh;right:16px;font-size:38vw}
+    .s3 .right{margin-top:48vh}
+    .s3 .plant{width:48vw;top:16vh;bottom:auto}
+    .final{padding:0 16px}
+    .cta .box{transform:none;margin-top:44vh}
+    footer .links{grid-template-columns:repeat(2,1fr);margin:0;width:100%}
+    .badge{right:12px;bottom:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="#top" aria-label="Isa Pan"><span>I</span><span>S</span><span>A</span><span>PAN</span></a>
+  <a class="link" href="#about">About us</a>
+  <a class="link" href="#contact">Contact</a>
+</nav>
+
+<canvas id="bottle" aria-hidden="true"></canvas>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" id="top" data-key="hero">
+    <h1>Exquis</h1>
+    <svg class="plant" id="plant-hero" viewBox="0 0 440 440" aria-hidden="true"></svg>
+    <div class="intro">
+      <p>Experience the art of fragrance: fresh, luscious, and 100% eco-friendly.</p>
+      <a class="learn" href="#about"><span class="mouse"></span>Learn more</a>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section class="feature s1" id="about" data-key="s1">
+    <div class="left"><div class="num grad-num reveal">01</div></div>
+    <div class="right">
+      <h2 class="reveal">Immerse yourself in our exquisite fragrances, where nature's bounty meets artistic vision.</h2>
+      <p class="reveal d1">The subtle, soothing aroma of green tea leaves intertwines with bursts of zesty, sun-kissed citrus fruits, combining vibrance with an elegant, calming touch. As the fragrance evolves, the woody undertones ground the composition, providing a sensual, earthy depth.</p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="feature s2" data-key="s2" data-dark>
+    <canvas class="water" id="water" aria-hidden="true"></canvas>
+    <div class="left">
+      <div class="num reveal">02</div>
+      <h2 class="reveal d1">A scent&nbsp; for our unwavering dedication to sustainability.</h2>
+      <p class="reveal d2">Our perfumers source every component from sustainably managed, renewable resources.</p>
+    </div>
+    <div></div>
+    <svg class="plant" id="plant-palm" viewBox="0 0 640 520" aria-hidden="true"></svg>
+  </section>
+
+  <!-- 03 -->
+  <section class="feature s3" data-key="s3">
+    <svg class="plant" id="plant-euca" viewBox="0 0 440 520" aria-hidden="true"></svg>
+    <div></div>
+    <div class="right">
+      <div class="num grad-num reveal">03</div>
+      <h2 class="reveal d1">Housed in minimalist crystal, its finish reflects the essence within.</h2>
+      <p class="reveal d2">Our high-end perfume isn't just about the scent; it's an embodiment of artistic brilliance. Our modern yet timeless vessel reflects our pursuit of excellence.</p>
+    </div>
+  </section>
+
+  <!-- CTA + FOOTER -->
+  <section class="final" id="contact" data-key="cta">
+    <div class="cta">
+      <div></div>
+      <div class="box">
+        <h2 class="reveal">Find your fragrance.</h2>
+        <a class="btn reveal d1" href="#top">Shop now</a>
+      </div>
+    </div>
+    <footer>
+      <div>
+        <div class="brand">Exquis</div>
+        <small>Spline 3D Model by Michał Sambora. Site made with ♡ by Isa.</small>
+      </div>
+      <div class="links">
+        <a href="#">YouTube</a><a href="#">Facebook</a>
+        <a href="#">LinkedIn</a><a href="#">Unsplash</a>
+        <a href="#">Instagram</a>
+      </div>
+    </footer>
+  </section>
+</main>
+
+<a class="badge" href="#top"><i></i>Made in Dora</a>
+<div class="progress" id="progress"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =========================================================
+   Plants (procedural SVG)
+   ========================================================= */
+const NS = "http://www.w3.org/2000/svg";
+function el(tag, attrs, parent){
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+function leafPath(L, W){
+  return `M0,0 C${W},${-L*.22} ${W*.85},${-L*.78} 0,${-L} C${-W*.85},${-L*.78} ${-W},${-L*.22} 0,0Z`;
+}
+function defs(svg, id, stops){
+  const d = svg.querySelector("defs") || el("defs", {}, svg);
+  const g = el("linearGradient", {id, x1:"0", y1:"1", x2:"0", y2:"0"}, d);
+  stops.forEach(([o,c]) => el("stop", {offset:o, "stop-color":c}, g));
+}
+
+// Hero: broad dark rubber-plant leaves from the bottom-left corner
+(function(){
+  const svg = document.getElementById("plant-hero");
+  defs(svg, "lh", [["0","#173c2b"],["0.55","#2f5a43"],["1","#4f7a62"]]);
+  defs(svg, "lh2", [["0","#0f2d20"],["1","#3c6650"]]);
+  const leaves = [
+    {x:40,  y:450, r:-8,  L:330, W:70, f:"lh2"},
+    {x:60,  y:450, r:28,  L:300, W:78, f:"lh"},
+    {x:30,  y:450, r:-38, L:250, W:62, f:"lh"},
+    {x:110, y:460, r:62,  L:260, W:70, f:"lh2"},
+    {x:150, y:470, r:84,  L:250, W:66, f:"lh"},
+    {x:20,  y:460, r:10,  L:200, W:52, f:"lh"},
+  ];
+  leaves.forEach(l => {
+    const g = el("g", {transform:`translate(${l.x},${l.y}) rotate(${l.r})`}, svg);
+    el("path", {d:leafPath(l.L, l.W), fill:`url(#${l.f})`}, g);
+    el("path", {d:`M0,0 Q${l.W*.08},${-l.L*.5} 0,${-l.L*.97}`, stroke:"rgba(200,235,210,.35)", "stroke-width":"2", fill:"none"}, g);
+    for (let i=1;i<7;i++){
+      const y = -l.L*i/8, w = l.W*.75*Math.sin(Math.PI*i/8);
+      el("path", {d:`M0,${y} q${w*.6},${-l.L*.04} ${w},${-l.L*.09} M0,${y} q${-w*.6},${-l.L*.04} ${-w},${-l.L*.09}`, stroke:"rgba(200,235,210,.12)", "stroke-width":"1.2", fill:"none"}, g);
+    }
+  });
+})();
+
+// 02: palm frond rising from the bottom-right
+(function(){
+  const svg = document.getElementById("plant-palm");
+  defs(svg, "lp", [["0","#103a22"],["1","#2f6b3d"]]);
+  function frond(x0,y0,cx,cy,x1,y1,len,w){
+    const g = el("g", {}, svg);
+    el("path", {d:`M${x0},${y0} Q${cx},${cy} ${x1},${y1}`, stroke:"#1b4a2c", "stroke-width":"4", fill:"none"}, g);
+    const N = 34;
+    for (let i=2;i<N;i++){
+      const t = i/N, u = 1-t;
+      const px = u*u*x0 + 2*u*t*cx + t*t*x1, py = u*u*y0 + 2*u*t*cy + t*t*y1;
+      const tx = 2*u*(cx-x0) + 2*t*(x1-cx), ty = 2*u*(cy-y0) + 2*t*(y1-cy);
+      const ang = Math.atan2(ty, tx) * 180/Math.PI;
+      const L = len * (0.45 + 0.55*Math.sin(Math.PI*Math.min(1,t*1.15)));
+      [-1,1].forEach(s => {
+        const a = ang + 90 + s*(52 - t*18) ;
+        el("path", {d:leafPath(L, w), fill:"url(#lp)", transform:`translate(${px},${py}) rotate(${a + 90 + (s<0?180:0)})`, opacity:(0.85+Math.random()*.15).toFixed(2)}, g);
+      });
+    }
+  }
+  frond(620,560, 470,330, 160,300, 210, 7);
+  frond(640,540, 560,300, 420,160, 170, 6);
+  frond(600,560, 520,430, 300,470, 150, 6);
+})();
+
+// 03: eucalyptus branch from the bottom-left
+(function(){
+  const svg = document.getElementById("plant-euca");
+  defs(svg, "le", [["0","#5d7a52"],["1","#a9c49a"]]);
+  const x0=-10,y0=540,cx=170,cy=380,x1=400,y1=120;
+  el("path", {d:`M${x0},${y0} Q${cx},${cy} ${x1},${y1}`, stroke:"#4b3a2a", "stroke-width":"4", fill:"none"}, svg);
+  const N = 9;
+  for (let i=1;i<=N;i++){
+    const t = i/(N+1), u = 1-t;
+    const px = u*u*x0 + 2*u*t*cx + t*t*x1, py = u*u*y0 + 2*u*t*cy + t*t*y1;
+    const s = 1 - t*.45;
+    [[-1,-35],[1,35]].forEach(([d,r]) => {
+      const g = el("g", {transform:`translate(${px},${py}) rotate(${(i%2?-20:15)+r+20*d})`}, svg);
+      el("ellipse", {cx:0, cy:-34*s, rx:22*s, ry:36*s, fill:"url(#le)", stroke:"rgba(40,60,30,.25)", "stroke-width":"1"}, g);
+      el("path", {d:`M0,0 L0,${-66*s}`, stroke:"rgba(60,80,50,.35)", "stroke-width":"1", fill:"none"}, g);
+    });
+  }
+  // a few dark leaves for depth
+  [[30,470,-30],[90,430,40]].forEach(([x,y,r]) => {
+    const g = el("g", {transform:`translate(${x},${y}) rotate(${r})`}, svg);
+    el("path", {d:leafPath(110, 30), fill:"#2f4a2c"}, g);
+  });
+})();
+
+/* =========================================================
+   Scroll UI: progress bar, reveals, nav color
+   ========================================================= */
+const progress = document.getElementById("progress");
+const nav = document.getElementById("nav");
+const sections = [...document.querySelectorAll("main section")];
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+}), {threshold:.25});
+document.querySelectorAll(".reveal").forEach(n => io.observe(n));
+
+function onScrollUI(){
+  const max = document.documentElement.scrollHeight - innerHeight;
+  progress.style.width = (max > 0 ? scrollY/max*100 : 0) + "%";
+  const mid = 40;
+  const dark = sections.find(s => s.hasAttribute("data-dark") && s.getBoundingClientRect().top <= mid && s.getBoundingClientRect().bottom > mid);
+  nav.classList.toggle("on-dark", !!dark);
+}
+addEventListener("scroll", onScrollUI, {passive:true});
+onScrollUI();
+
+/* =========================================================
+   3D bottle (three.js)
+   ========================================================= */
+(function(){
+  if (!window.THREE) return;
+  const canvas = document.getElementById("bottle");
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.NoToneMapping;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  camera.position.set(0, 0, 14);
+
+  // Simple studio environment for reflections
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  const envScene = new THREE.Scene();
+  envScene.add(new THREE.Mesh(new THREE.BoxGeometry(20,20,20), new THREE.MeshBasicMaterial({color:0x0c1a14, side:THREE.BackSide})));
+  [[0,8,0,6,1,6,2.4],[-9,2,3,1,6,3,2.0],[9,1,2,1,6,2,1.4],[0,-3,9,4,1,1,.8]].forEach(([x,y,z,w,h,d,i]) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), new THREE.MeshBasicMaterial({color:new THREE.Color(i,i,i)}));
+    m.position.set(x,y,z); envScene.add(m);
+  });
+  scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.25));
+  const key = new THREE.DirectionalLight(0xffffff, 1.1); key.position.set(-3,5,6); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xbfffe0, 1.2); rim.position.set(5,2,-4); scene.add(rim);
+
+  function roundedRect(w, h, r){
+    const s = new THREE.Shape(), x = -w/2, y = -h/2;
+    s.moveTo(x+r, y); s.lineTo(x+w-r, y); s.quadraticCurveTo(x+w, y, x+w, y+r);
+    s.lineTo(x+w, y+h-r); s.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+    s.lineTo(x+r, y+h); s.quadraticCurveTo(x, y+h, x, y+h-r);
+    s.lineTo(x, y+r); s.quadraticCurveTo(x, y, x+r, y);
+    return s;
+  }
+  function slab(w, h, d, r, bevel, segs){
+    const g = new THREE.ExtrudeGeometry(roundedRect(w, h, r), {
+      depth:d, bevelEnabled:true, bevelThickness:bevel, bevelSize:bevel, bevelSegments:segs, curveSegments:6
+    });
+    g.translate(0, 0, -d/2);
+    g.computeVertexNormals();
+    return g;
+  }
+
+  const bottle = new THREE.Group();
+  const W = 1.75, H = 1.85, D = 0.95;
+
+  // Crystal body: dark green, faceted bevel catching reflections
+  const shell = new THREE.Mesh(slab(W, H, D, 0.42, 0.16, 1), new THREE.MeshPhysicalMaterial({
+    color:new THREE.Color(0x0d4a32).convertSRGBToLinear(), roughness:0.12, metalness:0.0, clearcoat:.8, clearcoatRoughness:0.05,
+    envMapIntensity:1.0
+  }));
+  bottle.add(shell);
+
+  // Front window: the "juice" seen through the glass + label
+  const lc = document.createElement("canvas"); lc.width = 512; lc.height = 560;
+  const panelTex = new THREE.CanvasTexture(lc);
+  panelTex.encoding = THREE.sRGBEncoding;
+  panelTex.anisotropy = 4;
+  function drawPanel(){
+    const x = lc.getContext("2d");
+    const g = x.createLinearGradient(0, 0, 0, 560);
+    g.addColorStop(0, "#03200f"); g.addColorStop(.45, "#073a24"); g.addColorStop(.8, "#0e5a37"); g.addColorStop(1, "#167046");
+    x.fillStyle = g; x.fillRect(0, 0, 512, 560);
+    const r = x.createRadialGradient(150, 120, 10, 150, 120, 320);
+    r.addColorStop(0, "rgba(120,220,170,.18)"); r.addColorStop(1, "rgba(120,220,170,0)");
+    x.fillStyle = r; x.fillRect(0, 0, 512, 560);
+    x.fillStyle = "rgba(160,255,200,.10)"; x.fillRect(0, 420, 512, 18);
+    x.fillStyle = "#f2fff8"; x.textAlign = "center"; x.textBaseline = "middle";
+    x.font = "700 64px Lato, Arial, sans-serif"; x.fillText("FRAGRANCE", 256, 222);
+    x.font = "700 20px Lato, Arial, sans-serif"; x.fillText("de", 256, 266);
+    x.font = "700 58px Lato, Arial, sans-serif"; x.fillText("PISA", 256, 312);
+    panelTex.needsUpdate = true;
+  }
+  drawPanel();
+  if (document.fonts) document.fonts.ready.then(drawPanel);
+  const pw = W - 0.3, ph = H - 0.3;
+  const panelGeo = new THREE.ShapeGeometry(roundedRect(pw, ph, 0.3), 8);
+  const uv = panelGeo.attributes.uv, pp = panelGeo.attributes.position;
+  for (let i=0;i<uv.count;i++) uv.setXY(i, pp.getX(i)/pw + .5, pp.getY(i)/ph + .5);
+  const panel = new THREE.Mesh(panelGeo, new THREE.MeshPhysicalMaterial({
+    map:panelTex, roughness:0.1, metalness:0, clearcoat:.7, clearcoatRoughness:0.03, envMapIntensity:.6
+  }));
+  panel.position.z = D/2 + 0.161;
+  bottle.add(panel);
+  const back = panel.clone(); back.rotation.y = Math.PI; back.position.z = -panel.position.z;
+  bottle.add(back);
+
+  // Neck + black cap
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.22, 0.2, 24), new THREE.MeshStandardMaterial({color:new THREE.Color(0x0c3d2a).convertSRGBToLinear(), roughness:.2, metalness:.3}));
+  neck.position.y = H/2 + 0.2;
+  bottle.add(neck);
+  const cap = new THREE.Mesh(slab(0.62, 0.5, 0.42, 0.06, 0.04, 2), new THREE.MeshStandardMaterial({color:0x050706, roughness:0.4, metalness:0.1, envMapIntensity:.5}));
+  cap.position.y = H/2 + 0.52;
+  bottle.add(cap);
+
+
+  // center group vertically (body + cap)
+  const holder = new THREE.Group();
+  bottle.position.y = -0.38;
+  holder.add(bottle);
+  scene.add(holder);
+  const MODEL_H = H + 0.32 + 0.9; // total height incl. bevel + cap
+
+  /* ---- Keyframes per section: x/y in viewport fractions, rotations in radians ---- */
+  const mobile = () => innerWidth < 800;
+  const frames = {
+    hero:{x:.5,  y:.46, s:.50, rx:.05, ry: .35, rz:-.12},
+    s1:  {x:.29, y:.52, s:.48, rx:.05, ry:-.35, rz: .10},
+    s2:  {x:.62, y:.50, s:.40, rx:.0,  ry: .45, rz: .06},
+    s3:  {x:.27, y:.50, s:.44, rx:.08, ry: .55, rz:-.42},
+    cta: {x:.27, y:.40, s:.44, rx:.06, ry: .40, rz:-.36},
+  };
+  const framesMobile = {
+    hero:{x:.5, y:.40, s:.22, rx:.05, ry:.35, rz:-.12},
+    s1:  {x:.5, y:.30, s:.28, rx:.05, ry:-.35, rz:.10},
+    s2:  {x:.66, y:.24, s:.22, rx:0, ry:.45, rz:.06},
+    s3:  {x:.32, y:.30, s:.26, rx:.08, ry:.55, rz:-.42},
+    cta: {x:.5, y:.27, s:.28, rx:.06, ry:.4, rz:-.36},
+  };
+  const keys = sections.map(s => s.dataset.key);
+
+  const ease = t => t<.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+  const lerp = (a,b,t) => a + (b-a)*t;
+
+  function target(){
+    const F = mobile() ? framesMobile : frames;
+    const y = scrollY + innerHeight*0.5;
+    let i = 0;
+    for (let k=0;k<sections.length;k++){ if (sections[k].offsetTop + sections[k].offsetHeight*0.5 <= y) i = k; }
+    const a = sections[i], b = sections[Math.min(i+1, sections.length-1)];
+    const ca = a.offsetTop + a.offsetHeight*0.5, cb = b.offsetTop + b.offsetHeight*0.5;
+    let t = cb > ca ? (y - ca)/(cb - ca) : 0;
+    t = ease(Math.min(1, Math.max(0, t)));
+    if (y < sections[0].offsetTop + sections[0].offsetHeight*.5) t = 0;
+    const fa = F[keys[i]], fb = F[keys[Math.min(i+1, keys.length-1)]];
+    const o = {}; for (const k in fa) o[k] = lerp(fa[k], fb[k], t);
+    o.spin = t; // extra turn during transitions
+    return o;
+  }
+
+  function viewSize(){
+    const h = 2*Math.tan(THREE.MathUtils.degToRad(camera.fov/2))*camera.position.z;
+    return {w:h*camera.aspect, h};
+  }
+  function resize(){
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+  }
+  addEventListener("resize", resize); resize();
+
+  const cur = {x:.5, y:-.4, s:.5, rx:0, ry:-1.2, rz:.4, spin:0}; // starts above the viewport (drop-in)
+  let mx = 0, my = 0;
+  addEventListener("pointermove", e => { mx = e.clientX/innerWidth - .5; my = e.clientY/innerHeight - .5; });
+  const clock = new THREE.Clock();
+  let intro = 0;
+
+  function frame(){
+    const dt = Math.min(clock.getDelta(), .05), time = clock.elapsedTime;
+    intro = Math.min(1, intro + dt*0.7);
+    const tg = target();
+    const k = 1 - Math.pow(0.0025, dt); // smooth follow
+    const kin = intro < 1 ? Math.max(k, .02) : k;
+    for (const p in tg) cur[p] = lerp(cur[p], tg[p], kin);
+
+    const v = viewSize();
+    holder.position.x = (cur.x - .5) * v.w;
+    holder.position.y = -(cur.y - .5) * v.h + Math.sin(time*1.1)*0.06;
+    const sc = cur.s * v.h / MODEL_H;
+    holder.scale.setScalar(sc);
+    holder.rotation.set(
+      cur.rx + Math.sin(time*.8)*.04 + my*.12,
+      cur.ry + Math.sin(cur.spin*Math.PI)*0.9 + Math.sin(time*.6)*.08 + mx*.25,
+      cur.rz + Math.sin(time*.7)*.02
+    );
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* =========================================================
+   Water caustics for section 02
+   ========================================================= */
+(function(){
+  if (!window.THREE) return;
+  const canvas = document.getElementById("water");
+  const sec = canvas.parentElement;
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:false});
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  const scene = new THREE.Scene();
+  const cam = new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+  const uni = {uTime:{value:0}, uRes:{value:new THREE.Vector2(1,1)}};
+  const mat = new THREE.ShaderMaterial({
+    uniforms:uni,
+    vertexShader:`varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy,0.,1.); }`,
+    fragmentShader:`
+      precision highp float;
+      varying vec2 vUv; uniform float uTime; uniform vec2 uRes;
+      #define TAU 6.28318530718
+      float caustic(vec2 uv, float time){
+        vec2 p = mod(uv*TAU, TAU) - 250.0;
+        vec2 i = p; float c = 1.0; float inten = .005;
+        for (int n = 0; n < 5; n++){
+          float t = time * (1.0 - (3.5 / float(n+1)));
+          i = p + vec2(cos(t - i.x) + sin(t + i.y), sin(t - i.y) + cos(t + i.x));
+          c += 1.0/length(vec2(p.x / (sin(i.x+t)/inten), p.y / (cos(i.y+t)/inten)));
+        }
+        c /= 5.0;
+        c = 1.17 - pow(c, 1.4);
+        return pow(abs(c), 8.0);
+      }
+      void main(){
+        vec2 uv = vUv; uv.x *= uRes.x/uRes.y;
+        float t = uTime*.35 + 23.0;
+        float a = caustic(uv*1.1, t);
+        float b = caustic(uv*1.1 + vec2(.013,.0), t);
+        vec3 deep = vec3(.20,.42,.31), shallow = vec3(.36,.62,.47), hi = vec3(.80,.95,.84);
+        vec3 col = mix(deep, shallow, smoothstep(0.,1.,vUv.y*.6 + .25));
+        col = mix(col, hi, clamp(a*.75 + b*.25, 0., 1.)*.75);
+        col *= 1.0 - .25*length(vUv - .5);
+        gl_FragColor = vec4(col, 1.);
+      }`
+  });
+  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2), mat));
+  function resize(){
+    const r = sec.getBoundingClientRect();
+    renderer.setSize(r.width, r.height, false);
+    uni.uRes.value.set(r.width, r.height);
+  }
+  addEventListener("resize", resize); resize();
+  let visible = false;
+  new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(sec);
+  const clock = new THREE.Clock();
+  (function loop(){
+    uni.uTime.value = clock.getElapsedTime();
+    if (visible) renderer.render(scene, cam);
+    requestAnimationFrame(loop);
+  })();
+})();
+</script>
+</body>
+</html>
