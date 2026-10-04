@@ -553,7 +553,13 @@ button.tab{
 @media(max-width:600px){.tabs{gap:3px}.tab{flex:1 1 0;justify-content:center;padding:9px 6px;font-size:.82rem;gap:5px}.tab svg{width:14px;height:14px}.t-long{display:none}.t-short{display:inline}}
 body.on-trousse .fcta{display:none!important}
 body.on-trousse{padding-bottom:0}
-.kit-order strong{white-space:nowrap}
+.kit-order{font-size:.84rem;color:var(--text-s);margin:.9rem 0 1rem;background:var(--bg-alt);border:1px solid var(--border);border-radius:12px;padding:.8rem 1rem;line-height:1.55}
+.kit-order p{margin:0}
+.kit-order ul{margin:.35rem 0 .45rem;padding-left:1.1rem}
+.kit-order li{margin:.1rem 0}
+.kit-order a{color:var(--accent);font-weight:700;white-space:nowrap}
+.kit-order .ko-t{color:var(--text)}
+.kit-order .ko-warn{font-size:.76rem;color:var(--text-m)}
 .kit-card{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(1.25rem,4vw,2.5rem);align-items:center;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--rl);padding:clamp(1.25rem,3vw,2rem);box-shadow:var(--shadow)}
 .kit-media img{display:block;width:100%;height:auto;border-radius:14px}
 .kit-note{font-size:.75rem;color:var(--text-m);margin:.6rem 0 0}
@@ -1158,7 +1164,15 @@ body.on-trousse{padding-bottom:0}
       <p class="kit-price">34,90&nbsp;€<sub>TTC</sub></p>
       <p class="kit-size">Pochette : 26 × 18 × 8 cm</p>
       <a class="btn kit-btn" href="https://buy.stripe.com/cNi4gy5cC8WUayvfy9fbq02">Commander la trousse <span aria-hidden="true">→</span></a>
-      <p class="kit-order">Paiement sécurisé par Stripe. Votre adresse de livraison vous sera demandée lors du paiement.</p>
+      <div class="kit-order">
+        <p><strong class="ko-t">Après votre paiement</strong>, envoyez-nous par e-mail à <a href="mailto:sst-codes@outlook.fr?subject=Commande%20trousse%20de%20secours">sst-codes@outlook.fr</a> :</p>
+        <ul>
+          <li>vos nom et prénom ;</li>
+          <li>votre adresse de livraison ;</li>
+          <li>le numéro de votre reçu de paiement (indiqué dans l’e-mail de confirmation Stripe).</li>
+        </ul>
+        <p class="ko-warn">Ne communiquez jamais vos coordonnées bancaires par e-mail.</p>
+      </div>
       <a class="kit-more" href="#kit-contenu">Découvrir le contenu <span aria-hidden="true">↓</span></a>
     </div>
   </section>
