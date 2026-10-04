@@ -119,6 +119,17 @@ a{color:inherit}
 .ft-stripe{width:clamp(56px,8vw,78px)}
 .ft a{white-space:nowrap}
 @media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right){grid-column:1/-1;grid-row:1}}
+
+/* ── Haut de page : photo en fond + voile blanc ── */
+.hero{background:#fff url(images/fond-photo.jpg) center 40%/cover no-repeat;color:#1C2A3A}
+.hero::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.62);pointer-events:none}
+.hero>*{position:relative;z-index:1}
+.hero::before,.hero .gyro{display:none}
+.hero h1{color:#0F1D32}
+.hero p{color:#22324A}
+.alt{color:#3D4F63}
+.alt a{color:#0F1D32}
+.logo{filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
 </style>
 </head>
 <body>
