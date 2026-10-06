@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kit Sécurité Route</title>
+<meta name="description" content="Gilet jaune haute visibilité, gants de protection et trousse de premiers secours pour réagir en cas d'accident sur la route et l'autoroute.">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Overpass:wght@600;800;900&family=Overpass+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: asphalt hero with a live 3D vest and a headlight switch → three product stages + pack → size guide with finder → "why the vest" with a to-scale visibility chart → footer */
+:root{
+  --paper:#F3F4EE;      /* road-paint white, slight yellow bias */
+  --paper-2:#E8EADF;
+  --card:#FFFFFF;
+  --ink:#16181A;        /* asphalt ink */
+  --ink-2:#4B5157;
+  --line:#D6D8CC;
+  --hiviz:#DCF21E;      /* fluorescent yellow, used as fill */
+  --hiviz-2:#E8FA52;
+  --hiviz-deep:#596500; /* yellow family readable as text on paper */
+  --on-hiviz:#16181A;
+  --signal:#C8102E;     /* warning-triangle red */
+  --silver:#B6BBC0;     /* retroreflective band */
+  --stage:#E6E8DE;
+  --stage-hi:#FAFBF6;
+  --asphalt:#18191B;
+  --night:#0A0B0C;
+  --on-asphalt:#EEEFE8;
+  --on-asphalt-2:#A7ABAF;
+  --focus:#16181A;
+  --display:'Overpass','Arial Narrow',Arial,sans-serif;
+  --body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;
+  --mono:'Overpass Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111315;--paper-2:#181B1E;--card:#1B1E21;
+    --ink:#ECEDE6;--ink-2:#A6ACB1;--line:#2C3034;
+    --hiviz-deep:#DCF21E;--signal:#FF5A68;--silver:#8F959B;
+    --stage:#1C1F22;--stage-hi:#2B3034;--focus:#DCF21E;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111315;--paper-2:#181B1E;--card:#1B1E21;
+  --ink:#ECEDE6;--ink-2:#A6ACB1;--line:#2C3034;
+  --hiviz-deep:#DCF21E;--signal:#FF5A68;--silver:#8F959B;
+  --stage:#1C1F22;--stage-hi:#2B3034;--focus:#DCF21E;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+h1,h2,h3{text-wrap:balance}
+a{color:inherit}
+.wrap{max-width:1160px;margin-inline:auto;padding-inline:16px}
+@media (min-width:700px){.wrap{padding-inline:28px}}
+a:focus-visible,button:focus-visible,.stage:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+
+/* ── Header ── */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);background:color-mix(in srgb,var(--paper) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:16px;min-height:62px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:900;font-size:1.08rem;letter-spacing:-.01em;text-decoration:none;color:var(--ink)}
+.brand svg{flex:none}
+.nav{display:flex;align-items:center;gap:2px;margin-left:auto}
+.nav a{padding:8px 12px;border-radius:8px;color:var(--ink-2);text-decoration:none;font-weight:700;font-size:.94rem}
+.nav a:hover{color:var(--ink);background:var(--paper-2)}
+.nav a.nav-cta{background:var(--hiviz);color:var(--on-hiviz);margin-left:6px}
+@media (max-width:700px){.nav a:not(.nav-cta){display:none}}
+
+/* ── Hero ── */
+.hero{--focus:var(--hiviz);background:var(--asphalt);color:var(--on-asphalt);position:relative;overflow:hidden;transition:background-color .6s}
+.hero::before{content:"";position:absolute;left:0;right:0;bottom:30px;height:6px;background:repeating-linear-gradient(90deg,rgba(238,239,232,.5) 0 64px,transparent 64px 116px);opacity:.55}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(55% 60% at 74% 108%,rgba(255,244,205,.24),transparent 72%),radial-gradient(30% 40% at 60% 104%,rgba(255,244,205,.14),transparent 70%);opacity:0;transition:opacity .6s;pointer-events:none}
+.hero.is-night{background:var(--night)}
+.hero.is-night::after{opacity:1}
+.hero-in{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:32px;align-items:center;padding-block:56px 80px}
+@media (max-width:880px){.hero-in{grid-template-columns:minmax(0,1fr);gap:20px;padding-block:36px 72px}}
+.eyebrow{font-family:var(--mono);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--hiviz-deep);margin:0}
+.hero .eyebrow{color:var(--hiviz)}
+.hero h1{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,6.3vw,4.8rem);line-height:.98;letter-spacing:-.03em;margin:.4em 0 .45em}
+.hero h1 em{font-style:normal;color:var(--hiviz)}
+.lead{font-size:1.14rem;color:var(--on-asphalt-2);max-width:34em;margin:0}
+.lead strong{color:var(--on-asphalt)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:10px;font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:.005em;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .15s,background-color .2s}
+.btn-hv{background:var(--hiviz);color:var(--on-hiviz)}
+.btn-hv:hover{background:var(--hiviz-2);transform:translateY(-1px)}
+.btn-ghost{border-color:rgba(238,239,232,.32);color:var(--on-asphalt);background:transparent}
+.btn-ghost:hover{border-color:var(--on-asphalt)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin:30px 0 0;padding:0;list-style:none;font-size:.9rem;color:var(--on-asphalt-2)}
+.facts li{display:flex;align-items:center;gap:8px}
+.facts li::before{content:"";width:16px;height:6px;border-radius:1px;background:var(--hiviz)}
+
+.stage{position:relative;width:100%;max-width:100%;aspect-ratio:1/1}
+.stage canvas.gl{position:absolute;inset:0;z-index:1;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.stage canvas.gl:active{cursor:grabbing}
+.stage::after{content:"";position:absolute;z-index:0;left:22%;right:22%;bottom:5%;height:8%;background:radial-gradient(closest-side,rgba(0,0,0,.28),transparent);pointer-events:none}
+.fallback{display:none;position:absolute;inset:0;place-items:center;text-align:center;padding:24px;font-size:.92rem;color:var(--ink-2)}
+.stage.no3d .fallback{display:grid}
+.hero .stage{border-radius:20px;background:radial-gradient(58% 52% at 50% 46%,rgba(255,255,255,.08),transparent 72%)}
+.hero .stage::after{background:radial-gradient(closest-side,rgba(0,0,0,.55),transparent)}
+.hero .fallback{color:var(--on-asphalt-2)}
+.stage-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:8px}
+.switch{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 16px 0 10px;border-radius:999px;border:1.5px solid rgba(238,239,232,.3);background:rgba(255,255,255,.04);color:var(--on-asphalt);font:700 .95rem/1 var(--body);cursor:pointer}
+.switch-ico{position:relative;width:34px;height:20px;border-radius:999px;background:rgba(255,255,255,.2);transition:background-color .25s}
+.switch-ico::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:var(--on-asphalt);transition:transform .25s,background-color .25s}
+.switch[aria-pressed="true"] .switch-ico{background:var(--hiviz)}
+.switch[aria-pressed="true"] .switch-ico::after{transform:translateX(14px);background:var(--on-hiviz)}
+.stage-note{flex:1 1 16rem;min-width:0;margin:0;font-size:.9rem;color:var(--on-asphalt-2)}
+
+/* ── Sections ── */
+.section{padding-block:84px}
+.section.alt{background:var(--paper-2)}
+@media (max-width:700px){.section{padding-block:56px}}
+.sec-head{max-width:46rem;margin-bottom:36px}
+.sec-head h2{font-family:var(--display);font-weight:900;font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.02;letter-spacing:-.025em;margin:.3em 0 .35em}
+.sec-head p{margin:0;color:var(--ink-2);font-size:1.08rem}
+h3{font-family:var(--display);font-weight:800;font-size:1.3rem;line-height:1.2;letter-spacing:-.01em;margin:0}
+
+/* ── Products ── */
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.product{display:flex;flex-direction:column;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.product .stage{aspect-ratio:4/3;background:radial-gradient(75% 70% at 50% 42%,var(--stage-hi),var(--stage))}
+.p-body{display:flex;flex-direction:column;gap:14px;flex:1;padding:22px}
+.p-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.price{font-family:var(--display);font-weight:900;font-size:1.55rem;line-height:1;white-space:nowrap}
+.price small{font-size:.55em;font-weight:600;color:var(--ink-2);margin-left:2px}
+.tag{align-self:flex-start;font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.05em;padding:3px 8px;border-radius:6px;background:var(--paper-2);color:var(--ink-2)}
+.p-desc{margin:0;color:var(--ink-2)}
+.specs{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:.93rem}
+.specs li{display:flex;gap:10px}
+.specs li::before{content:"";flex:none;width:14px;height:6px;margin-top:.62em;border-radius:1px;background:var(--silver)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:8px;font-weight:700;font-size:.88rem}
+legend a{font-weight:400;color:var(--ink-2);margin-left:6px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.chips label{display:inline-flex;align-items:center;justify-content:center;min-height:40px;min-width:46px;padding:0 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--card);font-family:var(--mono);font-size:.86rem;font-weight:600;cursor:pointer;transition:border-color .15s}
+.chips label:hover{border-color:var(--ink-2)}
+.chips input:checked+label{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.chips input:focus-visible+label{outline:3px solid var(--focus);outline-offset:2px}
+.buy{margin-top:auto;display:grid;gap:8px}
+.buy .btn{width:100%}
+.note{margin:0;font-size:.86rem;color:var(--ink-2)}
+.ship{margin:0;font-size:.84rem;color:var(--ink-2);text-align:center}
+details.contents{border-top:1px solid var(--line);padding-top:12px}
+details.contents summary{cursor:pointer;font-weight:700;font-size:.93rem}
+details.contents .tbl-wrap{margin-top:12px;max-height:320px;overflow:auto}
+@media (max-width:980px){
+  .products{grid-template-columns:minmax(0,1fr)}
+}
+@media (min-width:640px) and (max-width:980px){
+  .product{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+  .product .stage{aspect-ratio:auto;min-height:320px}
+}
+
+.pack{--focus:var(--hiviz);margin-top:20px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:center;background:var(--asphalt);color:var(--on-asphalt);border-radius:18px;padding:30px}
+.pack h3{font-size:1.7rem;font-weight:900}
+.pack p{margin:.5em 0 0;color:var(--on-asphalt-2)}
+.pack-items{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.pack-items li{font-family:var(--mono);font-size:.8rem;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.08)}
+.pack .buy{gap:14px}
+.pack .price s{font-size:.5em;font-weight:600;color:var(--on-asphalt-2);margin-left:8px}
+.pack .price{font-size:2rem}
+.pack .chips label{background:transparent;border-color:rgba(238,239,232,.3);color:var(--on-asphalt)}
+.pack .chips input:checked+label{background:var(--hiviz);border-color:var(--hiviz);color:var(--on-hiviz)}
+.pack .note,.pack .ship{color:var(--on-asphalt-2)}
+@media (max-width:760px){.pack{grid-template-columns:minmax(0,1fr);padding:22px}}
+
+/* ── Size guide ── */
+.size-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:28px;align-items:start}
+@media (max-width:880px){.size-grid{grid-template-columns:minmax(0,1fr)}}
+.measure{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:18px}
+.measure svg{width:100%;max-width:300px;height:auto;justify-self:center}
+.measure ol{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.measure li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px}
+.measure li b.k{display:grid;place-items:center;width:28px;height:28px;border-radius:7px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.85rem}
+.measure li p{margin:0;font-size:.95rem;color:var(--ink-2)}
+.measure li strong{color:var(--ink)}
+.tip{margin:0;padding:12px 14px;border-radius:10px;background:var(--paper-2);font-size:.92rem}
+.size-col{display:grid;gap:22px;min-width:0}
+.finder{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:12px}
+.finder label{font-weight:700}
+.finder input[type=range]{width:100%;accent-color:var(--ink);height:28px}
+.finder-out{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 16px}
+.finder-cm{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.finder-size{font-family:var(--display);font-weight:900;font-size:2rem;line-height:1}
+.finder .btn{justify-self:start;background:var(--ink);color:var(--paper)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+table{width:100%;border-collapse:collapse;font-size:.94rem}
+caption{text-align:left;padding:14px 14px 4px;font-weight:700;font-family:var(--display);font-size:1.05rem}
+th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+thead th{font-size:.78rem;font-family:var(--mono);font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2)}
+tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}
+tbody th{font-weight:700}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.is-match{background:color-mix(in srgb,var(--hiviz) 30%,transparent)}
+tr.is-match th::after{content:"votre taille";margin-left:10px;font-family:var(--mono);font-size:.7rem;font-weight:600;padding:2px 6px;border-radius:5px;background:var(--ink);color:var(--paper);vertical-align:2px}
+.tbl-note{margin:0;padding:10px 14px 14px;font-size:.85rem;color:var(--ink-2);white-space:normal}
+
+/* ── Why ── */
+.vis{margin:0 0 28px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+.vis figcaption{font-weight:700;margin-bottom:18px}
+.vis-grid{display:grid;grid-template-columns:12rem minmax(0,1fr) 8rem;gap:14px 18px;align-items:center}
+.vis-lab{font-size:.95rem}
+.vis-track{position:relative;height:24px;border-radius:4px;background:linear-gradient(90deg,transparent calc(33.333% - 1px),var(--line) calc(33.333% - 1px) 33.333%,transparent 33.333% calc(66.667% - 1px),var(--line) calc(66.667% - 1px) 66.667%,transparent 66.667%),var(--paper-2)}
+.vis-bar{position:absolute;top:0;bottom:0;left:0;width:var(--w);border-radius:4px}
+.vis-bar.dark{background:var(--ink-2)}
+.vis-bar.light{background:var(--silver)}
+.vis-bar.retro{background:repeating-linear-gradient(90deg,var(--hiviz) 0 30px,var(--silver) 30px 42px)}
+.vis-val{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;font-size:.95rem;line-height:1.3;white-space:nowrap}
+.vis-val small{display:block;font-weight:400;font-size:.78rem;color:var(--ink-2)}
+.vis-axis{grid-column:2;position:relative;height:18px;font-family:var(--mono);font-size:.74rem;color:var(--ink-2)}
+.vis-axis span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.vis-axis span:first-child{transform:none}
+.vis-axis span:last-child{transform:translateX(-100%)}
+.vis-foot{margin:14px 0 0;font-size:.86rem;color:var(--ink-2)}
+@media (max-width:640px){
+  .vis-grid{grid-template-columns:minmax(0,1fr) 6.4rem;gap:6px 12px}
+  .vis-lab{grid-column:1/-1;margin-top:10px}
+  .vis-axis{grid-column:1}
+}
+.law{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.law{grid-template-columns:minmax(0,1fr)}}
+.law article{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:grid;gap:8px;align-content:start}
+.law .big{font-family:var(--display);font-weight:900;font-size:2.1rem;line-height:1;letter-spacing:-.02em}
+.law h3{font-size:1.08rem}
+.law p{margin:0;color:var(--ink-2);font-size:.96rem}
+.why-two{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;margin-top:44px;align-items:start}
+@media (max-width:880px){.why-two{grid-template-columns:minmax(0,1fr)}}
+.steps{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:18px}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;align-items:start}
+.tri{position:relative;width:44px;height:39px;display:grid;place-items:end center;padding-bottom:5px;font-family:var(--display);font-weight:900;font-size:.95rem;color:var(--ink)}
+.tri::before{content:"";position:absolute;inset:0;background:var(--signal);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.tri::after{content:"";position:absolute;inset:9px 10px 4px;background:var(--card);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.tri span{position:relative;z-index:1;line-height:1}
+.steps h4{margin:0;font-family:var(--display);font-weight:800;font-size:1.1rem}
+.steps p{margin:.2em 0 0;color:var(--ink-2);font-size:.96rem}
+.aside{background:var(--paper-2);border-radius:16px;padding:22px;display:grid;gap:10px}
+.aside p{margin:0;color:var(--ink-2);font-size:.96rem}
+.norm{margin-top:18px}
+
+/* ── Footer ── */
+.foot{background:var(--asphalt);color:var(--on-asphalt-2);padding-block:44px;font-size:.93rem;position:relative}
+.foot::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:repeating-linear-gradient(90deg,var(--hiviz) 0 40px,var(--silver) 40px 56px)}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px}
+.foot strong{color:var(--on-asphalt);font-family:var(--display);font-weight:900}
+.foot ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.foot a{color:var(--on-asphalt)}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg width="26" height="23" viewBox="0 0 26 23" aria-hidden="true"><path d="M13 1.5 24.5 21.5h-23z" fill="none" stroke="#C8102E" stroke-width="3" stroke-linejoin="round"/></svg>
+      Kit Sécurité Route
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#produits">Produits</a>
+      <a href="#tailles">Tailles</a>
+      <a href="#pourquoi">Pourquoi le gilet&nbsp;?</a>
+      <a class="nav-cta" href="#produits">Commander</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="hero">
+  <div class="wrap hero-in">
+    <div>
+      <p class="eyebrow">Obligatoire dans chaque voiture depuis 2008</p>
+      <h1>Être vu sur la route, <em>même de nuit.</em></h1>
+      <p class="lead">Gilet jaune haute visibilité, gants de protection et trousse de premiers secours&nbsp;: le kit à garder dans la voiture pour réagir <strong>en cas d'accident sur la route ou l'autoroute</strong>.</p>
+      <div class="hero-cta">
+        <a class="btn btn-hv" href="#produits">Voir les produits</a>
+        <a class="btn btn-ghost" href="#tailles">Guide des tailles</a>
+      </div>
+      <ul class="facts">
+        <li>Norme EN ISO 20471 classe 2</li>
+        <li>Livraison en 3 à 5 jours</li>
+        <li>Paiement sécurisé Stripe</li>
+      </ul>
+    </div>
+    <div>
+      <div class="stage" id="stage-hero" data-model="vest" tabindex="0" aria-label="Gilet jaune en 3D. Faites glisser ou utilisez les flèches pour le tourner.">
+        <p class="fallback">L'aperçu 3D n'est pas disponible sur cet appareil.</p>
+      </div>
+      <div class="stage-bar">
+        <button class="switch" id="lights" type="button" aria-pressed="false"><span class="switch-ico" aria-hidden="true"></span><span class="switch-tx">Allumer les phares</span></button>
+        <p class="stage-note" id="stage-note" aria-live="polite">Faites glisser le gilet pour le tourner, puis passez en mode nuit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="produits">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Nos produits</p>
+      <h2>Trois équipements pour protéger, alerter et secourir</h2>
+      <p>Tout ce qu'il faut pour sortir de la voiture sans danger après un accident ou une panne, et donner les premiers soins en attendant les secours.</p>
+    </div>
+
+    <div class="products">
+      <!-- Gilet -->
+      <article class="product" id="p-gilet">
+        <div class="stage" data-model="vest" tabindex="0" aria-label="Gilet jaune en 3D. Faites glisser pour le tourner.">
+          <p class="fallback">L'aperçu 3D n'est pas disponible sur cet appareil.</p>
+        </div>
+        <div class="p-body">
+          <span class="tag">EN ISO 20471 · classe 2</span>
+          <div class="p-top">
+            <h3>Gilet jaune haute visibilité</h3>
+            <span class="price">6,90&nbsp;€<small>TTC</small></span>
+          </div>
+          <p class="p-desc">Pour les accidents et les pannes sur la route et l'autoroute&nbsp;: enfilez-le avant de sortir du véhicule. Le jaune fluo vous rend visible le jour, les deux bandes rétroréfléchissantes renvoient la lumière des phares la nuit.</p>
+          <ul class="specs">
+            <li>2 bandes rétroréfléchissantes de 5 cm</li>
+            <li>Fermeture auto-agrippante, s'enfile en 3 secondes</li>
+            <li>Se plie dans sa pochette pour la boîte à gants</li>
+          </ul>
+          <div class="buy">
+            <fieldset>
+              <legend>Taille <a href="#tailles">Guide des tailles</a></legend>
+              <div class="chips">
+                <input type="radio" name="size-gilet" id="g-enfant" value="enfant"><label for="g-enfant">Enfant</label>
+                <input type="radio" name="size-gilet" id="g-ml" value="m-l" checked><label for="g-ml">M/L</label>
+                <input type="radio" name="size-gilet" id="g-xl" value="xl-xxl"><label for="g-xl">XL/XXL</label>
+                <input type="radio" name="size-gilet" id="g-3xl" value="3xl-4xl"><label for="g-3xl">3XL/4XL</label>
+              </div>
+            </fieldset>
+            <a class="btn btn-hv" href="#" data-buy="gilet">Commander le gilet</a>
+            <p class="note" id="note-gilet" hidden>Le paiement en ligne de cet article sera bientôt disponible.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Gants -->
+      <article class="product" id="p-gants">
+        <div class="stage" data-model="gloves" tabindex="0" aria-label="Paire de gants en 3D. Faites glisser pour la tourner.">
+          <p class="fallback">L'aperçu 3D n'est pas disponible sur cet appareil.</p>
+        </div>
+        <div class="p-body">
+          <span class="tag">EN 388 · risques mécaniques</span>
+          <div class="p-top">
+            <h3>Gants de protection</h3>
+            <span class="price">7,90&nbsp;€<small>TTC</small></span>
+          </div>
+          <p class="p-desc">Tricot jaune fluo et paume enduite de nitrile&nbsp;: une bonne prise pour poser le triangle, changer une roue ou écarter des débris, et des mains protégées avant de toucher un blessé.</p>
+          <ul class="specs">
+            <li>Paume et bouts des doigts enduits nitrile</li>
+            <li>Dos aéré, poignet tricoté qui tient bien</li>
+            <li>Visibles de loin, comme le gilet</li>
+          </ul>
+          <div class="buy">
+            <fieldset>
+              <legend>Taille <a href="#tailles-gants">Mesurer sa main</a></legend>
+              <div class="chips">
+                <input type="radio" name="size-gants" id="h-7" value="7"><label for="h-7">7</label>
+                <input type="radio" name="size-gants" id="h-8" value="8"><label for="h-8">8</label>
+                <input type="radio" name="size-gants" id="h-9" value="9" checked><label for="h-9">9</label>
+                <input type="radio" name="size-gants" id="h-10" value="10"><label for="h-10">10</label>
+                <input type="radio" name="size-gants" id="h-11" value="11"><label for="h-11">11</label>
+              </div>
+            </fieldset>
+            <a class="btn btn-hv" href="#" data-buy="gants">Commander les gants</a>
+            <p class="note" id="note-gants" hidden>Le paiement en ligne de cet article sera bientôt disponible.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Trousse -->
+      <article class="product" id="p-trousse">
+        <div class="stage" data-model="kit" tabindex="0" aria-label="Trousse de secours en 3D. Faites glisser pour la tourner.">
+          <p class="fallback">L'aperçu 3D n'est pas disponible sur cet appareil.</p>
+        </div>
+        <div class="p-body">
+          <span class="tag">Pochette 26 × 18 × 8 cm</span>
+          <div class="p-top">
+            <h3>Trousse de premiers secours</h3>
+            <span class="price">34,90&nbsp;€<small>TTC</small></span>
+          </div>
+          <p class="p-desc">Une pochette en nylon avec bandages, pansements et accessoires de premiers secours réunis au même endroit, pour soigner en attendant les secours.</p>
+          <ul class="specs">
+            <li>Couverture de survie, garrot, masque de bouche-à-bouche</li>
+            <li>Bandes, compresses, pansements, ciseaux</li>
+            <li>Une paire de gants et un sifflet</li>
+          </ul>
+          <details class="contents">
+            <summary>Voir les 25 articles de la trousse</summary>
+            <div class="tbl-wrap">
+              <table>
+                <thead><tr><th scope="col">Article</th><th scope="col">Dimensions</th><th scope="col">Qté</th></tr></thead>
+                <tbody>
+                  <tr><td>Bande PBT</td><td class="num">5 cm × 4,5 m</td><td class="num">3</td></tr>
+                  <tr><td>Bande PBT</td><td class="num">7,5 cm × 4,5 m</td><td class="num">3</td></tr>
+                  <tr><td>Bande PBT</td><td class="num">10 cm × 4,5 m</td><td class="num">1</td></tr>
+                  <tr><td>Masque de bouche-à-bouche</td><td class="num">30 × 20 cm</td><td class="num">1</td></tr>
+                  <tr><td>Gants</td><td>Taille L</td><td>1 paire</td></tr>
+                  <tr><td>Bandage triangulaire</td><td class="num">96 × 96 × 136 cm</td><td class="num">1</td></tr>
+                  <tr><td>Couverture de survie</td><td class="num">210 × 130 cm</td><td>1 sachet</td></tr>
+                  <tr><td>Épingles de sûreté</td><td>—</td><td class="num">20</td></tr>
+                  <tr><td>Tampons alcoolisés</td><td class="num">5 × 5 cm</td><td class="num">10</td></tr>
+                  <tr><td>Lingettes savonneuses</td><td class="num">5 × 5 cm</td><td class="num">10</td></tr>
+                  <tr><td>Compresses de gaze</td><td class="num">5 × 5 cm</td><td class="num">2</td></tr>
+                  <tr><td>Compresses de gaze</td><td class="num">7,5 × 7,5 cm</td><td class="num">2</td></tr>
+                  <tr><td>Ruban adhésif</td><td class="num">1,25 cm × 4 m</td><td>2 rouleaux</td></tr>
+                  <tr><td>Bande auto-adhésive</td><td class="num">2,5 cm × 4,5 m</td><td>1 rouleau</td></tr>
+                  <tr><td>Cotons-tiges</td><td class="num">8 cm</td><td class="num">50</td></tr>
+                  <tr><td>Patchs pour piqûres de moustiques</td><td class="num">5 × 5 cm</td><td class="num">10</td></tr>
+                  <tr><td>Pansement pour brûlures</td><td class="num">40 × 60 cm</td><td>1 sachet</td></tr>
+                  <tr><td>Pince en plastique</td><td class="num">10 cm</td><td class="num">1</td></tr>
+                  <tr><td>Ciseaux</td><td class="num">14,5 cm</td><td class="num">1</td></tr>
+                  <tr><td>Garrot</td><td class="num">2,5 × 45 cm</td><td class="num">1</td></tr>
+                  <tr><td>Pansements adhésifs</td><td class="num">7,2 × 1,9 cm</td><td class="num">20</td></tr>
+                  <tr><td>Pansements adhésifs</td><td class="num">72 × 38 mm</td><td class="num">4</td></tr>
+                  <tr><td>Pansements adhésifs</td><td class="num">51 × 45 mm</td><td class="num">4</td></tr>
+                  <tr><td>Sifflet en aluminium</td><td>—</td><td class="num">1</td></tr>
+                  <tr><td>Pochette en nylon</td><td class="num">26 × 18 × 8 cm</td><td class="num">1</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+          <div class="buy">
+            <a class="btn btn-hv" href="https://buy.stripe.com/cNi4gy5cC8WUayvfy9fbq02" data-buy="trousse">Commander la trousse</a>
+            <p class="note" id="note-trousse" hidden>Le paiement en ligne de cet article sera bientôt disponible.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Pack -->
+    <section class="pack" id="pack" aria-labelledby="pack-title">
+      <div>
+        <p class="eyebrow" style="color:var(--hiviz)">Le kit complet</p>
+        <h3 id="pack-title">Pack sécurité route</h3>
+        <p>Le gilet, les gants et la trousse en une seule commande. Rangez le gilet dans la boîte à gants ou la portière, la trousse et les gants sous un siège.</p>
+        <ul class="pack-items">
+          <li>1 gilet jaune</li><li>1 paire de gants</li><li>1 trousse de secours</li>
+        </ul>
+      </div>
+      <div class="buy">
+        <span class="price">44,90&nbsp;€<s>49,70&nbsp;€</s></span>
+        <fieldset>
+          <legend>Taille du gilet</legend>
+          <div class="chips">
+            <input type="radio" name="size-pack-gilet" id="pg-enfant" value="enfant"><label for="pg-enfant">Enfant</label>
+            <input type="radio" name="size-pack-gilet" id="pg-ml" value="m-l" checked><label for="pg-ml">M/L</label>
+            <input type="radio" name="size-pack-gilet" id="pg-xl" value="xl-xxl"><label for="pg-xl">XL/XXL</label>
+            <input type="radio" name="size-pack-gilet" id="pg-3xl" value="3xl-4xl"><label for="pg-3xl">3XL/4XL</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Taille des gants</legend>
+          <div class="chips">
+            <input type="radio" name="size-pack-gants" id="ph-7" value="7"><label for="ph-7">7</label>
+            <input type="radio" name="size-pack-gants" id="ph-8" value="8"><label for="ph-8">8</label>
+            <input type="radio" name="size-pack-gants" id="ph-9" value="9" checked><label for="ph-9">9</label>
+            <input type="radio" name="size-pack-gants" id="ph-10" value="10"><label for="ph-10">10</label>
+            <input type="radio" name="size-pack-gants" id="ph-11" value="11"><label for="ph-11">11</label>
+          </div>
+        </fieldset>
+        <a class="btn btn-hv" href="#" data-buy="pack">Commander le pack</a>
+        <p class="note" id="note-pack" hidden>Le paiement en ligne du pack sera bientôt disponible.</p>
+        <p class="ship">Frais de livraison 4,99&nbsp;€ · Livraison en 3 à 5 jours</p>
+      </div>
+    </section>
+  </div>
+</section>
+
+<section class="section alt" id="tailles">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Guide des tailles</p>
+      <h2>Choisir la taille de son gilet jaune</h2>
+      <p>Le gilet se porte par-dessus vos vêtements, manteau compris. Prenez vos mesures avec la veste que vous portez en hiver&nbsp;: le gilet doit s'enfiler vite, sans forcer.</p>
+    </div>
+
+    <div class="size-grid">
+      <div class="measure">
+        <svg viewBox="0 0 260 290" role="img" aria-labelledby="svg-t">
+          <title id="svg-t">Schéma du gilet : A, tour de poitrine sous les bras ; B, longueur de l'épaule au bas du gilet</title>
+          <path d="M72 22 L102 22 L122 118 L142 22 L172 22 C174 72 187 102 204 112 L204 252 L40 252 L40 112 C57 102 70 72 72 22 Z" fill="var(--hiviz)" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>
+          <rect x="41.5" y="190" width="161" height="14" fill="var(--silver)"/>
+          <rect x="41.5" y="220" width="161" height="14" fill="var(--silver)"/>
+          <line x1="122" y1="120" x2="122" y2="250" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 4" opacity=".55"/>
+          <g stroke="var(--signal)" stroke-width="2.5" fill="none" stroke-linecap="round">
+            <line x1="44" y1="140" x2="200" y2="140"/>
+            <path d="M52 134 44 140 52 146M192 134 200 140 192 146"/>
+            <line x1="232" y1="24" x2="232" y2="250"/>
+            <path d="M226 32 232 24 238 32M226 242 232 250 238 242"/>
+          </g>
+          <g font-family="Overpass Mono, monospace" font-size="15" font-weight="600" fill="var(--ink)">
+            <rect x="110" y="146" width="24" height="22" rx="5" fill="var(--card)" stroke="var(--signal)" stroke-width="2"/>
+            <text x="122" y="162" text-anchor="middle">A</text>
+            <rect x="238" y="126" width="22" height="22" rx="5" fill="var(--card)" stroke="var(--signal)" stroke-width="2"/>
+            <text x="249" y="142" text-anchor="middle">B</text>
+          </g>
+        </svg>
+        <ol>
+          <li><b class="k">A</b><p><strong>Tour de poitrine.</strong> Mettez votre veste, passez le mètre ruban sous les bras, à l'endroit le plus large, sans serrer.</p></li>
+          <li><b class="k">B</b><p><strong>Longueur.</strong> Le gilet doit descendre jusqu'au haut des hanches pour que les deux bandes restent visibles au-dessus d'une ceinture.</p></li>
+        </ol>
+        <p class="tip"><strong>Entre deux tailles&nbsp;?</strong> Prenez la plus grande. Un gilet trop juste se ferme mal par-dessus un manteau.</p>
+      </div>
+
+      <div class="size-col">
+        <div class="finder">
+          <label for="chest">Votre tour de poitrine, veste comprise</label>
+          <input type="range" id="chest" min="60" max="140" step="1" value="98" aria-describedby="finder-res">
+          <div class="finder-out" id="finder-res" aria-live="polite">
+            <span class="finder-cm"><span id="chest-val">98</span>&nbsp;cm</span>
+            <span>Taille conseillée&nbsp;: <span class="finder-size" id="size-res">M / L</span></span>
+          </div>
+          <button class="btn" type="button" id="pick-size">Choisir cette taille</button>
+        </div>
+
+        <div class="tbl-wrap">
+          <table id="vest-table">
+            <caption>Gilet jaune</caption>
+            <thead><tr><th scope="col">Taille</th><th scope="col">Tour de poitrine</th><th scope="col">Stature</th><th scope="col">Longueur</th><th scope="col">Équivaut à</th></tr></thead>
+            <tbody>
+              <tr data-size="enfant"><th scope="row">Enfant</th><td class="num">60 – 80 cm</td><td class="num">122 – 152 cm</td><td class="num">52 cm</td><td>7 à 12 ans</td></tr>
+              <tr data-size="m-l"><th scope="row">M / L</th><td class="num">80 – 104 cm</td><td class="num">164 – 182 cm</td><td class="num">66 cm</td><td>36 à 44</td></tr>
+              <tr data-size="xl-xxl"><th scope="row">XL / XXL</th><td class="num">104 – 120 cm</td><td class="num">176 – 194 cm</td><td class="num">70 cm</td><td>46 à 52</td></tr>
+              <tr data-size="3xl-4xl"><th scope="row">3XL / 4XL</th><td class="num">120 – 136 cm</td><td class="num">182 – 200 cm</td><td class="num">74 cm</td><td>54 à 60</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tbl-wrap" id="tailles-gants">
+          <table>
+            <caption>Gants de protection</caption>
+            <thead><tr><th scope="col">Taille</th><th scope="col">Tour de main</th><th scope="col">Longueur de main</th><th scope="col">Équivaut à</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">7</th><td class="num">17,8 cm</td><td class="num">17,1 cm</td><td>S</td></tr>
+              <tr><th scope="row">8</th><td class="num">20,3 cm</td><td class="num">18,2 cm</td><td>M</td></tr>
+              <tr><th scope="row">9</th><td class="num">22,9 cm</td><td class="num">19,2 cm</td><td>L</td></tr>
+              <tr><th scope="row">10</th><td class="num">25,4 cm</td><td class="num">20,4 cm</td><td>XL</td></tr>
+              <tr><th scope="row">11</th><td class="num">27,9 cm</td><td class="num">21,5 cm</td><td>XXL</td></tr>
+            </tbody>
+          </table>
+          <p class="tbl-note">Tour de main&nbsp;: mesurez autour de la paume, au niveau des jointures, sans le pouce. Longueur&nbsp;: du pli du poignet au bout du majeur. Tailles selon la norme EN ISO 21420.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pourquoi">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">La cause du gilet jaune</p>
+      <h2>Pourquoi le gilet jaune&nbsp;?</h2>
+      <p>Après un accident ou une panne, le plus grand danger vient des autres véhicules. Le gilet jaune existe pour une raison simple&nbsp;: que les conducteurs vous voient assez tôt pour ralentir et vous éviter.</p>
+    </div>
+
+    <figure class="vis">
+      <figcaption>De nuit, en feux de croisement, un conducteur voit un piéton à&nbsp;:</figcaption>
+      <div class="vis-grid">
+        <span class="vis-lab">Vêtements sombres</span>
+        <div class="vis-track"><span class="vis-bar dark" style="--w:20%"></span></div>
+        <span class="vis-val">30 m<small>soit 1,2 s</small></span>
+
+        <span class="vis-lab">Vêtements clairs</span>
+        <div class="vis-track"><span class="vis-bar light" style="--w:33.333%"></span></div>
+        <span class="vis-val">50 m<small>soit 2 s</small></span>
+
+        <span class="vis-lab">Gilet à bandes rétroréfléchissantes</span>
+        <div class="vis-track"><span class="vis-bar retro" style="--w:100%"></span></div>
+        <span class="vis-val">150 m et +<small>soit 6 s</small></span>
+
+        <div class="vis-axis" aria-hidden="true"><span style="left:0">0</span><span style="left:33.333%">50 m</span><span style="left:66.667%">100 m</span><span style="left:100%">150 m</span></div>
+      </div>
+      <p class="vis-foot">Les secondes indiquent le temps laissé au conducteur pour réagir à 90&nbsp;km/h, soit 25 mètres parcourus chaque seconde. Sur autoroute à 130&nbsp;km/h, c'est 36 mètres par seconde. Source&nbsp;: Prévention Routière.</p>
+    </figure>
+
+    <div class="law">
+      <article>
+        <span class="big">2008</span>
+        <h3>Obligatoire dans chaque voiture</h3>
+        <p>Depuis le 1<sup>er</sup> octobre 2008, tout conducteur doit avoir un gilet haute visibilité et un triangle de présignalisation. Les motards aussi, depuis le 1<sup>er</sup> janvier 2016.</p>
+      </article>
+      <article>
+        <span class="big">À portée de main</span>
+        <h3>Jamais dans le coffre</h3>
+        <p>Rangez le gilet dans l'habitacle&nbsp;: boîte à gants, portière ou sous le siège. Enfilez-le avant d'ouvrir la portière, pas une fois dehors.</p>
+      </article>
+      <article>
+        <span class="big">135&nbsp;€</span>
+        <h3>L'amende sans gilet</h3>
+        <p>Pas de gilet ou pas de triangle à bord&nbsp;: contravention de 4<sup>e</sup> classe, 135&nbsp;€, ramenée à 90&nbsp;€ si vous payez rapidement.</p>
+      </article>
+    </div>
+
+    <div class="why-two">
+      <div>
+        <h3>En cas d'accident&nbsp;: protéger, alerter, secourir</h3>
+        <ol class="steps">
+          <li><span class="tri" aria-hidden="true"><span>1</span></span><div><h4>Protéger</h4><p>Allumez les feux de détresse. Enfilez votre gilet avant de sortir, faites descendre les passagers côté accotement et mettez tout le monde derrière la glissière. Placez le triangle à 30&nbsp;m au moins du véhicule. Sur autoroute, posez-le seulement si vous pouvez le faire sans danger.</p></div></li>
+          <li><span class="tri" aria-hidden="true"><span>2</span></span><div><h4>Alerter</h4><p>Appelez le 112 depuis un portable, ou le 15 (Samu) et le 18 (pompiers). Sur autoroute, utilisez une borne d'appel orange&nbsp;: il y en a une tous les 2&nbsp;km et elle indique votre position aux secours.</p></div></li>
+          <li><span class="tri" aria-hidden="true"><span>3</span></span><div><h4>Secourir</h4><p>Enfilez les gants avant de toucher un blessé. Ne le déplacez pas, sauf danger immédiat. Couvrez-le avec la couverture de survie de la trousse et restez près de lui jusqu'à l'arrivée des secours.</p></div></li>
+        </ol>
+
+        <div class="tbl-wrap norm">
+          <table>
+            <caption>Ce que dit la norme EN ISO 20471</caption>
+            <thead><tr><th scope="col">Classe</th><th scope="col">Tissu fluo</th><th scope="col">Bandes</th><th scope="col">Usage</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">1</th><td class="num">0,14 m²</td><td class="num">0,10 m²</td><td>Risque faible</td></tr>
+              <tr><th scope="row">2</th><td class="num">0,50 m²</td><td class="num">0,13 m²</td><td>Gilet de voiture</td></tr>
+              <tr><th scope="row">3</th><td class="num">0,80 m²</td><td class="num">0,20 m²</td><td>Travaux sur route</td></tr>
+            </tbody>
+          </table>
+          <p class="tbl-note">Surfaces minimales visibles. Plus la classe est haute, plus le vêtement couvre le corps.</p>
+        </div>
+      </div>
+
+      <aside class="aside" aria-labelledby="gj-title">
+        <h3 id="gj-title">Et le mouvement des Gilets jaunes&nbsp;?</h3>
+        <p>Le 17 novembre 2018, des automobilistes ont manifesté partout en France contre la hausse des taxes sur le carburant, en portant leur gilet jaune.</p>
+        <p>Ils l'avaient choisi parce que chaque conducteur en avait un dans sa voiture depuis 2008. Le gilet de sécurité est ainsi devenu le symbole de ce mouvement social.</p>
+        <p>Sur la route, sa fonction reste la même&nbsp;: vous rendre visible quand vous êtes à pied près de la circulation.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <strong>Kit Sécurité Route</strong>
+      <p style="margin:.3em 0 0">Gilet jaune, gants et trousse de premiers secours.</p>
+    </div>
+    <ul>
+      <li>Frais de livraison 4,99&nbsp;€</li>
+      <li>Livraison en 3 à 5 jours</li>
+      <li>Paiement sécurisé par Stripe</li>
+    </ul>
+    <ul>
+      <li>Apprendre les gestes de premiers secours&nbsp;:</li>
+      <li><a href="https://sst.codes/">sst.codes</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ── Commande : liens de paiement Stripe ──
+   Ajoutez ici le lien Stripe de chaque article. La taille choisie est transmise
+   à Stripe dans client_reference_id (ex. gilet_m-l, pack_xl-xxl_9). */
+const PAYMENT_LINKS = {
+  gilet: '',
+  gants: '',
+  trousse: 'https://buy.stripe.com/cNi4gy5cC8WUayvfy9fbq02',
+  pack: ''
+};
+document.querySelectorAll('[data-buy]').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    var id = a.dataset.buy, url = PAYMENT_LINKS[id], note = document.getElementById('note-' + id);
+    if (!url) { e.preventDefault(); if (note) note.hidden = false; return; }
+    var box = a.closest('.buy');
+    var picked = Array.prototype.map.call(box.querySelectorAll('input[type=radio]:checked'), function (i) { return i.value; });
+    a.href = picked.length ? url + '?client_reference_id=' + encodeURIComponent([id].concat(picked).join('_')) : url;
+  });
+});
+
+/* ── Guide des tailles ── */
+(function () {
+  var SIZES = [
+    { max: 80, id: 'enfant', label: 'Enfant', chip: 'g-enfant' },
+    { max: 104, id: 'm-l', label: 'M / L', chip: 'g-ml' },
+    { max: 120, id: 'xl-xxl', label: 'XL / XXL', chip: 'g-xl' },
+    { max: Infinity, id: '3xl-4xl', label: '3XL / 4XL', chip: 'g-3xl' }
+  ];
+  var range = document.getElementById('chest'), val = document.getElementById('chest-val'), res = document.getElementById('size-res');
+  var rows = document.querySelectorAll('#vest-table tbody tr');
+  var current = SIZES[1];
+  function update() {
+    var v = +range.value;
+    current = SIZES.find(function (s) { return v < s.max; });
+    val.textContent = v;
+    res.textContent = current.label;
+    rows.forEach(function (r) { r.classList.toggle('is-match', r.dataset.size === current.id); });
+  }
+  range.addEventListener('input', update);
+  document.getElementById('pick-size').addEventListener('click', function () {
+    document.getElementById(current.chip).checked = true;
+    var pack = document.getElementById('p' + current.chip);
+    if (pack) pack.checked = true;
+    document.getElementById('p-gilet').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+  });
+  update();
+})();
+
+/* ── Modèles 3D (three.js) ── */
+(function () {
+  var stages = Array.prototype.slice.call(document.querySelectorAll('.stage[data-model]'));
+  function fail() { stages.forEach(function (s) { s.classList.add('no3d'); }); }
+  if (!window.THREE) { fail(); return; }
+  var T = THREE;
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var lin = function (h) { return new T.Color(h).convertSRGBToLinear(); };
+  var smooth = function (a, b, x) { var t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+  function mkCanvas(w, h) { var c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+  function tex(c) { var t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; t.anisotropy = 8; return t; }
+
+  /* Boîte arrondie : chaque sommet est ramené sur une sphère autour de la boîte intérieure */
+  function roundedBox(w, h, d, r, seg) {
+    var g = new T.BoxGeometry(w, h, d, seg, seg, seg), p = g.attributes.position, n = g.attributes.normal;
+    var v = new T.Vector3(), c = new T.Vector3(), hw = w / 2 - r, hh = h / 2 - r, hd = d / 2 - r;
+    for (var i = 0; i < p.count; i++) {
+      v.fromBufferAttribute(p, i);
+      c.set(Math.max(-hw, Math.min(hw, v.x)), Math.max(-hh, Math.min(hh, v.y)), Math.max(-hd, Math.min(hd, v.z)));
+      v.sub(c).normalize();
+      n.setXYZ(i, v.x, v.y, v.z);
+      v.multiplyScalar(r).add(c);
+      p.setXYZ(i, v.x, v.y, v.z);
+    }
+    return g;
+  }
+  function capsule(r, len) {
+    var pts = [], i, a;
+    for (i = 0; i <= 8; i++) { a = -Math.PI / 2 + i / 8 * Math.PI / 2; pts.push(new T.Vector2(Math.max(1e-4, r * Math.cos(a)), -len / 2 + r * Math.sin(a))); }
+    for (i = 0; i <= 8; i++) { a = i / 8 * Math.PI / 2; pts.push(new T.Vector2(Math.max(1e-4, r * Math.cos(a)), len / 2 + r * Math.sin(a))); }
+    return new T.LatheGeometry(pts, 28);
+  }
+  function paint(geo, fn) {
+    var p = geo.attributes.position, arr = new Float32Array(p.count * 3), c = new T.Color();
+    for (var i = 0; i < p.count; i++) { fn(p.getX(i), p.getY(i), p.getZ(i), c); arr[i * 3] = c.r; arr[i * 3 + 1] = c.g; arr[i * 3 + 2] = c.b; }
+    geo.setAttribute('color', new T.BufferAttribute(arr, 3));
+    return geo;
+  }
+
+  /* ── Gilet : un tube découpé (emmanchures, encolure) par une texture ── */
+  var VEST = null;
+  function vestAssets() {
+    if (VEST) return VEST;
+    var W = 2048, H = 1024, c = mkCanvas(W, H), g = c.getContext('2d'), e = mkCanvas(W, H), ge = e.getContext('2d');
+    var BIND = '#AEC20F';
+    ge.fillStyle = '#000'; ge.fillRect(0, 0, W, H);
+    g.fillStyle = '#D9EF1C'; g.fillRect(0, 0, W, H);
+    g.fillStyle = 'rgba(70,80,0,.07)';
+    for (var y = 0; y < H; y += 3) g.fillRect(0, y, W, 1);
+    [[0.585, 0.07], [0.775, 0.07]].forEach(function (b) {
+      var y0 = b[0] * H, h = b[1] * H, r = 0, x, yy;
+      g.fillStyle = '#C3C8CC'; g.fillRect(0, y0, W, h);
+      ge.fillStyle = '#fff'; ge.fillRect(0, y0, W, h);
+      g.fillStyle = 'rgba(255,255,255,.5)'; ge.fillStyle = 'rgba(0,0,0,.28)';
+      for (yy = y0 + 3; yy < y0 + h - 3; yy += 6, r++) for (x = (r % 2) * 3; x < W; x += 6) { g.fillRect(x, yy, 2, 2); ge.fillRect(x, yy, 2, 2); }
+      g.strokeStyle = 'rgba(80,92,0,.6)'; g.lineWidth = 2; g.setLineDash([9, 7]);
+      g.beginPath(); g.moveTo(0, y0 - 6); g.lineTo(W, y0 - 6); g.moveTo(0, y0 + h + 6); g.lineTo(W, y0 + h + 6); g.stroke();
+      g.setLineDash([]);
+    });
+    g.fillStyle = 'rgba(120,136,0,.6)'; g.fillRect(W / 2 - 3, 0.44 * H, 6, H);
+    g.fillStyle = '#F2F3EE'; g.fillRect(W * 0.55, H * 0.46, W * 0.024, H * 0.08);
+    g.fillStyle = '#3a3d40';
+    for (var k = 0; k < 4; k++) g.fillRect(W * 0.553, H * (0.472 + k * 0.016), W * 0.018, H * 0.005);
+    g.fillStyle = BIND; g.fillRect(0, H - 14, W, 14); g.fillRect(0, 0, W, 10);
+    function cut(path) {
+      g.save(); g.lineWidth = 24; g.lineJoin = 'round'; g.strokeStyle = BIND;
+      path(); g.stroke();
+      g.globalCompositeOperation = 'destination-out'; path(); g.fill();
+      g.restore();
+    }
+    [0.25 * W, 0.75 * W].forEach(function (sx) {
+      cut(function () {
+        g.beginPath();
+        g.moveTo(sx - 0.12 * W, 0.08 * H);
+        g.bezierCurveTo(sx - 0.118 * W, 0.3 * H, sx - 0.055 * W, 0.41 * H, sx, 0.42 * H);
+        g.bezierCurveTo(sx + 0.055 * W, 0.41 * H, sx + 0.118 * W, 0.3 * H, sx + 0.12 * W, 0.08 * H);
+        g.bezierCurveTo(sx + 0.06 * W, 0.095 * H, sx - 0.06 * W, 0.095 * H, sx - 0.12 * W, 0.08 * H);
+        g.closePath();
+      });
+    });
+    cut(function () {
+      g.beginPath();
+      g.moveTo(0.5 * W - 0.066 * W, -20);
+      g.quadraticCurveTo(0.5 * W - 0.048 * W, 0.26 * H, 0.5 * W, 0.44 * H);
+      g.quadraticCurveTo(0.5 * W + 0.048 * W, 0.26 * H, 0.5 * W + 0.066 * W, -20);
+      g.closePath();
+    });
+    cut(function () {
+      g.beginPath();
+      g.ellipse(0, -10, 0.066 * W, 0.09 * H, 0, 0, Math.PI * 2);
+      g.moveTo(W + 0.066 * W, -10);
+      g.ellipse(W, -10, 0.066 * W, 0.09 * H, 0, 0, Math.PI * 2);
+    });
+
+    var h = 2.3, geo = new T.CylinderGeometry(1, 1, h, 160, 72, true, Math.PI, Math.PI * 2), p = geo.attributes.position;
+    for (var i = 0; i < p.count; i++) {
+      var x0 = p.getX(i), t = (p.getY(i) + h / 2) / h, s = smooth(0.6, 1, t), flare = 1 + 0.05 * (1 - smooth(0, 0.35, t));
+      var slope = 0.26 * smooth(0.72, 1, t) * x0 * x0;
+      p.setXYZ(i, x0 * 1.12 * flare * (1 - 0.27 * s), p.getY(i) - slope, p.getZ(i) * 0.78 * flare * (1 - 0.42 * s));
+    }
+    geo.computeVertexNormals();
+    VEST = { map: tex(c), emi: tex(e), geo: geo };
+    return VEST;
+  }
+  function buildVest() {
+    var a = vestAssets();
+    var outer = new T.MeshStandardMaterial({ map: a.map, alphaTest: 0.5, roughness: 0.82, emissive: new T.Color(0xffffff), emissiveMap: a.emi, emissiveIntensity: 0 });
+    var inner = new T.MeshStandardMaterial({ map: a.map, alphaTest: 0.5, side: T.BackSide, color: lin('#8a8a8a'), roughness: 0.95 });
+    var grp = new T.Group();
+    grp.add(new T.Mesh(a.geo, outer), new T.Mesh(a.geo, inner));
+    grp.userData.mat = outer;
+    return grp;
+  }
+
+  /* ── Gants : tricot jaune fluo, paume et bouts des doigts enduits ── */
+  var KNIT = lin('#D3E81E'), COAT = lin('#1E2124');
+  function glove(sign) {
+    var mat = new T.MeshStandardMaterial({ vertexColors: true, roughness: 0.82 });
+    var grp = new T.Group();
+    var palm = paint(roundedBox(0.92, 1.0, 0.32, 0.15, 16), function (x, y, z, c) { c.copy(KNIT).lerp(COAT, smooth(0.02, -0.07, z)); });
+    grp.add(new T.Mesh(palm, mat));
+    var fingers = [[-0.3, 0.58, 0.105, 0.06], [-0.1, 0.66, 0.108, 0], [0.11, 0.6, 0.104, -0.05], [0.31, 0.46, 0.09, -0.13]];
+    fingers.forEach(function (f) {
+      var len = f[1], geo = capsule(f[2], len);
+      geo.scale(1, 1, 0.85);
+      paint(geo, function (x, y, z, c) { c.copy(KNIT).lerp(COAT, Math.max(smooth(0.02, -0.05, z), smooth(len / 2 - 0.06, len / 2 + 0.03, y))); });
+      var pivot = new T.Group(), m = new T.Mesh(geo, mat);
+      m.position.y = len / 2;
+      pivot.position.set(f[0] * sign, 0.38, 0);
+      pivot.rotation.set(-0.12, 0, f[3] * sign);
+      pivot.add(m); grp.add(pivot);
+    });
+    var tl = 0.42, tg = capsule(0.12, tl);
+    tg.scale(1, 1, 0.9);
+    paint(tg, function (x, y, z, c) { c.copy(KNIT).lerp(COAT, Math.max(smooth(0.02, -0.05, z), smooth(tl / 2 - 0.06, tl / 2 + 0.04, y))); });
+    var thumb = new T.Group(), tm = new T.Mesh(tg, mat);
+    tm.position.y = tl / 2;
+    thumb.position.set(-0.38 * sign, -0.12, -0.03);
+    thumb.rotation.set(-0.25, 0, 0.85 * sign);
+    thumb.add(tm); grp.add(thumb);
+    var cuffGeo = paint(new T.CylinderGeometry(0.47, 0.45, 0.56, 48, 8), function (x, y, z, c) { c.copy(y < -0.22 ? COAT : KNIT); });
+    cuffGeo.scale(1, 1, 0.42);
+    var cuff = new T.Mesh(cuffGeo, mat);
+    cuff.position.y = -0.76;
+    grp.add(cuff);
+    return grp;
+  }
+  function buildGloves() {
+    var g = new T.Group(), R = glove(1), L = glove(-1);
+    R.position.set(0.95, 0, 0.05); R.rotation.set(0, -0.2, -0.1);
+    L.position.set(-0.75, 0.04, -0.1); L.rotation.set(0, Math.PI + 0.25, 0.1);
+    g.add(R, L);
+    g.position.x = -0.05;
+    return g;
+  }
+
+  /* ── Trousse : pochette rouge, fermeture éclair, croix blanche ── */
+  function buildKit() {
+    var grp = new T.Group();
+    var fc = mkCanvas(256, 256), fg = fc.getContext('2d');
+    fg.fillStyle = '#f0f0f0'; fg.fillRect(0, 0, 256, 256);
+    fg.fillStyle = 'rgba(0,0,0,.09)';
+    for (var i = 0; i < 256; i += 4) { fg.fillRect(i, 0, 1, 256); fg.fillRect(0, i + 2, 256, 1); }
+    var fabric = tex(fc); fabric.wrapS = fabric.wrapT = T.RepeatWrapping; fabric.repeat.set(5, 4);
+    var red = new T.MeshStandardMaterial({ color: lin('#C8102E'), map: fabric, roughness: 0.72 });
+    grp.add(new T.Mesh(roundedBox(2.6, 1.8, 0.8, 0.3, 22), red));
+
+    var pts = [], hw = 1.3, hh = 0.9, r = 0.3, cx = hw - r, cy = hh - r, step = 0.05, x, y, a, k;
+    for (x = -cx; x < cx; x += step) pts.push(new T.Vector3(x, hh, 0));
+    for (k = 0; k < 10; k++) { a = Math.PI / 2 - k / 10 * Math.PI / 2; pts.push(new T.Vector3(cx + r * Math.cos(a), cy + r * Math.sin(a), 0)); }
+    for (y = cy; y > -cy; y -= step) pts.push(new T.Vector3(hw, y, 0));
+    for (k = 0; k < 10; k++) { a = -k / 10 * Math.PI / 2; pts.push(new T.Vector3(cx + r * Math.cos(a), -cy + r * Math.sin(a), 0)); }
+    for (x = cx; x > -cx; x -= step) pts.push(new T.Vector3(x, -hh, 0));
+    for (k = 0; k < 10; k++) { a = -Math.PI / 2 - k / 10 * Math.PI / 2; pts.push(new T.Vector3(-cx + r * Math.cos(a), -cy + r * Math.sin(a), 0)); }
+    for (y = -cy; y < cy; y += step) pts.push(new T.Vector3(-hw, y, 0));
+    for (k = 0; k < 10; k++) { a = Math.PI - k / 10 * Math.PI / 2; pts.push(new T.Vector3(-cx + r * Math.cos(a), cy + r * Math.sin(a), 0)); }
+    var dark = new T.MeshStandardMaterial({ color: lin('#232527'), roughness: 0.45, metalness: 0.3 });
+    grp.add(new T.Mesh(new T.TubeGeometry(new T.CatmullRomCurve3(pts, true), 400, 0.04, 8, true), dark));
+
+    var pull = new T.Mesh(roundedBox(0.1, 0.3, 0.04, 0.018, 4), dark);
+    pull.position.set(0.82, 0.78, 0.07); pull.rotation.z = 0.12;
+    grp.add(pull);
+    var strap = new T.MeshStandardMaterial({ color: lin('#1a1b1d'), roughness: 0.9 });
+    var handle = new T.CubicBezierCurve3(new T.Vector3(-0.55, 0.86, 0), new T.Vector3(-0.45, 1.38, 0), new T.Vector3(0.45, 1.38, 0), new T.Vector3(0.55, 0.86, 0));
+    grp.add(new T.Mesh(new T.TubeGeometry(handle, 40, 0.055, 10, false), strap));
+
+    var lc = mkCanvas(1024, 640), lg = lc.getContext('2d');
+    lg.fillStyle = '#ffffff';
+    function rr(x0, y0, w, h, rad) { lg.beginPath(); lg.moveTo(x0 + rad, y0); lg.arcTo(x0 + w, y0, x0 + w, y0 + h, rad); lg.arcTo(x0 + w, y0 + h, x0, y0 + h, rad); lg.arcTo(x0, y0 + h, x0, y0, rad); lg.arcTo(x0, y0, x0 + w, y0, rad); lg.closePath(); lg.fill(); }
+    rr(512 - 58, 70, 116, 330, 14); rr(512 - 165, 235 - 58, 330, 116, 14);
+    lg.font = '900 74px Overpass, "Arial Black", Arial, sans-serif';
+    lg.textAlign = 'center'; lg.textBaseline = 'middle';
+    lg.fillText('PREMIERS SECOURS', 512, 530);
+    var label = new T.Mesh(new T.PlaneGeometry(1.6, 1.0), new T.MeshStandardMaterial({ map: tex(lc), transparent: true, roughness: 0.6 }));
+    label.position.z = 0.404;
+    grp.add(label);
+    return grp;
+  }
+
+  var BUILD = { vest: buildVest, gloves: buildGloves, kit: buildKit };
+  var FRAME = {
+    vest: { w: 2.9, h: 3.0, camY: 0.35, lookY: 0.05, tilt: 0.06 },
+    gloves: { w: 3.6, h: 2.8, camY: 0.2, lookY: 0.05, tilt: 0.04, rotY: 0.3 },
+    kit: { w: 3.5, h: 3.0, camY: 0.45, lookY: 0.15, tilt: 0.12, rotY: -0.5 }
+  };
+  var TAN = Math.tan(15 * Math.PI / 180);
+  var viewers = [];
+
+  function makeViewer(stage) {
+    var kind = stage.dataset.model, o = FRAME[kind], r;
+    try { r = new T.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' }); }
+    catch (err) { stage.classList.add('no3d'); return null; }
+    r.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    r.outputEncoding = T.sRGBEncoding;
+    r.toneMapping = T.NoToneMapping;
+    r.domElement.className = 'gl';
+    stage.insertBefore(r.domElement, stage.firstChild);
+
+    var scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, 0.1, 60);
+    var hemi = new T.HemisphereLight(0xffffff, lin('#3b3a32'), 0.75);
+    var key = new T.DirectionalLight(0xffffff, 1.15); key.position.set(3, 4, 5);
+    var rim = new T.DirectionalLight(lin('#dfe7ff'), 0.55); rim.position.set(-4, 2.5, -4);
+    scene.add(hemi, key, rim);
+    var model = BUILD[kind](), pivot = new T.Group();
+    pivot.add(model); scene.add(pivot);
+    var v = { stage: stage, r: r, scene: scene, cam: cam, pivot: pivot, model: model, hemi: hemi, key: key, rim: rim, o: o, visible: true, drag: false, rotY: o.rotY || 0, rotX: o.tilt || 0, vel: 0 };
+
+    function fit() {
+      var w = stage.clientWidth, h = stage.clientHeight;
+      if (!w || !h) return;
+      r.setSize(w, h, false);
+      cam.aspect = w / h;
+      var d = Math.max(o.h / (2 * TAN), (o.w / cam.aspect) / (2 * TAN));
+      cam.position.set(0, o.camY, d);
+      cam.lookAt(0, o.lookY, 0);
+      cam.updateProjectionMatrix();
+    }
+    fit();
+    if (window.ResizeObserver) new ResizeObserver(fit).observe(stage); else window.addEventListener('resize', fit);
+
+    var lx = 0, ly = 0, el = r.domElement;
+    el.addEventListener('pointerdown', function (e) { v.drag = true; lx = e.clientX; ly = e.clientY; try { el.setPointerCapture(e.pointerId); } catch (_) {} });
+    el.addEventListener('pointermove', function (e) {
+      if (!v.drag) return;
+      v.vel = (e.clientX - lx) * 0.012; v.rotY += v.vel;
+      v.rotX = Math.max(-0.5, Math.min(0.6, v.rotX + (e.clientY - ly) * 0.006));
+      lx = e.clientX; ly = e.clientY;
+    });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(function (n) { el.addEventListener(n, function () { v.drag = false; }); });
+    stage.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { v.rotY -= 0.3; e.preventDefault(); }
+      if (e.key === 'ArrowRight') { v.rotY += 0.3; e.preventDefault(); }
+    });
+    if (window.IntersectionObserver) new IntersectionObserver(function (en) { v.visible = en[0].isIntersecting; }).observe(stage);
+    viewers.push(v);
+    return v;
+  }
+
+  function loop() {
+    requestAnimationFrame(loop);
+    if (document.hidden) return;
+    for (var i = 0; i < viewers.length; i++) {
+      var v = viewers[i];
+      if (!v.visible) continue;
+      if (!v.drag) {
+        v.vel += ((reduce ? 0 : 0.0045) - v.vel) * 0.04;
+        v.rotY += v.vel;
+        v.rotX += ((v.o.tilt || 0) - v.rotX) * 0.03;
+      }
+      v.pivot.rotation.set(v.rotX, v.rotY, 0);
+      if (v.tick) v.tick();
+      v.r.render(v.scene, v.cam);
+    }
+  }
+
+  function setupNight(v) {
+    var hero = document.getElementById('hero'), btn = document.getElementById('lights'), note = document.getElementById('stage-note');
+    var head = new T.SpotLight(lin('#fff4d6'), 0, 0, 0.5, 0.6, 1);
+    head.position.set(0, -0.3, 9); head.target.position.set(0, 0, 0);
+    v.scene.add(head, head.target);
+    var mat = v.model.userData.mat, night = 0, target = 0;
+    v.tick = function () {
+      night = reduce ? target : night + (target - night) * 0.08;
+      v.hemi.intensity = 0.75 * (1 - night) + 0.03 * night;
+      v.key.intensity = 1.15 * (1 - night);
+      v.rim.intensity = 0.55 * (1 - night);
+      head.intensity = 0.45 * night;
+      mat.emissiveIntensity = 1.3 * night;
+    };
+    btn.addEventListener('click', function () {
+      target = target ? 0 : 1;
+      var on = !!target;
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      btn.querySelector('.switch-tx').textContent = on ? 'Revenir au jour' : 'Allumer les phares';
+      hero.classList.toggle('is-night', on);
+      note.textContent = on
+        ? "De nuit, le jaune fluo ne se voit presque plus : ce sont les bandes rétroréfléchissantes qui renvoient la lumière des phares vers le conducteur."
+        : "Faites glisser le gilet pour le tourner, puis passez en mode nuit.";
+    });
+  }
+
+  function start() {
+    try {
+      stages.forEach(function (s) {
+        var v = makeViewer(s);
+        if (v && s.id === 'stage-hero') setupNight(v);
+      });
+    } catch (err) { fail(); return; }
+    if (!viewers.some(function (v) { return v.stage.id === 'stage-hero'; })) document.getElementById('lights').hidden = true;
+    if (!viewers.length) return;
+    loop();
+  }
+  var fontsReady = document.fonts && document.fonts.load ? document.fonts.load('900 74px Overpass') : Promise.resolve();
+  Promise.race([fontsReady, new Promise(function (res) { setTimeout(res, 1200); })]).then(start, start);
+})();
+</script>
+</body>
+</html>
