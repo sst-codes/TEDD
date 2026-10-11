@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Protocole 5 — Le programme muscu 5 jours, exercices en 3D</title>
+<meta name="description" content="L’ebook interactif pour prendre du muscle : programme 5 jours basé sur la science, 30 exercices animés en 3D, carnet d’entraînement, calculateur nutrition et guide des compléments. 15,99 €.">
+<meta name="theme-color" content="#0b0c0f">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<meta property="og:type" content="product">
+<meta property="og:title" content="Protocole 5 — Le programme muscu 5 jours, exercices en 3D">
+<meta property="og:description" content="Programme 5 jours basé sur la science, 30 exercices animés en 3D, carnet d’entraînement et nutrition. 15,99 €.">
+<meta property="og:image" content="https://sst.codes/muscu/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://sst.codes/muscu/">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://sst.codes/muscu/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/p5.css">
+<script type="importmap">{"imports":{"three":"./js/vendor/three.module.min.js"}}</script>
+<link rel="modulepreload" href="js/vendor/three.module.min.js">
+<style>
+body { background: var(--bg); }
+.w { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+section { padding: clamp(4rem, 9vw, 7rem) 0 0; }
+.sh { max-width: 720px; margin: 0 0 2.4rem; }
+.sh h2 { margin: .7rem 0 .9rem; }
+.sh p { font-size: 1.08rem; margin: 0; }
+.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* navigation */
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(11, 12, 15, .78); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3); border-bottom: 1px solid var(--line); }
+.nav .w { height: 64px; display: flex; align-items: center; gap: 1rem; }
+.nav .brand { white-space: nowrap; }
+@media (max-width: 380px) { .nav .brand { font-size: .85rem; } }
+.nav ul { display: none; gap: 1.6rem; list-style: none; margin: 0 0 0 auto; padding: 0; }
+.nav ul a { color: var(--tx2); text-decoration: none; font-size: .92rem; font-weight: 550; }
+.nav ul a:hover { color: var(--tx); }
+.nav .btn { margin-left: auto; min-height: 42px; padding: .55rem 1.1rem; font-size: .92rem; }
+@media (min-width: 900px) { .nav ul { display: flex; } .nav .btn { margin-left: 0; } }
+
+/* héros */
+.hero { position: relative; overflow: hidden; padding: clamp(2.4rem, 6vw, 4.5rem) 0 2rem; }
+.hero::before { content: ''; position: absolute; width: 900px; height: 900px; right: -260px; top: -320px; background: radial-gradient(closest-side, rgba(255, 90, 46, .22), transparent); pointer-events: none; animation: glow 9s ease-in-out infinite alternate; }
+.hero::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px); background-size: 48px 48px; -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 10%, transparent 70%); mask-image: radial-gradient(ellipse at 70% 30%, #000 10%, transparent 70%); pointer-events: none; }
+@keyframes glow { to { transform: translate(-80px, 60px) scale(1.1); } }
+.hero .w { position: relative; z-index: 1; display: grid; gap: 2.4rem; align-items: center; }
+@media (min-width: 960px) { .hero .w { grid-template-columns: 1.02fr 1fr; } }
+.hero h1 { font-size: clamp(2.9rem, 9vw, 5.4rem); line-height: .95; margin: 1rem 0 1.2rem; letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--acc); }
+.hero .lede { font-size: clamp(1.05rem, 2vw, 1.2rem); max-width: 34rem; }
+.badge { display: inline-flex; align-items: center; gap: .55rem; padding: .4rem .85rem .4rem .45rem; border-radius: 999px; border: 1px solid var(--line2); background: rgba(255, 255, 255, .03); font-size: .82rem; color: var(--tx2); }
+.badge b { background: var(--acc); color: #fff; padding: .2rem .55rem; border-radius: 999px; font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; }
+.buy-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.4rem; margin: 1.8rem 0 1.4rem; }
+.price { display: flex; align-items: baseline; gap: .5rem; }
+.price b { font: 900 2.6rem/1 var(--f-d); font-stretch: 105%; }
+.price span { color: var(--tx3); font-size: .85rem; line-height: 1.3; }
+.trust { display: flex; flex-wrap: wrap; gap: .5rem 1.3rem; font-size: .84rem; color: var(--tx3); }
+.trust span { display: inline-flex; align-items: center; gap: .45rem; }
+.trust svg { width: 16px; height: 16px; color: var(--ok); }
+.hero-3d { position: relative; }
+.hero-3d .stage { aspect-ratio: 1 / 1.05; width: 100%; max-height: 78vh; box-shadow: 0 40px 100px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(255, 255, 255, .04); }
+.float { position: absolute; z-index: 3; display: flex; align-items: center; gap: .6rem; padding: .65rem .85rem; border-radius: 14px; background: rgba(21, 23, 29, .86); backdrop-filter: blur(10px); border: 1px solid var(--line2); box-shadow: 0 16px 40px rgba(0, 0, 0, .45); font-size: .8rem; color: var(--tx2); animation: float 6s ease-in-out infinite; }
+.float b { display: block; color: var(--tx); font-size: .86rem; }
+.float i { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; background: var(--acc-soft); color: var(--acc); font-style: normal; flex: none; }
+.float i svg { width: 18px; height: 18px; }
+.float.f1 { left: -14px; bottom: 16%; }
+.float.f2 { right: -10px; top: 14%; animation-delay: -3s; }
+@media (max-width: 600px) { .float.f1 { left: 8px; bottom: 10px; } .float.f2 { display: none; } }
+@keyframes float { 50% { transform: translateY(-10px); } }
+
+/* bandeau défilant */
+.marquee { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 1rem 0; margin-top: 2.5rem; background: var(--bg2); }
+.marquee .tr { display: flex; gap: 2.6rem; width: max-content; animation: mq 46s linear infinite; }
+.marquee span { font: 800 1rem/1 var(--f-d); font-stretch: 115%; text-transform: uppercase; letter-spacing: .04em; color: var(--tx3); white-space: nowrap; display: inline-flex; align-items: center; gap: 2.6rem; }
+.marquee span::after { content: '✦'; color: var(--acc); font-size: .8rem; }
+@keyframes mq { to { transform: translateX(-50%); } }
+
+/* fonctionnalités */
+.feat { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.fc { position: relative; padding: 1.5rem; border-radius: var(--rl); background: var(--card); border: 1px solid var(--line); overflow: hidden; transition: border-color .3s, transform .3s; }
+.fc:hover { border-color: var(--acc-line); transform: translateY(-4px); }
+.fc .ic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: var(--acc-soft); color: var(--acc); margin-bottom: 1rem; }
+.fc .ic svg { width: 22px; height: 22px; }
+.fc h3 { font-size: 1.2rem; margin: 0 0 .5rem; }
+.fc p { margin: 0; font-size: .95rem; }
+.fc.big { grid-column: 1 / -1; display: grid; gap: 1.5rem; align-items: center; }
+@media (min-width: 800px) { .fc.big { grid-template-columns: 1fr 1.3fr; } }
+.thumbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: .5rem; }
+.thumbs img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 12px; background: var(--stage); transition: transform .4s; }
+.thumbs img:hover { transform: scale(1.06); }
+
+/* démo */
+.demo { display: grid; gap: 1.5rem; align-items: start; }
+@media (min-width: 960px) { .demo { grid-template-columns: 1.25fr 1fr; } }
+.demo .stage { aspect-ratio: 1 / .92; width: 100%; }
+.pick { display: flex; flex-wrap: wrap; gap: .45rem; margin: 0 0 1.3rem; }
+.pick button { border: 1px solid var(--line2); background: var(--card); color: var(--tx2); border-radius: 999px; padding: .55rem 1rem; font-size: .9rem; font-weight: 600; }
+.pick button[aria-pressed="true"] { background: var(--acc); border-color: var(--acc); color: #fff; }
+.demo-info h3 { font-size: 1.6rem; margin: .2rem 0 .7rem; }
+.demo-info ol.steps li { font-size: .95rem; }
+
+/* méthode */
+.pillars { display: grid; gap: 1px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); background: var(--line); border: 1px solid var(--line); border-radius: var(--rl); overflow: hidden; }
+.pl { background: var(--card); padding: 1.6rem 1.4rem; }
+.pl .n { font: 900 2.6rem/1 var(--f-d); font-stretch: 125%; color: transparent; -webkit-text-stroke: 1.4px var(--acc); }
+.pl h3 { font-size: 1.15rem; margin: .9rem 0 .5rem; }
+.pl p { font-size: .93rem; margin: 0; }
+
+/* semaine */
+.wk { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .5rem; }
+.wk div { border: 1px solid var(--line); background: var(--card); border-radius: 16px; padding: 1rem .5rem; text-align: center; min-height: 140px; display: grid; align-content: start; gap: .4rem; }
+.wk b { font: 800 .85rem/1 var(--f-d); text-transform: uppercase; letter-spacing: .05em; color: var(--tx3); }
+.wk strong { font: 850 1.1rem/1.15 var(--f-d); }
+.wk small { font-size: .74rem; color: var(--tx3); line-height: 1.35; }
+.wk .s { border-color: var(--acc-line); background: linear-gradient(180deg, var(--acc-soft), var(--card) 70%); }
+.wk .s b { color: var(--acc); }
+.wk .r { opacity: .5; }
+@media (max-width: 720px) { .wk { grid-template-columns: 1fr; } .wk div { min-height: 0; grid-template-columns: 52px 1fr; text-align: left; align-items: center; padding: .8rem 1rem; } .wk small { grid-column: 2; } }
+
+/* sommaire */
+.toc2 { display: grid; gap: .6rem 2rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); counter-reset: c -1; list-style: none; padding: 0; margin: 0; }
+.toc2 li { counter-increment: c; display: grid; grid-template-columns: 48px 1fr; gap: .6rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+.toc2 li::before { content: counter(c, decimal-leading-zero); font: 900 1.2rem/1.3 var(--f-d); color: var(--acc); }
+.toc2 b { display: block; color: var(--tx); }
+.toc2 span { font-size: .88rem; color: var(--tx3); }
+
+/* pour qui */
+.who { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.who .card h3 { margin: 0 0 1rem; font-size: 1.25rem; }
+.yes li::before { background: var(--ok) !important; }
+
+/* achat */
+.checkout { position: relative; overflow: hidden; display: grid; gap: 2rem; padding: clamp(1.5rem, 4vw, 3rem); border-radius: 30px; background: linear-gradient(140deg, #1c1f27, #121419 60%); border: 1px solid var(--line2); }
+.checkout::before { content: ''; position: absolute; width: 600px; height: 600px; left: -200px; bottom: -340px; background: radial-gradient(closest-side, rgba(255, 90, 46, .25), transparent); pointer-events: none; }
+@media (min-width: 900px) { .checkout { grid-template-columns: 1.1fr 1fr; align-items: center; } }
+.checkout > * { position: relative; min-width: 0; }
+.checkout h2 { font-size: clamp(2rem, 4.6vw, 3rem); margin: .6rem 0 1rem; }
+.box { background: rgba(11, 12, 15, .6); border: 1px solid var(--line2); border-radius: 22px; padding: 1.5rem; }
+.box .price b { font-size: clamp(2.5rem, 11vw, 3.4rem); white-space: nowrap; }
+.box ul.list { margin: 1rem 0 1.2rem; }
+.box ul.list li { font-size: .93rem; margin: .35rem 0; }
+.consent { display: grid; grid-template-columns: auto 1fr; gap: .7rem; align-items: start; font-size: .8rem; color: var(--tx3); line-height: 1.5; margin: 0 0 1rem; cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin: .1rem 0 0; accent-color: var(--acc); cursor: pointer; }
+.box .btn { width: 100%; min-height: 56px; font-size: 1.08rem; }
+.box .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.secure { display: flex; justify-content: center; align-items: center; gap: .6rem; margin-top: .9rem; font-size: .78rem; color: var(--tx3); }
+.secure img { height: 20px; width: auto; filter: brightness(0) invert(.75); }
+
+/* FAQ */
+.faq { max-width: 820px; margin: 0 auto; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; padding: 1.25rem 0; display: flex; justify-content: space-between; gap: 1rem; font-weight: 650; font-size: 1.05rem; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; color: var(--acc); font-size: 1.5rem; line-height: 1; transition: transform .3s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0 0 1.3rem; }
+
+.sticky-buy { position: fixed; z-index: 40; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .6rem .6rem .6rem 1.1rem; border-radius: 18px; background: rgba(21, 23, 29, .92); backdrop-filter: blur(12px); border: 1px solid var(--line2); box-shadow: 0 20px 50px rgba(0, 0, 0, .5); transform: translateY(150%); transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+.sticky-buy.on { transform: none; }
+.sticky-buy b { font: 900 1.3rem/1 var(--f-d); }
+.sticky-buy small { display: block; color: var(--tx3); font-size: .72rem; }
+@media (min-width: 900px) { .sticky-buy { display: none; } }
+.legal { font-size: .78rem; color: var(--tx3); max-width: 860px; margin: 2.5rem auto 0; text-align: center; line-height: 1.6; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M8 2v4M16 2v4M3 10h18M8 15h3"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7c-1.5-2-6-2.5-7 2-1 4 2 11 5 11 1 0 1.3-.6 2-.6s1 .6 2 .6c3 0 6-7 5-11-1-4.5-5.5-4-7-2z"/><path d="M12 7c0-2 1-4 3-4"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="20" height="8" rx="4" transform="rotate(-45 12 12)"/><path d="m8.5 8.5 7 7"/></symbol>
+  <symbol id="i-timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></symbol>
+  <symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></symbol>
+</svg>
+
+<nav class="nav"><div class="w">
+  <a class="brand" href="#"><span class="mk">5</span>Protocole 5</a>
+  <ul><li><a href="#contenu">Contenu</a></li><li><a href="#demo">Aperçu 3D</a></li><li><a href="#methode">Méthode</a></li><li><a href="#faq">FAQ</a></li></ul>
+  <a class="btn" href="#acheter">Obtenir · 15,99 €</a>
+</div></nav>
+
+<header class="hero">
+  <div class="w">
+    <div>
+      <span class="badge rv"><b>2026</b>Ebook interactif · exercices en 3D</span>
+      <h1 class="rv d1">Prends du muscle. <em>Pour de vrai.</em></h1>
+      <p class="lede rv d2">Le programme de musculation 5 jours construit à partir de la recherche scientifique. Chaque exercice est animé en 3D, chaque série est expliquée, et ton carnet d’entraînement est intégré.</p>
+      <div class="buy-row rv d3">
+        <a class="btn" href="#acheter">Je veux le programme<svg><use href="#i-right"/></svg></a>
+        <div class="price"><b>15,99 €</b><span>paiement unique<br>accès immédiat</span></div>
+      </div>
+      <div class="trust rv d3"><span><svg><use href="#i-check"/></svg>Paiement sécurisé Stripe</span><span><svg><use href="#i-check"/></svg>Mobile, tablette, ordinateur</span><span><svg><use href="#i-check"/></svg>Version PDF incluse</span></div>
+    </div>
+    <div class="hero-3d rv d2">
+      <div class="stage" id="hero3d" aria-label="Mannequin 3D réalisant les exercices du programme"><img class="still" src="img/ex/squat.webp" alt="Squat animé en 3D"></div>
+      <div class="float f1"><i><svg><use href="#i-cube"/></svg></i><div><b>Muscles en surbrillance</b>Tu vois exactement ce qui travaille</div></div>
+      <div class="float f2"><i><svg><use href="#i-timer"/></svg></i><div><b>Tempo en direct</b>2 s de descente, montée explosive</div></div>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true"><div class="tr" id="mq"></div></div>
+</header>
+
+<main>
+<section id="contenu"><div class="w">
+  <div class="sh rv"><span class="eyebrow">Ce que tu reçois</span><h2>Bien plus qu’un PDF.</h2><p>Un ebook vivant, pensé pour être utilisé à la salle, sur ton téléphone.</p></div>
+  <div class="feat">
+    <div class="fc big rv">
+      <div><div class="ic"><svg><use href="#i-cube"/></svg></div><h3>30 exercices animés en 3D</h3><p>Un mannequin 3D réalise chaque mouvement au bon tempo. Fais-le tourner, change d’angle, ralentis l’animation. Les muscles ciblés s’allument à chaque répétition. Avec l’exécution pas à pas, les erreurs à éviter et les variantes si la machine est prise.</p></div>
+      <div class="thumbs" id="thumbs"></div>
+    </div>
+    <div class="fc rv"><div class="ic"><svg><use href="#i-cal"/></svg></div><h3>Le programme 5 jours complet</h3><p>Séries, répétitions, RIR série par série, temps de repos et supersets. Plus les versions 3, 4 et 6 jours par semaine.</p></div>
+    <div class="fc rv d1"><div class="ic"><svg><use href="#i-timer"/></svg></div><h3>Carnet et minuteur intégrés</h3><p>Note tes charges, retrouve ta dernière performance, lance le minuteur de repos d’un geste. Exporte ton historique.</p></div>
+    <div class="fc rv d2"><div class="ic"><svg><use href="#i-apple"/></svg></div><h3>Calculateur nutrition</h3><p>Recomposition, sèche ou prise de masse : tes calories, protéines, lipides et glucides calculés pour ton poids.</p></div>
+    <div class="fc rv"><div class="ic"><svg><use href="#i-pill"/></svg></div><h3>Le guide des compléments</h3><p>Les 6 seuls compléments qui ont de vraies preuves, avec les bonnes doses… et les précautions.</p></div>
+    <div class="fc rv d1"><div class="ic"><svg><use href="#i-flask"/></svg></div><h3>55 études citées</h3><p>Volume, proximité de l’échec, tempo, repos, protéines : chaque recommandation s’appuie sur la recherche.</p></div>
+    <div class="fc rv d2"><div class="ic"><svg><use href="#i-phone"/></svg></div><h3>Partout avec toi</h3><p>Fonctionne dans le navigateur, sans appli à installer. Thème clair ou sombre, et une version PDF imprimable.</p></div>
+  </div>
+</div></section>
+
+<section id="demo"><div class="w">
+  <div class="sh rv"><span class="eyebrow">Aperçu interactif</span><h2>Essaie la 3D maintenant.</h2><p>Voici 4 des 30 exercices de l’ebook. Fais glisser pour tourner autour du mannequin.</p></div>
+  <div class="demo">
+    <div class="rv"><div class="stage" id="demo3d"><img class="still" src="img/ex/dc_barre.webp" alt="Développé couché animé en 3D"></div></div>
+    <div class="demo-info rv d1">
+      <div class="pick" id="pick" role="group" aria-label="Choisir un exercice"></div>
+      <span class="eyebrow" id="dCat"></span>
+      <h3 id="dName"></h3>
+      <ul class="chips" id="dMus" style="margin-bottom:1.2rem"></ul>
+      <ol class="steps" id="dSteps"></ol>
+    </div>
+  </div>
+</div></section>
+
+<section id="methode"><div class="w">
+  <div class="sh rv"><span class="eyebrow">La méthode</span><h2>4 principes. Zéro bullshit.</h2><p>Pas de « secret » ni de méthode miracle : uniquement ce que les méta-analyses montrent de plus solide sur la prise de muscle.</p></div>
+  <div class="pillars rv">
+    <div class="pl"><span class="n">01</span><h3>Surcharge progressive</h3><p>Une répétition ou un peu de poids en plus, chaque semaine. Le carnet te montre quoi battre.</p></div>
+    <div class="pl"><span class="n">02</span><h3>Proche de l’échec</h3><p>Entre 0 et 2 répétitions en réserve : le maximum de stimulation, sans la fatigue inutile.</p></div>
+    <div class="pl"><span class="n">03</span><h3>Le bon volume</h3><p>10 à 20 séries par muscle et par semaine, avec un accent sur le dos, les épaules et les bras.</p></div>
+    <div class="pl"><span class="n">04</span><h3>Tension en étirement</h3><p>Des exercices choisis pour charger les muscles en position allongée, là où ils grossissent le plus.</p></div>
+  </div>
+</div></section>
+
+<section id="semaine"><div class="w">
+  <div class="sh rv"><span class="eyebrow">Ta semaine type</span><h2>5 séances. Environ 70 minutes.</h2><p>Chaque muscle entraîné au moins deux fois par semaine. Tu préfères 3, 4 ou 6 séances ? Les adaptations sont incluses.</p></div>
+  <div class="wk rv">
+    <div class="s"><b>Lun</b><strong>Haut A</strong><small>Pecs · dos · bras</small></div>
+    <div class="s"><b>Mar</b><strong>Bas A</strong><small>Quadriceps · ischios</small></div>
+    <div class="s"><b>Mer</b><strong>Haut B</strong><small>Dos · épaules</small></div>
+    <div class="r"><b>Jeu</b><strong>Repos</strong><small>Récupération</small></div>
+    <div class="s"><b>Ven</b><strong>Bas B</strong><small>Chaîne arrière</small></div>
+    <div class="s"><b>Sam</b><strong>Haut C</strong><small>Pecs · épaules · bras</small></div>
+    <div class="r"><b>Dim</b><strong>Repos</strong><small>Récupération</small></div>
+  </div>
+</div></section>
+
+<section id="sommaire"><div class="w">
+  <div class="sh rv"><span class="eyebrow">Sommaire</span><h2>Tout ce qu’il faut. Rien de plus.</h2></div>
+  <ol class="toc2 rv">
+    <li><div><b>Avant de commencer</b><span>Comment utiliser l’ebook, matériel, sécurité</span></div></li>
+    <li><div><b>Les fondamentaux</b><span>Surcharge progressive, RIR, technique, respiration</span></div></li>
+    <li><div><b>Le programme 5 jours</b><span>Les 5 séances détaillées + carnet d’entraînement</span></div></li>
+    <li><div><b>L’échauffement</b><span>Routines jambes et haut du corps, séries d’approche</span></div></li>
+    <li><div><b>Le volume</b><span>Combien de séries par muscle, et pourquoi</span></div></li>
+    <li><div><b>Les variables</b><span>Repos, répétitions, tempo, supersets</span></div></li>
+    <li><div><b>Le choix des exercices</b><span>Étirement, machines vs poids libres, angles</span></div></li>
+    <li><div><b>Les 30 exercices en 3D</b><span>La bibliothèque animée complète</span></div></li>
+    <li><div><b>Fatigue et optimisation</b><span>Deload, intensification, sommeil</span></div></li>
+    <li><div><b>La nutrition</b><span>Recomposition, sèche, prise de masse + calculateur</span></div></li>
+    <li><div><b>Les compléments</b><span>Créatine, caféine, théanine, citrulline, whey, ashwagandha</span></div></li>
+    <li><div><b>Glossaire et références</b><span>Les termes clés et 55 études citées</span></div></li>
+  </ol>
+</div></section>
+
+<section id="pourqui"><div class="w">
+  <div class="sh rv"><span class="eyebrow">Pour qui ?</span><h2>Fait pour toi si…</h2></div>
+  <div class="who">
+    <div class="card rv"><h3>C’est pour toi si</h3><ul class="list yes">
+      <li>tu veux enfin un programme clair, sans te demander quoi faire en arrivant à la salle ;</li>
+      <li>tu débutes et tu veux apprendre les bons mouvements dès le départ ;</li>
+      <li>tu t’entraînes déjà mais tu stagnes depuis des mois ;</li>
+      <li>tu reprends après une pause et tu veux repartir sur de bonnes bases ;</li>
+      <li>tu préfères la science aux promesses des réseaux sociaux.</li></ul></div>
+    <div class="card rv d1"><h3>Ce n’est pas pour toi si</h3><ul class="list x">
+      <li>tu cherches un résultat en 2 semaines sans effort ;</li>
+      <li>tu n’as pas accès à une salle de sport (le programme utilise barres, haltères, poulies et machines) ;</li>
+      <li>tu prépares une compétition de force athlétique ou d’haltérophilie.</li></ul></div>
+  </div>
+</div></section>
+
+<section id="acheter"><div class="w">
+  <div class="checkout rv">
+    <div>
+      <span class="eyebrow">Protocole 5 · Édition 2026</span>
+      <h2>Ton prochain physique commence lundi.</h2>
+      <p>Un paiement unique, et tu as immédiatement accès à l’ebook complet, sur tous tes appareils.</p>
+      <div class="thumbs" id="thumbs2" style="max-width:420px;margin-top:1.4rem"></div>
+    </div>
+    <div class="box">
+      <div class="price"><b>15,99 €</b><span>paiement unique</span></div>
+      <ul class="list yes">
+        <li>Le programme 5 jours complet (+ versions 3, 4 et 6 jours)</li>
+        <li>30 exercices animés en 3D</li>
+        <li>Carnet d’entraînement et minuteur de repos</li>
+        <li>Nutrition, calculateur et guide des compléments</li>
+        <li>Version PDF imprimable</li>
+      </ul>
+      <label class="consent"><input type="checkbox" id="consent"><span>Je demande l’accès immédiat à l’ebook et je reconnais perdre mon droit de rétractation une fois l’accès ouvert (art. L221-28 du Code de la consommation).</span></label>
+      <a class="btn" id="buy" href="https://buy.stripe.com/REMPLACER_PAR_TON_LIEN" aria-disabled="true">Je veux le programme · 15,99 €</a>
+      <div class="secure"><svg width="14" height="14"><use href="#i-lock"/></svg>Paiement sécurisé par <img src="../images/logo-stripe.png" alt="Stripe"></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="faq"><div class="w">
+  <div class="sh center rv"><span class="eyebrow">FAQ</span><h2>Questions fréquentes</h2></div>
+  <div class="faq rv">
+    <details><summary>Comment je reçois l’ebook ?</summary><p>Juste après le paiement, tu es redirigé automatiquement vers ton ebook. Il se consulte en ligne sur ton téléphone, ta tablette ou ton ordinateur, et une version PDF est téléchargeable depuis le sommaire. Ajoute la page à tes favoris : c’est ton accès. Stripe t’envoie aussi un reçu par e-mail.</p></details>
+    <details><summary>De quel matériel ai-je besoin ?</summary><p>D’une salle de sport classique : barre, haltères, poulies et quelques machines courantes (leg extension, leg curl, pec deck…). Si un appareil manque, chaque exercice propose des variantes équivalentes.</p></details>
+    <details><summary>Je débute, c’est adapté ?</summary><p>Oui. Le chapitre « Les fondamentaux » t’explique tout depuis le début, et les animations 3D te montrent la bonne technique avant même ta première série. Si tu n’as jamais fait de sport, commence avec la version 3 séances par semaine.</p></details>
+    <details><summary>Combien de temps durent les séances ?</summary><p>Entre 65 et 75 minutes échauffement compris. Pressé ? L’ebook t’explique comment passer à 3 séries par exercice pour gagner du temps.</p></details>
+    <details><summary>Je ne peux m’entraîner que 3 ou 4 fois par semaine.</summary><p>Aucun problème : les versions 3, 4 et 6 jours par semaine sont expliquées dans le chapitre 2.</p></details>
+    <details><summary>C’est adapté aux femmes ?</summary><p>Oui. Les principes de la prise de muscle sont les mêmes, et le calculateur nutrition s’adapte à ton poids et à ton objectif.</p></details>
+    <details><summary>La 3D fonctionne sur mon téléphone ?</summary><p>Oui, sur tous les navigateurs récents (iPhone, Android, ordinateur), sans application à installer. Tu peux d’ailleurs l’essayer plus haut sur cette page.</p></details>
+    <details><summary>Puis-je être remboursé ?</summary><p>L’ebook étant un contenu numérique accessible immédiatement, le droit de rétractation ne s’applique plus une fois l’accès ouvert (tu l’acceptes au moment de l’achat). Un souci d’accès ? Écris-nous à <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a>, on règle ça rapidement.</p></details>
+  </div>
+  <p class="legal">Les informations de l’ebook sont fournies à titre éducatif et ne remplacent pas l’avis d’un médecin. Consulte un professionnel de santé avant de commencer un programme d’entraînement ou de prendre des compléments alimentaires, en particulier en cas de pathologie, de blessure ou de traitement.</p>
+</div></section>
+</main>
+
+<footer class="foot"><div class="in"><a class="brand" href="#"><span class="mk">5</span>Protocole 5</a><span>Contact : <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></span><span>© 2026 Protocole 5</span></div></footer>
+
+<div class="sticky-buy" id="stickyBuy"><div><small>Protocole 5 · ebook 3D</small><b>15,99 €</b></div><a class="btn btn-sm" href="#acheter">Obtenir</a></div>
+
+<script type="module" src="js/vente.js"></script>
+<script data-goatcounter="https://tep.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

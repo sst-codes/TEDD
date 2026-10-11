@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="fr" class="can-light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Protocole 5 — Ton ebook</title>
+<meta name="description" content="Protocole 5 : le programme de musculation 5 jours basé sur la science, avec chaque exercice animé en 3D.">
+<meta name="theme-color" content="#0b0c0f">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/p5.css">
+<script>try{var t=localStorage.getItem('p5.theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<script type="importmap">{"imports":{"three":"./js/vendor/three.module.min.js"}}</script>
+<link rel="modulepreload" href="js/vendor/three.module.min.js">
+<style>
+/* ───── barre du haut ───── */
+.top { position: sticky; top: 0; z-index: 60; height: var(--top); display: flex; align-items: center; gap: .7rem; padding: 0 16px; background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3); border-bottom: 1px solid var(--line); }
+.top .cur { flex: 1; min-width: 0; font-size: .86rem; color: var(--tx3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.top .cur b { color: var(--tx); font-weight: 650; }
+.top .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--acc); transform-origin: 0 50%; transform: scaleX(0); }
+.top .brand span.t { display: none; }
+@media (min-width: 640px) { .top .brand span.t { display: inline; } }
+.top .icon-btn { width: 38px; height: 38px; }
+.th-l, :root[data-theme="light"] .th-d { display: none; }
+:root[data-theme="light"] .th-l { display: block; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) .th-d { display: none; } :root:not([data-theme]) .th-l { display: block; } }
+
+/* ───── mise en page ───── */
+.layout { max-width: 1320px; margin: 0 auto; }
+main { min-width: 0; padding: 0 16px 4rem; }
+.toc { display: none; }
+.toc nav { display: grid; gap: 2px; }
+.toc a { display: grid; grid-template-columns: 30px 1fr; align-items: baseline; padding: .5rem .7rem; border-radius: 10px; color: var(--tx3); text-decoration: none; font-size: .9rem; line-height: 1.35; transition: background .2s, color .2s; }
+.toc a span { font: 800 .74rem/1 var(--f-d); color: var(--tx3); }
+.toc a:hover { color: var(--tx); background: var(--card); }
+.toc a.on { color: var(--tx); background: var(--card); box-shadow: inset 3px 0 0 var(--acc); }
+.toc a.on span { color: var(--acc); }
+.toc .pdf { margin-top: 1rem; }
+@media (min-width: 1120px) {
+  .layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px; padding: 0 24px; }
+  .toc { display: block; position: sticky; top: calc(var(--top) + 18px); max-height: calc(100vh - var(--top) - 36px); overflow-y: auto; padding: .5rem 0 1rem; }
+  .menu-btn { display: none !important; }
+}
+.drawer { position: fixed; inset: 0; z-index: 70; display: none; }
+.drawer.open { display: block; }
+.drawer .scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, .55); animation: fade .2s; }
+.drawer .panel { position: absolute; top: 0; bottom: 0; left: 0; width: min(330px, 86vw); background: var(--bg2); border-right: 1px solid var(--line); padding: 1rem 12px; overflow-y: auto; animation: slide .28s cubic-bezier(.2, .8, .2, 1); }
+.drawer .toc { display: block; }
+@keyframes slide { from { transform: translateX(-100%); } }
+
+/* ───── couverture ───── */
+.cover { position: relative; max-width: 1080px; margin: 0 auto; padding: 3.5rem 0 2rem; display: grid; gap: 2rem; align-items: center; }
+@media (min-width: 900px) { .cover { grid-template-columns: 1.05fr 1fr; padding-top: 4.5rem; } }
+.cover h1 { font-size: clamp(2.3rem, 6.6vw, 3.7rem); line-height: 1; margin: .9rem 0 1.1rem; }
+@media (min-width: 900px) { .cover h1 { font-size: clamp(2.6rem, 3.6vw, 3.6rem); } }
+.cover h1 em { font-style: normal; color: var(--acc); }
+.cover .lede { font-size: 1.12rem; max-width: 34rem; }
+.cover .stage { aspect-ratio: 1 / 1.02; width: 100%; max-height: 74vh; }
+.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: .7rem; margin: 1.6rem 0 1.8rem; max-width: 34rem; }
+@media (min-width: 560px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { padding: .85rem .9rem; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.stat b { display: block; font: 900 1.6rem/1 var(--f-d); color: var(--tx); white-space: nowrap; }
+.stat span { font-size: .78rem; color: var(--tx3); line-height: 1.3; display: block; margin-top: .3rem; }
+.printonly { display: none; }
+.welcome { display: none; margin: 0 auto; max-width: 1080px; }
+.welcome.show { display: grid; margin-top: 1.4rem; margin-bottom: 0; }
+
+/* ───── chapitres ───── */
+.ch { max-width: 780px; margin: 0 auto; padding: 4.5rem 0 1rem; }
+.ch.wide { max-width: 1040px; }
+.ch-head { display: grid; gap: .6rem; margin-bottom: 1.8rem; padding-top: 2.5rem; border-top: 1px solid var(--line); }
+.ch-head .num { font: 900 clamp(3.6rem, 11vw, 6rem)/.82 var(--f-d); font-stretch: 125%; color: transparent; -webkit-text-stroke: 1.5px var(--line2); }
+.ch-head .lede { font-size: 1.1rem; margin: .3rem 0 0; max-width: 40rem; }
+.exl { all: unset; cursor: pointer; color: var(--tx); font-weight: 600; border-bottom: 1.5px solid var(--acc-line); transition: border-color .2s, color .2s; }
+.exl:hover, .exl:focus-visible { color: var(--acc); border-color: var(--acc); }
+.exl::after { content: ' ⟲'; font-size: .8em; color: var(--acc); }
+
+/* ───── widgets ───── */
+.widget { background: var(--card); border: 1px solid var(--line); border-radius: var(--rl); padding: 1.3rem; margin: 1.4rem 0 1.8rem; box-shadow: var(--sh); }
+.widget > .wt { display: flex; align-items: center; gap: .6rem; font: 750 .8rem/1 var(--f-b); letter-spacing: .12em; text-transform: uppercase; color: var(--tx3); margin-bottom: 1rem; }
+.widget > .wt::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--acc); transform: rotate(45deg); }
+.field { display: grid; gap: .35rem; }
+.field label, .lbl { font-size: .8rem; font-weight: 600; color: var(--tx3); }
+.inp { height: 46px; padding: 0 .9rem; border-radius: 12px; border: 1px solid var(--line2); background: var(--bg2); color: var(--tx); font-size: 1rem; width: 100%; font-variant-numeric: tabular-nums; }
+.inp:focus { outline: none; border-color: var(--acc); box-shadow: 0 0 0 3px var(--acc-soft); }
+.inp-u { position: relative; } .inp-u .inp { padding-right: 2.6rem; } .inp-u span { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%); color: var(--tx3); font-size: .85rem; pointer-events: none; }
+.seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 14px; background: var(--bg2); border: 1px solid var(--line); }
+.seg button { border: 0; background: transparent; padding: .55rem .9rem; border-radius: 10px; font-size: .88rem; font-weight: 600; color: var(--tx3); }
+.seg button[aria-pressed="true"] { background: var(--card); color: var(--tx); box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 0 0 1px var(--line2); }
+.row { display: flex; flex-wrap: wrap; gap: .9rem; align-items: end; }
+.row > .field { flex: 1 1 150px; }
+.out { display: grid; gap: .7rem; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin-top: 1.1rem; }
+.big { padding: 1rem; border-radius: 14px; background: var(--bg2); border: 1px solid var(--line); }
+.big .k { font-size: .76rem; font-weight: 650; color: var(--tx3); letter-spacing: .04em; }
+.big .v { font: 850 1.65rem/1.1 var(--f-d); color: var(--tx); margin: .3rem 0 .1rem; font-variant-numeric: tabular-nums; }
+.big .s { font-size: .8rem; color: var(--tx3); }
+.big.acc { background: var(--acc-soft); border-color: var(--acc-line); } .big.acc .v { color: var(--acc); }
+
+/* RIR */
+.reps { display: grid; grid-template-columns: repeat(12, 1fr); gap: 5px; margin: 1rem 0 .6rem; }
+.reps i { height: 46px; border-radius: 8px; background: var(--acc); display: grid; place-items: center; font: 800 .8rem/1 var(--f-d); font-style: normal; color: #fff; transition: background .35s, color .35s, transform .35s; }
+.reps i.res { background: transparent; color: var(--tx3); box-shadow: inset 0 0 0 1.5px var(--line2); transform: scale(.94); }
+.rir-range { width: 100%; accent-color: var(--acc); height: 28px; }
+.rir-out { font-size: .95rem; color: var(--tx2); min-height: 3em; }
+
+/* notation */
+.dec { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.dec .set { padding: .6rem .8rem; border-radius: 12px; background: var(--bg2); border: 1px solid var(--line); min-width: 92px; }
+.dec .set small { display: block; font-size: .7rem; color: var(--tx3); font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.dec .set b { font: 850 1.15rem/1.2 var(--f-d); }
+.dec .set em { display: block; font-style: normal; color: var(--acc); font-weight: 700; font-size: .85rem; }
+
+/* tempo */
+.tempo { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; }
+.tempo .track { position: relative; height: 120px; border-radius: 16px; background: var(--bg2); border: 1px solid var(--line); overflow: hidden; }
+.tempo .load { position: absolute; left: 50%; width: 46%; height: 12px; margin-left: -23%; border-radius: 6px; background: var(--tx2); box-shadow: 0 0 0 4px var(--card); animation: tempo 3.6s cubic-bezier(.45, 0, .55, 1) infinite; }
+.tempo .load::before, .tempo .load::after { content: ''; position: absolute; top: -14px; width: 12px; height: 40px; border-radius: 4px; background: var(--acc); }
+.tempo .load::before { left: -6px; } .tempo .load::after { right: -6px; }
+.tempo .lab { display: grid; gap: .4rem; font-size: .86rem; color: var(--tx3); min-width: 150px; }
+.tempo .lab span { display: flex; gap: .5rem; align-items: center; } .tempo .lab i { width: 10px; height: 10px; border-radius: 50%; }
+@keyframes tempo { 0% { top: 14px; } 55.5% { top: 92px; } 58% { top: 92px; } 72% { top: 14px; } 100% { top: 14px; } }
+
+/* semaine + programme */
+.week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin: 1.2rem 0 1.4rem; }
+.week button { border: 1px solid var(--line); background: var(--card); border-radius: 14px; padding: .65rem .3rem; text-align: center; display: grid; gap: .25rem; min-width: 0; }
+.week button b { font: 800 .82rem/1 var(--f-d); letter-spacing: .04em; text-transform: uppercase; }
+.week button span { font-size: .7rem; color: var(--tx3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.week button.rest { opacity: .55; cursor: default; }
+.week button[aria-selected="true"] { border-color: var(--acc); background: var(--acc-soft); }
+.week button[aria-selected="true"] span { color: var(--acc); }
+.day-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .8rem 1.5rem; align-items: end; margin: .4rem 0 1rem; }
+.day-head h3 { margin: .3rem 0 0; font-size: clamp(1.5rem, 3.5vw, 2.1rem); }
+.day-head .meta { display: flex; flex-wrap: wrap; gap: .4rem; }
+.xl { display: grid; gap: .55rem; }
+.ssg { border: 1px dashed var(--acc-line); border-radius: 20px; padding: .55rem; display: grid; gap: .55rem; position: relative; }
+.ssg > .lbl { padding: .15rem .4rem 0; display: flex; gap: .5rem; align-items: center; color: var(--acc); font-size: .76rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.xr { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; transition: border-color .2s; }
+.xr.done { border-color: color-mix(in srgb, var(--ok) 45%, transparent); }
+.xr .main { display: grid; grid-template-columns: 30px 60px minmax(0, 1fr) auto; gap: .75rem; align-items: center; padding: .55rem .75rem .55rem .6rem; }
+.xr .ix { font: 850 .9rem/1 var(--f-d); color: var(--tx3); text-align: center; }
+.xr .ix.ss { color: var(--acc); }
+.xr .th { width: 60px; height: 60px; border-radius: 12px; background: var(--stage); overflow: hidden; border: 0; padding: 0; position: relative; }
+.xr .th img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.25); }
+.xr .th::after { content: ''; position: absolute; right: 4px; bottom: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 6.5v11l9-5.5z'/%3E%3C/svg%3E") center/12px no-repeat; }
+.xr .nm { all: unset; cursor: pointer; font-weight: 650; color: var(--tx); line-height: 1.3; display: block; }
+.xr .nm:hover { color: var(--acc); }
+.xr .sub { display: flex; flex-wrap: wrap; gap: .3rem .7rem; margin-top: .25rem; font-size: .78rem; color: var(--tx3); }
+.xr .sub span { display: inline-flex; align-items: center; gap: .3rem; }
+.xr .sub svg { width: 13px; height: 13px; }
+.xr .pr { text-align: right; }
+.xr .pr b { display: block; font: 850 1.12rem/1 var(--f-d); white-space: nowrap; }
+.xr .rir { display: flex; gap: 3px; justify-content: flex-end; margin-top: .4rem; }
+.xr .rir i { font-style: normal; font: 700 .66rem/1 var(--f-b); padding: .22rem .32rem; border-radius: 5px; background: var(--bg2); color: var(--tx2); border: 1px solid var(--line); }
+.xr .rir i.z { background: var(--acc-soft); color: var(--acc); border-color: var(--acc-line); }
+.xr .tog { display: flex; justify-content: space-between; align-items: center; gap: .5rem; border-top: 1px solid var(--line); padding: .45rem .75rem; font-size: .8rem; color: var(--tx3); }
+.xr .tog button { border: 0; background: none; color: var(--acc); font-weight: 650; font-size: .82rem; padding: .2rem 0; }
+.xr .last { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.xr .log { display: none; padding: .2rem .75rem .8rem; }
+.xr.open .log { display: block; }
+.log table { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+.log th { font-size: .68rem; text-transform: uppercase; letter-spacing: .08em; color: var(--tx3); text-align: left; font-weight: 700; padding: 0 .3rem; }
+.log td { padding: 0 .3rem; }
+.log .n { font: 800 .85rem/1 var(--f-d); color: var(--tx3); width: 28px; }
+.log .tg { font-size: .78rem; color: var(--tx2); white-space: nowrap; }
+.log .inp { height: 40px; padding: 0 .6rem; font-size: .95rem; max-width: 92px; }
+.log .ok { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--line2); background: var(--bg2); display: grid; place-items: center; color: var(--tx3); }
+.log .ok svg { width: 18px; height: 18px; }
+.log tr.on .ok { background: var(--ok); border-color: var(--ok); color: #06140d; }
+.day-foot { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: space-between; align-items: center; margin-top: 1rem; }
+@media (max-width: 560px) {
+  .xr .main { grid-template-columns: 52px minmax(0, 1fr) auto; }
+  .xr .ix { display: none; }
+  .xr .th { width: 52px; height: 52px; }
+  .ssg { padding: .4rem; }
+}
+
+/* minuteur */
+.timer { visibility: hidden; opacity: 0; position: fixed; left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); transform: translate(-50%, 140%); z-index: 75; display: flex; align-items: center; gap: .7rem; padding: .55rem .6rem .55rem 1rem; border-radius: 999px; background: #15171d; color: #fff; border: 1px solid #333845; box-shadow: 0 18px 50px rgba(0, 0, 0, .5); transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .3s, visibility 0s .35s; }
+.timer.on { visibility: visible; opacity: 1; transform: translate(-50%, 0); transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .3s; }
+.timer .ring { width: 38px; height: 38px; }
+.timer .ring circle { fill: none; stroke-width: 4; }
+.timer b { font: 850 1.4rem/1 var(--f-d); min-width: 4.2ch; font-variant-numeric: tabular-nums; }
+.timer small { display: block; font-size: .7rem; color: #9aa0ab; }
+.timer button { border: 1px solid #333845; background: #1d2027; color: #fff; border-radius: 999px; height: 36px; padding: 0 .8rem; font-size: .82rem; font-weight: 650; }
+.timer.end { border-color: var(--ok); }
+
+/* volume */
+.vol { display: grid; gap: .55rem; margin-top: .4rem; }
+.vrow { display: grid; grid-template-columns: 96px 1fr 64px; gap: .7rem; align-items: center; font-size: .85rem; }
+.vrow .n { color: var(--tx2); font-weight: 600; }
+.vrow .t { position: relative; height: 22px; border-radius: 7px; background: var(--bg2); overflow: hidden; }
+.vrow .band { position: absolute; top: 0; bottom: 0; background: var(--ok-soft); border-left: 1px dashed color-mix(in srgb, var(--ok) 55%, transparent); border-right: 1px dashed color-mix(in srgb, var(--ok) 55%, transparent); }
+.vrow .d, .vrow .i { position: absolute; top: 4px; bottom: 4px; border-radius: 4px; transform-origin: 0 50%; transform: scaleX(0); transition: transform 1.1s cubic-bezier(.2, .7, .2, 1); }
+.vrow .d { left: 0; background: var(--acc); }
+.vrow .i { background: repeating-linear-gradient(-45deg, var(--tx3) 0 3px, transparent 3px 6px); opacity: .55; }
+.vol.in .d, .vol.in .i { transform: scaleX(1); }
+.vrow .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--tx2); }
+.vrow .v b { color: var(--tx); }
+.vleg { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin-top: 1rem; font-size: .78rem; color: var(--tx3); }
+.vleg span { display: inline-flex; gap: .45rem; align-items: center; }
+.vleg i { width: 14px; height: 10px; border-radius: 3px; display: inline-block; }
+
+/* bibliothèque */
+.filters { display: flex; gap: .4rem; overflow-x: auto; padding-bottom: .4rem; margin-bottom: 1rem; scrollbar-width: none; }
+.filters button { flex: none; border: 1px solid var(--line); background: var(--card); color: var(--tx2); border-radius: 999px; padding: .45rem .95rem; font-size: .86rem; font-weight: 600; }
+.filters button[aria-pressed="true"] { background: var(--tx); color: var(--bg); border-color: var(--tx); }
+.lib { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); }
+.lc { all: unset; cursor: pointer; display: grid; border-radius: 18px; overflow: hidden; background: var(--card); border: 1px solid var(--line); transition: transform .25s, border-color .25s, box-shadow .25s; }
+.lc:hover, .lc:focus-visible { transform: translateY(-3px); border-color: var(--acc-line); box-shadow: var(--sh); }
+.lc .im { aspect-ratio: 1; background: var(--stage); overflow: hidden; }
+.lc .im img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.lc:hover .im img { transform: scale(1.06); }
+.lc .tx { padding: .7rem .8rem .85rem; }
+.lc b { display: block; font-size: .92rem; line-height: 1.3; color: var(--tx); }
+.lc small { color: var(--tx3); font-size: .76rem; }
+
+/* aliments & compléments */
+.food { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); margin: 1rem 0 1.6rem; }
+.food .card { padding: 1.1rem; }
+.food h4 { margin: 0 0 .3rem; }
+.food p { font-size: .85rem; margin-bottom: .6rem; }
+.supp { display: grid; gap: 1rem; margin: 1.2rem 0; }
+.supp .card { padding: 1.3rem 1.3rem 1.1rem; }
+.supp .hd { display: flex; justify-content: space-between; gap: 1rem; align-items: start; margin-bottom: .6rem; }
+.supp h3 { margin: 0; font-size: 1.35rem; }
+.lvl { display: inline-flex; gap: 3px; align-items: center; font-size: .72rem; color: var(--tx3); white-space: nowrap; }
+.lvl i { width: 16px; height: 6px; border-radius: 3px; background: var(--line2); }
+.lvl i.on { background: var(--ok); }
+.dose { display: grid; gap: .5rem; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin: .7rem 0 .3rem; }
+.dose div { padding: .7rem .8rem; border-radius: 12px; background: var(--bg2); border: 1px solid var(--line); font-size: .86rem; color: var(--tx2); }
+.dose b { display: block; color: var(--tx); font-size: .95rem; }
+
+/* glossaire + références */
+.glo { display: grid; gap: 0; border: 1px solid var(--line); border-radius: var(--rl); overflow: hidden; background: var(--card); }
+.glo div { display: grid; grid-template-columns: minmax(120px, 190px) 1fr; gap: 1rem; padding: .85rem 1.1rem; border-bottom: 1px solid var(--line); }
+.glo div:last-child { border-bottom: 0; }
+.glo dt { font-weight: 700; color: var(--tx); } .glo dd { margin: 0; color: var(--tx2); font-size: .93rem; }
+@media (max-width: 560px) { .glo div { grid-template-columns: 1fr; gap: .2rem; } }
+details.refs { border: 1px solid var(--line); border-radius: var(--r); background: var(--card); margin: .7rem 0; }
+details.refs summary { cursor: pointer; padding: 1rem 1.1rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; }
+details.refs summary::-webkit-details-marker { display: none; }
+details.refs summary::after { content: '+'; color: var(--acc); font-size: 1.2rem; line-height: 1; }
+details.refs[open] summary::after { content: '−'; }
+details.refs ol { margin: 0; padding: 0 1.1rem 1rem 2.4rem; font-size: .84rem; color: var(--tx2); }
+details.refs li { margin: .5rem 0; }
+.end { text-align: center; padding: 4rem 0 2rem; }
+.end h2 { margin: .6rem 0 1rem; }
+
+/* ───── impression / PDF ───── */
+@media print {
+  :root { --bg: #fff; --bg2: #f4f4f4; --card: #fff; --card2: #f5f5f5; --line: #ddd; --line2: #ccc; --tx: #111; --tx2: #333; --tx3: #666; --acc: #e64a1d; --acc-soft: #fdeee8; --acc-line: #f3b9a6; --sh: none; color-scheme: light; }
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  body { font-size: 11pt; background: #fff; }
+  .top, .toc, .drawer, .timer, .modal, .noprint, .stage .ui, .filters, .xr .tog, .xr .log, .day-foot, .week { display: none !important; }
+  .layout { display: block; }
+  main { padding: 0; }
+  .ch { padding-top: 0; break-before: page; max-width: none; }
+  .ch-head { border: 0; padding-top: 0; }
+  .cover { grid-template-columns: 1fr; padding-top: 1rem; }
+  .cover .stage { aspect-ratio: 16 / 10; max-height: 105mm; }
+  .cover .stats { grid-template-columns: repeat(4, 1fr); max-width: none; }
+  .rv { opacity: 1 !important; transform: none !important; }
+  .widget, .card, .callout, .xr, .lc, .big, .tbl-wrap { break-inside: avoid; box-shadow: none; }
+  .vol .d, .vol .i { transform: none !important; }
+  .day-panel { display: block !important; break-inside: avoid; margin-bottom: 1.4rem; }
+  .lib { grid-template-columns: repeat(4, 1fr); }
+  .stage { background: #1b1d22 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .xr .th, .lc .im, .big.acc, .chip.p, .reps i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  details.refs ol { display: block; }
+  .printonly { display: block !important; }
+  a { color: inherit; text-decoration: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+  <symbol id="i-warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-fire" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4 0 7-2.7 7-7 0-4-3-6.5-4-10-2 2-2.5 4-2.5 5.5C11 9 9.5 7.5 9 5.5 6.5 8 5 11 5 15c0 4.3 3 7 7 7z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></symbol>
+</svg>
+
+<header class="top">
+  <button class="icon-btn menu-btn" id="menuBtn" aria-label="Sommaire"><svg><use href="#i-menu"/></svg></button>
+  <a class="brand" href="#bienvenue"><span class="mk">5</span><span class="t">Protocole 5</span></a>
+  <div class="cur" id="cur" aria-live="polite"></div>
+  <button class="icon-btn" id="themeBtn" aria-label="Changer de thème"><svg class="th-d"><use href="#i-sun"/></svg><svg class="th-l"><use href="#i-moon"/></svg></button>
+  <div class="bar" id="bar"></div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true"><div class="scrim" data-close></div><div class="panel"><div class="toc" id="tocM"></div></div></div>
+
+<div class="layout">
+  <aside class="toc" id="toc" aria-label="Sommaire"></aside>
+  <main>
+
+<!-- ═════════════ COUVERTURE ═════════════ -->
+<div class="welcome callout ok" id="welcome"><svg><use href="#i-check"/></svg><div><b>Paiement confirmé, bienvenue !</b><p>Ajoute cette page à tes favoris (ou à l’écran d’accueil de ton téléphone) : c’est ton accès à l’ebook. Tu peux aussi télécharger la version PDF depuis le sommaire.</p></div></div>
+<section class="cover" id="bienvenue" data-title="Bienvenue">
+  <div>
+    <span class="eyebrow">Ebook interactif · Édition 2026</span>
+    <h1>Le programme 5 jours pour prendre du muscle, <em>prouvé par la science.</em></h1>
+    <p class="lede">Entraînement, nutrition, compléments : tout ce qui compte vraiment pour construire du muscle, sans le superflu. Chaque exercice est animé en 3D pour que ta technique soit parfaite dès la première séance.</p>
+    <div class="stats">
+      <div class="stat"><b data-count="5">5</b><span>séances par semaine</span></div>
+      <div class="stat"><b data-count="30">30</b><span>exercices animés en 3D</span></div>
+      <div class="stat"><b data-count="55">55</b><span>études citées</span></div>
+      <div class="stat"><b>10–20</b><span>séries par muscle et par semaine</span></div>
+    </div>
+    <p class="printonly muted" style="font-size:.9rem">Version PDF. La version en ligne contient les animations 3D, le carnet d’entraînement et les calculateurs interactifs.</p>
+    <div class="row noprint">
+      <a class="btn" href="#programme">Voir le programme<svg><use href="#i-right"/></svg></a>
+      <a class="btn btn-ghost" href="#fondamentaux">Commencer la lecture</a>
+    </div>
+  </div>
+  <div class="stage" id="hero" aria-label="Démonstration 3D des exercices"><img class="still" src="img/ex/squat.webp" alt=""></div>
+</section>
+
+<section class="ch" id="avant" data-title="Avant de commencer">
+  <div class="ch-head rv"><span class="num">00</span><span class="eyebrow">Avant de commencer</span><h2>Comment utiliser cet ebook</h2></div>
+  <p class="rv">Ce programme ne contient aucun secret miracle. Il applique, sans compromis, ce que la recherche montre de plus solide sur la prise de muscle : une charge qui augmente semaine après semaine, des séries menées près de l’échec, un volume suffisant pour chaque muscle et des exercices qui travaillent les muscles en position étirée. Ajoute à ça assez de protéines et de sommeil, et tu n’as plus le choix : <strong>tu vas progresser</strong>.</p>
+  <ul class="list rv">
+    <li><strong>Lis les chapitres 1 et 2 avant ta première séance.</strong> Ils t’expliquent comment lire le programme et comment progresser.</li>
+    <li><strong>Touche n’importe quel exercice</strong> (les noms soulignés <button class="exl" data-ex="squat">comme celui-ci</button>) pour ouvrir sa fiche : animation 3D, muscles ciblés, exécution, erreurs à éviter et variantes.</li>
+    <li><strong>Note tes séances dans le carnet intégré</strong> du chapitre 2 : il se souvient de tes charges et te rappelle ce que tu as fait la dernière fois.</li>
+    <li><strong>Ajoute cette page à l’écran d’accueil de ton téléphone</strong> pour l’avoir sous la main à la salle.</li>
+  </ul>
+  <div class="callout warn rv"><svg><use href="#i-warn"/></svg><div><b>Ta santé d’abord</b><p>Si tu as une blessure, une pathologie (notamment cardiaque ou de tension), des douleurs, ou si tu reprends le sport après une longue pause, demande l’avis d’un médecin avant de commencer. Arrête immédiatement un exercice qui provoque une douleur articulaire : la brûlure musculaire est normale, la douleur dans une articulation ne l’est pas.</p></div></div>
+  <h3 class="rv">Le matériel</h3>
+  <p class="rv">Le programme est pensé pour une salle de sport classique : barre, haltères, poulies et quelques machines courantes. Si un appareil manque ou est occupé, chaque fiche exercice propose des <strong>variantes équivalentes</strong>.</p>
+</section>
+
+<!-- ═════════════ 01 FONDAMENTAUX ═════════════ -->
+<section class="ch" id="fondamentaux" data-title="Les fondamentaux">
+  <div class="ch-head rv"><span class="num">01</span><span class="eyebrow">Chapitre 1</span><h2>Les fondamentaux</h2><p class="lede">Cinq principes qui font toute la différence. Si tu ne retiens qu’une chose de cet ebook, retiens ce chapitre.</p></div>
+
+  <h3 class="rv">Tu débutes ? Sois patient</h3>
+  <p class="rv">Ne te compare pas aux physiques que tu vois sur les réseaux sociaux : construire du muscle prend du temps, et c’est normal. Fais confiance au processus. En trois mois de travail sérieux, la différence sera visible. En revanche, si tu forces en augmentant les charges ou le nombre de séries trop vite, tu ralentiras ta progression, tu te blesseras et tu finiras frustré.</p>
+  <p class="rv">La génétique joue un rôle réel : certaines personnes prennent du muscle plus vite que d’autres. Peu importe ton point de départ, ce programme te permet d’exploiter <strong>ton</strong> potentiel au maximum… à condition de t’y donner à 100 %.</p>
+
+  <h3 class="rv">La technique avant la charge</h3>
+  <p class="rv">Une exécution propre protège tes articulations et fait travailler le bon muscle. Avant chaque nouvel exercice, ouvre sa fiche 3D, observe le mouvement sous plusieurs angles, puis <strong>filme-toi</strong> pendant une série et compare. C’est la méthode la plus rapide pour corriger un défaut.</p>
+
+  <h3 class="rv">La surcharge progressive</h3>
+  <p class="rv">C’est LA notion clé de la musculation : ton corps ne s’adapte que s’il y est obligé. L’objectif est simple : <strong>faire un peu mieux à chaque séance</strong>. Une répétition de plus, ou un peu plus de poids.</p>
+  <div class="callout tip rv"><svg><use href="#i-bolt"/></svg><div><b>La règle de progression</b><p>Chaque exercice a une fourchette de répétitions (par exemple 6–8). Tant que tu n’atteins pas le haut de la fourchette sur toutes tes séries, ajoute des répétitions. Dès que tu l’atteins, <strong>augmente la charge</strong> (2,5 kg sur les gros exercices, le plus petit palier possible sur les autres) et repars du bas de la fourchette.</p></div></div>
+  <p class="rv">Pour ça, il faut tout noter : exercice, charge, répétitions et RIR de chaque série. Le <a href="#programme">carnet intégré</a> le fait pour toi, mais un carnet papier ou les notes de ton téléphone fonctionnent aussi. La notation la plus rapide est <strong>répétitions@RIR</strong> :</p>
+  <div class="widget rv" id="notation">
+    <div class="wt">Décodeur de notation</div>
+    <div class="row">
+      <div class="field" style="flex:2 1 220px"><label for="notIn">Exemple : développé couché à 80 kg</label><input class="inp" id="notIn" value="8@2-7@2-7@1-6@1" autocomplete="off" spellcheck="false"></div>
+    </div>
+    <div class="dec" id="notOut"></div>
+    <p class="muted" style="margin:.9rem 0 0;font-size:.85rem">« 8@2 » = 8 répétitions en gardant 2 répétitions en réserve. Modifie le texte pour décoder ta propre séance.</p>
+  </div>
+  <div class="tbl-wrap rv"><table class="tbl">
+    <thead><tr><th>Exercice</th><th>Semaine 1</th><th>Semaine 2</th><th>Ce qui a changé</th></tr></thead>
+    <tbody>
+      <tr><td>Développé couché</td><td>80 kg : 8@2-8@2-8@1-8@1</td><td>82,5 kg : 7@2-7@2-6@1-6@1</td><td>Haut de la fourchette atteint partout : +2,5 kg</td></tr>
+      <tr><td>Tirage vertical large</td><td>60 kg : 11@2-10@2-10@1-9@0</td><td>60 kg : 12@2-11@2-10@1-10@0</td><td>Même charge, plus de répétitions</td></tr>
+      <tr><td>Élévations latérales</td><td>8 kg : 16@1-15@1-14@0-13@0</td><td>8 kg : 17@1-15@1-15@0-14@0</td><td>Même charge, plus de répétitions</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="rv">La proximité de l’échec (RIR)</h3>
+  <p class="rv">Une série n’est vraiment efficace que si elle se termine <strong>près de l’échec musculaire</strong> : c’est dans les dernières répétitions difficiles que toutes les fibres de ton muscle sont mises à contribution. Bonne nouvelle : la recherche montre que s’arrêter <strong>entre 0 et 2 répétitions avant l’échec</strong> donne pratiquement les mêmes résultats que d’aller systématiquement à l’échec… avec beaucoup moins de fatigue.</p>
+  <div class="widget rv" id="rirW">
+    <div class="wt">Visualise le RIR</div>
+    <p style="margin:0 0 .3rem">Avec cette charge, tu peux faire <strong>12 répétitions au maximum</strong>. Déplace le curseur :</p>
+    <div class="reps" id="rirReps" aria-hidden="true"></div>
+    <input type="range" class="rir-range" id="rirIn" min="0" max="5" step="1" value="2" aria-label="Répétitions en réserve">
+    <div class="rir-out" id="rirOut"></div>
+  </div>
+  <p class="rv">Dans le programme, le RIR est indiqué série par série. Quand tu lis <strong>2 · 2 · 1 · 0+P</strong>, cela veut dire : deux premières séries à 2 RIR, la troisième à 1 RIR, et la dernière jusqu’à l’échec, suivie de <strong>répétitions partielles</strong> (des demi-répétitions dans la partie étirée) jusqu’à ne plus pouvoir bouger la charge.</p>
+  <div class="callout sci rv"><svg><use href="#i-flask"/></svg><div><b>Apprends à sentir l’échec</b><p>Pendant tes deux premières semaines, va volontairement à l’échec sur la dernière série de quelques exercices (sur machine ou avec un partenaire pour les exercices lourds). Tu découvriras que tu pouvais souvent faire 2 ou 3 répétitions de plus que tu ne le pensais : ton estimation du RIR sera ensuite beaucoup plus juste.</p></div></div>
+
+  <h3 class="rv">La respiration</h3>
+  <p class="rv">La règle de base : <strong>inspire pendant la phase de descente</strong> (excentrique) et <strong>souffle pendant l’effort</strong> (concentrique). Respirer par le nez ou par la bouche ne change rien à la performance.</p>
+  <p class="rv">Sur les exercices lourds comme le <button class="exl" data-ex="squat">squat</button>, le <button class="exl" data-ex="dc_barre">développé couché</button> ou le <button class="exl" data-ex="sdt">soulevé de terre jambes tendues</button>, tu peux utiliser la <strong>manœuvre de Valsalva</strong> : grande inspiration, ventre gonflé et bloqué pendant la répétition, puis expiration en haut. Elle rigidifie le tronc et augmente la force.</p>
+  <div class="callout warn rv"><svg><use href="#i-warn"/></svg><div><p>La manœuvre de Valsalva fait monter fortement la tension artérielle. Évite-la si tu as de l’hypertension, un problème cardiaque ou ophtalmique, et demande l’avis de ton médecin.</p></div></div>
+</section>
+
+<!-- ═════════════ 02 PROGRAMME ═════════════ -->
+<section class="ch wide" id="programme" data-title="Le programme">
+  <div class="ch-head rv"><span class="num">02</span><span class="eyebrow">Chapitre 2</span><h2>Le programme 5 jours</h2><p class="lede">Trois séances haut du corps, deux séances bas du corps. Chaque muscle est entraîné au moins deux fois par semaine, avec un volume pensé pour un physique esthétique : dos large, épaules pleines, bras épais.</p></div>
+  <div class="week noprint" id="week" role="tablist" aria-label="Semaine type"></div>
+  <div id="days"></div>
+  <div class="callout tip rv"><svg><use href="#i-bolt"/></svg><div><b>Comment lire une ligne</b><p><strong>4 × 6–8</strong> = 4 séries de 6 à 8 répétitions. Les petites étiquettes indiquent le <strong>RIR de chaque série</strong>. <strong>A1 / A2</strong> = superset : tu alternes les deux exercices avec le temps de repos indiqué après chacun. <strong>30 s → 1 min</strong> (exercices à un bras) : commence par ton côté le plus faible, 30 s de repos, côté fort, 1 min de repos, puis recommence. Le tempo est toujours le même : <strong>2 secondes de descente, montée explosive</strong>.</p></div></div>
+
+  <h3 class="rv">Adapter le programme à ton emploi du temps</h3>
+  <div class="grid2 rv">
+    <div class="card"><h4 style="margin-top:0">3 séances par semaine</h4><p style="margin:0">Lundi, mercredi, vendredi : enchaîne les séances <strong>dans l’ordre</strong>, J1, J2, J3, puis J4, J5, J1 la semaine suivante, etc. Progression un peu plus lente, mais tout aussi régulière.</p></div>
+    <div class="card"><h4 style="margin-top:0">4 séances par semaine</h4><p style="margin:0">Même principe en rotation : J1 → J5 sur quatre jours d’entraînement, en gardant au moins un jour de repos après deux jours consécutifs.</p></div>
+    <div class="card"><h4 style="margin-top:0">Du lundi au vendredi</h4><p style="margin:0">J1 à J5 du lundi au vendredi, week-end au repos. Les séances jambes restent séparées de 48 heures : c’est parfait.</p></div>
+    <div class="card"><h4 style="margin-top:0">6 séances par semaine</h4><p style="margin:0">J1 → J5 puis J1 le sixième jour, un jour de repos, et tu reprends à J2. Réservé à ceux qui dorment et mangent bien : si tes performances stagnent plus de 2 semaines, reviens à 5.</p></div>
+  </div>
+  <div class="callout sci rv"><svg><use href="#i-flask"/></svg><div><b>Combien de temps suivre le programme ?</b><p>Au moins 12 semaines. Tant que tu progresses (charges ou répétitions en hausse), ne change rien : changer d’exercices trop souvent empêche de mesurer ta progression. En cas de stagnation, lis le chapitre 8 : un deload règle le problème dans la grande majorité des cas.</p></div></div>
+</section>
+
+<!-- ═════════════ 03 ÉCHAUFFEMENT ═════════════ -->
+<section class="ch" id="echauffement" data-title="L’échauffement">
+  <div class="ch-head rv"><span class="num">03</span><span class="eyebrow">Chapitre 3</span><h2>L’échauffement</h2><p class="lede">10 minutes qui protègent tes articulations et te rendent plus fort dès la première série.</p></div>
+  <p class="rv">Le but principal de l’échauffement est d’<strong>augmenter la température interne du corps</strong> : un muscle chaud est plus performant et moins exposé aux blessures. Le bon repère : commencer à transpirer légèrement. Pour ça, rien de mieux que 5 à 10 minutes de cardio à intensité modérée, idéalement sur un vélo. Si tu t’entraînes tôt le matin, prends 10 minutes : ta température corporelle est plus basse. Un sweat et un jogging t’aideront à te réchauffer plus vite.</p>
+  <p class="rv">L’échauffement sert aussi à préparer les articulations. Préfère les <strong>mouvements dynamiques</strong> (balancements, rotations) aux étirements statiques avant la séance.</p>
+  <h3 class="rv">Échauffement des séances jambes (J2, J4)</h3>
+  <div class="tbl-wrap rv"><table class="tbl" id="wuLegs"></table></div>
+  <h3 class="rv">Échauffement des séances haut du corps (J1, J3, J5)</h3>
+  <div class="tbl-wrap rv"><table class="tbl" id="wuUp"></table></div>
+  <h3 class="rv">Les séries d’échauffement</h3>
+  <p class="rv">Sur les exercices marqués <span class="tag">Échauffement</span> dans le programme, fais des séries d’approche avant tes séries de travail. Elles sont <strong>explosives, propres, loin de l’échec</strong>, et ne comptent pas dans les séries du programme.</p>
+  <ul class="list rv">
+    <li><strong>Charge de travail ≥ 60 kg :</strong> 2 séries d’échauffement : 50 % × 6 répétitions, puis 75 % × 3 répétitions, avec 1 minute de repos.</li>
+    <li><strong>Charge de travail &lt; 60 kg :</strong> 1 série : 50 % × 8 répétitions, puis 1 minute de repos.</li>
+  </ul>
+  <div class="widget rv">
+    <div class="wt">Calculateur de séries d’échauffement</div>
+    <div class="row"><div class="field"><label for="wuIn">Ta charge de travail</label><div class="inp-u"><input class="inp" id="wuIn" type="number" inputmode="decimal" min="0" step="2.5" value="80"><span>kg</span></div></div></div>
+    <div class="out" id="wuOut"></div>
+  </div>
+</section>
+
+<!-- ═════════════ 04 VOLUME ═════════════ -->
+<section class="ch" id="volume" data-title="Le volume">
+  <div class="ch-head rv"><span class="num">04</span><span class="eyebrow">Chapitre 4</span><h2>Le volume d’entraînement</h2><p class="lede">Combien de séries faut-il vraiment par muscle ? La réponse de la recherche, et comment le programme s’y conforme.</p></div>
+  <p class="rv">Le <strong>volume</strong>, c’est le nombre de séries proches de l’échec que tu réalises pour un muscle sur une semaine. Les méta-analyses récentes situent la zone la plus efficace pour la prise de muscle <strong>entre 10 et 20 séries par muscle et par semaine</strong>. En dessous, tu laisses des résultats sur la table ; au-dessus, la fatigue augmente plus vite que les gains.</p>
+  <div class="widget rv">
+    <div class="wt">Volume hebdomadaire du programme</div>
+    <div class="vol" id="vol"></div>
+    <div class="vleg"><span><i style="background:var(--acc)"></i>Séries directes</span><span><i style="background:repeating-linear-gradient(-45deg,var(--tx3) 0 3px,transparent 3px 6px);opacity:.6"></i>Séries indirectes</span><span><i style="background:var(--ok-soft);border:1px dashed var(--ok)"></i>Zone 10–20 séries</span></div>
+  </div>
+  <h4 class="rv">Pourquoi ce volume ?</h4>
+  <p class="rv">Le programme met l’accent sur <strong>le dos, les épaules et les bras</strong> : ce sont eux qui dessinent la silhouette en V, la plus recherchée. Tous les grands groupes musculaires se situent dans la zone optimale. Les petits muscles très sollicités par les exercices composés (biceps, trapèzes, abdos) complètent leur volume grâce au travail indirect.</p>
+  <p class="rv">Certains muscles travaillent aussi <strong>indirectement</strong> :</p>
+  <ul class="list rv">
+    <li>Tous les exercices de pectoraux sollicitent les triceps. C’est pour ça que le développé couché se fait à la barre : il recrute davantage les triceps que la version aux haltères.</li>
+    <li>Tous les tirages du dos font travailler les biceps : avec 9 séries directes et 19 indirectes, tes biceps sont largement servis.</li>
+    <li>Les gros exercices polyarticulaires comme le squat et le soulevé de terre font aussi travailler les abdominaux, qui servent à stabiliser le tronc.</li>
+    <li>Les trapèzes sont recrutés par l’upright row, les élévations latérales et tous les tirages : 3 séries directes suffisent.</li>
+  </ul>
+</section>
+
+<!-- ═════════════ 05 VARIABLES ═════════════ -->
+<section class="ch" id="variables" data-title="Les variables">
+  <div class="ch-head rv"><span class="num">05</span><span class="eyebrow">Chapitre 5</span><h2>Les variables d’entraînement</h2><p class="lede">Repos, répétitions, tempo, supersets : les réglages fins qui transforment une bonne séance en séance optimale.</p></div>
+  <h3 class="rv">Le temps de repos</h3>
+  <p class="rv">Les temps de repos du programme sont des repères. Des repos plus longs permettent de garder plus de répétitions d’une série à l’autre, ce qui augmente le volume réellement efficace. Adapte-les à tes sensations :</p>
+  <ul class="list rv">
+    <li>Tu te sens prêt avant la fin du repos ? Tu peux reprendre un peu plus tôt.</li>
+    <li>Tu perds <strong>3 répétitions ou plus</strong> d’une série à l’autre ? Prends plus de repos.</li>
+    <li><strong>« 30 s → 1 min »</strong> sur les exercices à un bras : côté faible, 30 s de repos, côté fort, 1 min de repos, et on recommence. Exemple pour un droitier au <button class="exl" data-ex="tv_neutre_uni">tirage vertical unilatéral</button> : main gauche 10 reps → 30 s → main droite 10 reps → 1 min → main gauche…</li>
+  </ul>
+  <h3 class="rv">Le nombre de répétitions</h3>
+  <p class="rv">Bonne nouvelle : de <strong>6 à plus de 30 répétitions</strong>, la prise de muscle est similaire, à condition d’aller près de l’échec. Le programme choisit la fourchette la plus pratique pour chaque exercice : basse (6–10) pour les gros mouvements où la technique se dégrade en fin de longue série, haute (12–20) pour les petits muscles et les exercices d’isolation, où une charge légère est plus sûre et plus facile à contrôler.</p>
+  <h3 class="rv">Le tempo</h3>
+  <p class="rv">Une descente contrôlée de <strong>2 à 8 secondes</strong> semble idéale pour la prise de muscle. Le programme retient <strong>2 secondes de descente, sans pause, et une montée explosive</strong> : c’est le meilleur compromis entre stimulation du muscle, force et durée de séance. Toutes les animations 3D suivent ce tempo, regarde l’indicateur de phase en haut à gauche.</p>
+  <div class="widget rv">
+    <div class="wt">Le tempo 2-0-X</div>
+    <div class="tempo">
+      <div class="track" aria-hidden="true"><div class="load"></div></div>
+      <div class="lab"><span><i style="background:var(--info)"></i>Descente : 2 s</span><span><i style="background:var(--tx3)"></i>Pause : 0 s</span><span><i style="background:var(--acc)"></i>Montée : explosive</span></div>
+    </div>
+  </div>
+  <h3 class="rv">Les supersets</h3>
+  <p class="rv">Un superset alterne deux exercices : une série du premier (A1), repos, une série du second (A2), repos, et ainsi de suite. Ça fait <strong>gagner du temps sans nuire à la prise de muscle</strong>. Associer des muscles antagonistes (biceps/triceps, quadriceps/ischios) permet même parfois de faire plus de répétitions. N’en abuse pas pour autant : enchaîner trop d’exercices sans vrai repos augmente la fatigue.</p>
+</section>
+
+<!-- ═════════════ 06 CHOIX ═════════════ -->
+<section class="ch" id="choix" data-title="Le choix des exercices">
+  <div class="ch-head rv"><span class="num">06</span><span class="eyebrow">Chapitre 6</span><h2>Le choix des exercices</h2><p class="lede">Rien n’est laissé au hasard : chaque exercice a été choisi pour une raison précise.</p></div>
+  <h3 class="rv">La tension en position étirée</h3>
+  <p class="rv">C’est l’une des découvertes les plus importantes de ces dernières années : un muscle se développe davantage quand il est <strong>chargé en position allongée</strong>. Le programme privilégie donc les exercices où la résistance est maximale quand le muscle est étiré, avec une grande amplitude :</p>
+  <div class="grid2 rv">
+    <div class="card"><h4 style="margin-top:0"><button class="exl" data-ex="ext_nuque">Extension triceps nuque</button></h4><p style="margin:0">Bras au-dessus de la tête, le chef long du triceps est étiré : il grossit nettement plus qu’avec des extensions bras le long du corps.</p></div>
+    <div class="card"><h4 style="margin-top:0"><button class="exl" data-ex="curl_poulie_uni">Curl dos à la poulie</button></h4><p style="margin:0">Le bras part derrière le corps, le biceps est étiré sous tension maximale.</p></div>
+    <div class="card"><h4 style="margin-top:0"><button class="exl" data-ex="leg_curl">Leg curl assis</button></h4><p style="margin:0">Hanche fléchie, les ischios sont plus allongés qu’au leg curl allongé : meilleure croissance.</p></div>
+    <div class="card"><h4 style="margin-top:0"><button class="exl" data-ex="elev_poulie">Élévations à la poulie</button></h4><p style="margin:0">Contrairement aux haltères, la poulie garde le deltoïde sous tension en bas du mouvement.</p></div>
+  </div>
+  <h3 class="rv">Machines et poids libres</h3>
+  <p class="rv">Les études ne montrent <strong>pas de différence notable</strong> de prise de muscle entre machines et poids libres. Le programme utilise les deux : les machines permettent de se concentrer sur un muscle et d’aller près de l’échec en sécurité, les poids libres travaillent la coordination et sollicitent davantage les stabilisateurs, comme la coiffe des rotateurs de l’épaule.</p>
+  <h3 class="rv">Les angles de travail</h3>
+  <p class="rv">Un même muscle ne se développe pas uniformément avec un seul exercice. Le dos, par exemple, comporte plusieurs régions aux fonctions différentes : le programme combine tirages verticaux et horizontaux, prises larges et prises neutres pour le couvrir entièrement. De même, les mollets se développent mieux <button class="exl" data-ex="mollets">jambes tendues</button>, et les <button class="exl" data-ex="leves_genoux">levés de genoux</button> figurent parmi les exercices qui recrutent le plus les abdominaux et les obliques.</p>
+</section>
+
+<!-- ═════════════ 07 BIBLIOTHÈQUE ═════════════ -->
+<section class="ch wide" id="bibliotheque" data-title="Les exercices en 3D">
+  <div class="ch-head rv"><span class="num">07</span><span class="eyebrow">Chapitre 7</span><h2>Les 30 exercices en 3D</h2><p class="lede">Touche un exercice pour ouvrir sa fiche : animation au bon tempo, muscles ciblés en surbrillance, exécution pas à pas, erreurs fréquentes et variantes. Fais tourner le mannequin avec le doigt ou la souris.</p></div>
+  <div class="filters noprint" id="filters" role="group" aria-label="Filtrer les exercices"></div>
+  <div class="lib" id="lib"></div>
+</section>
+
+<!-- ═════════════ 08 FATIGUE ═════════════ -->
+<section class="ch" id="fatigue" data-title="Fatigue & optimisation">
+  <div class="ch-head rv"><span class="num">08</span><span class="eyebrow">Chapitre 8</span><h2>Fatigue et optimisation</h2><p class="lede">Progresser, c’est aussi savoir lever le pied au bon moment.</p></div>
+  <h3 class="rv">Les signaux d’alerte</h3>
+  <p class="rv">Si tu n’arrives plus à progresser (ni en charge, ni en répétitions) <strong>pendant 2 semaines</strong>, ou si l’entraînement perturbe ton sommeil, la fatigue s’est accumulée. Deux solutions :</p>
+  <div class="grid2 rv">
+    <div class="card"><h4 style="margin-top:0">Une semaine de pause</h4><p style="margin:0">Aucune inquiétude : une semaine sans entraînement ne fait pas perdre de muscle. Tu reviendras souvent plus fort.</p></div>
+    <div class="card"><h4 style="margin-top:0">Une semaine de deload</h4><p style="margin:0">Même programme, mais <strong>moitié moins de séries</strong> et toutes les séries à <strong>4 à 6 RIR</strong>. Tu gardes l’habitude d’aller à la salle tout en récupérant.</p></div>
+  </div>
+  <h3 class="rv">Cycles et deload</h3>
+  <p class="rv">Un schéma courant consiste à augmenter progressivement le volume (par exemple +1 série sur un exercice par séance chaque semaine) pendant 6 semaines, puis à faire une semaine de deload. Peu d’études prouvent que ce découpage soit réellement supérieur. <strong>Le plus simple et le plus efficace :</strong> fais un deload d’une semaine uniquement quand tu stagnes 2 semaines d’affilée.</p>
+  <h3 class="rv">Les techniques d’intensification</h3>
+  <p class="rv">Les <strong>dropsets</strong> et le <strong>rest-pause</strong> (voir le glossaire) permettent d’ajouter du volume en peu de temps, avec des résultats comparables aux séries classiques. Limite-toi à <strong>une ou deux par séance</strong>, sur la dernière série d’un exercice d’isolation, pour ne pas exploser ta fatigue.</p>
+  <h3 class="rv">Range ton téléphone</h3>
+  <p class="rv">Faire défiler les réseaux sociaux avant ou pendant la séance crée une fatigue mentale qui <strong>réduit le nombre de répétitions</strong> que tu es capable de faire. Mets ta musique, lance le minuteur de repos du carnet, et garde le reste pour après.</p>
+  <h3 class="rv">Tu manques de temps ?</h3>
+  <p class="rv">Passe <strong>tous les exercices à 3 séries</strong>. Ta progression sera un peu plus lente, mais l’essentiel est d’être régulier : un programme que tu suis vaut mieux qu’un programme parfait que tu abandonnes. À l’inverse, tu peux passer à 4 séries partout si tu récupères très bien, en surveillant la fatigue.</p>
+  <h3 class="rv">Le sommeil, ton meilleur complément</h3>
+  <p class="rv">Dors au minimum <strong>7 h 30 par nuit</strong>. Le manque de sommeil réduit tes performances, perturbe tes hormones anabolisantes et, en période de sèche, te fait perdre davantage de muscle et moins de gras. C’est non négociable.</p>
+  <ul class="list rv">
+    <li>Couche-toi et lève-toi à heures fixes, même le week-end.</li>
+    <li>Chambre fraîche, sombre et silencieuse.</li>
+    <li>Pas de caféine dans les 8 heures avant le coucher.</li>
+    <li>Éteins les écrans 30 à 60 minutes avant de dormir.</li>
+  </ul>
+</section>
+
+<!-- ═════════════ 09 NUTRITION ═════════════ -->
+<section class="ch" id="nutrition" data-title="La nutrition">
+  <div class="ch-head rv"><span class="num">09</span><span class="eyebrow">Chapitre 9</span><h2>La nutrition</h2><p class="lede">Pas besoin de manger « parfait ». Deux chiffres comptent avant tout : tes calories et tes protéines.</p></div>
+  <h3 class="rv">Choisis ton objectif</h3>
+  <div class="grid3 rv">
+    <div class="card"><span class="eyebrow">Recomposition</span><h4>Perdre du gras et prendre du muscle</h4><p style="margin:0;font-size:.92rem">Pour les débutants, les « skinny fat » (minces mais peu musclés), ceux qui reprennent après une pause, ou qui ne se sont jamais entraînés à fond. <strong>Légèrement sous ta maintenance.</strong></p></div>
+    <div class="card"><span class="eyebrow">Sèche</span><h4>Perdre du gras en gardant le muscle</h4><p style="margin:0;font-size:.92rem">Pour les personnes en surpoids, celles qui veulent perdre du gras plus vite, ou les pratiquants de plus de 6 mois. <strong>300 à 500 kcal sous ta maintenance.</strong></p></div>
+    <div class="card"><span class="eyebrow">Prise de masse</span><h4>Prendre du muscle le plus vite possible</h4><p style="margin:0;font-size:.92rem">Pour les profils minces (« skinny ») et les pratiquants de plus de 6 mois déjà secs (autour de 10 % de masse grasse pour un homme). <strong>200 à 500 kcal au-dessus.</strong></p></div>
+  </div>
+  <div class="widget rv" id="nutri">
+    <div class="wt">Ton calculateur nutrition</div>
+    <div class="row">
+      <div class="field" style="flex:0 1 170px"><label for="nPoids">Ton poids</label><div class="inp-u"><input class="inp" id="nPoids" type="number" inputmode="decimal" min="35" max="200" step="0.5" value="70"><span>kg</span></div></div>
+      <div class="field" style="flex:1 1 300px"><span class="lbl">Ton objectif</span><div class="seg" id="nObj" role="group" aria-label="Objectif">
+        <button data-v="recompo" aria-pressed="true">Recomposition</button><button data-v="seche" aria-pressed="false">Sèche</button><button data-v="pdm" aria-pressed="false">Prise de masse</button></div></div>
+    </div>
+    <div class="out" id="nOut"></div>
+    <p class="muted" id="nNote" style="margin:1rem 0 0;font-size:.85rem"></p>
+  </div>
+  <div class="callout sci rv"><svg><use href="#i-flask"/></svg><div><b>D’où vient « poids × 33 » ?</b><p>C’est une estimation simple de ta <strong>maintenance</strong> (les calories que tu dépenses par jour) pour une personne active qui s’entraîne. Ce n’est qu’un point de départ : ta balance te dira la vérité. Pèse-toi chaque matin et compare les moyennes d’une semaine sur l’autre, puis ajuste de 100 kcal si besoin.</p></div></div>
+
+  <h3 class="rv">Les protéines : la priorité absolue</h3>
+  <p class="rv">Vise <strong>1,6 à 2,2 g de protéines par kilo de poids de corps</strong> chaque jour. En sèche, reste plutôt dans le haut de la fourchette : des apports élevés aident à préserver le muscle en déficit. Pour une personne de 70 kg : entre 112 et 154 g par jour.</p>
+  <ul class="list rv">
+    <li>Répartis-les sur <strong>au moins 3 repas</strong> contenant chacun au minimum 20 à 30 g de protéines.</li>
+    <li>Pas de panique sur la « limite » de protéines par repas : le corps sait utiliser de grosses quantités, simplement plus lentement.</li>
+    <li>Le total de la journée compte bien plus que le timing.</li>
+  </ul>
+  <h3 class="rv">Lipides et glucides</h3>
+  <p class="rv">Les <strong>lipides</strong> sont indispensables à tes hormones : garde au minimum <strong>0,5 g/kg</strong>, et jusqu’à 1,5 g/kg selon tes goûts. Le reste de tes calories va dans les <strong>glucides</strong>, le carburant de tes séances.</p>
+  <h3 class="rv">Avant et après l’entraînement</h3>
+  <div class="grid2 rv">
+    <div class="card"><span class="eyebrow">≈ 1 h 30 avant</span><h4>Le repas pré-séance</h4><p style="margin:0">0,5 g/kg de protéines, 1 g/kg de glucides, peu de lipides (0 à 20 g) pour une digestion rapide.</p></div>
+    <div class="card"><span class="eyebrow">Dans les 1 h 30 après</span><h4>Le repas post-séance</h4><p style="margin:0">0,5 g/kg de protéines et 1 g/kg de glucides. Les lipides, comme tu veux.</p></div>
+  </div>
+  <h3 class="rv">Les meilleurs aliments</h3>
+  <div class="food rv">
+    <div class="card"><h4>Riches en protéines</h4><p>Pour atteindre ton quota facilement.</p><ul class="chips"><li class="chip">Fromage blanc</li><li class="chip">Œufs</li><li class="chip">Poulet</li><li class="chip">Viandes</li><li class="chip">Poisson</li><li class="chip">Blanc de poulet en tranches</li><li class="chip">Whey</li></ul></div>
+    <div class="card"><h4>Riches en fibres</h4><p>Ils calent et améliorent ta santé globale.</p><ul class="chips"><li class="chip">Flocons d’avoine</li><li class="chip">Pâtes complètes</li><li class="chip">Légumes</li><li class="chip">Fruits</li><li class="chip">Légumineuses</li></ul></div>
+    <div class="card"><h4>Volumineux</h4><p>Beaucoup de volume, peu de calories : parfaits en sèche.</p><ul class="chips"><li class="chip">Pommes de terre</li><li class="chip">Légumes</li><li class="chip">Champignons</li><li class="chip">Fruits</li><li class="chip">Tofu</li><li class="chip">Crevettes</li><li class="chip">Fromage blanc 0 %</li><li class="chip">Cabillaud</li></ul></div>
+    <div class="card"><h4>Pour la prise de masse</h4><p>Beaucoup de calories, peu de volume.</p><ul class="chips"><li class="chip">Oléagineux</li><li class="chip">Chocolat noir 80 %+</li><li class="chip">Huile d’olive</li><li class="chip">Œufs</li><li class="chip">Steak 15 %</li><li class="chip">Saumon</li><li class="chip">Avocat</li><li class="chip">Fromage</li><li class="chip">Beurre</li></ul></div>
+  </div>
+  <h3 class="rv">Tenir un déficit sans souffrir</h3>
+  <ul class="list rv">
+    <li><strong>Marche 10 000 pas par jour</strong> : environ 300 kcal dépensées en plus, donc 300 kcal de plus dans ton assiette pour le même déficit.</li>
+    <li><strong>Règle des 80/20</strong> : 80 % d’aliments bruts, 20 % d’aliments plaisir, tant que le total calorique est respecté.</li>
+    <li><strong>Remplis ton assiette</strong> d’aliments riches en fibres et volumineux.</li>
+    <li><strong>Mange lentement</strong> : tu mangeras naturellement moins.</li>
+    <li><strong>Le jeûne intermittent</strong> (sauter le petit-déjeuner) aide certaines personnes à tenir leur total. Ce n’est pas magique, juste pratique si ça te convient.</li>
+    <li>Utilise une application de suivi (MyFitnessPal, Yazio…) pour compter tes calories les premières semaines.</li>
+  </ul>
+  <div class="callout tip rv"><svg><use href="#i-bolt"/></svg><div><b>Le bon rythme en sèche</b><p>Vise une perte de <strong>0,5 % de ton poids par semaine</strong> si tu es déjà assez sec, jusqu’à <strong>1 %</strong> si tu as plus de gras à perdre. Tu perds plus vite ? Ajoute 100 kcal. Pas assez vite ? Retire 100 kcal. Plus le déficit est grand, plus tu risques de perdre du muscle.</p></div></div>
+</section>
+
+<!-- ═════════════ 10 COMPLÉMENTS ═════════════ -->
+<section class="ch" id="complements" data-title="Les compléments">
+  <div class="ch-head rv"><span class="num">10</span><span class="eyebrow">Chapitre 10</span><h2>Les compléments alimentaires</h2><p class="lede">Oui, il y en a très peu qui marchent vraiment. Voici ceux qui ont des preuves scientifiques solides, et comment les doser.</p></div>
+  <div class="callout warn rv"><svg><use href="#i-warn"/></svg><div><b>À lire avant d’acheter</b><p>Un complément ne remplace ni une alimentation équilibrée ni le sommeil. Si tu prends un traitement, si tu as un problème de santé, si tu es enceinte ou allaitante, ou si tu as moins de 18 ans, demande l’avis d’un médecin ou d’un pharmacien. Privilégie les produits certifiés <strong>norme AFNOR NF V94-001</strong> (garantie sans substances dopantes).</p></div></div>
+  <div class="supp">
+    <div class="card rv"><div class="hd"><h3>Créatine monohydrate</h3><span class="lvl" title="Niveau de preuve"><i class="on"></i><i class="on"></i><i class="on"></i>preuves solides</span></div>
+      <p>Le complément le plus étudié au monde. Elle augmente la <strong>force et la performance</strong>, favorise la <strong>prise de muscle</strong>, réduit la fatigue et pourrait même améliorer certaines fonctions cérébrales comme la mémoire.</p>
+      <div class="dose"><div><b>3 à 5 g par jour</b>tous les jours, à n’importe quel moment</div><div><b>Option « charge »</b>20 g/jour en 4 prises pendant 5 à 7 jours pour saturer plus vite (inconfort digestif possible)</div><div><b>Hydratation</b>bois suffisamment tout au long de la journée</div></div></div>
+    <div class="card rv"><div class="hd"><h3>Caféine</h3><span class="lvl"><i class="on"></i><i class="on"></i><i class="on"></i>preuves solides</span></div>
+      <p>Réduit la sensation de fatigue, améliore la concentration et les <strong>performances sportives</strong>. C’est l’ingrédient principal de tout pré-workout.</p>
+      <div class="dose"><div><b>1 à 3 mg/kg</b>30 à 60 min avant la séance</div><div><b>400 mg maximum</b>par jour, toutes sources confondues (café compris)</div><div><b>Pas après 15 h</b>si tu t’entraînes le soir, ton sommeil passe avant</div></div>
+      <div class="row" style="margin-top:.9rem"><div class="field" style="flex:0 1 170px"><label for="cafIn">Ton poids</label><div class="inp-u"><input class="inp" id="cafIn" type="number" inputmode="decimal" value="70" min="35" max="200"><span>kg</span></div></div><div class="big acc" style="flex:1 1 200px"><div class="k">TA DOSE DE CAFÉINE</div><div class="v" id="cafOut">70–210 mg</div><div class="s" id="cafTh"></div></div></div></div>
+    <div class="card rv"><div class="hd"><h3>L-théanine</h3><span class="lvl"><i class="on"></i><i class="on"></i><i></i>preuves modérées</span></div>
+      <p>Un acide aminé du thé qui <strong>adoucit les effets indésirables de la caféine</strong> (nervosité, tension, sommeil perturbé) tout en renforçant ses effets positifs sur la concentration.</p>
+      <div class="dose"><div><b>Ratio 2 pour 1</b>200 mg de théanine pour 100 mg de caféine</div><div><b>400 mg maximum</b>par jour, 30 min avant la séance</div></div></div>
+    <div class="card rv"><div class="hd"><h3>Citrulline</h3><span class="lvl"><i class="on"></i><i class="on"></i><i></i>preuves modérées</span></div>
+      <p>Améliore la <strong>congestion</strong>, permet quelques répétitions de plus et réduit les courbatures.</p>
+      <div class="dose"><div><b>6 à 8 g</b>de citrulline malate</div><div><b>60 min avant</b>la séance</div></div></div>
+    <div class="card rv"><div class="hd"><h3>Whey</h3><span class="lvl"><i class="on"></i><i class="on"></i><i class="on"></i>utile</span></div>
+      <p>Ce n’est pas un produit magique : c’est simplement de la protéine en poudre, <strong>pratique pour atteindre ton quota</strong> quand l’alimentation ne suffit pas. Un shaker = environ 25 g de protéines.</p></div>
+    <div class="card rv"><div class="hd"><h3>Ashwagandha</h3><span class="lvl"><i class="on"></i><i class="on"></i><i></i>preuves modérées</span></div>
+      <p>Une plante adaptogène qui <strong>réduit le stress et le cortisol</strong>, améliore la qualité du sommeil et, dans plusieurs études, la force et l’endurance.</p>
+      <div class="dose"><div><b>300 à 600 mg par jour</b>d’extrait de racine standardisé</div><div><b>30 min avant le coucher</b>si tu la prends pour le sommeil</div></div>
+      <div class="callout warn" style="margin:.9rem 0 0"><svg><use href="#i-warn"/></svg><div><p>Déconseillée aux femmes enceintes ou allaitantes, en cas de troubles de la thyroïde, du foie, de maladie auto-immune, ou avec certains médicaments (sédatifs, antidiabétiques, immunosuppresseurs). Des cas rares d’atteinte du foie ont été rapportés. Son usage est restreint dans certains pays européens : demande conseil à un professionnel de santé.</p></div></div></div>
+  </div>
+  <p class="rv">Tous les autres compléments relèvent au mieux de l’optimisation très marginale. Garde ton argent pour une bonne alimentation.</p>
+</section>
+
+<!-- ═════════════ 11 GLOSSAIRE ═════════════ -->
+<section class="ch" id="glossaire" data-title="Glossaire">
+  <div class="ch-head rv"><span class="num">11</span><span class="eyebrow">Chapitre 11</span><h2>Glossaire</h2></div>
+  <dl class="glo rv" id="glo"></dl>
+</section>
+
+<!-- ═════════════ 12 RÉFÉRENCES ═════════════ -->
+<section class="ch" id="references" data-title="Références">
+  <div class="ch-head rv"><span class="num">12</span><span class="eyebrow">Chapitre 12</span><h2>Références scientifiques</h2><p class="lede">Les principales études et méta-analyses sur lesquelles s’appuie cet ebook.</p></div>
+  <div id="refs"></div>
+  <div class="end rv">
+    <span class="eyebrow">Et maintenant ?</span>
+    <h2>Ta première séance t’attend.</h2>
+    <p>Échauffe-toi, ouvre le carnet, et fais mieux que la dernière fois. Chaque semaine.</p>
+    <a class="btn noprint" href="#programme">Ouvrir le programme<svg><use href="#i-right"/></svg></a>
+  </div>
+  <p class="muted" style="font-size:.8rem;text-align:center">Les informations de cet ebook sont fournies à titre éducatif et ne remplacent pas l’avis d’un médecin ou d’un professionnel de santé.</p>
+</section>
+
+  </main>
+</div>
+
+<footer class="foot noprint"><div class="in"><span>© 2026 Protocole 5 · Ebook à usage personnel, merci de ne pas le partager.</span><span>Une question ? <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></span></div></footer>
+
+<!-- fiche exercice -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+  <div class="scrim" data-close></div>
+  <div class="sheet">
+    <div class="stage" id="mStage"></div>
+    <div class="body" id="mBody"></div>
+    <button class="icon-btn close" data-close aria-label="Fermer"><svg><use href="#i-x"/></svg></button>
+  </div>
+</div>
+
+<!-- minuteur de repos -->
+<div class="timer" id="timer" role="timer" aria-live="off">
+  <svg class="ring" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" stroke="#333845"/><circle id="tRing" cx="20" cy="20" r="16" stroke="#ff5a2e" stroke-dasharray="100.5" stroke-dashoffset="0" transform="rotate(-90 20 20)" stroke-linecap="round"/></svg>
+  <div><b id="tVal">0:00</b><small id="tLbl">Repos</small></div>
+  <button id="tAdd">+30 s</button>
+  <button id="tStop">OK</button>
+</div>
+
+<script type="module" src="js/ebook.js"></script>
+<script data-goatcounter="https://tep.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
