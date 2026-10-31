@@ -75,8 +75,6 @@
   .shadow{position:absolute;left:12%;right:12%;bottom:-26px;height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(60,35,10,.22),transparent);transform:translateZ(-40px);filter:blur(4px)}
 
   /* Gouttes 3D flottantes */
-  .drop3d{position:absolute;width:var(--s,34px);height:calc(var(--s,34px)*1.25);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;transform:translateZ(var(--z,70px)) rotate(180deg);background:radial-gradient(circle at 38% 68%,rgba(255,255,255,.95) 0 9%,transparent 11%),radial-gradient(circle at 50% 40%,#c6ecf5 0%,#7cc4d6 55%,#3a8ea6 100%);box-shadow:inset -4px 6px 10px rgba(255,255,255,.35),0 14px 22px -8px rgba(29,85,102,.45);animation:float 5s ease-in-out infinite;animation-delay:var(--d,0s);pointer-events:none}
-  @keyframes float{50%{margin-top:-12px}}
 
   /* Vignettes */
   .thumbs{display:flex;flex-direction:column;gap:12px;position:sticky;top:90px}
@@ -220,7 +218,6 @@
     .product{padding-top:16px}
     .product .wrap{grid-template-columns:minmax(0,1fr)}
     .info{grid-column:1;grid-row:auto;padding-left:0;margin-top:10px}
-    .drop3d{--s:24px !important}
     .trust .wrap{grid-template-columns:1fr 1fr}
     .panel{padding:24px 18px}
     .steps,.cards3d{grid-template-columns:1fr}
@@ -319,10 +316,6 @@
           </div>
         </div>
         <div class="glare"></div>
-        <span class="drop3d" style="left:-14px;top:12%;--s:36px;--z:90px"></span>
-        <span class="drop3d" style="right:22%;top:-14px;--s:26px;--z:60px;--d:-1.5s"></span>
-        <span class="drop3d" style="left:8%;bottom:-12px;--s:30px;--z:110px;--d:-3s"></span>
-        <span class="drop3d" style="right:14%;bottom:-16px;--s:40px;--z:80px;--d:-.8s"></span>
         <div class="shadow"></div>
       </div>
     </div>
