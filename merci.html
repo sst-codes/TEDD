@@ -133,7 +133,7 @@ a{color:inherit}
 .ft-right{justify-self:end;display:flex;align-items:center;gap:clamp(10px,2vw,16px)}
 .ft-stripe{width:clamp(56px,8vw,78px)}
 .ft a{white-space:nowrap}
-@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right){grid-column:1/-1;grid-row:1}}
+@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right):not(.ft-collab){grid-column:1/-1;grid-row:1}.ft-collab,.ft-right{grid-column:1/-1;justify-self:center}.ft-collab{align-items:center}}
 
 /* ── Haut de page : photo en fond + voile blanc ── */
 .hero{background:#fff url(images/fond-photo.jpg) center 40%/cover no-repeat;color:#1C2A3A}
@@ -145,6 +145,14 @@ a{color:inherit}
 .alt{color:#3D4F63}
 .alt a{color:#0F1D32}
 .logo{width:clamp(100px,12vw,130px);aspect-ratio:1;border-radius:16%;filter:none;box-shadow:0 4px 14px rgba(15,29,50,.28)}
+.ft-collab{justify-self:start;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.ft-collab-t{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B7A8D}
+.ft-collab-logos{display:flex;align-items:center;gap:8px}
+.ft-sc{width:clamp(44px,5vw,54px);height:auto;aspect-ratio:1;border-radius:18%;display:block;box-shadow:0 2px 8px rgba(15,29,50,.18)}
+.ft-x{font-size:1.15rem;font-weight:700;color:#C0392B;line-height:1}
+.ft-previal{width:clamp(76px,9vw,96px);height:auto;display:block;background:#fff;border-radius:10px;padding:3px;box-shadow:0 2px 8px rgba(15,29,50,.12)}
+.ft-right .ft-inrs{width:clamp(70px,9vw,104px)}
+@media(max-width:600px){.ft-collab{justify-self:center;align-items:center}.ft-right{justify-self:center}}
 </style>
 </head>
 <body>
@@ -196,12 +204,20 @@ a{color:inherit}
 
 <footer class="ft">
   <div class="ft-in">
-    <img src="images/logo-inrs.png" alt="INRS — Institut National de Recherche et de Sécurité" class="ft-logo ft-inrs" loading="lazy">
+    <div class="ft-collab">
+      <span class="ft-collab-t">En collaboration avec</span>
+      <div class="ft-collab-logos">
+        <img src="images/logo-sst-badge.jpg" alt="sst.codes" class="ft-sc" loading="lazy">
+        <span class="ft-x" aria-hidden="true">×</span>
+        <img src="images/logo-previal.png" alt="Prévial Formation" class="ft-previal" loading="lazy">
+      </div>
+    </div>
     <div>
       <p>© 2026 — Formation SST · Sauveteur Secouriste du Travail</p>
       <p>Une question ? <a href="mailto:sst-codes@outlook.fr">sst-codes@outlook.fr</a></p>
     </div>
     <div class="ft-right">
+      <img src="images/logo-inrs.png" alt="INRS — Institut National de Recherche et de Sécurité" class="ft-logo ft-inrs" loading="lazy">
       <img src="images/logo-stripe.png" alt="Paiement sécurisé par Stripe" class="ft-logo ft-stripe" loading="lazy">
       <img src="images/logo-sst-officiel.png" alt="Sauveteur Secouriste du Travail" class="ft-logo ft-sst" loading="lazy">
     </div>
