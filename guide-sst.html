@@ -494,7 +494,7 @@ button.tab{
 .ft-right{justify-self:end;display:flex;align-items:center;gap:clamp(10px,2vw,16px)}
 .ft-stripe{width:clamp(56px,8vw,78px)}
 .ft a{white-space:nowrap}
-@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right):not(.ft-collab){grid-column:1/-1;grid-row:1}.ft-collab,.ft-right{grid-column:1/-1;justify-self:center}.ft-collab{align-items:center}}
+@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right):not(.ft-collab){grid-column:1/-1;grid-row:1}.ft-collab{grid-column:1;justify-self:start;align-items:flex-start}.ft-right{grid-column:2;justify-self:end}}
 
 /* ── Trousse 3D qui passe d'un numéro de situation à l'autre (1 à 8) ── */
 .kit3d{position:fixed;left:0;top:0;width:60px;height:44px;z-index:50;pointer-events:none;perspective:320px;
@@ -629,7 +629,7 @@ body.on-trousse{padding-bottom:0}
 .ft-x{font-size:1.15rem;font-weight:700;color:#C0392B;line-height:1}
 .ft-previal{width:clamp(76px,9vw,96px);height:auto;display:block;background:#fff;border-radius:10px;padding:3px;box-shadow:0 2px 8px rgba(15,29,50,.12)}
 .ft-right .ft-inrs{width:clamp(70px,9vw,104px)}
-@media(max-width:600px){.ft-collab{justify-self:center;align-items:center}.ft-right{justify-self:center}}
+@media(max-width:600px){.ft-collab{grid-column:1;justify-self:start;align-items:flex-start}.ft-right{grid-column:2;justify-self:end;gap:8px}}
 </style>
 
 <!-- ═══ HERO ═══ -->

@@ -99,7 +99,7 @@ h1,h2{line-height:1.2;text-wrap:balance}
 .ft-right{justify-self:end;display:flex;align-items:center;gap:clamp(10px,2vw,16px)}
 .ft-stripe{width:clamp(56px,8vw,78px)}
 .ft a{white-space:nowrap}
-@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right):not(.ft-collab){grid-column:1/-1;grid-row:1}.ft-collab,.ft-right{grid-column:1/-1;justify-self:center}.ft-collab{align-items:center}}
+@media(max-width:600px){.ft-in{grid-template-columns:1fr 1fr;row-gap:14px}.ft-in>div:not(.ft-right):not(.ft-collab){grid-column:1/-1;grid-row:1}.ft-collab{grid-column:1;justify-self:start;align-items:flex-start}.ft-right{grid-column:2;justify-self:end}}
 .ft-collab{justify-self:start;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .ft-collab-t{font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6B7A8D}
 .ft-collab-logos{display:flex;align-items:center;gap:8px}
@@ -107,7 +107,7 @@ h1,h2{line-height:1.2;text-wrap:balance}
 .ft-x{font-size:1.15rem;font-weight:700;color:#C0392B;line-height:1}
 .ft-previal{width:clamp(76px,9vw,96px);height:auto;display:block;background:#fff;border-radius:10px;padding:3px;box-shadow:0 2px 8px rgba(15,29,50,.12)}
 .ft-right .ft-inrs{width:clamp(70px,9vw,104px)}
-@media(max-width:600px){.ft-collab{justify-self:center;align-items:center}.ft-right{justify-self:center}}
+@media(max-width:600px){.ft-collab{grid-column:1;justify-self:start;align-items:flex-start}.ft-right{grid-column:2;justify-self:end;gap:8px}}
 </style>
 </head>
 <body>
