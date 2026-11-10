@@ -5,690 +5,525 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>AquaVisière</title>
-<meta name="description" content="AquaVisière, la visière de douche transparente qui protège les yeux et le visage de l'eau et du shampoing. Souple, réutilisable, 30 €.">
-<meta property="og:title" content="AquaVisière — Visière de douche anti-eau">
-<meta property="og:description" content="Fini le shampoing dans les yeux. Visière transparente, souple et réutilisable. 30 €.">
+<meta name="description" content="Plus jamais de shampoing dans les yeux. La visière de douche transparente qui se pose en 2 secondes. 30 €, livraison offerte.">
+<meta property="og:title" content="AquaVisière — Plus jamais de shampoing dans les yeux">
+<meta property="og:description" content="La visière de douche transparente. Se pose en 2 secondes. 30 €, livraison offerte.">
 <meta property="og:image" content="images/visiere-douche.webp">
 <link rel="icon" href="images/favicon-32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fffdfa;
-    --peach:#f7e4cf;
-    --peach-2:#f1d6ba;
-    --peach-line:#ecc9a6;
-    --ink:#10242b;
-    --text:#2c3b40;
-    --muted:#6f7c80;
-    --sea:#1d5566;
-    --sea-2:#163f4c;
-    --aqua:#9fd3df;
-    --aqua-soft:#d8eef3;
-    --radius:16px;
+    --bg:#fffaf4;
+    --sand:#f6e7d6;
+    --sand-2:#efd8bf;
+    --line:#ead2b6;
+    --ink:#0f2a33;
+    --text:#33464c;
+    --muted:#74838a;
+    --sea:#17586b;
+    --sea-2:#0f4252;
+    --aqua:#8fd0e0;
+    --aqua-soft:#dff2f7;
+    --red:#d9534f;
+    --green:#2f9a68;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text);font-family:"Inter",system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{background:var(--bg);color:var(--text);font-family:"Inter",system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
   img{max-width:100%;height:auto;display:block}
   button{font:inherit;color:inherit;cursor:pointer}
-  .serif{font-family:"Fraunces",Georgia,serif}
-  .wrap{max-width:1320px;margin:0 auto;padding:0 24px}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;color:var(--ink);line-height:1.05;font-weight:700;letter-spacing:-.5px}
+  h2{font-size:clamp(32px,4.6vw,54px)}
+  h2 em,h1 em{font-style:italic;color:var(--sea)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  .center{text-align:center}
+  .kicker{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--sea);margin-bottom:14px}
+  .lead{font-size:clamp(17px,1.6vw,20px);color:var(--text)}
 
-  /* ---------- Bandeau + en-tête ---------- */
-  .ribbon{background:var(--sea);color:#eaf6f9;font-size:13px;text-align:center;padding:8px 16px}
-  header{position:sticky;top:0;z-index:40;background:rgba(255,253,250,.9);backdrop-filter:blur(10px);border-bottom:1px solid #f0e6da}
-  header .wrap{height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:14px;background:var(--sea);color:#fff;font-weight:800;font-size:17px;padding:18px 30px;text-decoration:none;box-shadow:0 6px 0 var(--sea-2),0 18px 28px -14px rgba(15,66,82,.7);transition:transform .12s,box-shadow .12s,background .2s}
+  .btn:hover{background:#1c6a80}
+  .btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--sea-2),0 8px 14px -10px rgba(15,66,82,.7)}
+  .btn .arrow{transition:transform .2s}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* ---------- En-tête ---------- */
+  .ribbon{background:var(--ink);color:#d6ecf2;text-align:center;font-size:13px;font-weight:500;padding:9px 16px}
+  header{position:sticky;top:0;z-index:40;background:rgba(255,250,244,.88);backdrop-filter:blur(10px);border-bottom:1px solid #f1e3d2}
+  header .wrap{height:64px;display:flex;align-items:center;justify-content:space-between}
   .brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);font:700 22px "Fraunces",serif}
   .brand i{width:13px;height:17px;background:linear-gradient(160deg,var(--aqua),var(--sea));border-radius:50% 50% 50% 50%/62% 62% 38% 38%;transform:rotate(180deg)}
-  header nav{display:flex;gap:28px;font-size:14px;font-weight:500}
-  header nav a{color:var(--text);text-decoration:none}
-  header nav a:hover{color:var(--sea)}
-  .cart-btn{position:relative;width:44px;height:44px;border-radius:12px;border:1px solid #eadfd2;background:#fff;display:grid;place-items:center}
-  .cart-btn svg{width:21px;height:21px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .cart-count{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--sea);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
-  .cart-count.on{transform:scale(1)}
-  .cart-count.bump{animation:bump .4s}
-  @keyframes bump{50%{transform:scale(1.45)}}
+  header .btn{padding:11px 20px;font-size:14.5px;border-radius:11px;box-shadow:0 4px 0 var(--sea-2)}
 
-  /* ---------- Fiche produit ---------- */
-  .product{padding:28px 0 64px}
-  .product .wrap{display:grid;grid-template-columns:minmax(0,1fr) 100px minmax(0,1fr);gap:18px 18px;align-items:start}
-  .info{padding-left:38px}
+  /* ---------- Hero ---------- */
+  .hero{padding:56px 0 72px;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+  .hero h1{font-size:clamp(44px,6.6vw,84px);margin-bottom:20px}
+  .hero .lead{max-width:28em;margin-bottom:30px}
+  .hero-cta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:26px}
+  .hero-price{font:800 34px "Inter";color:var(--ink);line-height:1}
+  .hero-price small{display:block;font-size:13px;font-weight:600;color:var(--green);margin-top:6px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:13.5px;font-weight:600;color:var(--ink)}
+  .chip svg{width:15px;height:15px;stroke:var(--sea);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 
-  /* Scène 3D */
-  .stage-wrap{perspective:1200px;position:sticky;top:90px}
-  .stage{position:relative;aspect-ratio:1/1;border-radius:20px;background:radial-gradient(120% 90% at 50% 40%,#fbeee0 0%,var(--peach) 55%,var(--peach-2) 100%);transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.8,.2,1);overflow:visible}
-  .stage.moving{transition:transform .08s linear}
-  .slides{position:absolute;inset:0;border-radius:20px;overflow:hidden;transform-style:preserve-3d;perspective:900px}
-  .slide{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transform:rotateY(28deg) translateZ(-120px) scale(.92);transition:opacity .55s,transform .7s cubic-bezier(.2,.8,.2,1);pointer-events:none;backface-visibility:hidden}
-  .slide.prev{transform:rotateY(-28deg) translateZ(-120px) scale(.92)}
-  .slide.active{opacity:1;transform:none;pointer-events:auto}
-  .slide img.photo{width:100%;height:100%;object-fit:cover}
-  .slide img.zoom{transform:scale(1.7);object-position:62% 46%}
-  .slide svg{width:86%;height:auto}
-  .slide .cap{position:absolute;left:18px;bottom:16px;background:rgba(255,253,250,.92);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;color:var(--ink)}
-  .glare{position:absolute;inset:0;border-radius:20px;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,30%),rgba(255,255,255,.35),transparent 45%);opacity:0;transition:opacity .3s;transform:translateZ(1px)}
-  .stage:hover .glare{opacity:1}
-  .shadow{position:absolute;left:12%;right:12%;bottom:-26px;height:30px;border-radius:50%;background:radial-gradient(closest-side,rgba(60,35,10,.22),transparent);transform:translateZ(-40px);filter:blur(4px)}
+  .tilt-zone{perspective:1100px}
+  .tilt{position:relative;transform-style:preserve-3d;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,-8deg));transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  .tilt.moving{transition:transform .08s linear}
+  .tilt .photo{border-radius:30px;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:45% 50%;box-shadow:30px 40px 70px -30px rgba(15,42,51,.45)}
+  .tilt .glare{position:absolute;inset:0;border-radius:30px;background:radial-gradient(circle at var(--gx,30%) var(--gy,20%),rgba(255,255,255,.35),transparent 50%);pointer-events:none}
+  .float-card{position:absolute;background:#fff;border-radius:18px;padding:13px 17px;box-shadow:0 22px 40px -18px rgba(15,42,51,.45);font-size:13.5px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:10px;animation:bob 5s ease-in-out infinite}
+  .float-card .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--aqua-soft)}
+  .float-card .ico svg{width:19px;height:19px;stroke:var(--sea);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .fc1{left:-26px;top:12%;transform:translateZ(80px)}
+  .fc2{right:-18px;bottom:14%;transform:translateZ(110px);animation-delay:-2.5s}
+  @keyframes bob{50%{margin-top:-10px}}
 
-  /* Gouttes 3D flottantes */
+  /* ---------- Bandeau défilant ---------- */
+  .marquee-wrap{overflow:hidden;padding:24px 0}
+  .marquee{background:var(--sea);color:#fff;overflow:hidden;padding:18px 0;transform:rotate(-1.2deg);margin:0 -10px;box-shadow:0 14px 30px -18px rgba(15,66,82,.8)}
+  .marquee .track{display:flex;width:max-content;animation:scroll 26s linear infinite}
+  .marquee span{font:700 22px "Fraunces",serif;padding:0 26px;white-space:nowrap;display:flex;align-items:center;gap:26px}
+  .marquee span::after{content:"";width:10px;height:13px;background:var(--aqua);border-radius:50% 50% 50% 50%/62% 62% 38% 38%;transform:rotate(180deg)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
 
-  /* Vignettes */
-  .thumbs{display:flex;flex-direction:column;gap:12px;position:sticky;top:90px}
-  .thumb{width:100px;aspect-ratio:1/1;border-radius:12px;border:2px solid transparent;background:var(--peach);overflow:hidden;padding:0;transition:transform .25s,border-color .25s,box-shadow .25s}
-  .thumb:hover{transform:translateY(-3px) rotateX(8deg);box-shadow:0 10px 18px -10px rgba(60,35,10,.4)}
-  .thumb[aria-selected="true"]{border-color:var(--ink)}
-  .thumb img,.thumb svg{width:100%;height:100%;object-fit:cover}
-  .thumb .zoom{transform:scale(1.7);object-position:62% 46%}
-  .thumb svg{padding:14px}
+  /* ---------- Sections ---------- */
+  section.block{padding:100px 0}
+  .head{max-width:660px;margin:0 auto 52px;text-align:center}
+  .head .lead{margin-top:14px}
 
-  /* Infos */
-  .tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--sea)}
-  .tag::before{content:"";width:8px;height:8px;border-radius:50%;background:#34b27b;box-shadow:0 0 0 4px rgba(52,178,123,.18)}
-  .info h1{font:700 clamp(36px,4.2vw,54px)/1.05 "Fraunces",serif;color:var(--ink);letter-spacing:-.5px;margin:12px 0 14px}
-  .short{font-size:18px;max-width:34em;margin-bottom:22px}
-  .price-line{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:22px}
-  .price{font:800 32px "Inter",sans-serif;color:var(--ink);letter-spacing:-.5px}
-  .pill{background:var(--aqua-soft);color:var(--sea-2);font-size:13px;font-weight:700;padding:6px 11px;border-radius:7px}
-  .usp{background:var(--peach);border:1px solid var(--peach-line);border-radius:var(--radius);padding:20px 26px;list-style:none;display:grid;gap:10px;margin-bottom:22px}
-  .usp li{display:flex;gap:12px;font-size:16.5px}
-  .usp li::before{content:"✓";font-weight:700;color:var(--ink)}
-  .buy{display:grid;grid-template-columns:auto 1fr;gap:14px;margin-bottom:12px}
-  .qty{display:flex;border:1px solid var(--peach-line);border-radius:12px;overflow:hidden;background:var(--peach);height:64px}
-  .qty button{width:56px;background:none;border:0;font-size:24px;transition:background .2s}
-  .qty button:hover{background:var(--peach-2)}
-  .qty input{width:62px;border:0;text-align:center;font:600 18px "Inter";background:#fff;color:var(--ink);-moz-appearance:textfield}
-  .qty input::-webkit-inner-spin-button{-webkit-appearance:none}
-  .add{position:relative;height:64px;border:0;border-radius:12px;background:var(--sea);color:#fff;font-weight:800;font-size:16px;letter-spacing:1.2px;text-transform:uppercase;box-shadow:0 6px 0 var(--sea-2),0 16px 24px -10px rgba(22,63,76,.6);transition:transform .12s,box-shadow .12s,background .2s}
-  .add:hover{background:#226476}
-  .add:active{transform:translateY(5px);box-shadow:0 1px 0 var(--sea-2),0 6px 12px -8px rgba(22,63,76,.6)}
-  .add.done{background:#2c8a5f;box-shadow:0 6px 0 #1f6345}
-  .reassure{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13.5px;color:var(--muted);margin:14px 0 34px}
-  .reassure span{display:flex;align-items:center;gap:6px}
-  .reassure svg{width:16px;height:16px;stroke:var(--sea);fill:none;stroke-width:2}
-  .info h2.caps{font:800 21px/1.2 "Inter",sans-serif;text-transform:uppercase;color:var(--ink);margin-bottom:16px}
+  /* Problème / solution animé */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .panel{border-radius:28px;padding:30px 28px 26px;position:relative;overflow:hidden}
+  .panel.bad{background:#fbeeea;border:1px solid #f2d3cb}
+  .panel.good{background:var(--aqua-soft);border:1px solid #bfe3ec}
+  .panel .label{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:1px;padding:7px 13px;border-radius:999px;background:#fff}
+  .bad .label{color:var(--red)}
+  .good .label{color:var(--green)}
+  .panel svg.scene{width:100%;height:auto;max-height:330px;margin:10px 0 8px}
+  .panel p{font-size:17px;font-weight:600;color:var(--ink);text-align:center}
+  .drop{animation:fall 1.4s linear infinite;opacity:0}
+  @keyframes fall{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(62px);opacity:.9}}
+  .flow{stroke-dasharray:7 11;animation:flow .9s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-18}}
+  .pulse{animation:pulse 1.6s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+  @keyframes pulse{50%{transform:scale(1.18)}}
 
-  /* Cartes bienfaits retournables (3D) */
-  .benefits{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-  .flip{perspective:800px;height:136px}
-  .flip-in{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,.9,.3,1)}
-  .flip.open .flip-in{transform:rotateY(180deg)}
-  .face{position:absolute;inset:0;border-radius:var(--radius);border:1px solid var(--peach-line);background:var(--peach);backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:14px 10px;gap:12px}
-  .face.back{transform:rotateY(180deg);background:var(--sea);border-color:var(--sea);color:#e6f4f7;font-size:14.5px;line-height:1.45;justify-content:center;padding:14px 40px 14px 20px}
-  .face svg{width:42px;height:42px;stroke:var(--sea);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .face strong{font-size:15px;color:var(--ink)}
-  .flip button.toggle{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:0;background:var(--aqua);color:var(--sea-2);font-weight:700;font-size:16px;z-index:2;transition:transform .3s}
-  .flip.open button.toggle{transform:rotate(45deg);background:#fff}
-  .flip button.face-btn{all:unset;position:absolute;inset:0;cursor:pointer;border-radius:var(--radius)}
+  /* Étapes */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;perspective:1200px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:26px;overflow:hidden;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
+  .step:hover{transform:translateY(-8px) rotateX(5deg);box-shadow:0 30px 50px -30px rgba(15,42,51,.45)}
+  .step .pic{position:relative;aspect-ratio:1/1;overflow:hidden}
+  .step .pic img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+  .step:hover .pic img{transform:scale(1.05)}
+  .step .num{position:absolute;top:16px;left:16px;width:46px;height:46px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font:700 22px "Fraunces",serif}
+  .step .pic.crop img{object-position:50% 100%;transform:scale(1.32);transform-origin:50% 72%}
+  .step:hover .pic.crop img{transform:scale(1.38)}
+  .step .txt{padding:22px 24px 26px}
+  .step h3{font-size:24px;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:15.5px}
 
-  /* ---------- Bandeau de confiance ---------- */
-  .trust{background:var(--ink);color:#d9e8ec}
-  .trust .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding-top:30px;padding-bottom:30px}
-  .trust div{display:flex;gap:14px;align-items:center;font-size:14px}
-  .trust strong{display:block;color:#fff;font-size:15px}
-  .trust svg{flex:0 0 36px;height:36px;stroke:var(--aqua);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  /* Pour qui */
+  .who{background:var(--sand)}
+  .who-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .who-card{background:var(--bg);border-radius:24px;padding:28px 22px;text-align:center;border:1px solid var(--line);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+  .who-card:hover{transform:translateY(-6px) rotate(-1deg)}
+  .who-card .em{width:70px;height:70px;margin:0 auto 16px;border-radius:22px;background:var(--aqua-soft);display:grid;place-items:center;transform:rotate(-6deg);transition:transform .4s}
+  .who-card:hover .em{transform:rotate(6deg) scale(1.06)}
+  .who-card .em svg{width:36px;height:36px;stroke:var(--sea);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .who-card h3{font-size:21px;margin-bottom:6px}
+  .who-card p{font-size:14.5px;color:var(--muted)}
 
-  /* ---------- Onglets d'informations ---------- */
-  .details{padding:80px 0}
-  .section-title{font:800 clamp(24px,2.6vw,32px)/1.15 "Inter",sans-serif;text-transform:uppercase;color:var(--ink);text-align:center;margin-bottom:30px}
-  .tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:28px}
-  .tab{border:1px solid var(--peach-line);background:#fff;border-radius:999px;padding:11px 20px;font-weight:600;font-size:14.5px;transition:background .2s,color .2s,transform .2s}
-  .tab:hover{transform:translateY(-2px)}
-  .tab[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
-  .panel{max-width:900px;margin:0 auto;background:var(--peach);border:1px solid var(--peach-line);border-radius:22px;padding:36px 40px;animation:pop .45s cubic-bezier(.2,.8,.2,1)}
-  .panel[hidden]{display:none}
-  @keyframes pop{from{opacity:0;transform:perspective(900px) rotateX(-10deg) translateY(14px)}}
-  .panel h3{font:700 24px "Fraunces",serif;color:var(--ink);margin-bottom:12px}
-  .panel p+p{margin-top:12px}
-  .panel ul{margin:12px 0 0 20px;display:grid;gap:6px}
-  .spec{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}
-  .spec td{padding:14px 18px;border-bottom:1px solid #f2e6d8;font-size:15px;vertical-align:top}
-  .spec td:first-child{font-weight:700;color:var(--ink);width:36%}
-  .spec tr:last-child td{border-bottom:0}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:n}
-  .steps div{background:#fff;border-radius:16px;padding:24px 20px;position:relative}
-  .steps div::before{counter-increment:n;content:counter(n);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--sea);color:#fff;font-weight:800;margin-bottom:12px}
-  .steps img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;margin-bottom:14px}
-  .steps strong{display:block;color:var(--ink);margin-bottom:4px}
-  .faq details{background:#fff;border-radius:14px;padding:16px 20px;margin-bottom:10px}
-  .faq summary{cursor:pointer;font-weight:600;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:12px}
+  /* Produit */
+  .product .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .product .pic{border-radius:30px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 40px 70px -40px rgba(15,42,51,.5)}
+  .product .pic img{width:100%;height:100%;object-fit:cover}
+  .specs{list-style:none;margin-top:28px;display:grid;gap:2px;background:var(--line);border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+  .specs li{background:#fff;display:flex;justify-content:space-between;gap:16px;padding:16px 20px;font-size:15.5px}
+  .specs b{color:var(--ink)}
+  .specs span{text-align:right;color:var(--text)}
+
+  /* Offre */
+  .offer{background:var(--ink);color:#d3e4e9;position:relative;overflow:hidden}
+  .offer::before{content:"";position:absolute;width:680px;height:680px;border-radius:50%;background:radial-gradient(circle,rgba(143,208,224,.22),transparent 65%);top:-260px;right:-200px}
+  .offer .wrap{position:relative}
+  .offer h2{color:#fff}
+  .offer-card{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:34px;padding:40px}
+  .offer-card .img3d{perspective:900px}
+  .offer-card .img3d img{border-radius:24px;aspect-ratio:5/4;width:100%;object-fit:cover;object-position:50% 100%;transform:rotateY(10deg) rotateX(4deg);box-shadow:-30px 40px 60px -30px rgba(0,0,0,.6);transition:transform .6s}
+  .offer-card .img3d:hover img{transform:none}
+  .offer .price{font:800 60px "Inter";color:#fff;line-height:1;margin:16px 0 4px}
+  .offer .price small{font-size:17px;font-weight:600;color:var(--aqua)}
+  .includes{list-style:none;display:grid;gap:9px;margin:22px 0 26px}
+  .includes li{display:flex;gap:11px;align-items:center;font-size:16px}
+  .includes li::before{content:"";flex:0 0 22px;height:22px;border-radius:50%;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/13px no-repeat}
+  .buy-row{display:flex;gap:12px}
+  .qty{display:flex;align-items:center;border:1px solid rgba(255,255,255,.25);border-radius:14px;overflow:hidden;flex:0 0 auto}
+  .qty button{width:48px;height:62px;background:none;border:0;color:#fff;font-size:22px}
+  .qty button:hover{background:rgba(255,255,255,.08)}
+  .qty output{min-width:34px;text-align:center;font-weight:700;font-size:18px;color:#fff}
+  .buy-row .btn{flex:1;background:var(--aqua);color:var(--ink);box-shadow:0 6px 0 #5aa9bd,0 18px 28px -14px rgba(0,0,0,.6);padding:0 20px;height:62px}
+  .buy-row .btn:hover{background:#a6dbe8}
+  .buy-row .btn:active{box-shadow:0 1px 0 #5aa9bd}
+  .guar{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;font-size:13.5px;color:#a9c2c9}
+  .guar span::before{content:"✓ ";color:var(--aqua);font-weight:800}
+  .notice{display:none;margin-top:14px;background:rgba(143,208,224,.15);color:#fff;border-radius:12px;padding:11px 14px;font-size:14px}
+
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  .faq details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 22px;margin-bottom:10px;transition:box-shadow .3s}
+  .faq details[open]{box-shadow:0 16px 30px -22px rgba(15,42,51,.4)}
+  .faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:14px;font-weight:700;font-size:17px;color:var(--ink)}
   .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";color:var(--sea);font-size:20px;line-height:1;transition:transform .2s}
+  .faq summary::after{content:"+";flex:0 0 30px;height:30px;border-radius:50%;background:var(--aqua-soft);color:var(--sea);display:grid;place-items:center;font-size:20px;transition:transform .3s}
   .faq details[open] summary::after{transform:rotate(45deg)}
-  .faq details p{margin-top:10px;font-size:15px}
+  .faq details p{margin-top:10px;color:var(--text)}
 
-  /* ---------- En action (cartes 3D) ---------- */
-  .action{padding:20px 0 90px}
-  .cards3d{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;perspective:1000px}
-  .c3{background:var(--peach);border:1px solid var(--peach-line);border-radius:22px;overflow:hidden;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .5s}
-  .c3:hover{transform:rotateX(6deg) rotateY(-6deg) translateY(-6px);box-shadow:20px 30px 40px -24px rgba(60,35,10,.45)}
-  .c3 .pic{aspect-ratio:4/3;overflow:hidden;background:var(--peach-2)}
-  .c3 .pic img{width:100%;height:100%;object-fit:cover}
-  .c3 .pic svg{width:100%;height:100%}
-  .c3 .txt{padding:20px 22px 24px;transform:translateZ(30px)}
-  .c3 h3{font:700 21px "Fraunces",serif;color:var(--ink);margin-bottom:6px}
+  /* CTA final */
+  .final{padding:0 0 100px}
+  .final-box{position:relative;border-radius:34px;overflow:hidden;min-height:380px;display:flex;align-items:center;padding:50px}
+  .final-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 40%}
+  .final-box::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,42,51,.92) 0%,rgba(15,42,51,.7) 45%,rgba(15,42,51,0) 80%)}
+  .final-box > div{position:relative;z-index:1;max-width:460px}
+  .final-box h2{color:#fff;margin-bottom:14px}
+  .final-box p{color:#d3e4e9;font-size:18px;margin-bottom:26px}
 
-  footer{border-top:1px solid #f0e6da;padding:34px 0 110px;text-align:center;font-size:13.5px;color:var(--muted)}
-
-  /* ---------- Panier ---------- */
-  .veil{position:fixed;inset:0;background:rgba(16,36,43,.4);opacity:0;pointer-events:none;transition:opacity .3s;z-index:60}
-  .veil.on{opacity:1;pointer-events:auto}
-  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--bg);z-index:61;transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;box-shadow:-20px 0 50px -20px rgba(0,0,0,.3)}
-  .drawer.on{transform:none}
-  .drawer-head{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;border-bottom:1px solid #f0e6da}
-  .drawer-head h2{font:700 22px "Fraunces",serif;color:var(--ink)}
-  .x{width:38px;height:38px;border-radius:10px;border:1px solid #eadfd2;background:#fff;font-size:20px}
-  .drawer-body{flex:1;overflow:auto;padding:22px}
-  .line{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:center}
-  .line img{width:76px;height:76px;border-radius:12px;object-fit:cover}
-  .line strong{display:block;color:var(--ink)}
-  .line .mini{display:flex;align-items:center;gap:10px;margin-top:8px}
-  .mini .qty{height:38px;border-radius:10px}
-  .mini .qty button{width:36px;font-size:18px}
-  .mini .qty input{width:40px;font-size:15px}
-  .rm{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:13px}
-  .empty{text-align:center;color:var(--muted);padding:40px 0}
-  .drawer-foot{border-top:1px solid #f0e6da;padding:20px 22px;display:grid;gap:8px}
-  .row{display:flex;justify-content:space-between;font-size:15px}
-  .row.total{font-size:19px;font-weight:800;color:var(--ink);margin:4px 0 10px}
-  .checkout{height:56px;border:0;border-radius:12px;background:var(--sea);color:#fff;font-weight:800;letter-spacing:1px;text-transform:uppercase}
-  .checkout:disabled{opacity:.4;cursor:not-allowed}
-  .notice{display:none;font-size:13.5px;background:var(--aqua-soft);color:var(--sea-2);border-radius:10px;padding:10px 12px}
+  footer{border-top:1px solid #f1e3d2;padding:30px 0 110px;text-align:center;font-size:13.5px;color:var(--muted)}
 
   /* Barre mobile */
-  .mbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;display:none;align-items:center;gap:12px;background:#fff;border-radius:16px;padding:8px 8px 8px 16px;box-shadow:0 16px 40px -12px rgba(16,36,43,.45);transform:translateY(150%);transition:transform .35s}
+  .mbar{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;display:none;align-items:center;justify-content:space-between;gap:12px;background:#fff;border-radius:18px;padding:8px 8px 8px 18px;box-shadow:0 16px 40px -12px rgba(15,42,51,.5);transform:translateY(150%);transition:transform .35s}
   .mbar.on{transform:none}
-  .mbar strong{font-size:19px;color:var(--ink)}
-  .mbar span{font-size:12px;color:var(--muted);display:block}
-  .mbar .add{height:50px;flex:1;font-size:14px}
+  .mbar strong{font-size:20px;color:var(--ink);display:block;line-height:1.1}
+  .mbar small{font-size:12px;color:var(--green);font-weight:600}
+  .mbar .btn{padding:14px 22px;font-size:15px}
 
-  @media (max-width:1060px){
-    .product .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
-    .thumbs{position:static;flex-direction:row;overflow-x:auto;grid-column:1;grid-row:2;padding:4px 2px 8px}
-    .thumb{flex:0 0 74px;width:74px}
-    .stage-wrap{position:static}
-    .info{grid-column:2;grid-row:1 / span 2;padding-left:18px}
-  }
-  @media (max-width:760px){
-    .wrap{padding:0 16px}
-    header nav{display:none}
-    .product{padding-top:16px}
-    .product .wrap{grid-template-columns:minmax(0,1fr)}
-    .info{grid-column:1;grid-row:auto;padding-left:0;margin-top:10px}
-    .trust .wrap{grid-template-columns:1fr 1fr}
-    .panel{padding:24px 18px}
-    .steps,.cards3d{grid-template-columns:1fr}
-    .tabs{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}
-    .tab{flex:0 0 auto}
+  /* Apparition au défilement */
+  .reveal{opacity:0;transform:perspective(1000px) translateY(40px) rotateX(10deg);transition:opacity .8s,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:var(--dl,0s)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:900px){
+    .hero{padding:28px 0 56px}
+    .hero .wrap,.product .wrap,.offer-card{grid-template-columns:1fr;gap:34px}
+    .tilt-zone{order:-1;padding:0 8px}
+    .fc1{left:-6px}.fc2{right:-6px}
+    .compare,.steps{grid-template-columns:1fr}
+    .who-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .who-card{padding:22px 14px}
+    section.block{padding:70px 0}
+    .offer-card{padding:22px}
+    .product .pic{aspect-ratio:1/1}
+    .final-box{padding:30px 24px;min-height:440px;align-items:flex-end}
+    .final-box::after{background:linear-gradient(0deg,rgba(15,42,51,.95) 0%,rgba(15,42,51,.6) 55%,rgba(15,42,51,0) 85%)}
     .mbar{display:flex}
-    .qty{height:56px}.add{height:56px;font-size:14px;letter-spacing:.5px}
-    .buy .qty button{width:46px}.buy .qty input{width:48px}
+    .final-box img{transform:scale(1.35);transform-origin:50% 100%}
+    header .btn{display:none}
+  }
+  @media (max-width:420px){
+    .float-card{font-size:12px;padding:9px 12px}
+    .float-card .ico{width:28px;height:28px}
+    .marquee span{font-size:18px}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation:none !important;transition:none !important}
+    .reveal{opacity:1;transform:none}
+    .drop{opacity:1}
   }
 </style>
 </head>
 <body>
 
-<div class="ribbon">Livraison offerte en France métropolitaine · Expédition sous 48 h · Retours 30 jours</div>
+<div class="ribbon">Livraison offerte · Expédiée sous 48 h · Satisfait ou remboursé 30 jours</div>
 
 <header>
   <div class="wrap">
     <a class="brand" href="#"><i></i>AquaVisière</a>
-    <nav>
-      <a href="#produit">Produit</a>
-      <a href="#infos">Informations</a>
-      <a href="#action">En action</a>
-      <a href="#infos" data-open-tab="faq">FAQ</a>
-    </nav>
-    <button class="cart-btn" id="openCart" aria-label="Ouvrir le panier">
-      <svg viewBox="0 0 24 24"><path d="M5 7h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V6a3 3 0 0 1 6 0v4"/></svg>
-      <span class="cart-count" id="cartCount">0</span>
-    </button>
+    <a class="btn" href="#commander">Commander · 30 €</a>
   </div>
 </header>
 
 <main>
-<!-- ================= FICHE PRODUIT ================= -->
-<section class="product" id="produit">
+<!-- ============ HERO ============ -->
+<section class="hero">
   <div class="wrap">
-
-    <!-- Scène 3D -->
-    <div class="stage-wrap">
-      <div class="stage" id="stage">
-        <div class="slides" id="slides">
-          <div class="slide active" data-i="0">
-            <img class="photo" src="images/visiere-douche.webp" alt="Femme sous la douche portant la visière transparente AquaVisière" width="807" height="672">
-          </div>
-          <div class="slide" data-i="1">
-            <img class="photo" src="images/visiere-etape-1.webp" alt="Étape 1 : placez la visière, bande blanche sur le front" width="1254" height="1254">
-          </div>
-          <div class="slide" data-i="2">
-            <img class="photo" src="images/visiere-etape-2.webp" alt="Étape 2 : ajustez la pose en appuyant le long de la bande" width="1254" height="1254">
-          </div>
-          <div class="slide" data-i="3">
-            <img class="photo" src="images/visiere-detail.webp" alt="La visière en main : plastique transparent souple avec sa bande blanche" width="1061" height="1483" style="object-position:50% 62%">
-            <span class="cap">Souple et ultra fine</span>
-          </div>
-          <div class="slide" data-i="2">
-            <svg viewBox="0 0 400 400" aria-label="Schéma de la visière vue de face">
-              <defs>
-                <linearGradient id="vg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9f7fb" stop-opacity=".95"/><stop offset="1" stop-color="#9fd3df" stop-opacity=".55"/></linearGradient>
-              </defs>
-              <ellipse cx="200" cy="350" rx="130" ry="14" fill="#d9b48f" opacity=".45"/>
-              <path d="M70 120 Q200 60 330 120 L318 250 Q300 300 200 310 Q100 300 82 250 Z" fill="url(#vg)" stroke="#1d5566" stroke-width="3"/>
-              <path d="M70 120 Q200 60 330 120" fill="none" stroke="#1d5566" stroke-width="9" stroke-linecap="round"/>
-              <path d="M110 140 Q150 120 180 128" stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none" opacity=".9"/>
-              <path d="M60 90 H340" stroke="#10242b" stroke-width="1.5" stroke-dasharray="5 5"/>
-              <text x="200" y="80" text-anchor="middle" font-family="Inter" font-size="15" font-weight="700" fill="#10242b">Bord souple — se pose sur le front</text>
-              <path d="M360 120 V310" stroke="#10242b" stroke-width="1.5"/><path d="M352 120 H368 M352 310 H368" stroke="#10242b" stroke-width="1.5"/>
-              <text x="372" y="220" font-family="Inter" font-size="14" font-weight="700" fill="#10242b" transform="rotate(90 372 220)" text-anchor="middle">Couvre yeux &amp; nez</text>
-              <text x="200" y="215" text-anchor="middle" font-family="Fraunces" font-size="22" font-weight="700" fill="#1d5566">100 % transparente</text>
-            </svg>
-            <span class="cap">Forme et zone protégée</span>
-          </div>
-          <div class="slide" data-i="3">
-            <svg viewBox="0 0 400 400" aria-label="Utilisation en trois étapes">
-              <g font-family="Inter" fill="#10242b">
-                <g transform="translate(40 60)"><circle r="28" cx="28" cy="28" fill="#1d5566"/><text x="28" y="36" text-anchor="middle" fill="#fff" font-weight="800" font-size="22">1</text><text x="74" y="24" font-weight="800" font-size="20">Placez</text><text x="74" y="48" font-size="15" fill="#2c3b40">la bande blanche sur le front</text></g>
-                <g transform="translate(40 170)"><circle r="28" cx="28" cy="28" fill="#1d5566"/><text x="28" y="36" text-anchor="middle" fill="#fff" font-weight="800" font-size="22">2</text><text x="74" y="24" font-weight="800" font-size="20">Ajustez</text><text x="74" y="48" font-size="15" fill="#2c3b40">appuyez le long de la bande</text></g>
-                <g transform="translate(40 280)"><circle r="28" cx="28" cy="28" fill="#1d5566"/><text x="28" y="36" text-anchor="middle" fill="#fff" font-weight="800" font-size="22">3</text><text x="74" y="24" font-weight="800" font-size="20">Rincez</text><text x="74" y="48" font-size="15" fill="#2c3b40">les yeux ouverts, sans piquer</text></g>
-                <path d="M68 124 V164 M68 234 V274" stroke="#1d5566" stroke-width="3" stroke-dasharray="4 6" stroke-linecap="round"/>
-              </g>
-            </svg>
-            <span class="cap">Prête en 3 secondes</span>
-          </div>
-          <div class="slide" data-i="4">
-            <svg viewBox="0 0 400 400" aria-label="Entretien de la visière">
-              <g font-family="Inter" fill="#10242b" text-anchor="middle">
-                <circle cx="110" cy="150" r="62" fill="#fff"/><path d="M110 112 C130 140 140 156 140 172 a30 30 0 0 1-60 0 c0-16 10-32 30-60z" fill="#9fd3df" stroke="#1d5566" stroke-width="3"/>
-                <text x="110" y="250" font-weight="800" font-size="18">Rincez</text><text x="110" y="272" font-size="14">à l'eau claire</text>
-                <circle cx="290" cy="150" r="62" fill="#fff"/><g stroke="#1d5566" stroke-width="4" fill="none" stroke-linecap="round"><path d="M255 135 q12-10 24 0 t24 0 t24 0"/><path d="M255 155 q12-10 24 0 t24 0 t24 0"/><path d="M255 175 q12-10 24 0 t24 0 t24 0"/></g>
-                <text x="290" y="250" font-weight="800" font-size="18">Séchez</text><text x="290" y="272" font-size="14">à l'air libre</text>
-                <text x="200" y="335" font-size="14" fill="#6f7c80">Évitez les produits abrasifs pour garder la transparence</text>
-              </g>
-            </svg>
-            <span class="cap">Entretien en 10 secondes</span>
-          </div>
-        </div>
+    <div>
+      <span class="kicker">Visière de douche anti-eau</span>
+      <h1>Plus jamais de shampoing <em>dans les yeux.</em></h1>
+      <p class="lead">Une visière transparente qui se pose en 2 secondes. L'eau glisse devant votre visage, jamais dedans.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#commander">Je la veux <span class="arrow">→</span></a>
+        <div class="hero-price">30 €<small>Livraison offerte</small></div>
+      </div>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Taille unique</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Réutilisable</span>
+        <span class="chip"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Adultes &amp; enfants</span>
+      </div>
+    </div>
+    <div class="tilt-zone">
+      <div class="tilt" id="tilt">
+        <img class="photo" src="images/visiere-douche.webp" alt="Femme sous la douche avec la visière : l'eau coule devant son visage" width="807" height="672">
         <div class="glare"></div>
-        <div class="shadow"></div>
+        <div class="float-card fc1"><span class="ico"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>Yeux 100 % au sec</div>
+        <div class="float-card fc2"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Posée en 2 secondes</div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Vignettes -->
-    <div class="thumbs" role="tablist" aria-label="Images du produit" id="thumbs">
-      <button class="thumb" role="tab" aria-selected="true" data-go="0" aria-label="Photo du produit"><img src="images/visiere-douche.webp" alt=""></button>
-      <button class="thumb" role="tab" aria-selected="false" data-go="1" aria-label="Étape 1 : placez la visière"><img src="images/visiere-etape-1.webp" alt=""></button>
-      <button class="thumb" role="tab" aria-selected="false" data-go="2" aria-label="Étape 2 : ajustez la pose"><img src="images/visiere-etape-2.webp" alt=""></button>
-      <button class="thumb" role="tab" aria-selected="false" data-go="3" aria-label="Détail de la visière"><img src="images/visiere-detail.webp" alt="" style="object-position:50% 62%"></button>
-      <button class="thumb" role="tab" aria-selected="false" data-go="4" aria-label="Schéma"><svg viewBox="0 0 100 100"><path d="M12 30 Q50 10 88 30 L84 66 Q78 82 50 85 Q22 82 16 66Z" fill="#d8eef3" stroke="#1d5566" stroke-width="4"/></svg></button>
-      <button class="thumb" role="tab" aria-selected="false" data-go="5" aria-label="Utilisation"><svg viewBox="0 0 100 100" font-family="Inter" font-weight="800" text-anchor="middle"><circle cx="50" cy="20" r="14" fill="#1d5566"/><text x="50" y="26" fill="#fff" font-size="16">1</text><circle cx="50" cy="52" r="14" fill="#1d5566"/><text x="50" y="58" fill="#fff" font-size="16">2</text><circle cx="50" cy="84" r="14" fill="#1d5566"/><text x="50" y="90" fill="#fff" font-size="16">3</text></svg></button>
-      <button class="thumb" role="tab" aria-selected="false" data-go="6" aria-label="Entretien"><svg viewBox="0 0 100 100"><path d="M50 14 C68 40 76 54 76 66 a26 26 0 0 1-52 0 c0-12 8-26 26-52z" fill="#9fd3df" stroke="#1d5566" stroke-width="4"/></svg></button>
+<div class="marquee-wrap"><div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Yeux protégés</span><span>Maquillage intact</span><span>Bain sans larmes</span><span>Cils préservés</span><span>Réutilisable</span>
+    <span>Yeux protégés</span><span>Maquillage intact</span><span>Bain sans larmes</span><span>Cils préservés</span><span>Réutilisable</span>
+  </div>
+</div></div>
+
+<!-- ============ PROBLÈME / SOLUTION ============ -->
+<section class="block">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Le principe</span>
+      <h2>L'eau passe <em>devant</em>,<br>pas sur votre visage.</h2>
     </div>
-
-    <!-- Infos produit -->
-    <div class="info">
-      <span class="tag">En stock · expédiée sous 48 h</span>
-      <h1>AquaVisière</h1>
-      <p class="short">La visière de douche transparente qui garde l'eau et le shampoing loin de vos yeux. Pour les enfants, les yeux sensibles, ou pour se laver les cheveux sans ruiner son maquillage.</p>
-
-      <div class="price-line">
-        <span class="price">30,00 €</span>
-        <span class="pill">Livraison offerte</span>
-        <span class="pill">TVA incluse</span>
+    <div class="compare">
+      <div class="panel bad reveal">
+        <span class="label">✕ Sans visière</span>
+        <svg class="scene" viewBox="0 0 300 320" role="img" aria-label="Sans visière, l'eau et le shampoing coulent dans les yeux">
+          <rect x="150" y="8" width="110" height="14" rx="7" fill="#9aa9ae"/>
+          <g fill="#4aa8c4">
+            <path class="drop" style="animation-delay:0s" d="M180 30c3 5 4 7 4 9a4 4 0 0 1-8 0c0-2 1-4 4-9z"/>
+            <path class="drop" style="animation-delay:.45s" d="M205 30c3 5 4 7 4 9a4 4 0 0 1-8 0c0-2 1-4 4-9z"/>
+            <path class="drop" style="animation-delay:.9s" d="M230 30c3 5 4 7 4 9a4 4 0 0 1-8 0c0-2 1-4 4-9z"/>
+          </g>
+          <path d="M92 305C86 255 62 232 62 172 62 102 112 62 170 66c46 4 66 34 66 70l3 26c-2 7-8 11-6 17l17 26-12 7c4 10 6 16 0 22 6 6 2 18-6 22-12 6-27 6-32 19l-2 30z" fill="#f2cfb3"/>
+          <path d="M62 172C62 102 112 62 170 66c40 3 60 24 65 52-30-14-70-18-110-6-28 9-50 32-63 60z" fill="#5a3d2b"/>
+          <ellipse cx="222" cy="170" rx="7" ry="4" fill="#0f2a33"/>
+          <path class="flow" d="M232 118c6 18 6 34 2 48-3 8-10 12-8 20" fill="none" stroke="#4aa8c4" stroke-width="5" stroke-linecap="round"/>
+          <path class="flow" d="M220 112c4 20 2 40 0 56" fill="none" stroke="#bde5ef" stroke-width="4" stroke-linecap="round"/>
+          <g class="pulse"><circle cx="222" cy="170" r="17" fill="none" stroke="#d9534f" stroke-width="3.5"/></g>
+        </svg>
+        <p>Ça pique, ça coule, le maquillage file.</p>
       </div>
+      <div class="panel good reveal" style="--dl:.12s">
+        <span class="label">✓ Avec AquaVisière</span>
+        <svg class="scene" viewBox="0 0 300 320" role="img" aria-label="Avec la visière, l'eau glisse dessus et tombe devant le visage">
+          <rect x="150" y="8" width="110" height="14" rx="7" fill="#9aa9ae"/>
+          <g fill="#4aa8c4">
+            <path class="drop" style="animation-delay:0s" d="M180 30c3 5 4 7 4 9a4 4 0 0 1-8 0c0-2 1-4 4-9z"/>
+            <path class="drop" style="animation-delay:.45s" d="M205 30c3 5 4 7 4 9a4 4 0 0 1-8 0c0-2 1-4 4-9z"/>
+            <path class="drop" style="animation-delay:.9s" d="M230 30c3 5 4 7 4 9a4 4 0 0 1-8 0c0-2 1-4 4-9z"/>
+          </g>
+          <path d="M92 305C86 255 62 232 62 172 62 102 112 62 170 66c46 4 66 34 66 70l3 26c-2 7-8 11-6 17l17 26-12 7c4 10 6 16 0 22 6 6 2 18-6 22-12 6-27 6-32 19l-2 30z" fill="#f2cfb3"/>
+          <path d="M62 172C62 102 112 62 170 66c40 3 60 24 65 52-30-14-70-18-110-6-28 9-50 32-63 60z" fill="#5a3d2b"/>
+          <path d="M222 168q8 5 14 0" fill="none" stroke="#0f2a33" stroke-width="3" stroke-linecap="round"/>
+          <path d="M226 114c40 6 60 46 58 128l-12 0c2-70-14-104-46-114z" fill="#8fd0e0" fill-opacity=".45" stroke="#17586b" stroke-width="2.5"/>
+          <rect x="216" y="108" width="20" height="12" rx="4" fill="#fff" stroke="#17586b" stroke-width="2"/>
+          <path class="flow" d="M234 110c36 8 54 46 52 128v70" fill="none" stroke="#4aa8c4" stroke-width="5" stroke-linecap="round"/>
+          <g class="pulse"><circle cx="222" cy="168" r="17" fill="none" stroke="#2f9a68" stroke-width="3.5"/></g>
+        </svg>
+        <p>L'eau glisse sur la visière et tombe devant vous.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <ul class="usp">
-        <li>Plus d'eau ni de shampoing dans les yeux</li>
-        <li>Se pose en 2 secondes : la bande se place sur le front</li>
-        <li>Souple, transparente et réutilisable</li>
+<!-- ============ 3 ÉTAPES ============ -->
+<section class="block" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Mode d'emploi</span>
+      <h2>3 gestes. <em>10 secondes.</em></h2>
+    </div>
+    <div class="steps">
+      <article class="step reveal">
+        <div class="pic crop"><img src="images/visiere-etape-1.webp" alt="Placer la visière, bande blanche sur le front" loading="lazy" width="1254" height="1254"><span class="num">1</span></div>
+        <div class="txt"><h3>Placez</h3><p>La bande blanche sur le front.</p></div>
+      </article>
+      <article class="step reveal" style="--dl:.12s">
+        <div class="pic crop"><img src="images/visiere-etape-2.webp" alt="Ajuster la visière en appuyant le long de la bande" loading="lazy" width="1254" height="1254"><span class="num">2</span></div>
+        <div class="txt"><h3>Ajustez</h3><p>Appuyez doucement le long de la bande.</p></div>
+      </article>
+      <article class="step reveal" style="--dl:.24s">
+        <div class="pic"><img src="images/visiere-douche.webp" alt="Rinçage sous la douche avec la visière" loading="lazy" width="807" height="672"><span class="num">3</span></div>
+        <div class="txt"><h3>Rincez</h3><p>Les yeux ouverts, sans rien sentir.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POUR QUI ============ -->
+<section class="block who">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker">Pour qui ?</span>
+      <h2>Pour tous ceux qui <em>détestent</em> l'eau dans les yeux.</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card reveal">
+        <div class="em"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5c2 2 5 2 7 0"/><circle cx="9" cy="10" r=".8" fill="currentColor"/><circle cx="15" cy="10" r=".8" fill="currentColor"/></svg></div>
+        <h3>Enfants</h3><p>Le bain sans larmes.</p>
+      </div>
+      <div class="who-card reveal" style="--dl:.08s">
+        <div class="em"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6"/><path d="M5 9 3.5 6.5M9 7.2 8.2 4.5M15 7.2l.8-2.7M19 9l1.5-2.5"/></svg></div>
+        <h3>Cils &amp; sourcils</h3><p>Extensions et rehaussements protégés.</p>
+      </div>
+      <div class="who-card reveal" style="--dl:.16s">
+        <div class="em"><svg viewBox="0 0 24 24"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/><path d="M9.5 14a2.5 2.5 0 0 0 2.5 2.5"/></svg></div>
+        <h3>Maquillage</h3><p>Cheveux lavés, visage intact.</p>
+      </div>
+      <div class="who-card reveal" style="--dl:.24s">
+        <div class="em"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Yeux sensibles</h3><p>Lentilles, irritations, seniors.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUIT ============ -->
+<section class="block product">
+  <div class="wrap">
+    <div class="pic reveal"><img src="images/visiere-detail.webp" alt="La visière en main : plastique transparent, fin et souple, avec sa bande blanche" loading="lazy" width="1061" height="1483"></div>
+    <div class="reveal" style="--dl:.12s">
+      <span class="kicker">Le produit</span>
+      <h2>Fine. Souple. <em>Invisible.</em></h2>
+      <p class="lead" style="margin-top:14px">Un plastique transparent qui suit la forme du visage. Vous voyez tout, l'eau ne passe pas.</p>
+      <ul class="specs">
+        <li><b>Matière</b><span>Plastique souple transparent</span></li>
+        <li><b>Fixation</b><span>Bande blanche sur le front</span></li>
+        <li><b>Taille</b><span>Unique, adultes &amp; enfants</span></li>
+        <li><b>Entretien</b><span>Rinçage à l'eau, séchage à l'air</span></li>
+        <li><b>Dans le colis</b><span>1 visière</span></li>
       </ul>
+    </div>
+  </div>
+</section>
 
-      <div class="buy">
-        <div class="qty" aria-label="Quantité">
-          <button type="button" data-step="-1" aria-label="Diminuer la quantité">−</button>
-          <input id="qty" type="number" min="1" max="10" value="1" inputmode="numeric" aria-label="Quantité">
-          <button type="button" data-step="1" aria-label="Augmenter la quantité">+</button>
-        </div>
-        <button class="add" id="addBtn" type="button">Ajouter au panier</button>
-      </div>
-
-      <div class="reassure">
-        <span><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>Livraison offerte</span>
-        <span><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>Retours 30 jours</span>
-        <span><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé</span>
-      </div>
-
-      <h2 class="caps">Un geste simple = une douche sereine</h2>
-      <div class="benefits">
-        <div class="flip">
-          <div class="flip-in">
-            <div class="face"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><strong>Yeux protégés</strong></div>
-            <div class="face back">L'eau et la mousse glissent sur la visière et s'écoulent loin des yeux. Fini les picotements.</div>
+<!-- ============ OFFRE ============ -->
+<section class="block offer" id="commander">
+  <div class="wrap">
+    <div class="offer-card reveal">
+      <div class="img3d"><img src="images/visiere-etape-1.webp" alt="AquaVisière portée" loading="lazy" width="1254" height="1254"></div>
+      <div>
+        <span class="kicker" style="color:var(--aqua)">Commandez maintenant</span>
+        <h2>Votre AquaVisière</h2>
+        <div class="price">30 € <small>TTC · livraison offerte</small></div>
+        <ul class="includes">
+          <li>Expédiée sous 48 h</li>
+          <li>Livraison offerte en France métropolitaine</li>
+          <li>Satisfait ou remboursé 30 jours</li>
+        </ul>
+        <div class="buy-row">
+          <div class="qty">
+            <button type="button" id="minus" aria-label="Retirer une visière">−</button>
+            <output id="q" aria-live="polite">1</output>
+            <button type="button" id="plus" aria-label="Ajouter une visière">+</button>
           </div>
-          <button class="face-btn" aria-label="En savoir plus : Yeux protégés"></button>
-          <button class="toggle" tabindex="-1" aria-hidden="true">+</button>
+          <button class="btn" type="button" id="buy">Commander · <span id="total">30 €</span></button>
         </div>
-        <div class="flip">
-          <div class="flip-in">
-            <div class="face"><svg viewBox="0 0 24 24"><path d="M12 3c3 4 6 7.5 6 11a6 6 0 0 1-12 0c0-3.5 3-7 6-11z"/></svg><strong>Maquillage intact</strong></div>
-            <div class="face back">Lavez vos cheveux sans abîmer maquillage, masque ou soin du visage.</div>
-          </div>
-          <button class="face-btn" aria-label="En savoir plus : Maquillage intact"></button>
-          <button class="toggle" tabindex="-1" aria-hidden="true">+</button>
-        </div>
-        <div class="flip">
-          <div class="flip-in">
-            <div class="face"><svg viewBox="0 0 24 24"><path d="M7 4h10M12 4v4"/><path d="M5 12a7 7 0 0 0 14 0"/><circle cx="12" cy="12" r="2"/></svg><strong>Pose facile</strong></div>
-            <div class="face back">La bande blanche se place sur le front, un appui léger suffit à l'ajuster.</div>
-          </div>
-          <button class="face-btn" aria-label="En savoir plus : Pose facile"></button>
-          <button class="toggle" tabindex="-1" aria-hidden="true">+</button>
-        </div>
-        <div class="flip">
-          <div class="flip-in">
-            <div class="face"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg><strong>Réutilisable</strong></div>
-            <div class="face back">Un rinçage, un séchage à l'air : elle vous accompagne douche après douche.</div>
-          </div>
-          <button class="face-btn" aria-label="En savoir plus : Réutilisable"></button>
-          <button class="toggle" tabindex="-1" aria-hidden="true">+</button>
-        </div>
+        <div class="notice" id="notice">Le paiement en ligne arrive très bientôt. Merci !</div>
+        <div class="guar"><span>Paiement sécurisé</span><span>Carte bancaire</span><span>Sans abonnement</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= BANDEAU CONFIANCE ================= -->
-<section class="trust">
+<!-- ============ FAQ ============ -->
+<section class="block">
   <div class="wrap">
-    <div><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><span><strong>Livraison offerte</strong>France métropolitaine</span></div>
-    <div><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><strong>Expédition 48 h</strong>Jours ouvrés</span></div>
-    <div><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg><span><strong>Retours 30 jours</strong>Remboursé si elle ne convient pas</span></div>
-    <div><svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><span><strong>Paiement sécurisé</strong>Carte bancaire</span></div>
+    <div class="head reveal"><span class="kicker">FAQ</span><h2>Vos questions</h2></div>
+    <div class="faq reveal">
+      <details><summary>Elle tient vraiment pendant la douche ?</summary><p>Oui. La bande se pose sur le front et la garde en place. Un léger appui suffit.</p></details>
+      <details><summary>Ça marche pour les enfants ?</summary><p>Oui, taille unique adultes et enfants. Restez toujours près des petits pendant le bain.</p></details>
+      <details><summary>On voit à travers ?</summary><p>Oui, elle est 100 % transparente. Vous gardez les yeux ouverts.</p></details>
+      <details><summary>Comment je la nettoie ?</summary><p>Un rinçage à l'eau claire, puis séchage à l'air libre. Pas de produit abrasif.</p></details>
+      <details><summary>Et si elle ne me plaît pas ?</summary><p>Vous avez 30 jours pour la renvoyer et être remboursé.</p></details>
+    </div>
   </div>
 </section>
 
-<!-- ================= INFORMATIONS ================= -->
-<section class="details" id="infos">
+<!-- ============ CTA FINAL ============ -->
+<section class="final">
   <div class="wrap">
-    <h2 class="section-title">Tout savoir sur l'AquaVisière</h2>
-    <div class="tabs" role="tablist" id="tabs">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="p-desc" id="t-desc">Description</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="p-spec" id="t-spec">Caractéristiques</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="p-use" id="t-use">Utilisation &amp; entretien</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="p-ship" id="t-ship">Livraison &amp; retours</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="p-faq" id="t-faq">FAQ</button>
-    </div>
-
-    <div class="panel" role="tabpanel" id="p-desc" aria-labelledby="t-desc">
-      <h3>Une douche sans yeux qui piquent</h3>
-      <p>L'AquaVisière est une visière de douche transparente qui se pose sur le front et forme un écran entre vos cheveux et votre visage. Pendant le shampoing et le rinçage, l'eau et la mousse glissent sur la visière et s'écoulent devant vous, au lieu de couler dans vos yeux.</p>
-      <p>Elle est pensée pour :</p>
-      <ul>
-        <li>les enfants qui détestent le moment du rinçage ;</li>
-        <li>les yeux sensibles et les porteurs de lentilles ;</li>
-        <li>après une extension de cils, un rehaussement ou un soin des sourcils ;</li>
-        <li>se laver les cheveux sans défaire son maquillage ou retirer un masque ;</li>
-        <li>les personnes âgées ou à mobilité réduite aidées à la toilette.</li>
-      </ul>
-    </div>
-
-    <div class="panel" role="tabpanel" id="p-spec" aria-labelledby="t-spec" hidden>
-      <h3>Caractéristiques</h3>
-      <table class="spec">
-        <tr><td>Produit</td><td>Visière de douche anti-eau AquaVisière</td></tr>
-        <tr><td>Matière</td><td>Plastique souple transparent</td></tr>
-        <tr><td>Taille</td><td>Unique — convient aux adultes et aux enfants</td></tr>
-        <tr><td>Zone protégée</td><td>Front, yeux et nez</td></tr>
-        <tr><td>Fixation</td><td>Bande blanche qui se pose sur le front</td></tr>
-        <tr><td>Utilisation</td><td>Douche, bain, shampoing, coloration</td></tr>
-        <tr><td>Contenu du colis</td><td>1 visière de douche</td></tr>
-        <tr><td>Prix</td><td>30,00 € TTC, livraison offerte</td></tr>
-      </table>
-    </div>
-
-    <div class="panel" role="tabpanel" id="p-use" aria-labelledby="t-use" hidden>
-      <h3>Comment l'utiliser</h3>
-      <div class="steps">
-        <div><img src="images/visiere-etape-1.webp" alt="Placez la visière, bande blanche sur le front" loading="lazy" width="1254" height="1254"><strong>Placez la visière</strong>Positionnez la bande blanche sur le front, la visière devant les yeux et le nez.</div>
-        <div><img src="images/visiere-etape-2.webp" alt="Ajustez la pose en appuyant le long de la bande" loading="lazy" width="1254" height="1254"><strong>Ajustez la pose</strong>Appuyez doucement le long de la bande pour la mettre bien en place.</div>
-        <div><img src="images/visiere-douche.webp" alt="Rinçage sous la douche avec la visière" loading="lazy" width="807" height="672"><strong>Rincez</strong>Shampoing, après-shampoing, rinçage : l'eau s'écoule devant le visage.</div>
+    <div class="final-box reveal">
+      <img src="images/visiere-etape-2.webp" alt="" loading="lazy" width="1254" height="1254">
+      <div>
+        <h2>Votre prochaine douche, <em style="color:var(--aqua)">les yeux ouverts.</em></h2>
+        <p>30 € · Livraison offerte · Retours 30 jours</p>
+        <a class="btn" href="#commander" style="background:var(--aqua);color:var(--ink);box-shadow:0 6px 0 #5aa9bd">Je commande <span class="arrow">→</span></a>
       </div>
-      <h3 style="margin-top:26px">Entretien</h3>
-      <p>Rincez la visière à l'eau claire après chaque utilisation et laissez-la sécher à l'air libre. Évitez les éponges abrasives et les produits agressifs pour qu'elle reste bien transparente. Pour un enfant, restez toujours à proximité pendant le bain.</p>
-    </div>
-
-    <div class="panel" role="tabpanel" id="p-ship" aria-labelledby="t-ship" hidden>
-      <h3>Livraison</h3>
-      <p>Livraison offerte en France métropolitaine. Les commandes sont préparées et expédiées sous 48 h ouvrées.</p>
-      <h3 style="margin-top:22px">Retours</h3>
-      <p>Vous avez 30 jours après réception pour nous retourner la visière si elle ne vous convient pas, et être remboursé.</p>
-      <h3 style="margin-top:22px">Paiement</h3>
-      <p>Paiement par carte bancaire sur une page de paiement sécurisée.</p>
-    </div>
-
-    <div class="panel faq" role="tabpanel" id="p-faq" aria-labelledby="t-faq" hidden>
-      <details open><summary>Est-ce que la visière tient toute seule ?</summary><p>Oui. Sa bande blanche se pose sur le front et la garde en place pendant le lavage. Un appui léger le long de la bande suffit pour l'ajuster.</p></details>
-      <details><summary>Convient-elle aux enfants ?</summary><p>Oui, la taille unique convient aux adultes comme aux enfants. Gardez toujours un œil sur les plus petits pendant le bain.</p></details>
-      <details><summary>Est-ce que je vois à travers ?</summary><p>Oui, elle est entièrement transparente : vous gardez les yeux ouverts pendant le rinçage.</p></details>
-      <details><summary>Peut-on l'utiliser pour une coloration ?</summary><p>Oui, elle aide à éviter que le produit coule sur le visage pendant le rinçage.</p></details>
-      <details><summary>Comment la nettoyer ?</summary><p>Rinçage à l'eau claire puis séchage à l'air libre. Évitez les produits abrasifs.</p></details>
-      <details><summary>Et si elle ne me convient pas ?</summary><p>Vous avez 30 jours après réception pour la retourner et être remboursé.</p></details>
-    </div>
-  </div>
-</section>
-
-<!-- ================= EN ACTION ================= -->
-<section class="action" id="action">
-  <div class="wrap">
-    <h2 class="section-title">Pour qui ?</h2>
-    <div class="cards3d">
-      <article class="c3">
-        <div class="pic"><img src="images/visiere-etape-2.webp" alt="La visière ajustée sur le visage" style="object-position:50% 40%" loading="lazy" width="807" height="672"></div>
-        <div class="txt"><h3>Beauté & soins</h3><p>Maquillage, extension de cils ou masque : gardez votre visage au sec pendant le shampoing.</p></div>
-      </article>
-      <article class="c3">
-        <div class="pic"><svg viewBox="0 0 400 300" aria-hidden="true"><rect width="400" height="300" fill="#d8eef3"/><circle cx="200" cy="175" r="70" fill="#f3d2b5"/><path d="M128 150 Q200 80 272 150" fill="#6b4a33"/><path d="M118 140 Q200 95 282 140 L272 205 Q255 235 200 238 Q145 235 128 205Z" fill="#fff" fill-opacity=".5" stroke="#1d5566" stroke-width="4"/><circle cx="178" cy="178" r="6" fill="#10242b"/><circle cx="222" cy="178" r="6" fill="#10242b"/><path d="M182 205 Q200 220 218 205" stroke="#10242b" stroke-width="4" fill="none" stroke-linecap="round"/><g fill="#7cc4d6"><circle cx="90" cy="60" r="7"/><circle cx="120" cy="40" r="5"/><circle cx="300" cy="55" r="7"/><circle cx="330" cy="85" r="5"/></g></svg></div>
-        <div class="txt"><h3>Enfants</h3><p>Le rinçage devient un jeu : plus de larmes ni d'yeux qui piquent au moment du bain.</p></div>
-      </article>
-      <article class="c3">
-        <div class="pic"><svg viewBox="0 0 400 300" aria-hidden="true"><rect width="400" height="300" fill="#f7e4cf"/><path d="M200 60 C245 120 270 155 270 190 a70 70 0 0 1-140 0 c0-35 25-70 70-130z" fill="#9fd3df" stroke="#1d5566" stroke-width="5"/><path d="M168 170 q12-26 32-34" stroke="#fff" stroke-width="9" stroke-linecap="round" fill="none"/><circle cx="200" cy="200" r="22" fill="none" stroke="#1d5566" stroke-width="5"/><circle cx="200" cy="200" r="8" fill="#1d5566"/></svg></div>
-        <div class="txt"><h3>Yeux sensibles</h3><p>Porteurs de lentilles, yeux irrités ou personnes âgées : une douche plus confortable.</p></div>
-      </article>
     </div>
   </div>
 </section>
 </main>
 
-<footer>
-  <div class="wrap">© <span id="year"></span> AquaVisière · Visière de douche anti-eau</div>
-</footer>
+<footer><div class="wrap">© <span id="year"></span> AquaVisière · Visière de douche anti-eau</div></footer>
 
-<!-- Barre d'achat mobile -->
 <div class="mbar" id="mbar">
-  <div><strong>30,00 €</strong><span>Livraison offerte</span></div>
-  <button class="add" type="button" id="mAdd">Ajouter au panier</button>
+  <div><strong>30 €</strong><small>Livraison offerte</small></div>
+  <a class="btn" href="#commander">Commander</a>
 </div>
-
-<!-- Panier -->
-<div class="veil" id="veil"></div>
-<aside class="drawer" id="drawer" aria-label="Panier" aria-hidden="true">
-  <div class="drawer-head"><h2>Votre panier</h2><button class="x" id="closeCart" aria-label="Fermer le panier">×</button></div>
-  <div class="drawer-body" id="cartBody"></div>
-  <div class="drawer-foot">
-    <div class="row"><span>Sous-total</span><span id="sub">0,00 €</span></div>
-    <div class="row"><span>Livraison</span><span>Offerte</span></div>
-    <div class="row total"><span>Total</span><span id="tot">0,00 €</span></div>
-    <button class="checkout" id="checkout" type="button">Passer au paiement</button>
-    <div class="notice" id="notice">Le paiement en ligne arrive bientôt. Merci de votre intérêt !</div>
-  </div>
-</aside>
 
 <script>
   // Collez ici votre lien de paiement (ex. Stripe Payment Link : https://buy.stripe.com/...)
   const LIEN_PAIEMENT = "";
-  const PRIX = 30;
-  const MAX = 10;
-  const eur = n => n.toFixed(2).replace(".", ",") + " €";
+  const PRIX = 30, MAX = 10;
   const $ = id => document.getElementById(id);
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Galerie 3D ---------- */
-  const slides = [...document.querySelectorAll(".slide")];
-  const thumbs = [...document.querySelectorAll(".thumb")];
-  let current = 0;
-  function go(i){
-    if (i === current) return;
-    slides.forEach((s, k) => {
-      s.classList.toggle("active", k === i);
-      s.classList.toggle("prev", k < i);
-    });
-    thumbs.forEach((t, k) => t.setAttribute("aria-selected", k === i));
-    current = i;
-  }
-  thumbs.forEach(t => t.addEventListener("click", () => go(+t.dataset.go)));
-  $("thumbs").addEventListener("keydown", e => {
-    if (!["ArrowDown","ArrowRight","ArrowUp","ArrowLeft"].includes(e.key)) return;
-    e.preventDefault();
-    const d = (e.key === "ArrowDown" || e.key === "ArrowRight") ? 1 : -1;
-    const n = (current + d + slides.length) % slides.length;
-    go(n); thumbs[n].focus();
-  });
-  // Balayage sur mobile
-  let sx = null;
-  const stage = $("stage");
-  stage.addEventListener("touchstart", e => sx = e.touches[0].clientX, {passive:true});
-  stage.addEventListener("touchend", e => {
-    if (sx === null) return;
-    const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 40) go((current + (dx < 0 ? 1 : -1) + slides.length) % slides.length);
-    sx = null;
-  });
-
-  // Inclinaison 3D qui suit la souris
-  if (!reduce && matchMedia("(hover: hover)").matches){
-    stage.addEventListener("pointermove", e => {
-      const r = stage.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-      stage.classList.add("moving");
-      stage.style.setProperty("--ry", ((x - .5) * 14) + "deg");
-      stage.style.setProperty("--rx", ((.5 - y) * 14) + "deg");
-      stage.style.setProperty("--gx", (x * 100) + "%");
-      stage.style.setProperty("--gy", (y * 100) + "%");
-    });
-    stage.addEventListener("pointerleave", () => {
-      stage.classList.remove("moving");
-      stage.style.setProperty("--ry", "0deg");
-      stage.style.setProperty("--rx", "0deg");
-    });
-  }
-
-  /* ---------- Cartes bienfaits ---------- */
-  document.querySelectorAll(".flip").forEach(f => {
-    const toggle = () => f.classList.toggle("open");
-    f.querySelector(".face-btn").addEventListener("click", toggle);
-    f.querySelector(".toggle").addEventListener("click", toggle);
-  });
-
-  /* ---------- Onglets ---------- */
-  const tabs = [...document.querySelectorAll(".tab")];
-  function openTab(tab){
-    tabs.forEach(t => {
-      const on = t === tab;
-      t.setAttribute("aria-selected", on);
-      $(t.getAttribute("aria-controls")).hidden = !on;
-    });
-  }
-  tabs.forEach(t => t.addEventListener("click", () => openTab(t)));
-  document.querySelectorAll("[data-open-tab]").forEach(a => a.addEventListener("click", () => openTab($("t-" + a.dataset.openTab))));
-
-  /* ---------- Quantité + panier ---------- */
-  const qty = $("qty");
-  const clamp = n => Math.min(MAX, Math.max(1, n || 1));
-  document.querySelectorAll(".buy [data-step]").forEach(b => b.addEventListener("click", () => qty.value = clamp(+qty.value + +b.dataset.step)));
-  qty.addEventListener("change", () => qty.value = clamp(+qty.value));
-
-  let cart = 0;
-  try { const s = localStorage.getItem("aquavisiere-panier"); cart = s ? clamp(+s) : 0; } catch(e){}
-  function save(){ try { localStorage.setItem("aquavisiere-panier", cart || ""); } catch(e){} }
-
-  function render(){
-    const c = $("cartCount");
-    c.textContent = cart;
-    c.classList.toggle("on", cart > 0);
-    const body = $("cartBody");
-    if (!cart){
-      body.innerHTML = '<p class="empty">Votre panier est vide.</p>';
-    } else {
-      body.innerHTML = `
-        <div class="line">
-          <img src="images/visiere-douche.webp" alt="">
-          <div>
-            <strong>AquaVisière</strong>
-            <span style="font-size:14px;color:var(--muted)">${eur(PRIX)} l'unité</span>
-            <div class="mini">
-              <div class="qty">
-                <button type="button" data-c="-1" aria-label="Retirer une visière">−</button>
-                <input type="number" value="${cart}" min="1" max="${MAX}" aria-label="Quantité dans le panier" id="cq">
-                <button type="button" data-c="1" aria-label="Ajouter une visière">+</button>
-              </div>
-              <button class="rm" type="button" id="rm">Retirer</button>
-            </div>
-          </div>
-        </div>`;
-      body.querySelectorAll("[data-c]").forEach(b => b.onclick = () => { cart = clamp(cart + +b.dataset.c); update(); });
-      $("cq").onchange = e => { cart = clamp(+e.target.value); update(); };
-      $("rm").onclick = () => { cart = 0; update(); };
-    }
-    $("sub").textContent = eur(cart * PRIX);
-    $("tot").textContent = eur(cart * PRIX);
-    $("checkout").disabled = !cart;
-  }
-  function update(){ save(); render(); }
-
-  function openCart(){ $("drawer").classList.add("on"); $("veil").classList.add("on"); $("drawer").setAttribute("aria-hidden","false"); $("closeCart").focus(); }
-  function closeCart(){ $("drawer").classList.remove("on"); $("veil").classList.remove("on"); $("drawer").setAttribute("aria-hidden","true"); $("notice").style.display = "none"; }
-  $("openCart").onclick = openCart;
-  $("closeCart").onclick = closeCart;
-  $("veil").onclick = closeCart;
-  addEventListener("keydown", e => { if (e.key === "Escape") closeCart(); });
-
-  function add(n){
-    cart = clamp(cart + n);
-    update();
-    const c = $("cartCount");
-    c.classList.remove("bump"); void c.offsetWidth; c.classList.add("bump");
-    const btn = $("addBtn");
-    btn.classList.add("done"); btn.textContent = "Ajouté ✓";
-    setTimeout(() => { btn.classList.remove("done"); btn.textContent = "Ajouter au panier"; }, 1400);
-    setTimeout(openCart, 350);
-  }
-  $("addBtn").onclick = () => add(+qty.value);
-  $("mAdd").onclick = () => add(1);
-
-  $("checkout").onclick = () => {
-    if (!cart) return;
-    if (LIEN_PAIEMENT){
+  // Quantité + commande
+  let q = 1;
+  const maj = () => { $("q").textContent = q; $("total").textContent = (q * PRIX) + " €"; };
+  $("minus").onclick = () => { if (q > 1) { q--; maj(); } };
+  $("plus").onclick = () => { if (q < MAX) { q++; maj(); } };
+  $("buy").onclick = () => {
+    if (LIEN_PAIEMENT) {
       const u = new URL(LIEN_PAIEMENT);
-      u.searchParams.set("quantity", cart);
+      u.searchParams.set("quantity", q);
       location.href = u.toString();
     } else {
       $("notice").style.display = "block";
     }
   };
 
-  render();
-  $("year").textContent = new Date().getFullYear();
+  // Inclinaison 3D de la photo principale
+  const tilt = $("tilt");
+  if (!reduce && matchMedia("(hover: hover)").matches) {
+    const zone = tilt.parentElement;
+    zone.addEventListener("pointermove", e => {
+      const r = zone.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      tilt.classList.add("moving");
+      tilt.style.setProperty("--ry", ((x - .5) * 18) + "deg");
+      tilt.style.setProperty("--rx", ((.5 - y) * 14) + "deg");
+      tilt.style.setProperty("--gx", (x * 100) + "%");
+      tilt.style.setProperty("--gy", (y * 100) + "%");
+    });
+    zone.addEventListener("pointerleave", () => {
+      tilt.classList.remove("moving");
+      tilt.style.setProperty("--ry", "-8deg");
+      tilt.style.setProperty("--rx", "0deg");
+    });
+  }
 
-  /* ---------- Barre mobile ---------- */
-  const mbar = $("mbar");
-  const buy = document.querySelector(".buy");
-  new IntersectionObserver(([e]) => mbar.classList.toggle("on", !e.isIntersecting && e.boundingClientRect.top < 0)).observe(buy);
+  // Apparition au défilement
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // Barre d'achat mobile : visible après le hero, cachée sur l'offre
+  const mbar = $("mbar"), hero = document.querySelector(".hero"), offer = $("commander");
+  let heroOn = true, offerOn = false;
+  new IntersectionObserver(es => {
+    es.forEach(e => { if (e.target === hero) heroOn = e.isIntersecting; else offerOn = e.isIntersecting; });
+    mbar.classList.toggle("on", !heroOn && !offerOn);
+  }).observe(hero);
+  new IntersectionObserver(es => {
+    es.forEach(e => { offerOn = e.isIntersecting; });
+    mbar.classList.toggle("on", !heroOn && !offerOn);
+  }).observe(offer);
+
+  $("year").textContent = new Date().getFullYear();
 </script>
 <script data-goatcounter="https://tep.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
